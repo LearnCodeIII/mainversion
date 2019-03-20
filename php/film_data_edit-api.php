@@ -9,7 +9,7 @@ $result=[
 'errorCode'=>0,
 'errorMsg'=>'資料輸入不完整',
 'post'=>[], //做檢查
-
+'movie_type'=>''
 ];
 
 
@@ -21,7 +21,8 @@ if (isset($_POST['name_tw'])and !empty($sid)) {
     $name_en=$_POST['name_en'];
     $intro_tw=$_POST['intro_tw'];
     $intro_en=$_POST['intro_en'];
-    $movie_pic=$_POST['movie_genre'];
+
+    $movie_type = isset($_POST['chk'])? implode(',', $_POST['chk']):NULL;
     $movie_ver=$_POST['movie_ver'];
     $movie_rating=$_POST['movie_rating'];
     $trailer=$_POST['trailer'];
@@ -35,6 +36,7 @@ if (isset($_POST['name_tw'])and !empty($sid)) {
     $country=$_POST['country'];
     $subtitle=$_POST['subtitle'];
     $subtitle_lang=$_POST['subtitle_lang'];
+
     $result['post']=$_POST;  //做檢查
 
 
@@ -137,7 +139,7 @@ if (isset($_POST['name_tw'])and !empty($sid)) {
                 $_POST['intro_en'],
                 $filename,
 
-                $_POST['movie_genre'],
+                $movie_type,
                 $_POST['movie_ver'],
                 $_POST['movie_rating'],
                 $_POST['trailer'],

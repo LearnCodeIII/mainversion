@@ -11,6 +11,7 @@ $result=[
 'errorCode'=>0,
 'errorMsg'=>'資料輸入失敗',
 'post'=>[], //做檢查
+'movie_type'=>''
 
 ];
 
@@ -21,7 +22,7 @@ if (isset($_POST['checkme'])) {
     $intro_tw=$_POST['intro_tw'];
     $intro_en=$_POST['intro_en'];
 
-    $movie_genre=$_POST['movie_genre'];
+    $movie_type = isset($_POST['chk'])? implode(',', $_POST['chk']):NULL;
     $movie_ver=$_POST['movie_ver'];
     $movie_rating=$_POST['movie_rating'];
     $trailer=$_POST['trailer'];
@@ -45,6 +46,9 @@ if (isset($_POST['checkme'])) {
     //     // echo json_encode($result, JSON_UNESCAPED_UNICODE);
     //     exit;
     // }
+
+
+    
 
 
 
@@ -108,8 +112,10 @@ if (isset($_POST['checkme'])) {
             )";
 
     try {
+        //準備statement物件(function)
         $stmt = $pdo->prepare($sql);
-
+        
+        //塞值
         $stmt->execute([
                 $_POST['name_tw'],
                 $_POST['name_en'],
@@ -117,7 +123,7 @@ if (isset($_POST['checkme'])) {
                 $_POST['intro_en'],
                 $filename,
 
-                $_POST['movie_genre'],
+                $movie_type,
                 $_POST['movie_ver'],
                 $_POST['movie_rating'],
                 $_POST['trailer'],
