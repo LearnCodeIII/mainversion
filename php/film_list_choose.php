@@ -339,9 +339,9 @@ include __DIR__.'./film_sidenav.php';
                             </a>
                         </td>`; 
                         for (let i = 0; i < column_num; i++) {
-                            if (temp_title[i] == 'avatar') {
+                            if (temp_title[i] == 'movie_pic') {
                                 str += `<td>
-                                    <img src="../pic/avatar/${ori_data.data[s][temp_title[i]]}" alt="" width="100">
+                                    <img src="../pic/film_upload/${ori_data.data[s][temp_title[i]]}" alt="" width="100">
                                 </td>`
                             } else {
                                 str += `<td>${ori_data.data[s][temp_title[i]]}</td>`
@@ -486,9 +486,9 @@ include __DIR__.'./film_sidenav.php';
                     </a>
                 </td>`;
                     for (let i = 0; i < column_num; i++) {
-                        if (temp_title[i] == 'avatar') {
+                        if (temp_title[i] == 'movie_pic') {
                             str += `<td>
-                        <img src="../pic/avatar/${ori_data.data[s][temp_title[i]]}" alt="" width="100">
+                        <img src="../pic/film_upload/${ori_data.data[s][temp_title[i]]}" alt="" width="100">
                       </td>`
                         } else {
                             str += `<td vertical-align="middle">${ori_data.data[s][temp_title[i]]}</td>`
