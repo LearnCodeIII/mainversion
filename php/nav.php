@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">.Moiveee</a>
+    <a class="navbar-brand" href="mainpage.php">.Moiveee</a>
 	<div class="container-fulid">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
 					<a class="nav-link" href="cinema_ifmt_list.php">戲院系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="film_data_list.php">影片系統</a>
+					<a class="nav-link" href="film_main.php">影片系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
 					<a class="nav-link" href="RuthPageMain.php">文章系統</a>
