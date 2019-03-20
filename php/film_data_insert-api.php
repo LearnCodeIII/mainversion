@@ -20,7 +20,7 @@ if (isset($_POST['checkme'])) {
     $name_en=$_POST['name_en'];
     $intro_tw=$_POST['intro_tw'];
     $intro_en=$_POST['intro_en'];
-    $movie_pic=$_POST['movie_pic'];
+
     $movie_genre=$_POST['movie_genre'];
     $movie_ver=$_POST['movie_ver'];
     $movie_rating=$_POST['movie_rating'];
@@ -38,7 +38,7 @@ if (isset($_POST['checkme'])) {
 
     $result['post']=$_POST;  //做檢查
 
-
+    //設定必填欄位
     // if (empty($name_tw)or empty($movie_pic)) {
     //     $result['errorCode']=400;
     //     $result['errorMsg'] ='一定要有名字和圖片喔';
@@ -68,7 +68,7 @@ if (isset($_POST['checkme'])) {
         exit;
         }
     }
-    $result['filename']=$filename;
+    $result['movie_pic']=$filename;
     $upload_file=$upload_dir.$filename;
 
     if (move_uploaded_file($_FILES['movie_pic']['tmp_name'], $upload_file)) {
@@ -87,22 +87,24 @@ if (isset($_POST['checkme'])) {
         `intro_tw`,
         `intro_en`,
         `movie_pic`,
+
         `movie_genre`,
         `movie_ver`,
         `movie_rating`,
         `trailer`,
         `pirce`,
+
         `schedule`,
         `in_theaters`,
         `out_theaters`,
         `runtime`,
         `director_tw`,
+
         `director_en`,
         `country`,
         `subtitle`,
         `subtitle_lang`) VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
-            ,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
             )";
 
     try {
@@ -114,16 +116,19 @@ if (isset($_POST['checkme'])) {
                 $_POST['intro_tw'],
                 $_POST['intro_en'],
                 $filename,
+
                 $_POST['movie_genre'],
                 $_POST['movie_ver'],
                 $_POST['movie_rating'],
                 $_POST['trailer'],
                 $_POST['pirce'],
+
                 $_POST['schedule'],
                 $_POST['in_theaters'],
                 $_POST['out_theaters'],
                 $_POST['runtime'],
                 $_POST['director_tw'],
+
                 $_POST['director_en'],
                 $_POST['country'],
                 $_POST['subtitle'],
