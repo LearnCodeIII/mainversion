@@ -7,11 +7,15 @@ include __DIR__ . '/PDO.php';
 <?php include __DIR__ . './head.php'?>
 <?php include __DIR__ . './nav.php'?>
 <?php include __DIR__ . './Roysidenav.php'?>
-<style>
-.form-group small {
-    color: red !important;
-}
-</style>
+
+<head>
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <style>
+    .form-group small {
+        color: red !important;
+    }
+    </style>
+</head>
 <section class="dashboard">
     <div class="container">
         <div class="row">
@@ -115,7 +119,7 @@ intro_pic.addEventListener("change", event => {
             console.log(obj);
             myimg.setAttribute('src', '../pic/roy/' + obj.filename);
             // 要指定好變更後的路徑
-        });  
+        });
 })
 
 
