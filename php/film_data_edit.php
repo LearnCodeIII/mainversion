@@ -325,6 +325,8 @@ include __DIR__.'./film_sidenav.php';
 
 
     //匯入資訊 對比資料庫資料值入selected
+
+    //半途中...可砍------------------------------------
     // array.forEach(element => {
 
     // });
@@ -338,7 +340,7 @@ include __DIR__.'./film_sidenav.php';
 
     // movie_ver.options[0].selected = true
     // true
-
+    //半途中...可砍------------------------------------
 
     // const siteid = [
     //     'movie_ver',
@@ -346,9 +348,11 @@ include __DIR__.'./film_sidenav.php';
     //     'subtitle',
     // ];
 
+
+
     // function setOption(selectElement, value) {
     //     var options = selectElement.options;
-    //     for (var i = 0, optionsLength = options.length; i < optionsLength; i++) {
+    //     for (var i = 0; i < options.length; i++) {
     //         if (options[i].value == value) {
     //             selectElement.selectedIndex = i;
     //             return true;
@@ -357,13 +361,11 @@ include __DIR__.'./film_sidenav.php';
     //     return false;
     // }
 
-    // siteid.forEach(function (element) {
+    // siteid.forEach(element => {
     //     setOption(
-    //         // document.querySelector('select[name=element]'),
-    //         "<?php echo $sid; ?>"
-    //     );
-    // });
-
+    //         ("select[name='siteid']"),
+    //         "<?php echo $sid; ?>")
+    //     });
 
 </script>
 
