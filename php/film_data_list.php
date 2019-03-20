@@ -99,9 +99,11 @@ include __DIR__.'./film_sidenav.php';
                 <td><%= sid %></td>
                 <td><%= name_tw %></td>
                 <td><%= name_en %></td>
-                <td style="height:100px;"><%= intro_tw %></td>
+                <td height="200px"><%= intro_tw %></td>
                 <td><%= intro_en %></td>
-                <td><%= movie_pic %></td>
+
+                <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
+
                 <td><%= movie_genre %></td>
                 <td><%= movie_ver %></td>
                 <td><%= movie_rating %></td>
