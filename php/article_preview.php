@@ -29,7 +29,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <div class="container">
     <button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">返回列表</button>    
         <div class="card mb-3">
-            <img src="../pic/<?= $row['image']?>" class="card-img-top" alt="">
+            <img src="../pic/article/<?= $row['image']?>" class="card-img-top" alt="">
             <div class="card-body" id="card_body">
                 <h5 class="card-title"><?= $row['title']?></h5>
                 <p class="card-text"><?= $row['author']?></p><img src="" alt="">

@@ -89,7 +89,7 @@ $(function() {
                 <small id="dateHelp" class="form-text text-muted"></small>
 
                 <div class="my-2 mx-auto">
-                    <img src="../pic/<?= $row['image']?>" class="img-fluid max-width：100% height：auto" alt="<?= $row['image']?>">
+                    <img src="../pic/article/<?= $row['image']?>" class="img-fluid max-width：100% height：auto" alt="<?= $row['image']?>">
                 </div>
                 <div class="custom-file">
                     <input type="hidden" class="custom-file-input" id="image" name="ori_img" value="<?= $row['image']?>">
