@@ -8,25 +8,25 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="Su_member_list.php">會員系統</a>
+					<a class="nav-link" href="Su_member_list.php"><i class="fas fa-user-tie"></i>會員系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="cinema_ifmt_list.php">戲院系統</a>
+					<a class="nav-link" href="cinema_ifmt_list.php"><i class="fas fa-theater-masks"></i>戲院系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="film_main.php">影片系統</a>
+					<a class="nav-link" href="film_main.php"><i class="fas fa-film"></i>影片系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="article_list.php">文章系統</a>
+					<a class="nav-link" href="article_list.php"><i class="fas fa-film"></i>文章系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageHome"?"active":""; ?>">
-					<a class="nav-link" href="ShawnpageDatalist.php">活動系統</a>
+					<a class="nav-link" href="ShawnpageDatalist.php"><i class="fas fa-snowboarding"></i>活動系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="Roy_datalist.php">論壇系統</a>
+					<a class="nav-link" href="Roy_datalist.php"><i class="fas fa-igloo"></i>論壇系統</a>
 				</li>
 				<li class="nav-item <?= $pagename == "pageData"?"active":""; ?>">
-					<a class="nav-link" href="ann_client_list.php">廣告系統</a>
+					<a class="nav-link" href="ann_client_list.php"><i class="fas fa-ad"></i>廣告系統</a>
 				</li>
 			</ul>
 		</div>
