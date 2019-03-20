@@ -99,7 +99,7 @@ include __DIR__.'./film_sidenav.php';
                 <td><%= sid %></td>
                 <td><%= name_tw %></td>
                 <td><%= name_en %></td>
-                <td><%= intro_tw %></td>
+                <td style="height:100px;"><%= intro_tw %></td>
                 <td><%= intro_en %></td>
                 <td><%= movie_pic %></td>
                 <td><%= movie_genre %></td>
@@ -233,6 +233,7 @@ include __DIR__.'./film_sidenav.php';
             });
     };
 
+
     //按delete時先跳出確認視窗後再刪除
     const checkDelete = (sid) => {
 
@@ -242,7 +243,6 @@ include __DIR__.'./film_sidenav.php';
             alert("無資料被刪除");
         }
     }
-
 
 
 

@@ -2,13 +2,13 @@
 require __DIR__.'/PDO.php';
 
 $pagename = "film_list_choose";
+// $groupname = "film";
 
 include __DIR__.'./head.php';
 include __DIR__.'./nav.php';
 include __DIR__.'./film_sidenav.php';
 
-// $pagename = "member";
-// $spname = 'film_list_choose';
+
 ?>
 
 <section class="dashboard">
@@ -227,7 +227,7 @@ include __DIR__.'./film_sidenav.php';
                   <li class="page-item  <%= active %>" style="visibility:<%= v %>">
                   <a class="page-link" href="#<%= page %>"><%= page %></a></li>
                  `;
-    const page_function = _.template(page_str);
+    const page_func = _.template(page_str);
     document.getElementById('all').checked = false;
 
 
@@ -285,7 +285,7 @@ include __DIR__.'./film_sidenav.php';
 
         let form = new FormData(document.form1);
 
-        fetch("Su_member_list_choose_api.php?page=" + page, {
+        fetch("film_list_choose-api.php?page=" + page, {
             method: 'POST',
             body: form
         })
@@ -329,7 +329,7 @@ include __DIR__.'./film_sidenav.php';
                     for (let s in ori_data.data) {//用for in拿取ori_data(result陣列)中'data'的值
                         str = '';
                         str += `<th scope="row">
-                            <a href="Su_member_edit.php?sid=${ori_data.data[s][temp_title[0]]}">
+                            <a href="film_data_edit.php?sid=${ori_data.data[s][temp_title[0]]}">
                                 <i class="fas fa-edit"></i>
                             </a>
                         </th>
@@ -435,7 +435,7 @@ include __DIR__.'./film_sidenav.php';
 
 
         let form = new FormData(document.form1);
-        fetch("Su_member_list_choose_api.php?page=" + page, {
+        fetch("film_list_choose-api.php?page=" + page, {
             method: 'POST',
             body: form
         })
@@ -476,7 +476,7 @@ include __DIR__.'./film_sidenav.php';
                     str = '';
                     //先放edit連結
                     str += `<th scope="row">
-                    <a href="Su_member_edit.php?sid=${ori_data.data[s][temp_title[0]]}">
+                    <a href="film_data_edit.php?sid=${ori_data.data[s][temp_title[0]]}">
                       <i class="fas fa-edit"></i>
                     </a>
                   </th>
@@ -508,7 +508,7 @@ include __DIR__.'./film_sidenav.php';
                     if (parseInt(ori_data.page) + i <= 0 || parseInt(ori_data.page) + i > parseInt(ori_data.totalPage)) {
                         vh = 'hidden';
                     }
-                    str += page_function({
+                    str += page_func({
                         active: active,
                         v: vh,
                         page: ori_data.page + i,
