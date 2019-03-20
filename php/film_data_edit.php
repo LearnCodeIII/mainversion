@@ -46,14 +46,14 @@ include __DIR__.'./film_sidenav.php';
                             <div class="col-lg-4 col-md-4">
 
                                 <div class="form-group">
-                                    <label for="name_tw">電影中文</label>
+                                    <label for="name_tw">電影名稱中文</label>
                                     <input type="text" class="form-control" id="name_tw" name="name_tw" placeholder=""
                                         value="<?= $row['name_tw']?>">
                                     <small id="name_twHelp" class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name_en">電影英文</label>
+                                    <label for="name_en">電影名稱英文</label>
                                     <input type="text" class="form-control" id="name_en" name="name_en" placeholder=""
                                         value="<?= $row['name_en']?>">
                                     <small id="name_enHelp" class="form-text text-muted"></small>
@@ -157,13 +157,13 @@ include __DIR__.'./film_sidenav.php';
                                     <small id="runtimeHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="director_tw">導演中文</label>
+                                    <label for="director_tw">導演名稱中文</label>
                                     <input type="text" class="form-control" id="director_tw" name="director_tw"
                                         placeholder="" value="<?= $row['director_tw']?>">
                                     <small id="director_twHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="director_en">導演英文</label>
+                                    <label for="director_en">導演名稱英文</label>
                                     <input type="text" class="form-control" id="director_en" name="director_en"
                                         placeholder="" value="<?= $row['director_en']?>">
                                     <small id="director_enHelp" class="form-text text-muted"></small>
