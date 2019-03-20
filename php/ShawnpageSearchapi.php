@@ -26,12 +26,19 @@ $result = [
 
 if(isset($_POST['search_keyword'])){
 
-	$search_keyword =$_POST['search_keyword'];
+	$_POST['search_keyword']=isset($_POST['search_keyword'])?$_POST['search_keyword']:"";
+	$_POST['search_dateStart']=isset($_POST['search_dateStart'])?$_POST['search_dateStart']:"1970-01-01";
+	$_POST['search_dateEnd']=isset($_POST['search_dateEnd'])?$_POST['search_dateEnd']:"3000-01-01";
+
+
 	$search_keyword = '%'.$_POST['search_keyword'].'%';
+	$search_dateStart = '%'.$_POST['search_dateStart'].'%';
+	$search_dateEnd = '%'.$_POST['search_dateEnd'].'%';
+
 
 
 	#算總筆數
-	$t_sql = "SELECT COUNT(1) FROM `activity` WHERE `name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword ";
+	$t_sql = "SELECT COUNT(1) FROM `activity` WHERE `name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword ORDER BY `activity`.`sid` DESC";
 	$t_stmt = $pdo->prepare($t_sql);
 	$t_stmt->bindParam(":search_keyword",$search_keyword);
 	$t_stmt->execute();
@@ -52,7 +59,7 @@ if(isset($_POST['search_keyword'])){
 
 	#顯示資料
 
-	$sql = sprintf("SELECT * FROM `activity` WHERE `name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword  LIMIT %s, %s",($page-1)*$per_page,$per_page);
+	$sql = sprintf("SELECT * FROM `activity` WHERE `name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword  ORDER BY `activity`.`sid` DESC LIMIT %s, %s",($page-1)*$per_page,$per_page);
 	$stmt = $pdo->prepare($sql);
 	$stmt->bindParam(":search_keyword",$search_keyword);
 	$stmt->execute();
