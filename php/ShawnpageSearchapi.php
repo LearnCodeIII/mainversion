@@ -29,6 +29,7 @@ if(isset($_POST['search_keyword'])){
 	$search_keyword =$_POST['search_keyword'];
 	$search_keyword = '%'.$_POST['search_keyword'].'%';
 
+
 	#算總筆數
 	$t_sql = "SELECT COUNT(1) FROM `activity` WHERE `name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword ";
 	$t_stmt = $pdo->prepare($t_sql);
