@@ -1,5 +1,5 @@
 <?php
-$groupname == "activity";
+$groupname = "activity";
 $pagename = "pageMain";
 
 include __DIR__.'/PDO.php';
