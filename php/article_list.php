@@ -7,8 +7,8 @@ include __DIR__.'/PDO.php';
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./RuthNav.php'?>
 
-<link rel="stylesheet" href="../css/jquery-ui.css">
-<script src="../js/jquery-ui.js"></script>
+<!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
+<!-- <script src="../js/jquery-ui.js"></script> -->
 <style>
 .content {
     /* display: block; */

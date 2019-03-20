@@ -18,10 +18,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./RuthNav.php'?>
-<link rel="stylesheet" href="../css/jquery-ui.css">
+<!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
-<script src="../js/jquery-ui.js"></script>
+<!-- <script src="../js/jquery-ui.js"></script> -->
 <script>
 tinyMCE.init({
     // 初始化參數設定[註1]
@@ -41,13 +41,13 @@ $(document).ready(function() {
     bsCustomFileInput.init()
 });
 
-$(function() {
-    $("#datepicker").datepicker({
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        dateFormat: 'yy-mm-dd'
-    });
-});
+// $(function() {
+//     $("#datepicker").datepicker({
+//         showOtherMonths: true,
+//         selectOtherMonths: true,
+//         dateFormat: 'yy-mm-dd'
+//     });
+// });
 </script>
 
 <section class="dashboard">
@@ -84,7 +84,7 @@ $(function() {
             <label>Date</label>
 
             <div class="">
-                <input type="text" class="form-control mb-2" id="datepicker" name="date" placeholder="請輸入日期 YY-MM-DD"
+                <input type="date" class="form-control mb-2" id="datepicker" name="date" placeholder="請輸入日期 YY-MM-DD"
                     value="<?= $row['date']?>">
                 <small id="dateHelp" class="form-text text-muted"></small>
 
