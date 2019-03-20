@@ -22,6 +22,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   bsCustomFileInput.init()
 })
 </script>
+<script src="../js/sweet.js"></script>
 <script src="../ckeditor/ckeditor.js"></script>
 <style>
         .form-group small {
@@ -302,14 +303,40 @@ CKEDITOR.replace( 'content');
                 .then(response=>response.json())
                 .then(obj=>{
 
-                    info_bar.style.display = 'block';
+
 
                     if(obj.success){
-                        info_bar.className = 'alert alert-success';
-                        info_bar.innerHTML = '資料修改成功';
+                        const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false,
+                        });
+                        swalWithBootstrapButtons.fire({
+                            title: `成功`,
+                            text: "已經修改此筆資料!",
+                            footer: '提示：即將返回主畫面',
+                            type: 'success',
+                            timer: 3000,
+                        }).then((result) => {
+                            location.href = 'ShawnpageDatalist.php';
+                        })
+
                     } else {
-                        info_bar.className = 'alert alert-danger';
-                        info_bar.innerHTML = obj.msg;
+                        const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false,
+                        });
+                        swalWithBootstrapButtons.fire({
+                            title: `失敗`,
+                            text: obj.msg,
+                            footer: '提示：請確認資料是否填寫正確',
+                            type: 'error',
+                        })
                     }
 
                     submit_btn.style.display = 'block';

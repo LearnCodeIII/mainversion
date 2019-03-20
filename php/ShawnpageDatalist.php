@@ -8,6 +8,7 @@ include __DIR__.'/PDO.php';
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./Shawnsidenav.php'?>
+<script src="../js/sweet.js"></script>
 <section class="dashboard">
     <div class="container-fulid">
         <div class="row d-flex ">
@@ -252,6 +253,16 @@ const searchForm = () =>{
         myHashChange();
         return;
     }
+    // if(search_dateStart =="" && search_dateEnd ==""){
+    //     search_dateStart.value="0000-00-00";
+    //     search_dateEnd.value="9999-99-99";
+    // }
+    // if(search_dateStart ==""){
+    //     search_dateStart.value="0000-00-00";
+    // }
+    // if(search_dateEnd ==""){
+    //     search_dateEnd.value="9999-99-99";
+    // }
     let h = location.hash.slice(1);
     page = parseInt(h);
     if(isNaN(page)){
@@ -310,12 +321,12 @@ const searchForm = () =>{
             }
         search_pagi.innerHTML =str;
         if(!ori_data.success){
-
         return search_pagi.innerHTML ="<a href='./ShawnpageDatalist.php'>搜尋結果沒有符合此條件的活動，點此重新搜尋</a>";
         }
         highlight();
     });
-    
+    search_dateStart.value="";
+    search_dateEnd.value="";
     return false;
 };
 
@@ -352,13 +363,44 @@ return str.replace(/\s+/g, "");
 
 //刪除功能
 function deleteIt(sid){
-		if(
-            confirm(`確認要刪除編號為${sid}的資料嗎`
-            
-            )){
-			location.href = 'ShawnpageDelete.php?sid=' + sid;
-		}
-	}
+    
+    const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false,
+    })
+
+    swalWithBootstrapButtons.fire({
+    title: `確認要刪除資料嗎?`,
+    text: "檔案刪除過後將無法還原!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '確認刪除',
+    cancelButtonText: '我再想想',
+    reverseButtons: true
+    }).then((result) => {
+    if (result.value) {
+        swalWithBootstrapButtons.fire({
+            type: 'success',
+            title: '確認刪除',
+            text: '您的資料已經刪除。',
+            timer: 3000,
+        }).then((result) => {
+            location.href = 'ShawnpageDelete.php?sid=' + sid;
+        })
+    } else if (
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire({
+            type: 'error',
+            title: '取消刪除',
+            text: '您的資料沒有刪除。'
+        })
+    }
+    })
+}
 
 
 
