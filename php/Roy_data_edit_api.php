@@ -33,7 +33,7 @@ if(isset($_POST['headline']) and !empty($sid)){
     $w_date = $_POST['w_date'];
     $w_cinema = $_POST['w_cinema'];
     $film_rate = $_POST['film_rate'];
-    $fav = $_POST['fav'];
+    // $fav = $_POST['fav'];
 
 
     $result['post'] = $_POST;  // 做 echo 檢查
@@ -68,7 +68,24 @@ if(isset($_POST['headline']) and !empty($sid)){
     //         }
     // }
 
+// 更新上傳檔案
+    $upload_dir = __DIR__.'/../pic/roy/';
 
+    if(empty($_FILES['intro_pic']['name'])){
+        $filename = $_POST['intro_pic'];
+        }else{  
+        $filename = $_FILES['intro_pic']['name'];
+    }
+
+    $result['intro_pic'] = $filename;
+    $upload_file = $upload_dir.$filename;
+    
+
+    if(move_uploaded_file($_FILES['intro_pic']['tmp_name'], $upload_file)){
+        $result['success'] = true;
+    } else {
+        $result['info'] = '暫存檔無法搬移';
+    }
 
     $sql = "UPDATE `forum` SET 
                 `headline`=?,
@@ -76,7 +93,8 @@ if(isset($_POST['headline']) and !empty($sid)){
                 `w_date`=?,
                 `w_cinema`=?,
                 `film_rate`=?,
-                `fav`=?
+                -- `fav`=?
+                `intro_pic`=?
                 WHERE `sid`=?";
 
     try {
@@ -88,7 +106,8 @@ if(isset($_POST['headline']) and !empty($sid)){
             $_POST['w_date'],
             $_POST['w_cinema'],
             $_POST['film_rate'],
-            $_POST['fav'],
+            // $_POST['fav'],
+            $filename,
             $sid
         ]);
 

@@ -33,23 +33,24 @@ include __DIR__ . '/PDO.php';
             </div>
         </div>
         <div class="row">
-            <table class="table table-bordered table-dark text-center">
-                <thead>
+            <table class="table  text-center">
+                <thead class="thead-dark table-bordered">
                     <tr>
-                        <th scope="col">文章編號</th>
-                        <th scope="col">文章標題</th>
+                        <th scope="col">影評編號</th>
+                        <th scope="col">影評標題</th>
                         <th scope="col">影評</th>
                         <th scope="col">發布時間</th>
                         <th scope="col">觀看日期</th>
                         <th scope="col">觀看戲院</th>
                         <th scope="col">電影評分</th>
                         <th scope="col">我的最愛</th>
-                        <th scope="col"><i class="far fa-edit"></i></th>
-                        <th scope="col"><i class="far fa-trash-alt"></i></th>
+                        <th scope="col">預覽</th>
+                        <th scope="col">編輯</i></th>
+                        <th scope="col">刪除</i></th>
                         <a href=""></a>
                     </tr>
                 </thead>
-                <tbody id="forum_databody">
+                <tbody id="forum_databody" class="thead-light table-bordered">
 
                 </tbody>
             </table>
@@ -82,6 +83,7 @@ const tr_str = ` <tr>
                     <td><%=w_cinema%></td>
                     <td><%=film_rate%></td>
                     <td><%=fav%></td>
+                    <td><a href="./Roy_datapreview.php?sid=<%=sid%>"><i class="fas fa-eye"></i></a></td>
                     <td><a href="./Roy_data_edit.php?sid=<%=sid%>"><i class="far fa-edit"></i></a></td>
                     <td>
                         <a href="javascript:delete_it(<%=sid%>)">
