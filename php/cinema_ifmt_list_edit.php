@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/cinema_Login_SQL.php';
+include __DIR__. './PDO.php';
 $page_name = 'list_edit';
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
@@ -15,9 +15,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-<?php include __DIR__. './hp_head.php' ?>
-<?php include __DIR__. './hp_nav.php' ?>
-<?php include __DIR__. './hp_sidenav.php' ?>
+<?php include __DIR__. './head.php' ?>
+<?php include __DIR__. './nav.php' ?>
+<?php include __DIR__. './sidenav.php' ?>
     <style>
         .form-group small {
             color: red !important;
@@ -157,4 +157,4 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     </script>
     </section>
-<?php include __DIR__. './hp_foot.php' ?>
+<?php include __DIR__. './foot.php' ?>
