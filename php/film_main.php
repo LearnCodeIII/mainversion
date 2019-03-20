@@ -42,7 +42,7 @@ include __DIR__.'./film_sidenav.php';
 
 
 <table class="table table-striped table-bordered">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">電影中文名稱</th>
