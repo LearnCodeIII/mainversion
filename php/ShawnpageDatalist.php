@@ -65,7 +65,7 @@ include __DIR__.'/PDO.php';
                     <ul class="pagination justify-content-center" id="search_pagination">
                     </ul>
                 </nav>
-                <input class="form-check-input" type="checkbox" id="search_lightS" value="search_lightS" name="search_contenttype[]" onclick="javascript:console.log(this.className='form-check-input active' )" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_lightS" value="search_lightS" name="search_contenttype[]" hidden><br>
                 <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]"hidden><br>
                 <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]"hidden><br>
                 <input class="form-check-input" type="checkbox" id="search_lightE" value="search_lightE" name="search_contenttype[]"hidden><br>
@@ -320,7 +320,7 @@ const searchForm = () =>{
 //
 function highlight(){
     var value = search_keyword.value;
-    if(!(typeof(value) == "undefined")){
+    if(!(value == "")){
     for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-title')[i].innerHTML.split(value);
         document.querySelectorAll('.card-title')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
@@ -328,10 +328,12 @@ function highlight(){
     }
 };
 
+
+//TODO:搜尋高亮 字串 切除空白轉字串
 function highlightContent(){
     var value = search_keyword.value;
-    if(!(typeof(value) == "undefined")){
-        for(var i=0;i<500;i++){
+    if(!(value == "" )){
+        for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-body')[i].innerHTML.split(value);
         document.querySelectorAll('.card-body')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
         };
