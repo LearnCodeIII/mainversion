@@ -195,7 +195,7 @@ include __DIR__.'./film_sidenav.php';
 
                         </div>
 
-                        <button id="submit_btn" type="submit" class="btn btn-primary btn-block">送出</button>
+                        <button id="submit_btn" type="submit" onclick="topFunction()" class="btn btn-primary btn-block">送出</button>
 
                     </form>
 
@@ -322,19 +322,23 @@ include __DIR__.'./film_sidenav.php';
         output.src = URL.createObjectURL(event.target.files[0]);
     };
 
-
-
     //匯入資訊 對比資料庫資料值入selected
-
     const siteid = [
         'movie_ver',
         'movie_rating',
         'subtitle',
     ];
 
-        document.querySelector('#movie_ver').value = '<?= $row['movie_ver'] ?>';
-        document.querySelector('#movie_rating').value = '<?= $row['movie_rating'] ?>';
-        document.querySelector('#subtitle').value = '<?= $row['subtitle'] ?>';
+    document.querySelector('#movie_ver').value = '<?= $row['movie_ver'] ?>';
+    document.querySelector('#movie_rating').value = '<?= $row['movie_rating'] ?>';
+    document.querySelector('#subtitle').value = '<?= $row['subtitle'] ?>';
+
+    //按下時回到頁面最上方
+    function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    }
+
 </script>
 
 <?php include __DIR__.'./foot.php'?>

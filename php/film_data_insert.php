@@ -181,7 +181,7 @@ include __DIR__.'./film_sidenav.php';
                             </div>
 
                         </div>
-                        <button id="submit_btn" type="submit" class="btn btn-primary btn-block">送出</button>
+                        <button id="submit_btn" type="submit" onclick="topFunction()" class="btn btn-primary btn-block">送出</button>
                     </form>
 
                 </div>
@@ -241,7 +241,6 @@ include __DIR__.'./film_sidenav.php';
         for (let v of fields) {
             fs[v].style.borderColor = '#cccccc';
             document.querySelector('#' + v + 'Help').innerHTML = '';
-
         }
 
 
@@ -285,6 +284,11 @@ include __DIR__.'./film_sidenav.php';
         output.src = URL.createObjectURL(event.target.files[0]);
     };
 
+    //按下時回到頁面最上方
+    function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    }
 
 
 </script>
