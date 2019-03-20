@@ -1,10 +1,10 @@
 <nav class="sidenav">
     <ul class="navbar-nav">
     <li class="nav-item <?= $phpname == "phpHome"?"active":""; ?>">
-            <a class="nav-link" href="./RuthPageMain.php">文章列表</a>
+            <a class="nav-link" href="./article_list.php">文章列表</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./RuthPageAdd.php">新增文章</a>
+            <a class="nav-link" href="./article_insert.php">新增文章</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">留言管理</a>
