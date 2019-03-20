@@ -267,10 +267,7 @@ const searchForm = () =>{
     .then(json=>{
         ori_data = json;
         console.log(ori_data);
-        if(!ori_data.success){
-            search_pagi.style="display:none";
-            return data_body.innerHTML ="搜尋結果沒有符合此條件的活動";
-        }
+        
         
         let str='';
         for(let d of ori_data.data){
@@ -311,16 +308,22 @@ const searchForm = () =>{
                 });
             }
         search_pagi.innerHTML =str;
+        if(!ori_data.success){
+
+        return search_pagi.innerHTML ="<a href='./ShawnpageDatalist.php'>搜尋結果沒有符合此條件的活動，點此重新搜尋</a>";
+        }
         highlight();
     });
     
     return false;
 };
 
-//
+
+
+//標提高亮
 function highlight(){
     var value = search_keyword.value;
-    if(!(value == "")){
+    if(removeAllSpace(value) != ""){
     for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-title')[i].innerHTML.split(value);
         document.querySelectorAll('.card-title')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
@@ -329,10 +332,10 @@ function highlight(){
 };
 
 
-//TODO:搜尋高亮 字串 切除空白轉字串
+//內文高亮
 function highlightContent(){
     var value = search_keyword.value;
-    if(!(value == "" )){
+    if(removeAllSpace(value) != ""){
         for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-body')[i].innerHTML.split(value);
         document.querySelectorAll('.card-body')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
@@ -340,6 +343,10 @@ function highlightContent(){
     }
 }
 
+//去除字串所有空白
+function removeAllSpace(str) {
+return str.replace(/\s+/g, "");
+}
 
 
 //刪除功能
