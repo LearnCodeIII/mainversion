@@ -386,6 +386,7 @@ function deleteIt(sid){
             type: 'success',
             title: '確認刪除',
             text: '您的資料已經刪除。',
+            footer: '提示：即將返回主畫面',
             timer: 3000,
         }).then((result) => {
             location.href = 'ShawnpageDelete.php?sid=' + sid;
