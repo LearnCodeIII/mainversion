@@ -17,7 +17,7 @@
 					<a class="nav-link" href="film_main.php"><i class="fas fa-film"></i> 影片系統</a>
 				</li>
 				<li class="nav-item <?= $groupname == "article"?"active":""; ?>">
-					<a class="nav-link" href="article_list.php"><i class="fas fa-film"></i> 文章系統</a>
+					<a class="nav-link" href="article_list.php"><i class="far fa-newspaper"></i></i> 文章系統</a>
 				</li>
 				<li class="nav-item <?= $groupname == "activity"?"active":""; ?>">
 					<a class="nav-link" href="ShawnpageDatalist.php"><i class="fas fa-snowboarding"></i> 活動系統</a>
