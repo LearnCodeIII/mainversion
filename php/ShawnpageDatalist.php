@@ -20,7 +20,7 @@ include __DIR__.'/PDO.php';
                     <div class="input-group-prepend ">
                         <span class="input-group-text bg-dark text-white">活動關鍵字</span>
                     </div>
-                    <input type="text" class="form-control" id="search_keyword" name="search_keyword" placeholder="廠商、標題、標籤、地區、內容">
+                    <input type="text" class="form-control" id="search_keyword" name="search_keyword" placeholder="廠商、標題、內文、地址">
                 </div>
 
                 <div class="input-group mt-3 mb-3">
