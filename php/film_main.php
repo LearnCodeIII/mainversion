@@ -11,42 +11,33 @@ include __DIR__.'./film_sidenav.php';
 
 <section class="dashboard">
 
-<!-- <div class="container"> -->
-    <?php /*
-    <div class="">資料共<?= $row_count ?>筆</div>
-<div class="">本頁共<?= $stamt->rowCount() ?>筆</div>
-<div class="">頁數：<?= $page."/".$tol_page ?></div>
-*/ ?>
-<div class="row">
-    <div class="col-lg-12">
-        <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-
-                <?php
-                /*
-                //設定上一頁
-                    <li class="page-item <?= $page<=1?'disabled':''?>">
-                <a class="page-link" href="?page=<?= $page-1 ?>">&lt</a>
-                </li>
-
-                //設定資料有多少就做幾頁
-                <?php for ($i=1;$i<=$tol_page;$i++): ?>
-                <li class="page-item <?= $i==$page?'active':''?>">
-                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                </li>
-                <?php endfor ?>
-
-                //設定下一頁
-                <li class="page-item <?= $page>=$tol_page?'disabled':''?>">
-                    <a class="page-link" href="?page=<?= $page+1 ?>">&gt</a>
-                </li>
-                */
-                ?>
-            </ul>
-        </nav>
+<div class="row d-flex justify-content-center">
+        <div class="col-lg data_info"></div>
+        <div class="col-lg-4">
+            <div class="row d-flex justify-content-center flex-nowrap">
+                <div class="col-lg">
+                    <nav class="d-flex justify-content-center">
+                        <ul id="first_page" class="pagination pagination-sm justify-content-center"></ul>
+                        <ul id="pre_page" class="pagination pagination-sm justify-content-center"></ul>
+                    </nav>
+                </div>
+                <div class="col-lg-5">
+                    <nav class="d-flex justify-content-center">
+                        <ul id="page_list" class="pagination pagination-sm justify-content-center"></ul>
+                    </nav>
+                </div>
+                <div class="col-lg">
+                    <nav class="d-flex justify-content-center">
+                        <ul id="next_page" class="pagination pagination-sm justify-content-center"></ul>
+                        <ul id="end_page" class="pagination pagination-sm justify-content-center"></ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg page_info"></div>
     </div>
-</div>
 
+<!-- <div class="container"> -->
 
 
 
@@ -76,21 +67,7 @@ include __DIR__.'./film_sidenav.php';
         </tr>
     </thead>
     <tbody id="data_body">
-        <?php /*
-                <?php foreach ($rows as $row): ?>
-
-        <tr>
-            <td><?= $row['uid'] ?></td>
-            <td><?= $row['name'] ?></td>
-            <td><?= $row['selfphone'] ?></td>
-            <td><?= $row['email'] ?></td>
-            <td><?= $row['adress'] ?></td>
-            <td><?= $row['facebook'] ?></td>
-            <td><?= $row['IG'] ?></td>
-
-        </tr>
-        <?php endforeach; ?>
-        */ ?>
+        
     </tbody>
 </table>
 
@@ -102,8 +79,16 @@ include __DIR__.'./film_sidenav.php';
     let ori_data;
 
     const data_page = document.querySelector('.pagination');
+    const page_list = document.querySelector('#page_list');
     const data_body = document.querySelector('#data_body');
 
+    const pre_page = document.querySelector('#pre_page');
+    const next_page = document.querySelector('#next_page');
+    const first_page = document.querySelector('#first_page');
+    const end_page = document.querySelector('#end_page');
+    const data_info = document.querySelector('.data_info');
+    const page_info = document.querySelector('.page_info');
+    
     const tr_str = `
             <tr>
                 <td><%= sid %></td>
@@ -154,11 +139,11 @@ include __DIR__.'./film_sidenav.php';
 
     const tr_func = _.template(tr_str);
 
-    const pagi_str = `<li class="page-item <%= active %>">
+    const page_str = `<li class="page-item  <%= active %>" style="visibility:<%= v %>">
                         <a class="page-link" href="#<%= page %>"><%= page %></a>
                     </li>`;
 
-    const pagi_func = _.template(pagi_str);
+    const page_func = _.template(page_str);
 
     const myHashChange = () => {
         let h = location.hash.slice(1);
@@ -200,6 +185,69 @@ include __DIR__.'./film_sidenav.php';
                 }
                 data_page.innerHTML = str;
                 
+//製作頁碼按鈕
+p_btn_num = 7;//設定可顯示幾個頁碼按鈕(建議使用奇數)
+                str = '';
+                for (let i =-parseInt(p_btn_num/2); i<=parseInt(p_btn_num/2); i++) {
+                    let active = i === 0 ? 'active' : '';
+                    let vh = '';
+                    if (parseInt(ori_data.page)+i<=0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
+                        vh = 'hidden';
+                    }
+                    str += page_func({
+                        active: active,
+                        v:vh,
+                        page: ori_data.page+i,
+                    });
+                }
+                page_list.innerHTML = str;
+
+
+                if (page <= 1) {
+                    first_page.innerHTML = `<li class="page-item disabled"><a class="page-link" href="#1">&lt;&lt;</a></li>`
+                } else {
+                    first_page.innerHTML = `<li class="page-item"><a class="page-link" href="#1" title="回到第一頁">&lt;&lt;</a></li>`
+                }
+                if (page <= 1) {
+                    pre_page.innerHTML = `<li class="page-item disabled"><a class="page-link" href="?page=${page - 1}">&lt;</a></li>`
+                } else {
+                    pre_page.innerHTML = `<li class="page-item"><a class="page-link" href="#${page - 1}" title="前一頁">&lt;</a></li>`
+                }
+                if (page >= ori_data.tol_page) {
+                    next_page.innerHTML = `<li class="page-item disabled"><a class="page-link" href="?page=${page - 1}">&gt;</a></li>`
+                } else {
+                    next_page.innerHTML = `<li class="page-item"><a class="page-link" href="#${page + 1}"  title="下一頁">&gt;</a></li>`
+                }
+                if (page >= ori_data.tol_page) {
+                    end_page.innerHTML = `<li class="page-item disabled"><a class="page-link" href="#${ori_data.tol_page}">&gt;&gt;</a></li>`
+                } else {
+                    end_page.innerHTML = `<li class="page-item"><a class="page-link" href="#${ori_data.tol_page}" title="跳到最末頁">&gt;&gt;</a></li>`
+                }
+
+
+                //資料筆數、頁數資訊
+                if (page >= ori_data.tol_page) {
+                    data_info.innerHTML = `
+                        <div class="col-lg-5">總資料筆數：${ori_data.row_count} 筆</div>
+                        <div class="col-lg-7">本頁資料：第${(ori_data.tol_page - 1) * ori_data.per_page + 1} ~ ${ori_data.row_count} 筆</div>`
+                    page_info.innerHTML = `
+                        <div class="text-right">頁數：${ori_data.tol_page}  /  ${ori_data.tol_page}</div>`
+                } else if (page < 1) {
+                    data_info.innerHTML = `
+                        <div class="col-lg-5">總資料筆數：${ori_data.row_count} 筆</div>
+                        <div class="col-lg-7">本頁資料：第1 ~ ${ori_data.per_page} 筆</div>`
+                    page_info.innerHTML = `
+                        <div class="text-right">頁數：1 / ${ori_data.tol_page}</div>`
+                } else {
+                    data_info.innerHTML = `
+                        <div class="col-lg-5">總資料筆數：${ori_data.row_count} 筆</div>
+                        <div class="col-lg-7">本頁資料：第${(page - 1) * ori_data.per_page + 1} ~ ${page * ori_data.per_page} 筆</div>`
+                    page_info.innerHTML = `
+                        <div class="text-right">頁數：${page} / ${ori_data.tol_page}</div>`
+                }
+
+
+
             });
         };
         

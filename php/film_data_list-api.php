@@ -27,9 +27,10 @@ $row_count=$tol_stmt->fetch(PDO::FETCH_NUM)[0];
     //將結果設定進去要傳給前端的變數
 $result['row_count']=intval($row_count);
 
-//總頁數
+//總頁數(小數點進位)
 $tol_page=ceil($row_count/$per_page);
 
+//取資料
 $sql=sprintf("SELECT * FROM `film_primary_table` ORDER BY sid ASC LIMIT %s,%s", ($page-1)*$per_page, $per_page);
 $stamt=$pdo->query($sql);
     //將結果設定進去要傳給前端的變數

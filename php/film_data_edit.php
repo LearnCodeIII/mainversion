@@ -325,6 +325,8 @@ include __DIR__.'./film_sidenav.php';
 
 
     //匯入資訊 對比資料庫資料值入selected
+
+    //半途中...可砍------------------------------------
     // array.forEach(element => {
 
     // });
@@ -338,32 +340,32 @@ include __DIR__.'./film_sidenav.php';
 
     // movie_ver.options[0].selected = true
     // true
+    //半途中...可砍------------------------------------
+
+    const siteid = [
+        'movie_ver',
+        'movie_rating',
+        'subtitle',
+    ];
 
 
-    // const siteid = [
-    //     'movie_ver',
-    //     'movie_rating',
-    //     'subtitle',
-    // ];
 
-    // function setOption(selectElement, value) {
-    //     var options = selectElement.options;
-    //     for (var i = 0, optionsLength = options.length; i < optionsLength; i++) {
-    //         if (options[i].value == value) {
-    //             selectElement.selectedIndex = i;
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
+    function setOption(selectElement, value) {
+        var options = selectElement.options;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value == value) {
+                selectElement.selectedIndex = i;
+                return true;
+            }
+        }
+        return false;
+    }
 
-    // siteid.forEach(function (element) {
-    //     setOption(
-    //         // document.querySelector('select[name=element]'),
-    //         "<?php echo $sid; ?>"
-    //     );
-    // });
-
+    siteid.forEach(element => {
+        setOption(
+            ("select[name='siteid']"),
+            "<?php echo $sid; ?>")
+        });
 
 </script>
 
