@@ -326,47 +326,15 @@ include __DIR__.'./film_sidenav.php';
 
     //匯入資訊 對比資料庫資料值入selected
 
-    //半途中...可砍------------------------------------
-    // array.forEach(element => {
+    const siteid = [
+        'movie_ver',
+        'movie_rating',
+        'subtitle',
+    ];
 
-    // });
-    // if (movie_ver.options[0].selected ==) {
-    //     movie_ver.options[0].selected = true;
-    // }
-
-    // const gotop = () => {
-    //     location.href = './film_data_edit.php';
-    // }
-
-    // movie_ver.options[0].selected = true
-    // true
-    //半途中...可砍------------------------------------
-
-    // const siteid = [
-    //     'movie_ver',
-    //     'movie_rating',
-    //     'subtitle',
-    // ];
-
-
-
-    // function setOption(selectElement, value) {
-    //     var options = selectElement.options;
-    //     for (var i = 0; i < options.length; i++) {
-    //         if (options[i].value == value) {
-    //             selectElement.selectedIndex = i;
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
-    // siteid.forEach(element => {
-    //     setOption(
-    //         ("select[name='siteid']"),
-    //         "<?php echo $sid; ?>")
-    //     });
-
+        document.querySelector('#movie_ver').value = '<?= $row['movie_ver'] ?>';
+        document.querySelector('#movie_rating').value = '<?= $row['movie_rating'] ?>';
+        document.querySelector('#subtitle').value = '<?= $row['subtitle'] ?>';
 </script>
 
 <?php include __DIR__.'./foot.php'?>
