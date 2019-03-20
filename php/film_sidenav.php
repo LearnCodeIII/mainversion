@@ -10,7 +10,7 @@
             <a class="nav-link" href="./film_list_choose.php">影片清單(自訂)</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./film_data_insert.php">影片搜尋</a>
+            <a class="nav-link" href="./film_data_search.php">影片搜尋</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="./film_data_insert.php">新增影片資訊</a>
