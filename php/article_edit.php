@@ -20,6 +20,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <?php include __DIR__.'./RuthNav.php'?>
 
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
 <script>
 tinyMCE.init({
