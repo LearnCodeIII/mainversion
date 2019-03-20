@@ -7,8 +7,7 @@ include __DIR__.'/PDO.php';
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./RuthNav.php'?>
 
-<link rel="stylesheet" href="../css/jquery-ui.css">
-<script src="../js/jquery-ui.js"></script>
+
 <style>
 .content {
     /* display: block; */
@@ -21,24 +20,20 @@ include __DIR__.'/PDO.php';
 .title {
     /* display: block; */
     text-overflow: ellipsis;
-    max-width:50px;
-}
-
-;
+    max-width:30px;
+};
 </style>
 
 <section class="dashboard">
 
     <div class="container">
-        <!-- <form class="form-inline">
+        <form class="form-inline" name="searchform" method="post" onsubmit="return gosearch();">
             <div class="form-group my-3">
-                <input type="text" class="form-control" id="Search" placeholder="Search">
+                <input type="text" class="form-control" id="search" name="searchkey" placeholder="Search">
                 <button type="submit" class="btn btn-primary mx-1">go</button>
             </div>
-        </form> -->
+        </form>
         <nav aria-label="Page navigation example">
-                <!-- <div class="page-item <?= $page <=1 ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?=$page-1?>">Previous</a></button> -->
             <ul class="pagination">
 
             </ul>
@@ -57,7 +52,6 @@ include __DIR__.'/PDO.php';
                 </tr>
             </thead>
             <tbody id="data_body">
-
             </tbody>
         </table>
     </div>
@@ -77,12 +71,12 @@ let tr_str = `<tr>
                 <td><%= date %></td>
                 <td class="content text-truncate"><%= content %></td>
                 <td><a href="article_preview.php?sid=<%= sid %>"><i class="fas fa-eye"></a></td>
-                <td><a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></a></td>
+                <td><a href="article_previewpic.php?sid=<%= sid %>"><i class="fas fa-edit"></a></td>
                 <td><a href="javascript: delete_it(<%= sid %>)"><i class="fas fa-trash-alt"></a></td>
                 </tr>`;
 
 const tr_func = _.template(tr_str);
-// escape.html(_.escape(input.val(tr_str)));
+
 
 let page_str = `<li class="page-item <%= active %>">
                 <a class="page-link" href="#<%= page %>"><%= page %></a>
@@ -90,6 +84,23 @@ let page_str = `<li class="page-item <%= active %>">
 
 const page_func = _.template(page_str);
 
+
+const gosearch = () => {
+    var searchform = new FormData(document.searchform);
+
+    fetch('article_search_api.php')
+        .then(response => response.json())
+        .then(json => {
+            oriData = json;
+            console.log(oriData);
+            let str='';
+            for(k in oriData.data){
+                str += tr_func(oriData.data[k]);
+            }
+            data_body.innerHTML = str;
+        });
+    return false;
+}; 
 
 const myHashChange = () => {
     let h = location.hash.slice(1);
@@ -99,7 +110,7 @@ const myHashChange = () => {
     };
     // ul_page.innerHTML = page;
 
-    fetch('article_list_api.php?page=' + page)
+    fetch('article_search_api.php?page=' + page)
         .then(res => {
             return res.json();
         })
@@ -145,5 +156,3 @@ function delete_it(sid) {
     }
 };
 </script>
-
-<!-- <?php include __DIR__.'/__html_foot.php'; ?> -->

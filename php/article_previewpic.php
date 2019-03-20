@@ -1,14 +1,25 @@
 <?php
-$pagename = "pageMain";
-
 include __DIR__.'/PDO.php';
+$pagename = "article_edit";
+
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+
+$sql = "SELECT * FROM `article` WHERE `sid`=$sid";
+
+$stmt = $pdo->query($sql);
+
+if($stmt->rowCount()==0){
+    header('Location: article_list.php');
+    exit;
+}
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./RuthNav.php'?>
-<link rel="stylesheet" href="../css/jquery-ui.css">
+
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
-<script src="../js/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
 <script>
 tinyMCE.init({
@@ -48,55 +59,86 @@ $(function() {
         </div>
         <?php endif?>
         <form name="form1" method="post" onsubmit="return postya();">
+        <input type="hidden" name="sid" value="<?= $row['sid']?>">
             <label>Title</label>
             <div>
-                <input type="text" class="form-control mb-2" id="title" name="title" placeholder="title">
+                <input type="text" class="form-control mb-2" id="title" name="title" placeholder="title"
+                    value="<?= $row['title']?>">
                 <small id="titleHelp" class="form-text text-muted"></small>
             </div>
             <label>Author</label>
             <div class="form-row">
                 <div class="col-6">
-                    <input type="text" class="form-control" id="author" name="author" placeholder="作者" value="">
+                    <input type="text" class="form-control" id="author" name="author" placeholder="作者"
+                        value="<?= $row['author']?>">
                     <small id="authorHelp" class="form-text text-muted"></small>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control" id="avatar" name="avatar" placeholder="作者頭像" value="">
+                    <input type="text" class="form-control" id="avatar" name="avatar" placeholder="作者頭像"
+                        value="<?= $row['avatar']?>">
                     <small id="avatarHelp" class="form-text text-muted"></small>
                 </div>
             </div>
 
             <label>Date</label>
-            <div class="form-row">
-                <div class="col-6">
-                    <input type="text" class="form-control mb-2" id="datepicker" name="date"
-                        placeholder="請輸入日期 YY-MM-DD">
-                    <small id="dateHelp" class="form-text text-muted"></small>
+
+            <div class="">
+                <input type="text" class="form-control mb-2" id="datepicker" name="date" placeholder="請輸入日期 YY-MM-DD"
+                    value="<?= $row['date']?>">
+                <small id="dateHelp" class="form-text text-muted"></small>
+
+                <div class="my-2 mx-auto">
+                    <img id="myimg" src="" class="img-fluid max-width：100% height：auto" alt="<?= $row['image']?>">
                 </div>
-                <div class="custom-file col-6">
+                <div class="custom-file">
+                    <input type="hidden" class="custom-file-input" id="image" name="ori_img" value="<?= $row['image']?>">
                     <input type="file" class="custom-file-input" id="image" name="image">
-                    <label class="custom-file-label" for="image" data-browse="upload"></label>
+                    <label class="custom-file-label" for="image" data-browse="edit"><?= $row['image']?></label>
                     <small id="imageHelp" class="form-text text-muted"></small>
                 </div>
                 <label for="validationTextarea" class="my-2">Textarea</label>
-                <textarea id="editor" name="content"></textarea>
-                
+                <textarea id="editor" name="content"><?= $row['content']?></textarea>
+
                 <label>Link</label>
-                <input type="text" class="form-control mb-2" id="link" name="link" placeholder="link">
+                <input type="text" class="form-control mb-2" id="link" name="link" placeholder="link"
+                    value="<?= $row['link']?>">
                 <small id="linkHelp" class="form-text text-muted"></small>
                 <button id="submitBtn" type="submit" class="btn btn-primary my-2">Submit</button>
         </form>
 </section>
 <script>
 
+const myimg = document.querySelector('#myimg');
+    const myfile = document.querySelector('#image');
+
+    myfile.addEventListener('change', event=>{
+        console.log(event.target);
+        const fd = new FormData();
+
+        fd.append('myfile',myfile.files[0]);
+        fetch('article_previewpic_api.php',{
+            method:'POST',
+            body:fd
+        })
+            .then(response=>response.json())
+            .then(obj=>{
+                console.log(obj);
+                myimg.setAttribute('src','../pic/' + obj.filename);
+        });
+    });
+
+
+
+
+
 const postya = () => {
     submitBtn.style.display = 'none';
-
     const edt = document.querySelector('#editor')
     console.log(edt);
-    edt.innerHTML += tinyMCE.activeEditor.getContent();
-    var form1 = new FormData(document.form1);
-
-    fetch('article_insert_api.php', {
+    edt.innerHTML = tinyMCE.activeEditor.getContent();
+    
+    let form1 = new FormData(document.form1);
+    fetch('article_edit_api.php', {
             method: 'POST',
             body: form1
         })
@@ -106,7 +148,7 @@ const postya = () => {
             infoMsg.style.display = 'block';
             if (obj.success) {
                 infoMsg.className = 'alert alert-success';
-                infoMsg.innerHTML = '資料新增成功';
+                infoMsg.innerHTML = '資料修改成功';
             } else {
                 infoMsg.className = 'alert alert-dager';
                 infoMsg.innerHTML = obj.errorMsg;

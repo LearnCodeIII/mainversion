@@ -18,10 +18,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./RuthNav.php'?>
-
+<link rel="stylesheet" href="../css/jquery-ui.css">
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
+<script src="../js/jquery-ui.js"></script>
 <script>
 tinyMCE.init({
     // 初始化參數設定[註1]
@@ -93,7 +93,7 @@ $(function() {
                 </div>
                 <div class="custom-file">
                     <input type="hidden" class="custom-file-input" id="image" name="ori_img" value="<?= $row['image']?>">
-                    <input type="file" class="custom-file-input" id="image" name="image" value="">
+                    <input type="file" class="custom-file-input" id="image" name="image">
                     <label class="custom-file-label" for="image" data-browse="edit"><?= $row['image']?></label>
                     <small id="imageHelp" class="form-text text-muted"></small>
                 </div>
