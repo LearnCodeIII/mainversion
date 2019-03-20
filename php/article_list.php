@@ -15,7 +15,7 @@ include __DIR__.'/PDO.php';
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width:200px;
+    max-width:400px;
 };
 
 .title {
@@ -29,7 +29,7 @@ include __DIR__.'/PDO.php';
 
 <section class="dashboard">
 
-    <div class="container">
+    <div class="container-fluid">
         <!-- <form class="form-inline">
             <div class="form-group my-3">
                 <input type="text" class="form-control" id="Search" placeholder="Search">
@@ -47,10 +47,10 @@ include __DIR__.'/PDO.php';
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th class="title text-truncate" scope="col">title</th>
-                    <th scope="col">author</th>
-                    <th scope="col">date</th>
-                    <th class="content text-truncate" scope="col">content</th>
+                    <th class="title text-truncate" scope="col">新聞標題</th>
+                    <th scope="col">作者</th>
+                    <th scope="col">日期</th>
+                    <th class="content text-truncate" scope="col">新聞內容預覽</th>
                     <th scope="col">預覽</i></th>
                     <th scope="col">編輯</i></th>
                     <th scope="col">刪除</i></th>

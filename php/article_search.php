@@ -14,19 +14,21 @@ include __DIR__.'/PDO.php';
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width:200px;
+    max-width:400px;
 };
 
 .title {
     /* display: block; */
+    overflow:hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     max-width:30px;
 };
 </style>
 
 <section class="dashboard">
 
-    <div class="container">
+    <div class="container-fluid">
         <form class="form-inline" name="searchform" method="post" onsubmit="return gosearch();">
             <div class="form-group my-3">
                 <input type="text" class="form-control" id="search" name="searchkey" placeholder="Search">
