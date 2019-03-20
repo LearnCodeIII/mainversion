@@ -23,11 +23,18 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 .card-text{
     line-height:2;
 };
+.re_btn{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+};
 </style>
 
 <section class="dashboard">
+<div class="d-flex fixed-bottom justify-content-end">
+    <button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">返回上一頁</button>    
+</div>
     <div class="container">
-    <button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">返回列表</button>    
         <div class="card mb-3">
             <img src="../pic/article/<?= $row['image']?>" class="card-img-top" alt="">
             <div class="card-body" id="card_body">

@@ -29,7 +29,7 @@ include __DIR__.'/PDO.php';
 <section class="dashboard">
 
     <div class="container-fluid">
-        <form class="form-inline" name="searchform" method="post" onsubmit="return gosearch();">
+        <form class="form-inline" name="searchform" onsubmit="return gosearch();">
             <div class="form-group my-3">
                 <input type="text" class="form-control" id="search" name="searchkey" placeholder="Search">
                 <button type="submit" class="btn btn-primary mx-1">go</button>
@@ -90,7 +90,7 @@ const page_func = _.template(page_str);
 const gosearch = () => {
     var searchform = new FormData(document.searchform);
 
-    fetch('article_search_api.php')
+    fetch('article_search_api.php?searchkey='+document.searchform.searchkey.value)
         .then(response => response.json())
         .then(json => {
             oriData = json;
@@ -112,7 +112,7 @@ const myHashChange = () => {
     };
     // ul_page.innerHTML = page;
 
-    fetch('article_search_api.php?page=' + page)
+    fetch('article_search_api.php?page=' + page+'&searchkey='+document.searchform.searchkey.value)
         .then(res => {
             return res.json();
         })
