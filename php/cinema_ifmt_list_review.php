@@ -1,4 +1,4 @@
-<?php include __DIR__. './cinema_Login_SQL.php'?>
+<?php include __DIR__. './PDO.php'?>
 <?php
 $sid = $_GET['sid'];
 $sql = "SELECT * FROM cinema where sid='{$sid}'";
@@ -16,9 +16,9 @@ foreach($rows as $row){
 }
 
 ?>
-<?php include __DIR__. './hp_head.php' ?>
-<?php include __DIR__. './hp_nav.php' ?>
-<?php include __DIR__. './hp_sidenav.php' ?>
+<?php include __DIR__. './head.php' ?>
+<?php include __DIR__. './nav.php' ?>
+<?php include __DIR__. './cinema_sidenav.php' ?>
     <style>
         p{
             width: 75%;
@@ -34,7 +34,7 @@ foreach($rows as $row){
 <!--        左側資料-->
         <div style="width: 50%;background-color: #ccc;border-radius: 30px;">
 <!--    圖像-->
-            <img id="img" src=".<?= $img ?>" alt="..." class="img-thumbnail m-2 mb-4">
+            <img id="img" src="<?= $img ?>" alt="..." class="img-thumbnail m-2 mb-4">
 
             <h2 id="name" class="font-weight-bolder m-2 mt-3" style="font-size: 50px"><?= $name ?></h2>
 
@@ -146,4 +146,4 @@ foreach($rows as $row){
     </script>
 
 </section>
-<?php include __DIR__. './hp_foot.php' ?>
+<?php include __DIR__. './foot.php' ?>

@@ -3,7 +3,7 @@
     <ul class="navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="cinema_ifmt_insert.php">新增戲院</a>
+            <a class="nav-link" href="cinema_insert.php">新增戲院</a>
         </li>
 
         <li class="nav-item">

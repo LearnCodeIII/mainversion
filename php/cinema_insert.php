@@ -1,5 +1,5 @@
 <?php
-include __DIR__. './cinema_Login_SQL.php';
+include __DIR__. './PDO.php';
 
 if(isset($_POST['checkme'])){
     $sql = "INSERT INTO `cinema`(
@@ -14,7 +14,7 @@ if(isset($_POST['checkme'])){
 
         $stmt->execute([
             $_POST['name'],
-            '/images/cinema/'.$_POST['img'],
+            '../pic/cinema/'.$_POST['img'],
             $_POST['taxID'],
             $_POST['phone'],
             $_POST['address'],
@@ -44,11 +44,10 @@ if(isset($_POST['checkme'])){
 }
 
 ?>
-<?php include __DIR__. './cinema_Login_SQL.php'?>
-<?php include __DIR__. './hp_head.php' ?>
+<?php include __DIR__. './head.php' ?>
 <?php $pagename = "cinema_ifmt"; ?>
-<?php include __DIR__. './hp_nav.php' ?>
-<?php include __DIR__. './hp_sidenav.php' ?>
+<?php include __DIR__. './nav.php' ?>
+<?php include __DIR__. './cinema_sidenav.php' ?>
     <section class="dashboard">
     <style>
         .form-group small {
@@ -222,7 +221,7 @@ if(isset($_POST['checkme'])){
 
             fd.append('img', img.files[0]);
 
-            fetch('cinema_ifmt_insert_api.php', {
+            fetch('cinema_insert_api.php', {
                 method: 'POST',
                 body: fd
             })
@@ -236,4 +235,4 @@ if(isset($_POST['checkme'])){
 
     </script>
 
-<?php include __DIR__. './hp_foot.php' ?>
+<?php include __DIR__. './foot.php' ?>
