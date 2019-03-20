@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/cinema_Login_SQL.php';
+include __DIR__. './PDO.php';
 
 header('Content-Type: application/json');
 

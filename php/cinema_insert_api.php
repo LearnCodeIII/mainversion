@@ -16,18 +16,18 @@ if(empty($_FILES['img'])){
 
 $filename = $_FILES['img']['name'];
 
-//switch($_FILES['img']['type']){
-//    case 'image/jpeg':
-//        $filename .= '.jpg';
-//        break;
-//    case 'image/png':
-//        $filename .= '.png';
-//        break;
-//    default:
-//        $result['info'] = '圖片格式不符';
-//        echo json_encode($result, JSON_UNESCAPED_UNICODE);
-//        exit;
-//}
+switch($_FILES['img']['type']){
+    case 'image/jpeg':
+        $filename .= '.jpg';
+        break;
+    case 'image/png':
+        $filename .= '.png';
+        break;
+    default:
+        $result['info'] = '圖片格式不符';
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        exit;
+}
 $result['filename'] = $filename;
 $upload_file = $upload_dir. $filename;
 
