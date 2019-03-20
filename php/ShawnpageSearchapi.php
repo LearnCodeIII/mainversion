@@ -24,16 +24,18 @@ $result = [
 
 
 
+	$_POST['search_keyword']=isset($_POST['search_keyword'])?$_POST['search_keyword']:"";
+	$_POST['search_dateStart']=isset($_POST['search_dateStart'])?$_POST['search_dateStart']:"1970-01-01";
+	$_POST['search_dateEnd']=isset($_POST['search_dateEnd'])?$_POST['search_dateEnd']:"3000-01-01";
 
-
-
-	
-	$search_dateStart = "2017-10-12";
-	$search_dateEnd = "2019-04-08";
+	$search_keyword = '%'.$_POST['search_keyword'].'%';
+	$search_dateStart = $_POST['search_dateStart'];
+	$search_dateEnd = $_POST['search_dateEnd'];
 
 	#顯示資料
-	$sql ="SELECT * FROM `activity` WHERE `dateStart` > :search_dateStart AND `dateEnd` < :search_dateEnd ORDER BY `activity`.`dateStart` ASC";
+	$sql ="SELECT * FROM `activity` WHERE (`name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword )AND  `dateStart` >= :search_dateStart AND `dateEnd` <= :search_dateEnd ORDER BY `activity`.`dateStart` ASC";
 	$stmt = $pdo->prepare($sql);
+	$stmt->bindValue(":search_keyword",$search_keyword);
 	$stmt->bindValue(":search_dateStart",$search_dateStart);
 	$stmt->bindValue(":search_dateEnd",$search_dateEnd);
 	$stmt->execute();
