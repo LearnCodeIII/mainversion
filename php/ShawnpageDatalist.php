@@ -83,6 +83,33 @@ include __DIR__.'/PDO.php';
 </section>
 
 <script>
+//
+(function () {
+  var ie = !!(window.attachEvent && !window.opera);
+  var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+  var fn = [];
+  var run = function () { for (var i = 0; i < fn.length; i++) fn[i](); };
+  var d = document;
+  d.ready = function (f) {
+    if (!ie && !wk && d.addEventListener)
+      return d.addEventListener('DOMContentLoaded', f, false);
+    if (fn.push(f) > 1) return;
+    if (ie)
+      (function () {
+        try { d.documentElement.doScroll('left'); run(); }
+        catch (err) { setTimeout(arguments.callee, 0); }
+      })();
+    else if (wk)
+      var t = setInterval(function () {
+        if (/^(loaded|complete)$/.test(d.readyState))
+          clearInterval(t), run();
+      }, 0);
+  };
+})();
+
+
+
+
 //按鈕
 function btn_changeColor(e){
     switch(e.className){
@@ -135,7 +162,7 @@ const wrap_str =
 </div>
 
     
-    <div class="card-footer d-flex justify-content-between bg-dark text-white">
+    <div class="card-footer d-flex justify-content-between bg-dark text-white" onclick="highlightContent();">
         <small >活動期限：<%= dateStart %>-<%= dateEnd %></small>
         <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">更多資訊 <i class="fas fa-info-circle"></i></a></small> 
         <small class="d-flex justify-content-between">
@@ -158,6 +185,8 @@ const search_pagi_func = _.template(search_pagi_str);
 
 
 const myHashChange = () => {
+    
+
     let h = location.hash.slice(1);
     page = parseInt(h);
     if(isNaN(page)){
@@ -205,6 +234,7 @@ const myHashChange = () => {
                 });
             }
             pagi.innerHTML =str;
+            highlight();
         });
 }
 window.addEventListener('hashchange',myHashChange);
@@ -290,13 +320,23 @@ const searchForm = () =>{
 //
 function highlight(){
     var value = search_keyword.value;
+    if(!(typeof(value) == "undefined")){
     for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-title')[i].innerHTML.split(value);
         document.querySelectorAll('.card-title')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
-        
+        };
     }
-    ;
 };
+
+function highlightContent(){
+    var value = search_keyword.value;
+    if(!(typeof(value) == "undefined")){
+        for(var i=0;i<500;i++){
+        var values = document.querySelectorAll('.card-body')[i].innerHTML.split(value);
+        document.querySelectorAll('.card-body')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
+        };
+    }
+}
 
 
 
@@ -309,6 +349,12 @@ function deleteIt(sid){
 			location.href = 'ShawnpageDelete.php?sid=' + sid;
 		}
 	}
+
+
+
+
+
+
 </script>
 
 <?php include __DIR__.'./foot.php'?>
