@@ -95,8 +95,8 @@ echo $row;
 
                                 <label for="intro_pic ">圖片</label>
                                 <figure>
-                                    <img id="myimg" src="../pic/roy/<?= $row["intro_pic"]?>" alt="" width="200px">
-                           
+                                    <img id="myimg" src="../pic/roy/<?=   $row["intro_pic"] ?>" alt="" width="200px">
+                                                                        <!-- 判斷是否有圖片，沒有就顯示預設圖片 -->
                                 </figure>
                                 <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
                                     value="">
@@ -121,13 +121,14 @@ const submit_btn = document.querySelector('#submit_btn');
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
 
+
 intro_pic.addEventListener("change", event => {
     // 當偵測到有變更後，觸發箭頭韓式EVENT
     //console.log(event.target);
     const fd = new FormData();
 
     fd.append('intro_pic', intro_pic.files[0]);
-    fetch('Roy_upload_multi_api.php', {
+    fetch('Roy_data_edit_api.php', {
             method: 'POST',
             body: fd
         })

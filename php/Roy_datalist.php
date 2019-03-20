@@ -1,5 +1,5 @@
 <?php
-$pagename = "pageMain";
+$pagename = "forum";
 
 include __DIR__ . '/PDO.php';
 ?>

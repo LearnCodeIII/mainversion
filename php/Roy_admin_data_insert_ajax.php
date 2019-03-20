@@ -110,7 +110,8 @@ intro_pic.addEventListener("change", event => {
     const fd = new FormData();
 
     fd.append('intro_pic', intro_pic.files[0]);
-    fetch('Roy_upload_multi_api.php', {
+    fetch('Roy_data_insert_api.php', {
+        // 將轉碼也寫在同隻API
             method: 'POST',
             body: fd
         })
