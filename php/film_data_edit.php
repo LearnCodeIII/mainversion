@@ -134,13 +134,13 @@ include __DIR__.'./film_sidenav.php';
                                 </div>
                                 <div class="form-group">
                                     <label for="in_theaters">上映日期</label>
-                                    <input type="text" class="form-control" id="in_theaters" name="in_theaters"
+                                    <input type="date" class="form-control" id="in_theaters" name="in_theaters"
                                         placeholder="YYYY-MM-DD" value="<?= $row['in_theaters']?>">
                                     <small id="in_theatersHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="out_theaters">下檔日期</label>
-                                    <input type="text" class="form-control" id="out_theaters" name="out_theaters"
+                                    <input type="date" class="form-control" id="out_theaters" name="out_theaters"
                                         placeholder="YYYY-MM-DD" value="<?= $row['out_theaters']?>">
                                     <small id="out_theatersHelp" class="form-text text-muted"></small>
                                 </div>
