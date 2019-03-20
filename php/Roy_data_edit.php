@@ -21,7 +21,8 @@ echo $row;
 <?php include __DIR__. './Roysidenav.php';  ?>
 
 <head>
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
+    <script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key'></script>
 
     <style>
     .form-group small {
@@ -98,6 +99,7 @@ echo $row;
                                     <img id="myimg" src="../pic/roy/<?=   $row["intro_pic"] ?>" alt="" width="200px">
                                                                         <!-- 判斷是否有圖片，沒有就顯示預設圖片 -->
                                 </figure>
+                                    <!-- 如果不換圖片無法提交的BUG -->
                                 <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
                                     value="">
                             
@@ -142,12 +144,15 @@ intro_pic.addEventListener("change", event => {
 })
 
 
+tinymce.init({
+    selector: '#review'
+  });
 
-ClassicEditor
-    .create(document.querySelector('#review'))
-    .catch(error => {
-        console.error(error);
-    });
+// ClassicEditor
+//     .create(document.querySelector('#review'))
+//     .catch(error => {
+//         console.error(error);
+//     });
 
 
 const fields = [

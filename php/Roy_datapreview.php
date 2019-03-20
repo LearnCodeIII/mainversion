@@ -37,12 +37,15 @@ let ori_data;
 const review_body = document.querySelector('#review_body');
 
 // 掛載UNDERSCORE自動生成帶入內容
-const tr_str = ` <h5 class="mt-3 mb-3 border-bottom"><%=headline%></h5>                   
+const tr_str = ` 
+                <h5 class="mt-3 mb-3 border-bottom"><%=headline%></h5>                   
                 <%=review%>
                 <p class="mt-3 mb-3">發布日期:<%=i_date%></p>
                 <p class="mt-3 mb-3">觀看日期:<%=w_date%></p>
                 <p class="mt-3 mb-3">觀看戲院:<%=w_cinema%></p>
                 <p class="mt-3 mb-3">電影評價:<%=film_rate%></p>
+                <p class="mt-3 mb-3">電影圖片</p>
+                <img src="../pic/roy/<%=intro_pic%>"  width="600px">
                `
 
 
