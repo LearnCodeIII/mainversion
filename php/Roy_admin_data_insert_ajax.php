@@ -45,7 +45,7 @@ include __DIR__ . '/PDO.php';
                             </div>
                             <div class="form-group">
                                 <label for="w_date"><span class="text-danger">*</span>觀看日期</label>
-                                <input type="text" class="form-control" id="w_date" name="w_date"
+                                <input type="date" class="form-control" id="w_date" name="w_date"
                                     placeholder="YYYY-MM-DD" value="">
                                 <small id="w_dateHelp" class="form-text text-muted"></small>
                             </div>
@@ -68,11 +68,11 @@ include __DIR__ . '/PDO.php';
                                     placeholder="0-10" value="">
                                 <small id="film_rateHelp" class="form-text text-muted"></small>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="fav">我的最愛</label>
                                 <input type="text" class="form-control" id="fav" name="fav" placeholder="0-1" value="">
                                 <small id="favHelp" class="form-text text-muted"></small>
-                            </div>
+                            </div> -->
                             <div class="form-group">
 
                                 <label for="intro_pic ">圖片</label>
@@ -133,7 +133,7 @@ const fields = [
     // 'i_date',無效
     'w_cinema',
     'film_rate',
-    'fav',
+    // 'fav',
     `intro_pic`
 ];
 
@@ -176,9 +176,9 @@ const checkForm = () => {
         document.querySelector('#' + v + 'Help').innerHTML = '';
     }
 
-    if (fsv.headline.length > 20) {
+    if (fsv.headline.length > 50) {
         fs.headline.style.borderColor = 'red';
-        document.querySelector('#headlineHelp').innerHTML = '請勿輸入超過20個字!';
+        document.querySelector('#headlineHelp').innerHTML = '請勿輸入超過50個字!';
 
         isPassed = false;
     }
@@ -199,11 +199,11 @@ const checkForm = () => {
     }
 
     // TODO 如果不想必檢查的方式
-    if (!fav_pattern.test(fsv.fav)) {
-        fs.fav.style.borderColor = 'red';
-        document.querySelector('#favHelp').innerHTML = '請輸入正確值!';
-        isPassed = false;
-    }
+    // if (!fav_pattern.test(fsv.fav)) {
+    //     fs.fav.style.borderColor = 'red';
+    //     document.querySelector('#favHelp').innerHTML = '請輸入正確值!';
+    //     isPassed = false;
+    // }
 
 
 

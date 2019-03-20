@@ -18,7 +18,7 @@ if (isset($_POST["checkme"])) {
     $w_date = htmlspecialchars($_POST['w_date']);
     $w_cinema = htmlspecialchars($_POST['w_cinema']);
     $film_rate = htmlspecialchars($_POST['film_rate']);
-    $fav = htmlspecialchars($_POST['fav']);
+    // $fav = htmlspecialchars($_POST['fav']);
     // $intro_pic = htmlspecialchars($_POST['intro_pic']);
     // 這串要拿掉，值的屬性不同會判讀有誤
    
@@ -91,8 +91,8 @@ if (isset($_POST["checkme"])) {
 
 
 
-    $sql = "INSERT INTO `forum`(`headline`, `review`, `w_date`, `w_cinema`, `film_rate`, `fav`,`intro_pic`)
-             VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `forum`(`headline`, `review`, `w_date`, `w_cinema`, `film_rate`, `intro_pic`)
+             VALUES (?, ?, ?, ?, ?,?)";
     // 不用SPRINTF寫法
 
 
@@ -106,7 +106,7 @@ if (isset($_POST["checkme"])) {
             $_POST["w_date"],
             $_POST["w_cinema"],
             $_POST["film_rate"],
-            $_POST["fav"],
+            // $_POST["fav"],
             $filename
         ]);
 
