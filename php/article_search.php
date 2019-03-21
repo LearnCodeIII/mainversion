@@ -73,7 +73,7 @@ let tr_str = `<tr>
                 <td><%= date %></td>
                 <td class="content text-truncate"><%= content %></td>
                 <td><a href="article_preview.php?sid=<%= sid %>"><i class="fas fa-eye"></a></td>
-                <td><a href="article_previewpic.php?sid=<%= sid %>"><i class="fas fa-edit"></a></td>
+                <td><a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></a></td>
                 <td><a href="javascript: delete_it(<%= sid %>)"><i class="fas fa-trash-alt"></a></td>
                 </tr>`;
 

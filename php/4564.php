@@ -20,12 +20,12 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 // $cmstmt = $pdo->query($cmsql);
 // $cmrow = $cmstmt->fetch(PDP::FETCH_ASSOC);
 
-$cm_time = date("Y-m-d h:i:sa");
+
 
 ?>
 <?php include __DIR__.'./head.php'?>
-<?php //include __DIR__.'./nav.php'?>
-<?php //include __DIR__.'./RuthNav.php'?>
+<?php include __DIR__.'./nav.php'?>
+<?php include __DIR__.'./RuthNav.php'?>
 
 
 <style>
@@ -59,8 +59,8 @@ $cm_time = date("Y-m-d h:i:sa");
             </div>
         </div>
 
-        <h4 class="mb-3">網友評論</h4>
-        <div id="commentarea" class="justify-content-between">
+        <h2 class="mb-3">網友留言</h2>
+        <div id="commentarea">
             <!-- <div class="toast-header">
                 <img src="..." class="rounded mr-2" alt="...">
                 <strong class="mr-auto">Bootstrap</strong>
@@ -71,9 +71,9 @@ $cm_time = date("Y-m-d h:i:sa");
             </div> -->
         </div>
 
-        <form name="form1" method="post" onsubmit="return postya();">
+        <form name="form1" method="post" runat="server" onsubmit="return postya();">
             <div class="form-row">
-                <div class="col">
+                <div class="col-3">
                     <select class="form-control" name="member_sid">
                         <option value="1">皮卡丘</option>
                         <option value="2">小火龍</option>
@@ -81,10 +81,8 @@ $cm_time = date("Y-m-d h:i:sa");
                         <option value="4">妙蛙種子</option>
                     </select>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <input type="text" class="form-control" name="comment" placeholder="留下評論......">
-                    <input type="hidden" class="form-control" name="article_sid" value="<?= $row['sid']?>">
-                    <input type="hidden" class="form-control" name="cm_date" value="<?= $cm_time ?>">
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary mb-2">送出</button>
@@ -99,18 +97,13 @@ let page = location.search;
 let oriData;
 const data_body = document.querySelector('#commentarea');
 
-let tr_str = `<div class="toast-header my-1">
-<div class="">
-                <img src="../pic/avatar/<%= avatar%>" width="30" alt="...">
-                </div>
-                <div class="">
-                <strong"><%= name%></strong>：<%= comment %>
-                </div>
-                <div class="ml-auto">
-                <small><%= cm_date %></small>
-                </div>
-                 </div>`;
-
+let tr_str = `<div class="toast-header">
+                <img src="../pic/avatar/<%= avatar %>" class="rounded mr-2" width="30" alt="...">
+                <%= name %>：<%= comment %>
+                      </div>
+            <div class="toast-body">
+            <small><%= cm_date %></small>
+            </div>`;
 const tr_func = _.template(tr_str);
 
 // escape.html(_.escape(input.val(tr_str)));
@@ -147,17 +140,21 @@ myHashChange();
 
 
 const postya = () => {
-    // submitBtn.style.display = 'none';
+    submitBtn.style.display = 'none';
 
-    let form1 = new FormData(document.form1);
-    fetch('comment_insert_api.php', {
+    const edt = document.querySelector('#editor')
+    console.log(edt);
+    edt.innerHTML += tinyMCE.activeEditor.getContent();
+    var form1 = new FormData(document.form1);
+
+    fetch('article_insert_api.php', {
             method: 'POST',
             body: form1
         })
         .then(response => response.json())
         .then(obj => {
             console.log(obj);
-            // infoMsg.style.display = 'block';
+            infoMsg.style.display = 'block';
             if (obj.success) {
                 infoMsg.className = 'alert alert-success';
                 infoMsg.innerHTML = '資料新增成功';
@@ -165,10 +162,12 @@ const postya = () => {
                 infoMsg.className = 'alert alert-dager';
                 infoMsg.innerHTML = obj.errorMsg;
             }
+            submitBtn.style.display = 'block';
         });
-        // location.href = 'article_delete.php?sid=' + page;
     return false;
 };
+
+
 </script>
 
 <!-- <?php include __DIR__.'/__html_foot.php'; ?> -->
