@@ -11,6 +11,12 @@ if(isset($_SESSION['admin'])){
 }else if(isset($_SESSION['theater'])){
     $theater = $_SESSION['theater'];
     
+
+    $sql = sprintf("SELECT * FROM cinema where `account` like %s ",$theater);
+    $stmt = $pdo->query($sql);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 }else {
     header("Location: ./login.php");
     exit;
