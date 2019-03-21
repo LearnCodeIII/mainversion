@@ -30,7 +30,7 @@ if($page < 1)$page = 1 ;
 if($page > $total_pages) $page = $total_pages;
 $result['page'] = $page;
 
-$sql = sprintf("SELECT * FROM article ORDER BY sid DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+$sql = sprintf("SELECT * FROM article ORDER BY sid ASC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
 $stmt = $pdo -> query($sql);
 
 $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
