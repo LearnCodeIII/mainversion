@@ -69,7 +69,7 @@ include __DIR__.'./film_sidenav.php';
                                     <label class="custom-file-label" for="customFile" data-browse="上傳檔案">選擇檔案</label>
                                     <small id="movie_picHelp" class="form-text text-muted"></small>
                                     <div class="overflow-hidden" width="200px" height="200px">
-                                        <img id="output" src="" alt="">
+                                        <img width="300px" height="450px" id="output" src="" alt="">
                                     </div>
                                 </div>
 
