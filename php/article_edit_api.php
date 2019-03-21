@@ -116,12 +116,12 @@ if (isset($_POST['title'])and !empty($sid)){
             $result['errorMsg'] = '';
         }else {
             $result['errorCode'] = 402;
-            $result['errorMsg'] = '資料新增錯誤';
+            $result['errorMsg'] = '資料修改失敗';
         };
         //要看connect db 設定的錯誤屬性  484=exception J個部分$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }catch(PDOException $ex){
             $result['errorCode'] = 403;
-            $result['errorMsg'] = '資料新增失敗';
+            $result['errorMsg'] = '資料修改失敗';
         };
 };
 

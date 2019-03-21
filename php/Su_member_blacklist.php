@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/PDO.php';
 
-$pagename = "member";
+$groupname = "member";
 $spname = 'member_blacklist';
 ?>
 <?php include __DIR__.'/head.php' ?>

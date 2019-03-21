@@ -1,7 +1,12 @@
 <?php
 $pagename = "forum";
-
+$groupname = "forum";
+// include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
+
+if($_SESSION["admin"]!=="roy"){
+    header('Location: login.php');
+}
 ?>
 <?php include __DIR__ . './head.php'?>
 <?php include __DIR__ . './nav.php'?>

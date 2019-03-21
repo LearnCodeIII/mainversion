@@ -1,5 +1,5 @@
 <?php
-$pagename = "member";
+$groupname = "member";
 
 include __DIR__.'/PDO.php';
 

@@ -45,7 +45,7 @@ if (isset($_POST['name_tw'])and !empty($sid)) {
     $upload_dir = __DIR__. '/../pic/film_upload/';
     // 如果沒有檔案 給一個nopic檔
     if (empty($_FILES['movie_pic']['name'])) {
-        $filename="nopic.jpg";
+        $filename=$_POST['ori_pic'];
     } else {
         $filename = sha1($_FILES['movie_pic']['name']. uniqid());
 
@@ -62,7 +62,7 @@ if (isset($_POST['name_tw'])and !empty($sid)) {
         exit;
         }
     }
-    $result['movie_pic']=$filename;
+    $result['filename']=$filename;
     $upload_file=$upload_dir.$filename;
 
     if (move_uploaded_file($_FILES['movie_pic']['tmp_name'], $upload_file)) {

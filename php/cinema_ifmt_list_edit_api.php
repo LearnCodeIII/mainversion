@@ -1,5 +1,5 @@
 <?php
-include __DIR__. './PDO.php';
+require __DIR__. '/PDO.php';
 
 header('Content-Type: application/json');
 
@@ -8,13 +8,19 @@ $result = [
     'errorCode' => 0,
     'errorMsg' => '資料輸入不完整',
     'post' => [], // 做 echo 檢查      
-        
-];
+    'filename' => '',
+    'info' => '',
+    'test' => '',
+    ];
 $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
+$result['test'] = $_POST['imgupload'];
 
-if(isset($_POST['name']) and !empty($sid)){
+
+$filename = sha1($_FILES['img']['name']. uniqid());
+
+if(!empty($sid)){
     $name = $_POST['name'];
-    $img = $_POST['img'];
+    $img = $_POST['imgupload'];
     $taxID = $_POST['taxID'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
@@ -61,7 +67,7 @@ if(isset($_POST['name']) and !empty($sid)){
 
     $sql = "UPDATE `cinema` SET 
                 `name`=?,
-                `name`=?,
+                `img`=?,
                 `taxID`=?,
                 `phone`=?,
                 `address`=?,
@@ -75,7 +81,7 @@ if(isset($_POST['name']) and !empty($sid)){
 
         $stmt->execute([
             $_POST['name'],
-            $_POST['img'],
+            $_POST['imgupload'],
             $_POST['taxID'],
             $_POST['phone'],
             $_POST['address'],
@@ -84,6 +90,7 @@ if(isset($_POST['name']) and !empty($sid)){
             $_POST['intro'],
             $sid
         ]);
+
 
         if($stmt->rowCount()==1) {
             $result['success'] = true;
