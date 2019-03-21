@@ -57,7 +57,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-dark text-white">活動開始日期</span>
+                                        <span class="input-group-text bg-dark text-white">開始日期</span>
                                     </div>
                                     <input type="date" class="form-control" id="dateStart" name="dateStart" placeholder="" value="<?=$row['dateStart']?>">
                                     <span class="text-danger">*</span>
@@ -65,7 +65,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="dateStartHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-dark text-white">活動結束日期</span>
+                                        <span class="input-group-text bg-dark text-white">結束日期</span>
                                     </div>
                                     <input type="date" class="form-control" id="dateEnd" name="dateEnd" placeholder="" value="<?=$row['dateEnd']?>">
                                     <span class="text-danger">*</span>
@@ -73,17 +73,17 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="dateEndHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">活動廠商名稱</span>
+                                        <span class="input-group-text bg-dark text-white">戲院名稱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="company" name="company" placeholder="" value="<?=$row['company']?>">
+                                    <input type="text" class="form-control" id="company" name="company" placeholder="" value="<?=$row['company']?>" disabled>
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="companyHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">活動地址</span>
+                                        <span class="input-group-text bg-dark text-white">戲院地址</span>
                                     </div>
-                                    <input type="text" class="form-control" id="region" name="region" placeholder="" value="<?=$row['region']?>">
+                                    <input type="text" class="form-control" id="region" name="region" placeholder="" value="<?=$row['region']?>" >
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="regionHelp" class="form-text text-muted"></small>
