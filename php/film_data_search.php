@@ -13,9 +13,9 @@ include __DIR__.'./film_sidenav.php';
 
 <section class="dashboard">
 
-    <div class="alert alert-warning" role="alert">
+    <!-- <div class="alert alert-warning" role="alert">
         尬廣跟上?
-    </div>
+    </div> -->
 
     <h2 class="card-title text-center">搜尋影片資料
     </h2>
