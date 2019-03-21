@@ -206,22 +206,22 @@ const myHashChange = () => {
                     d.primary="徵才資訊"
                 }else d.primary="";
                 if(d.contenttype.indexOf('success')>-1){
-                    d.success="進行中"
+                    d.success="長期活動"
                 }else d.success="";
                 if(d.contenttype.indexOf('warning')>-1){
-                    d.warning="即將結束"
+                    d.warning="戲院公告"
                 }else d.warning="";
                 if(d.contenttype.indexOf('danger')>-1){
-                    d.danger="會員專屬活動"
+                    d.danger="會員專屬"
                 }else d.danger="";
                 if(d.contenttype.indexOf('info')>-1){
                     d.info="電影資訊"
                 }else d.info="";
                 if(d.contenttype.indexOf('secondary')>-1){
-                    d.secondary="活動結束"
+                    d.secondary="官方活動"
                 }else d.secondary="";
                 if(d.contenttype.indexOf('dark')>-1){
-                    d.dark="長期活動";
+                    d.dark="維修公告";
                 }else d.dark="";
                 str += wrap_func(d);
             }
@@ -288,22 +288,22 @@ const searchForm = () =>{
                 d.primary="徵才資訊"
             }else d.primary="";
             if(d.contenttype.indexOf('success')>-1){
-                d.success="進行中"
+                d.success="長期活動"
             }else d.success="";
             if(d.contenttype.indexOf('warning')>-1){
-                d.warning="即將結束"
+                d.warning="戲院公告"
             }else d.warning="";
             if(d.contenttype.indexOf('danger')>-1){
-                d.danger="會員專屬活動"
+                d.danger="會員專屬"
             }else d.danger="";
             if(d.contenttype.indexOf('info')>-1){
                 d.info="電影資訊"
             }else d.info="";
             if(d.contenttype.indexOf('secondary')>-1){
-                d.secondary="活動結束"
+                d.secondary="官方活動"
             }else d.secondary="";
             if(d.contenttype.indexOf('dark')>-1){
-                d.dark="長期活動";
+                d.dark="維修公告";
             }else d.dark="";
             str += wrap_func(d);
 

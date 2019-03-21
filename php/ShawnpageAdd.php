@@ -84,29 +84,29 @@ include __DIR__.'/PDO.php';
                                                 <input class="form-check-input" type="checkbox" id="primary" value="primary" name="contenttype[]">
                                                 <label class="form-check-label" for="primary">徵才資訊</label>
                                             </div>
-                                            <div class="form-check form-check-inline" hidden>
+                                            <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="success" value="success" name="contenttype[]">
-                                                <label class="form-check-label" for="success">進行中</label>
+                                                <label class="form-check-label" for="success">長期活動</label>
                                             </div>
-                                            <div class="form-check form-check-inline" hidden>
+                                            <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="warning" value="warning" name="contenttype[]">
-                                                <label class="form-check-label" for="warning">即將結束</label>
+                                                <label class="form-check-label" for="warning">戲院公告</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="danger" value="danger" name="contenttype[]">
-                                                <label class="form-check-label" for="danger">會員專屬活動</label>
+                                                <label class="form-check-label" for="danger">會員專屬</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="info" value="info" name="contenttype[]">
                                                 <label class="form-check-label" for="info">電影資訊</label>
                                             </div>
-                                            <div class="form-check form-check-inline" hidden>
+                                            <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="secondary" value="secondary" name="contenttype[]">
-                                                <label class="form-check-label" for="secondary">活動結束</label>
+                                                <label class="form-check-label" for="secondary">官方活動</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="dark" value="dark" name="contenttype[]">
-                                                <label class="form-check-label" for="dark">長期活動</label>
+                                                <label class="form-check-label" for="dark">維修公告</label>
                                             </div>
                                             <input class="form-check-input" type="checkbox" id="space" value="space" name="contenttype[]" checked hidden >
                                         </div>
