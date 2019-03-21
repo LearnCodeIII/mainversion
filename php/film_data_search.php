@@ -13,14 +13,17 @@ include __DIR__.'./film_sidenav.php';
 
 <section class="dashboard">
 
-<div class="alert alert-warning" role="alert">
-    尬廣跟上?
-</div>
+    <div class="alert alert-warning" role="alert">
+        尬廣跟上?
+    </div>
+
+    <h2 class="card-title text-center">搜尋影片資料
+    </h2>
 
     <form name="form1" method="post" action="" onsubmit="return checkForm()">
         <input type="hidden" name="" value="sid">
 
-        
+
         <div class="row justify-content-center">
             <div class="col-lg-5">
                 <label class="sr-only" for="inlineFormInputName2">Name</label>
@@ -34,6 +37,13 @@ include __DIR__.'./film_sidenav.php';
 
         <div class="row justify-content-center">
             <div class="col-lg-6">
+
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <p class="h4">用那些欄位搜尋及顯示</p>
+                    </div>
+                </div>
+
                 <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" class="custom-control-input" id="all" name="all"
                         onclick="check_all('chk[]',this)">
@@ -282,7 +292,7 @@ include __DIR__.'./film_sidenav.php';
 
     const checkForm = () => {
 
-        submit_btn.style.display = 'none';//按下提交後，按鈕消失(當資料處理結束才再設定顯示)
+        //submit_btn.style.display = 'none';按下提交後，按鈕消失(當資料處理結束才再設定顯示)
         info.innerHTML = "";
         title.innerHTML = "";
         data_body.innerHTML = "";
@@ -293,6 +303,16 @@ include __DIR__.'./film_sidenav.php';
         pre_page.innerHTML = "";
         next_page.innerHTML = "";
         end_page.innerHTML = "";
+
+
+
+        // 如果沒輸入值則跳提醒及回到原本頁面
+        if(keyword.value == ""){
+            alert("未填入要搜尋的資料喔");
+            location.href="film_data_search.php";
+            return false;
+        }
+           
 
         let form = new FormData(document.form1);
 
@@ -348,7 +368,7 @@ include __DIR__.'./film_sidenav.php';
                             <a href="javascript: checkDelete(${ori_data.data[s][temp_title[0]]})">
                                 <i class="text-danger fas fa-trash-alt"></i>
                             </a>
-                        </td>`; 
+                        </td>`;
                         for (let i = 0; i < column_num; i++) {
                             if (temp_title[i] == 'movie_pic') {
                                 str += `<td>
