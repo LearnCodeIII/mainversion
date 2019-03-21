@@ -1,8 +1,8 @@
 <?php
+include __DIR__.'/PDO.php';
 $groupname = "activity";
 $pagename = "pageMain";
 
-include __DIR__.'/PDO.php';
 
 ?>
 <?php include __DIR__.'./head.php'?>

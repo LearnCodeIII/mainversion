@@ -1,8 +1,8 @@
 <?php
+include __DIR__.'/PDO.php';
 $groupname = "activity";
 $pagename = "";
 
-include __DIR__.'/PDO.php';
 
 if(isset($_SESSION['admin'])){
     $user = $_SESSION['admin'];

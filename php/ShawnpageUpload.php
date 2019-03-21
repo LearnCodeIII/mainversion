@@ -1,4 +1,4 @@
-<?php
+<?php  session_start(); 
 $upload_dir = __DIR__. '/../pic/activity/';
 
 header('Content-Type: application/json');

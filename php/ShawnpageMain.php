@@ -1,8 +1,8 @@
-<?php
+<?php 
+include __DIR__.'/PDO.php';
 $groupname = "activity";
 $pagename = "pageMain";
 
-include __DIR__.'/PDO.php';
 
 #每頁筆數
 $per_page = 5;
