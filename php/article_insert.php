@@ -29,13 +29,6 @@ $(document).ready(function() {
     bsCustomFileInput.init()
 });
 
-// $(function() {
-//     $("#datepicker").datepicker({
-//         showOtherMonths: true,
-//         selectOtherMonths: true,
-//         dateFormat: 'yy-mm-dd'
-//     });
-// });
 </script>
 
 <section class="dashboard">
@@ -47,7 +40,7 @@ $(document).ready(function() {
             <?= $msg['info'] ?>
         </div>
         <?php endif?>
-        <form name="form1" method="post" onsubmit="return postya();">
+        <form name="form1" method="post" runat="server" onsubmit="return postya();">
             <label>Title</label>
             <div>
                 <input type="text" class="form-control mb-2" id="title" name="title" placeholder="title">
@@ -66,28 +59,30 @@ $(document).ready(function() {
             </div>
 
             <label>Date</label>
-            <div class="form-row">
-                <div class="col-6">
-                    <input type="date" class="form-control mb-2" id="datepicker" name="date"
-                        placeholder="請輸入日期 YY-MM-DD">
-                    <small id="dateHelp" class="form-text text-muted"></small>
-                </div>
-                <div class="custom-file col-6">
-                    <input type="file" class="custom-file-input" id="image" name="image">
-                    <label class="custom-file-label" for="image" data-browse="upload"></label>
-                    <small id="imageHelp" class="form-text text-muted"></small>
-                </div>
+            <div class="">
+                <input type="date" class="form-control mb-2" id="datepicker" name="date" placeholder="請輸入日期 YY-MM-DD">
+                <small id="dateHelp" class="form-text text-muted"></small>
+            </div>
+            <label>Image</label>
+            <div class="img">
+                <img id="blah" src="" onerror="this.src='../pic/article/defaultpreview.jpg'" class="d-block" alt="your image" width="500" height="auto" />
+            </div>
+            <div class="custom-file">
+                <input type="file" class="" id="image" name="image" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+            </div>
+            <label>Link</label>
+            <input type="text" class="form-control" id="link" name="link" placeholder="link">
+            <small id="linkHelp" class="form-text text-muted"></small>
+            <div>
                 <label for="validationTextarea" class="my-2">Textarea</label>
                 <textarea id="editor" name="content"></textarea>
-                
-                <label>Link</label>
-                <input type="text" class="form-control mb-2" id="link" name="link" placeholder="link">
-                <small id="linkHelp" class="form-text text-muted"></small>
-                <button id="submitBtn" type="submit" class="btn btn-primary my-2">Submit</button>
+            </div>
+            
+            
+            <button id="submitBtn" type="submit" class="btn btn-primary my-2">Submit</button>
         </form>
 </section>
 <script>
-
 const postya = () => {
     submitBtn.style.display = 'none';
 
