@@ -9,8 +9,8 @@ if(isset($_SESSION['admin'])){
     $user .= $_SESSION['admin'];
     
 }else if(isset($_SESSION['theater'])){
-    $user = $_SESSION['theater'];
-
+    $theater = $_SESSION['theater'];
+    
 }else {
     header("Location: ./login.php");
     exit;
