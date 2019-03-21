@@ -54,7 +54,7 @@ if(isset($_POST['user']) and isset($_POST['password'])){
             </form>
         <?php else: ?>
             <script>
-                location.href = './ShawnpageMain.php';
+                location.href = './mainpage.php';
             </script>
         <?php endif; ?>
     </div>

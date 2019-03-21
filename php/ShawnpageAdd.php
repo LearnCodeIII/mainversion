@@ -7,8 +7,9 @@ include __DIR__.'/PDO.php';
 if(isset($_SESSION['admin'])){
     $user = $_SESSION['admin'];
 }else {
-    header("Location: http://192.168.27.179/mainversion/mainversion/php/login.php")
-}
+    header("Location: http://192.168.27.179/mainversion/mainversion/php/login.php");
+    exit;
+};
 ?>
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./nav.php'?>
@@ -69,7 +70,7 @@ if(isset($_SESSION['admin'])){
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text bg-dark text-white">活動廠商名稱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="company" name="company" <?=$user?>>
+                                    <input type="text" class="form-control" id="company" name="company" <?=$user?> disabled>
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="companyHelp" class="form-text text-muted"></small>
