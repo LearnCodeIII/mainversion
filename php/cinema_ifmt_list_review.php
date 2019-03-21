@@ -25,7 +25,7 @@ $per_page = 5;
 // 算總筆數
 try{
 
-$t_sql = sprintf("SELECT COUNT(1) FROM `ad`, `activity` WHERE `activity`.`company`='$name'  AND `ad`.`client_name`='$name'  ");
+$t_sql = sprintf("SELECT COUNT(1) FROM `ad`, `activity` WHERE `activity`.`company`='$name'  OR `ad`.`client_name`='$name'  ");
 $t_stmt = $pdo->query($t_sql);
 $total_rows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
 
@@ -36,7 +36,7 @@ if($page < 1) $page = 1;
 if($page > $total_pages) $page = $total_pages;
 
 //$sql = sprintf("SELECT * FROM `activity` where `activity`.`author`='$name'  LIMIT %s, %s", ($page-1)*$ac_per_page, $ac_per_page);
-$sql = sprintf("SELECT  `activity`.`name` , `ad`.`contract_start_date`,`ad`.`contract_end_date`,`ad`.`ad_name` FROM `ad`, `activity` WHERE `activity`.`company`='$name'  AND `ad`.`client_name`='$name'  LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+$sql = sprintf("SELECT  `activity`.`name` , `ad`.`contract_start_date`,`ad`.`contract_end_date`,`ad`.`ad_name` FROM `ad`, `activity` WHERE `activity`.`company`='$name'  OR `ad`.`client_name`='$name'  LIMIT %s, %s", ($page-1)*$per_page, $per_page);
 
 $stmt = $pdo->query($sql);
 
