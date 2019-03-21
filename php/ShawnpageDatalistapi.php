@@ -1,8 +1,8 @@
 <?php
+include __DIR__.'/PDO.php';
 $groupname = "activity";
 $pagename = "pageMain";
 
-include __DIR__.'/PDO.php';
 
 #每頁筆數
 $per_page = 4;
@@ -18,7 +18,7 @@ $result = [
 	"ErrCode" => 0
 ];
 
-
+	
 #設定當前頁數
 $page = isset($_GET['page'])? intval($_GET['page']):1;
 

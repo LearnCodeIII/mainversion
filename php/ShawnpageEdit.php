@@ -1,7 +1,7 @@
 <?php
+include __DIR__.'/PDO.php';
 $groupname = "activity";
 
-include __DIR__.'/PDO.php';
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 $sql = "SELECT * FROM activity WHERE sid=$sid";

@@ -1,6 +1,6 @@
 <?php
-$groupname = "activity";
 include __DIR__.'/PDO.php';
+$groupname = "activity";
 
 header("Content-type:application/json");
 

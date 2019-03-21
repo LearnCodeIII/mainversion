@@ -1,7 +1,7 @@
 <?php
+include __DIR__.'/PDO.php';
 $pagename = "pageMain";
 
-include __DIR__.'/PDO.php';
 
 header("Content-type:application/json");
 
