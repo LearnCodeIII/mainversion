@@ -1,7 +1,11 @@
 <?php
 $pagename = "pageMain";
-
+// include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
+
+if($_SESSION["admin"]!=="roy"){
+    header('Location: login.php');
+}
 
 ?>
 <?php include __DIR__ . './head.php'?>
@@ -20,7 +24,6 @@ include __DIR__ . '/PDO.php';
     //         .catch(error => {
     //             console.error(error);
     //         });
-
     </script>
     <style>
     .form-group small {
@@ -38,16 +41,21 @@ include __DIR__ . '/PDO.php';
                     <div class="card-body">
                         <h5 class="card-title">發布文章
                         </h5>
-                
                         <form name="form1" method="post" onsubmit="return checkForm();">
                             <input type="hidden" name="checkme" value="check123">
+                            <div class="form-group">
+                                <label for="headline">發布者</label>
+                                <input type="text" readonly class="form-control" id="issuer" name="issuer" placeholder="<?= $_SESSION["admin"]?>"
+                                    value="<?= $_SESSION["admin"]?>">
+                                <small id="headlineHelp" class="form-text text-muted"></small>
+                            </div>
                             <div class="form-group">
                                 <label for="headline">影評標題</label>
                                 <input type="text" class="form-control" id="headline" name="headline" placeholder=""
                                     value="">
                                 <small id="headlineHelp" class="form-text text-muted"></small>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label for="review">影評</label>
                                 <!-- <textarea class="form-control" id="review" name="review" cols="30" rows="3"></textarea> -->
                                 <textarea class="form-control" name="review" id="review"></textarea>
@@ -111,8 +119,6 @@ include __DIR__ . '/PDO.php';
 </section>
 
 <script>
-
-
 // 上傳檔案
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
@@ -154,7 +160,7 @@ const fields = [
     'w_cinema',
     'film_rate',
     // 'fav',
-    `intro_pic`
+    `intro_pic`,
 ];
 
 // 拿到每個欄位的參照
@@ -249,7 +255,7 @@ const checkForm = () => {
                 info_bar.style.display = 'block';
                 if (obj.success) {
                     info_bar.className = 'alert alert-success';
-                    info_bar.innerHTML = '資料新增成功，五秒後自行轉跳';
+                    info_bar.innerHTML = '資料新增成功';
                     // func = () => {
                     //     location.href = "Roy_datalist.php";
                     // }

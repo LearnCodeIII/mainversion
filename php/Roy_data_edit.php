@@ -3,6 +3,10 @@
 require __DIR__. '/PDO.php';
 $page_name = 'data_edit';
 
+if($_SESSION["admin"]!=="roy"){
+    header('Location: login.php');
+}
+
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
 $sql = "SELECT * FROM forum WHERE sid=$sid";
@@ -259,7 +263,7 @@ const checkForm = () => {
 
                 if (obj.success) {
                     info_bar.className = 'alert alert-success';
-                    info_bar.innerHTML = '資料新增成功，五秒後自行轉跳';
+                    info_bar.innerHTML = '資料新增成功';
                     // func = () => {
                     //     location.href = "Roy_datalist.php";
                     // }

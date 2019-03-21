@@ -1,7 +1,9 @@
 <?php
 //TODO 設定管理權限使用
-// require __DIR__. '/__cred.php';
+// include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
+
+
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
