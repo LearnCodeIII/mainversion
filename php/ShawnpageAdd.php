@@ -7,7 +7,7 @@ include __DIR__.'/PDO.php';
 if(isset($_SESSION['admin'])){
     $user = $_SESSION['admin'];
 }else {
-    header("Location: http://192.168.27.179/mainversion/mainversion/php/login.php");
+    header("Location: ./login.php");
     exit;
 };
 ?>

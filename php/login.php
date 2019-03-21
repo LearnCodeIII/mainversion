@@ -19,7 +19,8 @@ if(isset($_POST['user']) and isset($_POST['password'])){
 
     if($stmt->rowCount()==1) {
         $_SESSION['admin'] = $user;
-        header('Location: ./ShawnpageMain.php');
+
+        header('Location: ./mainpage.php');
         exit;
     } else {
         $msg = '帳號或密碼錯誤';
@@ -29,8 +30,8 @@ if(isset($_POST['user']) and isset($_POST['password'])){
 
 ?>
 <?php include __DIR__.'/head.php'?>
-<?php include __DIR__.'/nav.php'?>
-<?php include __DIR__.'/Shawnsidenav.php'?>
+<?php include __DIR__.'/loginnav.php'?>
+<?php include __DIR__.'./sidenav.php'?>
 <section class="dashboard">
     <div class="container">
         <?php if(! isset($_SESSION['admin'])): ?>
