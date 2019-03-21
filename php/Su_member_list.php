@@ -1,11 +1,16 @@
 <?php
 require __DIR__.'/PDO.php';
-$pagename = "member";
+$groupname = "member";
 $spname = 'member_list';
 ?>
 <?php include __DIR__.'/head.php' ?>
 <?php include __DIR__.'/nav.php' ?>
 <?php include __DIR__.'./Su_sidenav.php'?>
+<style>
+  #show_avatar{
+    object-fit:contain;
+  }
+</style>
 <section class="dashboard">
 <div class="row d-flex justify-content-center">
   <div class="col-lg data_info"></div>
@@ -98,7 +103,7 @@ const tr_str = `<tr>
           <td><%= email %></td>
           <td class="text-nowrap"><%= mobile %></td>
           <td><%= fav_type %></td>
-          <td><img src="../pic/avatar/<%= avatar %>" alt="" width="100"></td>
+          <td><img id="show_avatar" src="../pic/avatar/<%= avatar %>" alt="" style="width:100px ; height:100px"></td>
           <td><%= join_date %></td>
           <td><%= pwd %></td>
           <td><%= pwd_change_d %></td>

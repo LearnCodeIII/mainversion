@@ -1,14 +1,14 @@
 <?php
 require __DIR__.'/PDO.php';
-$pagename = "member";
+$groupname = "member";
 $page_name = 'member_edit';
 
 $sid = isset($_GET['sid'])? intval($_GET['sid']) : 0;
 
 $sql = "SELECT * FROM `member` WHERE sid=$sid";
-
 $stmt = $pdo->query($sql);
-$goto = "Su_member_list_choose.php";
+
+$goto = "Su_member_list.php";
 if($stmt->rowCount()==0){
     if(isset($_SERVER['HTTP_REFERER'])){
         $goto = $_SERVER['HTTP_REFERER'];
@@ -28,6 +28,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 .form-group small{
     color:red !important;
 }
+#ori-av{
+    object-fit:contain;
+}
 </style>
 <script>
 $(document).ready(function () {
@@ -41,43 +44,47 @@ $(document).ready(function () {
                 </div> 
             <div class="card">                       
                 <div class="card-body px-5">
-                    <h5 class="card-title text-center">會員資料修改
-                    </h5>
+                    <div class="d-flex justify-content-between">
+                        <a href="Su_member_edit.php?sid=<?= ($row['sid'])-1 ?>"><i class="fas fa-arrow-circle-left"></i> 前一筆</a>
+                        <h5 class="card-title text-center">會員資料修改</h5>
+                        <a href="Su_member_edit.php?sid=<?= ($row['sid'])+1 ?>">下一筆 <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
                     <form name="form1" method="post" onsubmit="return checkForm()">
                     <input type="hidden" name="checkme" value="check123">
-                        <div class="form-group row align-items-center my-4">
-                            <label for="name" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">會員編號</label>
-                            <input type="hidden" class="form-control text-center" name="sid" placeholder="" value="<?= $row['sid'] ?>">
-                            <input type="text" class="col-lg-4 mx-2 form-control text-center"  placeholder="" value="<?= $row['sid'] ?>" disabled>
+                        <div class="row justify-content-between">
+                            <div class="col-lg-4 align-self-center order-lg-1 text-center">
+                                    <input type="hidden" name="ori_pic" value="<?= $row['avatar'] ?>">
+                                    <img src="../pic/avatar/<?= $row['avatar'] ?>" alt="" id="ori-av" class="img-thumbnail" style="width:200px ; height:200px">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group row align-items-center my-4 flex-nowrap">
+                                    <label for="name" class="col-lg-4 mx-2 col-form-label text-center bg-dark text-white rounded">會員編號</label>
+                                    <input type="hidden" class="form-control text-center" name="sid" placeholder="" value="<?= $row['sid'] ?>">
+                                    <input type="text" class="col-lg-8 ml-2 form-control text-center"  placeholder="" value="<?= $row['sid'] ?>" disabled>
+                                </div>
+                                <div class="form-group row align-items-center my-4 flex-nowrap">
+                                    <label for="name" class="col-lg-4 mx-2 col-form-label text-center bg-dark text-white rounded">姓名</label>
+                                    <input type="text" class="col-lg-8 mx-2 form-control text-center" id="name" name="name" placeholder="" value="<?= $row['name'] ?>" disabled>
+                                    <small id="nameHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group row align-items-center my-4 flex-nowrap">
+                                    <label for="nickname" class="col-lg-4 mx-2 col-form-label text-center bg-dark text-white rounded">暱稱</label>
+                                    <input type="text" class="col-lg-8 mx-2 form-control text-center" id="nickname" name="nickname" placeholder="" value="<?= $row['nickname'] ?>">
+                                    <small id="nicknameHelp" class="form-text text-muted"></small>
+                                </div>
+                            </div>  
                         </div>
-                        <div class="form-group row align-items-center my-4">
-                            <label for="name" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">姓名</label>
-                            <input type="text" class="col-lg-4 mx-2 form-control text-center" id="name" name="name" placeholder="" value="<?= $row['name'] ?>" disabled>
-                            <small id="nameHelp" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-group row align-items-center my-4">
-                            <label for="nickname" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">暱稱</label>
-                            <input type="text" class="col-lg-4 mx-2 form-control text-center" id="nickname" name="nickname" placeholder="" value="<?= $row['nickname'] ?>">
-                            <small id="nicknameHelp" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-group row align-items-center my-4">
+                        <div class="form-group row align-items-center mt-0 mb-4">
                             <label for="birthday" class="col-lg-2 mx-2  col-form-label text-center bg-dark text-white rounded">生日</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="birthday" name="birthday" placeholder="YYYY - MM - DD" value="<?= $row['birthday'] ?>">
-                            <!-- </div> -->
                             <small id="birthdayHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="age" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">年齡</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="age" name="age" placeholder="" value="<?= $row['age'] ?>">
-                            <!-- </div> -->
                         </div>
                         <div class="form-group row align-items-center my-4">
-                            <!-- <fieldset class="form-group col-sm-8 mb-0"> -->
-                                <!-- <div class="row  align-items-center"> -->
                                     <legend class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">性別</legend>
-                                    <!-- <div class="col-sm-9 d-flex"> -->
                                         <div class="col-lg-1 col-sm-5 mx-2 form-check mr-4">
                                             <input class="form-check-input" type="radio" name="gender" id="male" value="男" <?= $row['gender']=="男" ? 'checked' :'' ?>>
                                             <label class="form-check-label" for="male">
@@ -90,22 +97,15 @@ $(document).ready(function () {
                                                 女
                                             </label>
                                         </div>
-                                    <!-- </div> -->
-                                <!-- </div> -->
-                            <!-- </fieldset> -->
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="mobile" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">手機</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="mobile" name="mobile" placeholder="" value="<?= $row['mobile'] ?>">
-                            <!-- </div> -->
                             <small id="mobileHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="email" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">電子信箱</label>
-                            <!-- <div class="col-sm-8 ml-0"> -->
                             <input type="text" class="col-lg-7 mx-2 form-control text-center" id="email" name="email" placeholder="" value="<?= $row['email'] ?>">
-                            <!-- </div> -->
                             <small id="emailHelp" class="form-text text-muted"></small>
                         </div>
                         <!-- <div class="form-group row">
@@ -122,98 +122,101 @@ $(document).ready(function () {
                             </div>
                             <small id="pwdchkHelp" class="form-text text-muted"></small>
                         </div> -->
-
                         <div class="form-group row align-items-center my-4">
                             <label for="avatar" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">上傳頭像</label>
-                            <!-- <div class="col-sm-8"> -->
-                                <div class="col-lg-8 mx-2 custom-file">
-                                    <input type="hidden" class="custom-file-input" name="ori_pic" value="<?= $row['avatar'] ?>">
-                                    <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                                    <label class="custom-file-label" for="avatar" data-browse="選擇圖片"></label>
-                                </div>
-                            <!-- </div> -->
+                            <div class="col-lg-8 mx-2 custom-file">
+                                <input type="file" class="custom-file-input" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange="loadFile(event)">
+                                <label id="l_for_avatar" class="custom-file-label" for="avatar" data-browse="選擇圖片"></label>
+                            </div>
                         </div>
-                        <div class="form-group row align-items-center my-4">
+                        <div class="previewImg text-center" style="display:none">
+                            <div class="row justify-content-center">
+                                <div style="width:200px">
+                                <img id="output" style="width:200px">  
+                                </div>      
+                                <a href="javascript: cancel()"><i class="fas fa-times-circle" style="font-size:30px ; color:red"></i></a>              
+                            </div>
+                        </div>
+                        <div class="form-group row my-4">
                             <div class="col-lg-2 mx-2 col-form-label d-flex align-items-center justify-content-center bg-dark text-white rounded">
                             <label class="text-center" for="fav_type">喜愛電影類型</label>
                             </div>
-                            <div class="col-sm-10">
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                            <div class="col-lg-9 d-flex flex-wrap justify-content-lg-start justify-content-md-center">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="all" name="all" onclick="check_all('chk[]',this)">
                                     <label id="l_all" class="custom-control-label" for="all">全選</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type1" name="chk[]" value="動作片" onclick="check(this,'all','chk[]')" >
                                     <label class="custom-control-label" for="type1">動作片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type2" name="chk[]" value="動畫片" onclick="check(this,'all','chk[]')" >
                                     <label class="custom-control-label" for="type2">動畫片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type3" name="chk[]" value="喜劇片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type3">喜劇片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type4"  name="chk[]" value="偵探片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type4">偵探片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type5" name="chk[]" value="紀錄片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type5">紀錄片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type6" name="chk[]" value="戲劇片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type6">戲劇片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type7" name="chk[]" value="英雄片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type7">英雄片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type8" name="chk[]" value="恐怖片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type8">恐怖片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type9" name="chk[]" value="武俠片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type9">武俠片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type10" name="chk[]" value="靈異片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type10">靈異片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type11" name="chk[]" value="文藝片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type11">文藝片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type12" name="chk[]" value="警匪片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type12">警匪片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type13" name="chk[]" value="科幻片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type13">科幻片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type14" name="chk[]" value="懸疑片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type14">懸疑片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type15" name="chk[]" value="驚悚片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type15">驚悚片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type16" name="chk[]" value="戰爭片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type16">戰爭片</label>
                                 </div>
-                                <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                                <div class="col-lg-2 col-md-3 custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" class="custom-control-input" id="type17" name="chk[]" value="愛情片" onclick="check(this,'all','chk[]')">
                                     <label class="custom-control-label" for="type17">愛情片</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row align-items-center my-4">
-                 
                                     <label class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">權限</label>
                                     <div class="col-lg-9 d-flex">
                                         <div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
@@ -223,7 +226,7 @@ $(document).ready(function () {
                                             </label>
                                         </div>
                                         <div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
-                                            <input class="form-check-input" type="radio" name="permission" id="perm1" value="1" checked>
+                                            <input class="form-check-input" type="radio" name="permission" id="perm1" value="1">
                                             <label class="form-check-label" for="perm1">
                                                 一般會員
                                             </label>
@@ -241,7 +244,6 @@ $(document).ready(function () {
                                             </label>
                                         </div>
                                     </div>
-                       
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-4  d-flex justify-content-center">
@@ -272,17 +274,48 @@ $(document).ready(function () {
     };
     console.log(fs);
 
-
-    let php_row = "<?= $row['fav_type']; ?>";
+    //判斷原始勾選狀態
+    let php_row1 = "<?= $row['fav_type']; ?>";
     const fav_types=['動作片','動畫片','喜劇片','偵探片','紀錄片','戲劇片','英雄片','恐怖片','武俠片','靈異片','文藝片','警匪片','科幻片','懸疑片','驚悚片','戰爭片','愛情片'];
     for(let i=0 ; i<fav_types.length ; i++){
-        if(php_row.indexOf(fav_types[i]) != -1){
+        if(php_row1.indexOf(fav_types[i]) != -1){
             document.getElementsByName('chk[]')[i].checked = 'checked';
         }
     }
+    let php_row2 = "<?= $row['permission']; ?>";
+    // const permissions=['0','1','2','3'];
+    // for(let i=0 ; i<permissions.length ; i++){
+    //     if(php_row2.indexOf(permissions[i]) != -1){
+            document.getElementsByName('permission')[php_row2].checked = 'checked';
 
-    // ar = split(',',$row['fav_type'])
+    // }
 
+    //圖片檔案預覽
+    var output = document.getElementById('output');//預覽img
+    var pre = document.querySelector('.previewImg');//包img的div(控制display)
+    var avatar = document.querySelector('#avatar');
+    var l_for_avatar = document.querySelector('#l_for_avatar');//label:顯示檔名
+    var ppp;
+
+    const loadFile = function (event) {
+        if (avatar.files.length > 0) {//如果有選擇檔案
+            l_for_avatar.innerText = '';
+            pre.style.display = 'block';
+            output.src = URL.createObjectURL(event.target.files[0]);
+            l_for_avatar.innerText = event.target.files[0]['name'];
+            ppp = event.target.files;//把檔案資訊(陣列)存到ppp
+        }
+        else {//如果沒選擇檔案
+            avatar.files = ppp;//原本選取的檔案資料會被代回，不會消失
+        }
+    };
+    //消除選擇的檔案
+    const cancel = () => {
+        avatar.value = ''; //清空夾帶檔案
+        l_for_avatar.innerText = '';
+        output.src = '';
+        pre.style.display = 'none';
+    }
 
 
 
@@ -316,7 +349,7 @@ $(document).ready(function () {
 
 
 const checkForm = ()=>{
-    submit_btn.style.display='none';//按下提交後，按鈕消失(當資料處理結束才再設定顯示)
+    submit_btn.style.display='none';
     let isPassed = true;
 
     //拿到每個input的value(值是在輸入後才會產生，故拿值須放在function內)
@@ -325,7 +358,6 @@ const checkForm = ()=>{
         fsv[v] = fs[v].value;
     };
 
-    // let name = document.form1.name.value;
 
 
 
