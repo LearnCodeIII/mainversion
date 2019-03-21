@@ -20,7 +20,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 // $cmstmt = $pdo->query($cmsql);
 // $cmrow = $cmstmt->fetch(PDP::FETCH_ASSOC);
 
-
+$cm_time = date("Y-m-d h:i:sa");
 
 ?>
 <?php include __DIR__.'./head.php'?>
@@ -59,7 +59,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <h4 class="mb-3">網友留言</h4>
+        <h4 class="mb-3">網友評論</h4>
         <div id="commentarea" class="justify-content-between">
             <!-- <div class="toast-header">
                 <img src="..." class="rounded mr-2" alt="...">
@@ -84,7 +84,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="col-9">
                     <input type="text" class="form-control" name="comment" placeholder="留下評論......">
                     <input type="hidden" class="form-control" name="article_sid" value="<?= $row['sid']?>">
-                    <input type="hidden" class="form-control" name="cm_date" value="">
+                    <input type="hidden" class="form-control" name="cm_date" value="<?= $cm_time ?>">
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary mb-2">送出</button>
@@ -147,8 +147,9 @@ myHashChange();
 
 
 const postya = () => {
-    submitBtn.style.display = 'none';
+    // submitBtn.style.display = 'none';
 
+    let form1 = new FormData(document.form1);
     fetch('comment_insert_api.php', {
             method: 'POST',
             body: form1
@@ -156,7 +157,7 @@ const postya = () => {
         .then(response => response.json())
         .then(obj => {
             console.log(obj);
-            infoMsg.style.display = 'block';
+            // infoMsg.style.display = 'block';
             if (obj.success) {
                 infoMsg.className = 'alert alert-success';
                 infoMsg.innerHTML = '資料新增成功';
@@ -164,8 +165,8 @@ const postya = () => {
                 infoMsg.className = 'alert alert-dager';
                 infoMsg.innerHTML = obj.errorMsg;
             }
-            submitBtn.style.display = 'block';
         });
+        // location.href = 'article_delete.php?sid=' + page;
     return false;
 };
 </script>
