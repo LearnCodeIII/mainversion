@@ -9,8 +9,8 @@ include __DIR__ . '/PDO.php';
 <?php include __DIR__ . './Roysidenav.php'?>
 
 <head>
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
-    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key"></script> -->
 
     <style>
     .form-group small {
@@ -247,14 +247,14 @@ const checkForm = () => {
     return false;
 };
 
-tinymce.init({
-    selector: '#review'
-  });
+// tinymce.init({
+//     selector: '#review'
+//   });
 
-// ClassicEditor
-//     .create(document.querySelector('#review'))
-//     .catch(error => {
-//         console.error(error);
-//     });
+ClassicEditor
+    .create(document.querySelector('#review'))
+    .catch(error => {
+        console.error(error);
+    });
 </script>
 <?php include __DIR__ . './foot.php'?>
