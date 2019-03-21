@@ -24,8 +24,8 @@ $page_name = 'member_insert';
 <section class="dashboard">
     <div class="row justify-content-center">
         <div class="col-lg-7">
-            <div id="info" class="alert alert-success" style="display:none" role="alert">
-            </div>
+            <!-- <div id="info" class="alert alert-success" style="display:none" role="alert">
+            </div> -->
             <div class="card">
                 <div class="card-body px-5">
                     <h5 class="card-title text-center">新增會員資料
@@ -259,6 +259,8 @@ $page_name = 'member_insert';
                                 <button id="submit_btn" type="submit"
                                     class="btn btn-primary btn-block my-3">確認送出</button>
                             </div>
+                        </div>
+                        <div id="info" class="alert alert-success" style="display:none" role="alert">
                         </div>
                     </form>
                 </div>

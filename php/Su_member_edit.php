@@ -40,8 +40,8 @@ $(document).ready(function () {
 <section class="dashboard">
     <div class="row justify-content-center">
         <div class="col-lg-7">
-                <div id="info" class="alert alert-success" style="display:none" role="alert">
-                </div> 
+                <!-- <div id="info" class="alert alert-success" style="display:none" role="alert">
+                </div>  -->
             <div class="card">                       
                 <div class="card-body px-5">
                     <div class="d-flex justify-content-between">
@@ -250,6 +250,8 @@ $(document).ready(function () {
                                 <button id="submit_btn" type="submit" class="btn btn-primary btn-block my-3">確認送出</button>
                             </div>
                         </div>                            
+                        <div id="info" class="alert alert-success" style="display:none" role="alert">
+                        </div> 
                     </form>
                 </div>
             </div>
