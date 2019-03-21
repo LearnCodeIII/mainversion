@@ -67,10 +67,10 @@ include __DIR__.'/PDO.php';
                     <ul class="pagination justify-content-center" id="search_pagination">
                     </ul>
                 </nav>
-                <input class="form-check-input" type="checkbox" id="search_lightS" value="search_lightS" name="search_contenttype[]" hidden><br>
+                <!-- <input class="form-check-input" type="checkbox" id="search_lightS" value="search_lightS" name="search_contenttype[]" hidden><br>
                 <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]"hidden><br>
                 <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]"hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_lightE" value="search_lightE" name="search_contenttype[]"hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_lightE" value="search_lightE" name="search_contenttype[]"hidden><br> -->
 
                 <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]"hidden><br>
                 <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]"hidden><br>
@@ -249,20 +249,18 @@ myHashChange();
 const search_btn = document.querySelector('#search_btn');
  
 const searchForm = () =>{
-    if(search_keyword.value=="" && search_dateStart =="" && search_dateEnd ==""){
+    if(search_keyword.value=="" && search_dateStart.value =="" && search_dateEnd.value ==""){
         myHashChange();
-        return;
+        return false;
     }
-    // if(search_dateStart =="" && search_dateEnd ==""){
-    //     search_dateStart.value="0000-00-00";
-    //     search_dateEnd.value="9999-99-99";
-    // }
-    // if(search_dateStart ==""){
-    //     search_dateStart.value="0000-00-00";
-    // }
-    // if(search_dateEnd ==""){
-    //     search_dateEnd.value="9999-99-99";
-    // }
+    if(search_dateStart.value ==""){
+        search_dateStart.value ="1000-01-01";
+    }
+    if(search_dateEnd.value ==""){
+        search_dateEnd.value ="9999-01-01";
+    }
+
+
     let h = location.hash.slice(1);
     page = parseInt(h);
     if(isNaN(page)){
