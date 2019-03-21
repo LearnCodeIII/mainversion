@@ -47,7 +47,6 @@ if(isset($_POST['user']) and isset($_POST['password'])){
     ]);
     if($c_stmt->rowCount()==1) {
         $_SESSION['theater'] = $user;
-        $_SESSION['theater'] = 
 
 
 
