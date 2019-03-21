@@ -10,7 +10,7 @@
             <a class="nav-link" href="./article_search.php">文章搜尋</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">還沒想到</a>
+            <a class="nav-link" href="./comment_list.php">留言列表</a>
         </li>
         <li class="nav-item <?= $phpname == "phpSetting"?"active":""; ?>">
             <a class="nav-link" href="#">管理者設置</a>
