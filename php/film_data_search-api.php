@@ -71,9 +71,9 @@ if (! isset($_POST['chk'])) {
     //取得搜尋結果資料
     if($_POST['keyword']!==''){
         $srch_kw ="'%".$_POST['keyword']."%'";
-        $sql = sprintf("SELECT $select FROM film_primary_table WHERE concat(%s) LIKE %s ORDER BY `sid` ASC LIMIT %s,%s", $select, $srch_kw, ($page-1)*$dper_page, $dper_page);
+        $sql = sprintf("SELECT $select FROM film_primary_table WHERE concat(%s) LIKE %s ORDER BY `sid` ASC LIMIT %s,%s", $select, $srch_kw, ($page-1)*$per_page, $per_page);
     }else{
-        $sql = sprintf("SELECT $select FROM film_primary_table ORDER BY `sid` ASC LIMIT %s,%s", ($page-1)*$dper_page, $dper_page);
+        $sql = sprintf("SELECT $select FROM film_primary_table ORDER BY `sid` ASC LIMIT %s,%s", ($page-1)*$per_page, $per_page);
     }
 
         $stmt = $pdo->query("$sql");
