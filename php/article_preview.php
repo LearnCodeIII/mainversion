@@ -40,8 +40,14 @@ $cm_time = date("Y-m-d h:i:sa");
     bottom: 30px;
     right: 30px;
 }
+.toast-header{
+    border-radius:10px 10px 10px 0px;
+    box-shadow: 1px 1px 5px #cccccc;
+};
 
-;
+.border10{
+    border-radius:10%;
+}
 </style>
 
 <section class="dashboard">
@@ -99,11 +105,11 @@ let page = location.search;
 let oriData;
 const data_body = document.querySelector('#commentarea');
 
-let tr_str = `<div class="toast-header my-1">
+let tr_str = `<div class="toast-header my-2">
 <div class="">
-                <img src="../pic/avatar/<%= avatar%>" width="30" alt="...">
+                <img src="../pic/avatar/<%= avatar%>" class="mb-1" width="30" alt="...">
                 </div>
-                <div class="">
+                <div class="ml-2">
                 <strong"><%= name%></strong>：<%= comment %>
                 </div>
                 <div class="ml-auto">
@@ -161,7 +167,7 @@ const postya = () => {
             // }
             // data_body.innerHTML = str;
         });
-        setTimeout(myHashChange(), 500);
+        setTimeout(myHashChange(), 300);
           return false;
 };
 
