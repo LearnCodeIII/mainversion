@@ -21,8 +21,14 @@ $result = [
 	"data" => []
 ];
 
+$_POST['search_contenttype']=isset($_POST['search_contenttype'])?$_POST['search_contenttype']:"";
 
-$result['Code']=['search_keyword'=>$_POST['search_keyword'],'search_dateStart'=>$_POST['search_dateStart'],'search_dateEnd'=>$_POST['search_dateEnd']];
+$result['Code']=[
+'search_keyword'=>$_POST['search_keyword'],
+'search_dateStart'=>$_POST['search_dateStart'],
+'search_dateEnd'=>$_POST['search_dateEnd'],
+
+];
 
 
 

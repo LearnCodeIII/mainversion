@@ -42,29 +42,41 @@ include __DIR__.'/PDO.php';
 
 
                 <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
+                    <label class="btn btn-dark ">活動狀態</label>               
+                    <label class="btn btn-light" for="search_lightS" onclick="btn_changeColor(this)">即將開始</label>
+                    <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">進行中　</label>
+                    <label class="btn btn-light" for="search_warning" onclick="btn_changeColor(this)">即將結束</label>
+                    <label class="btn btn-light" for="search_lightE" onclick="btn_changeColor(this)">已結束　</label>
+                </div>
+
+                <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
                     <label class="btn btn-dark ">活動類型</label>               
                     <label class="btn btn-light" for="search_primary" onclick="btn_changeColor(this)">徵才資訊</label>
-                    <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">長期活動</label>
-                    <label class="btn btn-light" for="search_warning" onclick="btn_changeColor(this)">戲院公告</label>
-                    <label class="btn btn-light" for="search_danger" onclick="btn_changeColor(this)">會員專屬</label>
                     <label class="btn btn-light" for="search_info" onclick="btn_changeColor(this)">電影資訊</label>
-                    <label class="btn btn-light" for="search_secondary" onclick="btn_changeColor(this)">官方活動</label>
-                    <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">維修公告</label>
+                    <label class="btn btn-light" for="search_danger" onclick="btn_changeColor(this)">會員專屬</label>
+                    <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">長期活動</label>
                 </div>
                 <div class="btn-group mt-3 mb-3 d-flex justify-content-between" role="group">
                     <button class="btn btn-dark" type="submit" id="search_btn" >搜尋</button>
                 </div>
                 <nav>
+                    <ul class="pagination justify-content-center" id="pagination">
+                    </ul>
+                </nav>
+                <nav>
                     <ul class="pagination justify-content-center" id="search_pagination">
                     </ul>
                 </nav>
-                <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_danger" value="search_danger" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_secondary" value="search_secondary" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_dark" value="search_dark" name="search_contenttype[]" hidden><br>
+                <!-- <input class="form-check-input" type="checkbox" id="search_lightS" value="search_lightS" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]"hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]"hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_lightE" value="search_lightE" name="search_contenttype[]"hidden><br> -->
+
+                <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]"hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]"hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_danger" value="search_danger" name="search_contenttype[]"hidden><h4>
+                <input class="form-check-input" type="checkbox" id="search_dark" value="search_dark" name="search_contenttype[]"hidden><h4>
+
             </form>
             
         </div>
@@ -135,8 +147,8 @@ const wrap_str =
                 <span class="badge badge-dark" id="badge-dark"><%= dark%></span>
             </h6>
         </div>
-        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4">
-            <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
+        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4" hidden>
+            <img src="../pic/activity/<%= picture %>" class="card-img-top" style="display:block;max-height:180px;max-width:180px;">
         </div>
     </div>
     
@@ -164,22 +176,82 @@ const wrap_str =
 </div>`;
 
 const wrap_func = _.template(wrap_str);
-
+const pagi_str = `<li class="page-item <%= active %>">
+				<a class="page-link" href="#<%= page %>"><%= page %></a>
+            </li>`;
+const pagi_func = _.template(pagi_str);
 const search_pagi_str = `<li class="page-item <%= active %>">
-				<a class="page-link" href="#/page=<%= page %>"><%= page %></a>
+				<a class="page-link" href="#<%= page %>"><%= page %></a>
             </li>`;
 const search_pagi_func = _.template(search_pagi_str);
+
+
+const myHashChange = () => {
+    
+
+    let h = location.hash.slice(1);
+    page = parseInt(h);
+    if(isNaN(page)){
+        page = 1;
+    }
+    pagi.innerHTML = page;
+    fetch('ShawnpageDatalistapi.php?page='+page)
+        .then(res=>{return res.json();})
+        .then(json=>{
+            ori_data = json;
+            let str='';
+            for(let d of ori_data.data){
+
+                if(d.contenttype.indexOf('primary')>-1){
+                    d.primary="徵才資訊"
+                }else d.primary="";
+                if(d.contenttype.indexOf('success')>-1){
+                    d.success="長期活動"
+                }else d.success="";
+                if(d.contenttype.indexOf('warning')>-1){
+                    d.warning="戲院公告"
+                }else d.warning="";
+                if(d.contenttype.indexOf('danger')>-1){
+                    d.danger="會員專屬"
+                }else d.danger="";
+                if(d.contenttype.indexOf('info')>-1){
+                    d.info="電影資訊"
+                }else d.info="";
+                if(d.contenttype.indexOf('secondary')>-1){
+                    d.secondary="官方活動"
+                }else d.secondary="";
+                if(d.contenttype.indexOf('dark')>-1){
+                    d.dark="維修公告";
+                }else d.dark="";
+                str += wrap_func(d);
+            }
+            data_body.innerHTML = str;
+
+            str = '';
+            for(let i=1;i<=ori_data.totalPages;i++){
+                let active = ori_data.page === i ? 'active':'';
+                str += pagi_func({
+                    active:active,
+                    page:i
+                });
+            }
+            pagi.innerHTML =str;
+            highlight();
+        });
+}
+
+
+
+
 
 //搜尋功能
 
 const search_btn = document.querySelector('#search_btn');
  
 const searchForm = () =>{
-    console.log('GO!')
     if(search_keyword.value=="" && search_dateStart.value =="" && search_dateEnd.value ==""){
-        search_keyword.value=="";
-        search_dateStart.value ="1000-01-01";
-        search_dateEnd.value ="9999-01-01";
+        myHashChange();
+        return false;
     }
     if(search_dateStart.value ==""){
         search_dateStart.value ="1000-01-01";
@@ -189,14 +261,15 @@ const searchForm = () =>{
     }
 
 
-    let h = location.hash.slice(7);
+    let h = location.hash.slice(1);
     page = parseInt(h);
     if(isNaN(page)){
         page = 1;
     }
     search_pagi.innerHTML = page;
+    pagi.setAttribute('style','display:none')
     let form = new FormData(document.form1);
-    fetch('ShawnpageSearchapi.php?page='+page,{
+    fetch('ShawnpageSearchapi.php?',{
         method:'POST',
         body:form
     })
