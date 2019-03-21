@@ -8,14 +8,5 @@
         <li class="nav-item">
             <a class="nav-link" href="cinema_ifmt_list.php">戲院資訊</a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">充場面</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">沒東西做</a>
-        </li>
-
     </ul>
 </nav>

@@ -143,7 +143,7 @@ try{
                     <div class="pt-3 pb-3 bg-white w-100 h-100 d-flex flex-column align-items-center overflow-hidden" id="ad_body">
 
                         <?php if(!isset($contract_start_date)){ ?>
-                            <div class="mt-5">無相關資料</div>
+                            <div class="m-5">無相關資料</div>
                         <?php } ?>
 
                         <?php if(isset($contract_start_date)){ ?>
@@ -172,10 +172,10 @@ try{
                 <!--                下方活動-->
                 <div class=" w-100 h-50 overflow-hidden shadow-sm mb-5" style="border-radius: 30px">
                     <div class="bg-dark d-flex justify-content-center align-items-center" style="height: 80px"><<i class="fas fa-snowboarding ac">活動</i></div>
-                    <div class="bg-white w-100 h-100 d-flex flex-column align-items-center" id="ad_body">
+                    <div class="pt-3 pb-3 bg-white w-100 h-100 d-flex flex-column align-items-center" id="ad_body">
 
                         <?php if(!isset($ac_name)){ ?>
-                            <div class="mt-5">無相關資料</div>
+                            <div class="m-5">無相關資料</div>
                         <?php } ?>
 
                         <?php if(isset($ac_name)){ ?>
