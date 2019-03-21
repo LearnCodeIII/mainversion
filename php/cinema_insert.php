@@ -1,6 +1,6 @@
 <?php
 include __DIR__. './PDO.php';
-
+$groupname = 'theater';
 if(isset($_POST['checkme'])){
     $sql = "INSERT INTO `cinema`(
             `name`,`img`, `taxID`, `phone`, `address`, `account` ,`password` , `intro`
@@ -8,13 +8,14 @@ if(isset($_POST['checkme'])){
               ?, ?, ?, ?, ?, ?, ?, ?
             )";
 
+$img_loaddata = isset($_POST['img_data']) ? $_POST['img_data']: '';
 
     try {
         $stmt = $pdo->prepare($sql);
 
         $stmt->execute([
             $_POST['name'],
-            '../pic/cinema/'.$_POST['img'],
+            $img_loaddata,
             $_POST['taxID'],
             $_POST['phone'],
             $_POST['address'],
@@ -53,7 +54,9 @@ if(isset($_POST['checkme'])){
         .form-group small {
             color: red !important;
         }
-
+        #myimg{
+            object-fit: cover;
+        }
     </style>
 <div class="container">
 
@@ -101,13 +104,15 @@ if(isset($_POST['checkme'])){
                             </div>
                             <div class="col-6">
                                 <label class="mt-4">戲院預覽圖</label>
-                                <div class="img-thumbnail mb-3 w-50 overflow-hidden">
-                                    <img id="output" src="" alt="" class="img-thumbnail m-0 w-100 p-0">
+                                <div class="img-thumbnail mb-3 overflow-hidden" style="width:250px;height: 250px">
+                                    <img id="myimg" src="" alt="" class="img-thumbnailp-0 w-100 h-100">
                                 </div>
 
                                 <label for="img">戲院圖</label>
                                 <div class="custom-file form-group col-12 mb-3">
-                                    <input type="file" class="custom-file-input" accept="image/*" onchange="loadFile(event)" id="img" name="img">
+<!--                                    onchange="loadFile(event)"-->
+                                    <input type="file" class="custom-file-input" id="img" name="img">
+                                    <input type="hidden" class="custom-file-input" id="img_data" name="img_data">
                                     <label class="custom-file-label overflow-hidden" for="customFile" data-browse="上傳檔案">選擇檔案</label>
                                     <small id="imgHelp" class="form-text text-muted"></small>
                                 </div>
@@ -205,30 +210,31 @@ if(isset($_POST['checkme'])){
             bsCustomFileInput.init();
         })
 
-        // 預覽圖
-        var loadFile = function (event) {
-            var output = document.querySelector('#output');
-            output.src = URL.createObjectURL(event.target.files[0]);
-        }
+        // // 預覽圖
+        // var loadFile = function (event) {
+        //     var output = document.querySelector('#output');
+        //     output.src = URL.createObjectURL(event.target.files[0]);
+        // }
 
         // 圖片移致指定資料夾
-        const myimg = document.querySelector('#myimg');
         const img = document.querySelector('#img');
+        const myimg = document.querySelector('#myimg')
+        const img_data = document.querySelector('#img_data');
 
         img.addEventListener('change', event=>{
-            //console.log(event.target);
             const fd = new FormData();
 
             fd.append('img', img.files[0]);
 
-            fetch('cinema_insert_api.php', {
+            fetch('cinema_imgmove_api.php', {
                 method: 'POST',
                 body: fd
             })
                 .then(response=>response.json())
                 .then(obj=>{
                     console.log(obj);
-                    // myimg.setAttribute('src', '/images/cinema/' +obj.filename);
+                    myimg.setAttribute('src', `../pic/cinema/${obj.filename}`);
+                    img_data.setAttribute('value',obj.filename);
                 });
         });
 
