@@ -1,7 +1,7 @@
 <?php
 
 include __DIR__."./PDO.php";
-    $per_page = 10;
+    $per_page = 5;
     // 設定每頁要幾筆
     // 順序要在RESULT之前，不然PERPAGE抓取會有問題
     
