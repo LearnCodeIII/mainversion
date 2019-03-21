@@ -77,10 +77,9 @@ $img = '../pic/cinema/'.$row['img'];
 
                                         <label for="img">戲院圖</label>
                                         <div class="custom-file form-group col-12 mb-3">
-                                            <!--                                                                                onchange="loadFile(event)"-->
-                                            <input type="file" class="custom-file-input" id="img" name="img">
-                                            <input type="hidden" class="custom-file-input" id="imgupload" name="imgupload" value="">
-                                            <label class="custom-file-label overflow-hidden" for="customFile" data-browse="上傳檔案">選擇檔案</label>
+                                            <input type="file" class="custom-file-input" id="img" name="img"">
+                                            <input type="hidden" class="custom-file-input" id="imgupload" name="imgupload">
+                                            <label class="custom-file-label overflow-hidden" for="customFile" data-browse="上傳檔案" >選擇檔案</label>
                                             <small id="imgHelp" class="form-text text-muted"></small>
                                         </div>
 
