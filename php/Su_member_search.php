@@ -15,10 +15,10 @@ $spname = 'member_search';
         <div class="card col">
             <div class="card-body">
                 <form name="form1" method="post" action="" onsubmit="return checkForm()">
-                    <div class="alert alert-primary text-center" role="alert">
+                    <div class="alert alert-primary text-center" role="alert" data-toggle="collapse" data-target="#set_condition" aria-expanded="true" aria-controls="set_condition">
                             STEP-(1)設定搜尋條件
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 show" id="set_condition">
                         <div class="row justify-content-center">
                             <select class="col-lg-3 custom-select" name="sel-1">
                                 <option selected value='none'>選擇搜尋欄位</option>
@@ -92,11 +92,11 @@ $spname = 'member_search';
                         </div>
                     </div>
 
-                <div class="alert alert-primary text-center mt-3" role="alert">
+                <div class="alert alert-primary text-center mt-3" role="alert" data-toggle="collapse" data-target="#set_column" aria-expanded="true" aria-controls="set_column">
                         STEP-(2)選擇資料顯示的欄位
                 </div>
                     <input type="hidden" name="chk[]" value="sid">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center show" id="set_column">
                         <div class="col-lg-12">
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="all" name="all"
@@ -264,34 +264,6 @@ $spname = 'member_search';
     const title = document.querySelector('#title');
     const info = document.querySelector('.info');
 
-
-
-    // const fields = [
-    //     'sid',
-    //     'name',
-    //     'nickname',
-    //     'gender',
-    //     'age',
-    //     'birthday',
-    //     'email',
-    //     'mobile',
-    //     'fav_type',
-    //     'avatar',
-    //     'join_date',
-    //     'pwd',
-    //     'pwd_change_d',
-    //     'pwd_err_c',
-    //     'last_login_d',
-    //     'login_c',
-    //     'rank',
-    //     'permission'
-    //     ];
-    //拿到每個欄位參照
-    // const fs={};
-    // for(let v of fields){
-    //     fs[v] = document.form1[v];
-    // };
-    // console.log(fs);
 
 
     //使用underscore.js的template功能
