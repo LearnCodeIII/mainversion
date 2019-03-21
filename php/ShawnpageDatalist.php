@@ -135,8 +135,8 @@ const wrap_str =
                 <span class="badge badge-dark" id="badge-dark"><%= dark%></span>
             </h6>
         </div>
-        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4" hidden>
-            <img src="../pic/activity/<%= picture %>" class="card-img-top" style="display:block;max-height:180px;max-width:180px;">
+        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4">
+            <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
         </div>
     </div>
     
