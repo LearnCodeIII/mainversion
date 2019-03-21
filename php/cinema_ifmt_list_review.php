@@ -32,22 +32,30 @@ try{
     } else {
         $per_page = $total_rows;
     }
-
-
 // 總頁數
-
     if($page < 1) $page = 1;
-
-
-//$sql = sprintf("SELECT * FROM `activity` where `activity`.`author`='$name'  LIMIT %s, %s", ($page-1)*$ac_per_page, $ac_per_page);
-
-//    SELECT  `activity`.`name` , `ad`.`contract_start_date`,`ad`.`contract_end_date`,`ad`.`ad_name` FROM `ad`, `activity` WHERE `activity`.`company`='$name'  OR `ad`.`client_name`='$name'  LIMIT 0, %s", $per_page
-    $sql = sprintf("SELECT  `activity`.`name` , `ad`.`contract_start_date`,`ad`.`contract_end_date`,`ad`.`ad_name` FROM `activity` JOIN `ad` ON `activity`.`company`='$name'  OR `ad`.`client_name`='$name'  LIMIT 0,%s", $per_page);
-
+    $sql = sprintf("SELECT `activity`.`sid`, `activity`.`name` , `ad`.`contract_start_date` , `ad`.`contract_end_date`,`ad`.`ad_name` FROM `activity` JOIN `ad` ON `activity`.`company`='$name'  OR `ad`.`client_name`='$name'  LIMIT 0,%s", $per_page);
     $stmt = $pdo->query($sql);
 
 // 所有資料一次拿出來
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $ad_row = $rows;
+    $ac_row = $rows;
+    $ad_rows = isset($ad_row) ? $ad_row : '';
+    $ac_rows = isset($ac_row) ? $ac_row : '';
+
+
+    foreach($ad_rows as $row ) {
+        $contract_start_date = $row['contract_start_date'];
+        $contract_end_date = $row['contract_end_date'];
+        $ad_name = $row['ad_name'];
+    }
+
+    foreach($ac_rows as $row){
+        $ac_name = $row['name'];
+        $ac_sid = $row['sid'];
+    }
 }catch(PDOException $ex){
     $miss_msg = '無相關資料';
 }
@@ -122,10 +130,7 @@ try{
                     <div class="d-flex align-items-center">
                         <label for="#intro">簡介:</label>
                         <p contenteditable = "true" id="intro" class="text-secondary"><?= $intro ?></p>
-                    </div>
-                    <div class="d-flex justify-content-end mt-3">
-                        <button type="button" class="btn btn-secondary mx-2 col">編輯</button>
-                    </div>
+                   </div>
                 </div>
             </div>
 
@@ -136,9 +141,12 @@ try{
                 <div class="mb-5  w-100 h-50 overflow-hidden shadow-sm" style="border-radius: 30px">
                     <div class="bg-dark d-flex justify-content-center align-items-center" style="height: 80px"><i class="fas fa-ad ad"> 廣告</i></div>
                     <div class="pt-3 pb-3 bg-white w-100 h-100 d-flex flex-column align-items-center overflow-hidden" id="ad_body">
-                        <?php if(isset($miss_msg)){ ?>
-                            <div class="mt-5"><?= $miss_msg ?></div>
-                        <?php } else { ?>
+
+                        <?php if(!isset($contract_start_date)){ ?>
+                            <div class="mt-5">無相關資料</div>
+                        <?php } ?>
+
+                        <?php if(isset($contract_start_date)){ ?>
                             <?php foreach($rows as $row): ?>
                                 <div class="bg-white w-100 d-flex align-items-center justify-content-center overflow-hidden" >
                                     <a href="ann_client_list.php" style="display:flex;text-decoration:none;" >
@@ -165,11 +173,14 @@ try{
                 <div class=" w-100 h-50 overflow-hidden shadow-sm mb-5" style="border-radius: 30px">
                     <div class="bg-dark d-flex justify-content-center align-items-center" style="height: 80px"><<i class="fas fa-snowboarding ac">活動</i></div>
                     <div class="bg-white w-100 h-100 d-flex flex-column align-items-center" id="ad_body">
-                        <?php if(isset($miss_msg)){ ?>
-                            <div class="mt-5"><?= $miss_msg ?></div>
-                        <?php }else{ ?>
+
+                        <?php if(!isset($ac_name)){ ?>
+                            <div class="mt-5">無相關資料</div>
+                        <?php } ?>
+
+                        <?php if(isset($ac_name)){ ?>
                             <?php foreach($rows as $row): ?>
-                                <a href="ShawnpageDatalist.php" class="mx-auto my-2" style="width: 94%;height: 14%">
+                                <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $row['sid'] ?>" class="mx-auto my-2" style="width: 94%;height: 14%">
                                     <button type="button" class="btn btn-info mx-auto  w-100 h-100">
                                         <div class="font-weight-bold">活動名稱</div>
                                         <?= $row['name'] ?>
@@ -183,6 +194,7 @@ try{
         </section>
     </section>
     <script>
+
         function delete_it(sid){
             if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
                 location.href = 'cinema_ifmt_list_delete.php?sid=' + sid;
