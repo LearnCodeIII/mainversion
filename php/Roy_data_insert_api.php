@@ -15,7 +15,7 @@ $result = [
 
 // 將轉碼寫在IF外面
 
-$upload_dir =__DIR__. '/../pic/roy/';
+$upload_dir =__DIR__. '/../pic/forum/';
 // 先設定好上傳後的路徑，若要放在當下資料夾子資料夾可用DIR
 // 若要放其他資料夾放入完整路徑
 
