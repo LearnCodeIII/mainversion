@@ -1,6 +1,6 @@
 <?php
 require __DIR__.'/PDO.php';
-$pagename = "member";
+$groupname = "member";
 $page_name = 'member_insert';
 
 ?>
@@ -11,10 +11,14 @@ $page_name = 'member_insert';
     .form-group small {
         color: red !important;
     }
+
+    #output {
+        object-fit: contain;
+    }
 </style>
 <script>
     $(document).ready(function () {
-        bsCustomFileInput.init()
+        // bsCustomFileInput.init()
     })
 </script>
 <section class="dashboard">
@@ -26,49 +30,40 @@ $page_name = 'member_insert';
                 <div class="card-body px-5">
                     <h5 class="card-title text-center">新增會員資料
                     </h5>
+                    <div>
+                    <span style="color:red">＊</span>為必填項目
+                    </div>
                     <form name="form1" method="post" onsubmit="return checkForm()">
                         <input type="hidden" name="checkme" value="check123">
                         <div class="form-group row align-items-center my-4">
                             <label for="name"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">姓名</label>
-                            <!-- <div class="col-lg-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="name" name="name"
-                                placeholder="" value="">
-                            <!-- </div> -->
+                                placeholder="" value=""><span style="color:red">＊</span>
                             <small id="nameHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="nickname"
                                 class="col-lg-2 mx-2  col-form-label text-center bg-dark text-white rounded">暱稱</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="nickname"
-                                name="nickname" placeholder="" value="">
-                            <!-- </div> -->
-                            <!-- <small id="nicknameHelp" class="form-text text-muted"></small> -->
+                                name="nickname" placeholder="" value=""><span style="color:red">＊</span>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="birthday"
                                 class="col-lg-2 mx-2  col-form-label text-center bg-dark text-white rounded">生日</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="birthday"
-                                name="birthday" placeholder="YYYY - MM - DD" value="">
-                            <!-- </div> -->
+                                name="birthday" placeholder="YYYY - MM - DD" value=""><span style="color:red">＊</span>
                             <small id="birthdayHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="age"
                                 class="col-lg-2 mx-2  col-form-label text-center bg-dark text-white rounded">年齡</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="age" name="age"
-                                placeholder="" value="">
-                            <!-- </div> -->
+                                placeholder="" value=""><span style="color:red">＊</span>
                         </div>
                         <div class="form-group row align-items-center my-4">
-                            <!-- <fieldset class="form-group col-sm-8 mb-0"> -->
-                            <!-- <div class="row align-items-center"> -->
                             <label
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">性別</label>
-                            <!-- <div class="col-sm-10 d-flex"> -->
                             <div class="col-lg-1 col-sm-5 mx-2 form-check">
                                 <input class="form-check-input" type="radio" name="gender" id="male" value="男" checked>
                                 <label class="form-check-label" for="male">
@@ -81,35 +76,26 @@ $page_name = 'member_insert';
                                     女
                                 </label>
                             </div>
-                            <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- </fieldset> -->
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="mobile"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">手機</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="mobile" name="mobile"
                                 placeholder="" value="">
-                            <!-- </div> -->
                             <small id="mobileHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="email"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">電子信箱</label>
-                            <!-- <div class="col-sm-8 ml-0"> -->
                             <input type="text" class="col-lg-7 mx-2 form-control text-center" id="email" name="email"
-                                placeholder="" value="">
-                            <!-- </div> -->
+                                placeholder="" value=""><span style="color:red">＊</span>
                             <small id="emailHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="pwd"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">設定密碼</label>
-                            <!-- <div class="col-sm-4"> -->
                             <input type="password" class="col-lg-4 mx-2 form-control text-center" id="pwd" name="pwd"
-                                placeholder="" value="">
-                            <!-- </div> -->
+                                placeholder="" value=""><span style="color:red">＊</span>
                             <!-- <small id="pwdHelp" class="form-text text-muted"></small> -->
                         </div>
                         <!-- <div class="form-group row">
@@ -122,12 +108,21 @@ $page_name = 'member_insert';
                         <div class="form-group row align-items-center my-4">
                             <label for="avatar"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">上傳頭像</label>
-                            <!-- <div class="col-sm-8"> -->
                             <div class="col-lg-8 mx-2 custom-file">
-                                <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                                <label class="custom-file-label" for="avatar" data-browse="選擇圖片"></label>
+                                <input type="file" class="custom-file-input" id="avatar" name="avatar"
+                                    accept="image/png, image/jpeg" onchange="loadFile(event)">
+                                <label id="l_for_avatar" class="custom-file-label" for="avatar"
+                                    data-browse="選擇圖片"></label>
                             </div>
-                            <!-- </div> -->
+                        </div>
+                        <div class="previewImg text-center" style="display:none">
+                            <div class="row justify-content-center">
+                                <div style="width:200px ; height:200px">
+                                    <img id="output" style="width:200px ; height:200px">
+                                </div>
+                                <a href="javascript: cancel()"><i class="fas fa-times-circle"
+                                        style="font-size:30px ; color:red"></i></a>
+                            </div>
                         </div>
                         <div class="form-group row my-4">
                             <div
@@ -228,8 +223,6 @@ $page_name = 'member_insert';
                             </div>
                         </div>
                         <div class="form-group row align-items-center my-4">
-
-                            <!-- <div class="row align-items-center col-sm-8"> -->
                             <label
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">權限</label>
                             <div class="col-lg-9 d-flex">
@@ -246,8 +239,8 @@ $page_name = 'member_insert';
                                         一般會員
                                     </label>
                                 </div>
-  
-                               <div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
+
+                                <div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
                                     <input class="form-check-input" type="radio" name="permission" id="perm2" value="2">
                                     <label class="form-check-label" for="perm2">
                                         VIP會員
@@ -318,8 +311,39 @@ $page_name = 'member_insert';
         }
     }
 
+
+    //圖片檔案預覽
+    var output = document.getElementById('output');//預覽img
+    var pre = document.querySelector('.previewImg');//包img的div(控制display)
+    var avatar = document.querySelector('#avatar');
+    var l_for_avatar = document.querySelector('#l_for_avatar');//label:顯示檔名
+    var ppp;
+
+    const loadFile = function (event) {
+        if (avatar.files.length > 0) {//如果有選擇檔案
+            l_for_avatar.innerText = '';
+            pre.style.display = 'block';
+            output.src = URL.createObjectURL(event.target.files[0]);
+            l_for_avatar.innerText = event.target.files[0]['name'];
+            ppp = event.target.files;//把檔案資訊(陣列)存到ppp
+        }
+        else {//如果沒選擇檔案
+            avatar.files = ppp;//原本選取的檔案資料會被代回，不會消失
+        }
+    };
+    //消除選擇的檔案
+    const cancel = () => {
+        avatar.value = ''; //清空夾帶檔案
+        l_for_avatar.innerText = '';
+        output.src = '';
+        pre.style.display = 'none';
+    }
+
+
+
+
     const checkForm = () => {
-        submit_btn.style.display = 'none';//按下提交後，按鈕消失(當資料處理結束才再設定顯示)
+        submit_btn.style.display = 'none';
         let isPassed = true;
 
         //拿到每個input的value(值是在輸入後才會產生，故拿值須放在function內)
@@ -328,7 +352,7 @@ $page_name = 'member_insert';
             fsv[v] = fs[v].value;
         };
 
-        // let name = document.form1.name.value;
+
 
 
 
@@ -342,8 +366,7 @@ $page_name = 'member_insert';
             fs[v].style.borderColor = '#ccc';
             document.querySelector('#' + v + 'Help').innerHTML = '';
         };
-
-
+        
         if (fsv.name.length < 2) {
             fs.name.style.borderColor = 'red';
             document.querySelector('#nameHelp').innerHTML = '請輸入正確的姓名!';
@@ -388,7 +411,6 @@ $page_name = 'member_insert';
         }
         submit_btn.style.display = 'block';
         return false;
-
     }
 
 
