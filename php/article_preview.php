@@ -166,8 +166,8 @@ const postya = () => {
             //     str += tr_func(oriData.data[k]);
             // }
             // data_body.innerHTML = str;
-        });
         setTimeout(myHashChange(), 300);
+        });
           return false;
 };
 
