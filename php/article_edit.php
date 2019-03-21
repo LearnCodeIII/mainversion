@@ -22,6 +22,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
 <!-- <script src="../js/jquery-ui.js"></script> -->
+
+<style>
+#editor{
+    height:300px;
+}
+
+</style>
+
 <script>
 tinyMCE.init({
     // 初始化參數設定[註1]
@@ -89,12 +97,12 @@ $(document).ready(function() {
                 <small id="dateHelp" class="form-text text-muted"></small>
 
                 <div class="my-2 mx-auto">
-                    <img src="../pic/article/<?= $row['image']?>" class="img-fluid max-width：100% height：auto" alt="<?= $row['image']?>">
+                    <img id="blah" src="" onerror="this.src='../pic/article/<?=$row['image']?>'" class="d-block" alt="your image" width="500" height="auto" />
                 </div>
                 <div class="custom-file">
                     <input type="hidden" class="custom-file-input" id="image" name="ori_img" value="<?= $row['image']?>">
-                    <input type="file" class="custom-file-input" id="image" name="image">
-                    <label class="custom-file-label" for="image" data-browse="edit"><?= $row['image']?></label>
+                    <input type="file" class="" id="image" name="image" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                    <label class="" for="image" data-browse="edit"></label>
                     <small id="imageHelp" class="form-text text-muted"></small>
                 </div>
                 <label for="validationTextarea" class="my-2">Textarea</label>

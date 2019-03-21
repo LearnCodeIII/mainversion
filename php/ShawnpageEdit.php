@@ -99,26 +99,26 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 >
                                                 <label class="form-check-label" for="primary">徵才資訊</label>
                                             </div>
-                                            <div class="form-check form-check-inline" hidden>
+                                            <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="success" value="success" name="contenttype[]"
                                                 <?php
                                                 if(stripos($row['contenttype'],"success")>-1){echo "checked";};
                                                 ?>>
-                                                <label class="form-check-label" for="success">進行中</label>
+                                                <label class="form-check-label" for="success">長期活動</label>
                                             </div>
-                                            <div class="form-check form-check-inline" hidden>
+                                            <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="warning" value="warning" name="contenttype[]"
                                                 <?php
                                                 if(stripos($row['contenttype'],"warning")>-1){echo "checked";};
                                                 ?>>
-                                                <label class="form-check-label" for="warning">即將結束</label>
+                                                <label class="form-check-label" for="warning">戲院公告</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="danger" value="danger" name="contenttype[]"
                                                 <?php
                                                 if(stripos($row['contenttype'],"danger")>-1){echo "checked";};
                                                 ?>>
-                                                <label class="form-check-label" for="danger">會員專屬活動</label>
+                                                <label class="form-check-label" for="danger">會員專屬</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="info" value="info" name="contenttype[]"
@@ -127,19 +127,19 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 ?>>
                                                 <label class="form-check-label" for="info">電影資訊</label>
                                             </div>
-                                            <div class="form-check form-check-inline" hidden>
+                                            <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="secondary" value="secondary" name="contenttype[]"
                                                 <?php
                                                 if(stripos($row['contenttype'],"secondary")>-1){echo "checked";};
                                                 ?>>
-                                                <label class="form-check-label" for="secondary">活動結束</label>
+                                                <label class="form-check-label" for="secondary">官方活動</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="dark" value="dark" name="contenttype[]"
                                                 <?php
                                                 if(stripos($row['contenttype'],"dark")>-1){echo "checked";};
                                                 ?>>
-                                                <label class="form-check-label" for="dark">長期活動</label>
+                                                <label class="form-check-label" for="dark">維修公告</label>
                                             </div>
                                             <input class="form-check-input" type="checkbox" id="space" value="space" name="contenttype[]" checked hidden >
                                         </div>
@@ -173,7 +173,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <span class="input-group-text bg-dark text-white" id="inputGroupFileAddon01">活動圖片預覽</span>
                                     </div>        
                                 </div>
-                                <img id="myimg" class="mt-3 mb-3" src="../pic/activity/<?= $row['picture'] ?>" alt="" style="height:400px">
+                                <img id="myimg" class="mt-3 mb-3" src="../pic/activity/<?= $row['picture'] ?>" alt="" style="max-height:400px max-width:700px;">
                             </div>
                             <div class="col-md-6 ">
                                 <div class="input-group mt-3">

@@ -10,12 +10,12 @@ include __DIR__ . '/PDO.php';
 
 <section class="dashboard">
     <div class="container-fluid ">
-        <div class="row justify-content-center">
+        <!-- <div class="row justify-content-center">
             <div class="col-lg-6 ">
                 <div id="info_bar" class="alert alert-success" role="alert">
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row justify-content-center">
 
             <div class="col-lg-6 py-4 px-4 bg-light">
@@ -31,8 +31,11 @@ include __DIR__ . '/PDO.php';
 </section>
 
 <script>
-let sid = parseInt(location.href.slice(57));
-// 需要根據不同路徑更改SLICE數量
+// let sid = parseInt(location.href.slice(57));
+let sidsplit = location.href.split("?sid=");
+let sid = sidsplit [1];
+// 將URL切割成兩個陣列，避免不同位置用SLICE位置產生問題
+
 let ori_data;
 const review_body = document.querySelector('#review_body');
 
