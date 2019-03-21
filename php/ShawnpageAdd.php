@@ -12,10 +12,19 @@ if(isset($_SESSION['admin'])){
     $theater = $_SESSION['theater'];
     
 
-    $sql = sprintf("SELECT * FROM cinema where `account` = %s ",$theater);
+    $sql = "SELECT * FROM cinema where `account` like :search_keyword ";
+    $t_stmt->bindParam(":search_keyword",$search_keyword);
     $stmt = $pdo->query($sql);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    foreach($rows as $row){
+        $name = $row['name'];
+        $img = $row['img'];
+        $taxID = $row['taxID'];
+        $phone = $row['phone'];
+        $address = $row['address'];
+        $intro = $row['intro'];
+    
+    }
 
 }else {
     header("Location: ./login.php");
