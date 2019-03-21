@@ -1,7 +1,10 @@
 <?php
 $pagename = "pageMain";
-
+// include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
+if($_SESSION["admin"]!=="roy"){
+    header('Location: login.php');
+}
 
 ?>
 <?php include __DIR__ . './head.php'?>

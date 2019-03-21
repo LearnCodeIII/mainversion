@@ -88,8 +88,8 @@ if (isset($_POST["checkme"])) {
     }
 
 
-    $sql = "INSERT INTO `forum`(`headline`, `review`, `w_date`, `w_cinema`, `film_rate`, `intro_pic`)
-             VALUES (?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO `forum`(`headline`, `review`, `w_date`, `w_cinema`, `film_rate`, `intro_pic`,`issuer`)
+             VALUES (?, ?, ?, ?, ?,?,?)";
     // 不用SPRINTF寫法
 
 
@@ -104,7 +104,9 @@ if (isset($_POST["checkme"])) {
             $_POST["w_cinema"],
             $_POST["film_rate"],
             // $_POST["fav"],
-            $filename
+            $filename,
+            $_POST["issuer"]
+            // 將操作的使用者同時記錄上傳
         ]);
 
         if ($stmt->rowCount() == 1) {
