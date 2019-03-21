@@ -9,7 +9,9 @@ include __DIR__ . '/PDO.php';
 <?php include __DIR__ . './Roysidenav.php'?>
 
 <head>
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key"></script>
+
     <style>
     .form-group small {
         color: red !important;
@@ -79,6 +81,7 @@ include __DIR__ . '/PDO.php';
                                 <figure>
                                     <img id="myimg" src="" alt="" width="200px">
                                 </figure>
+                                <!-- 如果不換圖片無法提交的BUG -->
                                 <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
                                     value="">
                                 <small id="intro_picHelp" class="form-text text-muted"></small>
@@ -110,7 +113,8 @@ intro_pic.addEventListener("change", event => {
     const fd = new FormData();
 
     fd.append('intro_pic', intro_pic.files[0]);
-    fetch('Roy_upload_multi_api.php', {
+    fetch('Roy_data_insert_api.php', {
+        // 將轉碼也寫在同隻API
             method: 'POST',
             body: fd
         })
@@ -243,10 +247,14 @@ const checkForm = () => {
     return false;
 };
 
-ClassicEditor
-    .create(document.querySelector('#review'))
-    .catch(error => {
-        console.error(error);
-    });
+tinymce.init({
+    selector: '#review'
+  });
+
+// ClassicEditor
+//     .create(document.querySelector('#review'))
+//     .catch(error => {
+//         console.error(error);
+//     });
 </script>
 <?php include __DIR__ . './foot.php'?>

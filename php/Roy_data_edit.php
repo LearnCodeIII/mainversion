@@ -21,7 +21,8 @@ echo $row;
 <?php include __DIR__. './Roysidenav.php';  ?>
 
 <head>
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
+    <script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key'></script>
 
     <style>
     .form-group small {
@@ -95,9 +96,10 @@ echo $row;
 
                                 <label for="intro_pic ">圖片</label>
                                 <figure>
-                                    <img id="myimg" src="../pic/roy/<?= $row["intro_pic"]?>" alt="" width="200px">
-                           
+                                    <img id="myimg" src="../pic/roy/<?=   $row["intro_pic"] ?>" alt="" width="200px">
+                                                                        <!-- 判斷是否有圖片，沒有就顯示預設圖片 -->
                                 </figure>
+                                    <!-- 如果不換圖片無法提交的BUG -->
                                 <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
                                     value="">
                             
@@ -121,13 +123,14 @@ const submit_btn = document.querySelector('#submit_btn');
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
 
+
 intro_pic.addEventListener("change", event => {
     // 當偵測到有變更後，觸發箭頭韓式EVENT
     //console.log(event.target);
     const fd = new FormData();
 
     fd.append('intro_pic', intro_pic.files[0]);
-    fetch('Roy_upload_multi_api.php', {
+    fetch('Roy_data_edit_api.php', {
             method: 'POST',
             body: fd
         })
@@ -141,12 +144,15 @@ intro_pic.addEventListener("change", event => {
 })
 
 
+tinymce.init({
+    selector: '#review'
+  });
 
-ClassicEditor
-    .create(document.querySelector('#review'))
-    .catch(error => {
-        console.error(error);
-    });
+// ClassicEditor
+//     .create(document.querySelector('#review'))
+//     .catch(error => {
+//         console.error(error);
+//     });
 
 
 const fields = [
