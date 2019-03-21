@@ -1,22 +1,27 @@
 <?php
 include __DIR__.'/PDO.php';
 $groupname = "activity";
-$pagename = "";
-
 
 if(isset($_SESSION['admin'])){
     $user = "小編：";
     $user .= $_SESSION['admin'];
+    $level = 10;
     
 }else if(isset($_SESSION['theater'])){
-    $theater = $_SESSION['theater'];
-    
-
-    $sql = sprintf("SELECT * FROM cinema where `account` = %s ",$theater);
+    $theater=$_SESSION['theater'];
+    $sql = "SELECT * FROM `cinema` where account = 'spacebarroom1' ";
     $stmt = $pdo->query($sql);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
+    foreach($rows as $row){
+        $user = $row['name'];
+        $img = $row['img'];
+        $taxID = $row['taxID'];
+        $phone = $row['phone'];
+        $address = $row['address'];
+        $intro = $row['intro'];
+    
+    }
+    $level = 2;
 }else {
     header("Location: ./login.php");
     exit;
@@ -38,9 +43,7 @@ if(isset($_SESSION['admin'])){
 }
 </style>
 <section class="dashboard">
-
 <div class="container-fluid ">
-	
     <div class="card">
         <div class="card-body">
             <div class="row ">
@@ -63,7 +66,7 @@ if(isset($_SESSION['admin'])){
                                 
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-dark text-white">活動開始日期</span>
+                                        <span class="input-group-text bg-dark text-white">開始日期</span>
                                     </div>
                                     <input type="date" class="form-control" id="dateStart" name="dateStart" placeholder="">
                                     <span class="text-danger">*</span>
@@ -71,7 +74,7 @@ if(isset($_SESSION['admin'])){
                                 <small id="dateStartHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-dark text-white">活動結束日期</span>
+                                        <span class="input-group-text bg-dark text-white">結束日期</span>
                                     </div>
                                     <input type="date" class="form-control" id="dateEnd" name="dateEnd" placeholder="">
                                     <span class="text-danger">*</span>
@@ -79,7 +82,7 @@ if(isset($_SESSION['admin'])){
                                 <small id="dateEndHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">活動廠商名稱</span>
+                                        <span class="input-group-text bg-dark text-white">戲院名稱</span>
                                     </div>
                                     <input type="text" class="form-control" id="company" name="company" value="<?=$user?>" disabled>
                                     <span class="text-danger">*</span>
@@ -87,9 +90,9 @@ if(isset($_SESSION['admin'])){
                                 <small id="companyHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">活動地址</span>
+                                        <span class="input-group-text bg-dark text-white">戲院地址</span>
                                     </div>
-                                    <input type="text" class="form-control" id="region" name="region" placeholder="">
+                                    <input type="text" class="form-control" id="region" name="region" value="<?=$address?>" disabled>
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="regionHelp" class="form-text text-muted"></small>
@@ -117,6 +120,7 @@ if(isset($_SESSION['admin'])){
                                                 <input class="form-check-input" type="checkbox" id="info" value="info" name="contenttype[]">
                                                 <label class="form-check-label" for="info">電影資訊</label>
                                             </div>
+                                            <?php if($level>9): ?>
                                             <div class="form-check form-check-inline" >
                                                 <input class="form-check-input" type="checkbox" id="secondary" value="secondary" name="contenttype[]">
                                                 <label class="form-check-label" for="secondary">官方活動</label>
@@ -125,6 +129,7 @@ if(isset($_SESSION['admin'])){
                                                 <input class="form-check-input" type="checkbox" id="dark" value="dark" name="contenttype[]">
                                                 <label class="form-check-label" for="dark">維修公告</label>
                                             </div>
+                                            <?php endif ?>
                                             <input class="form-check-input" type="checkbox" id="space" value="space" name="contenttype[]" checked hidden >
                                         </div>
                                     </div>
@@ -163,6 +168,7 @@ if(isset($_SESSION['admin'])){
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-dark text-white">活動內容</span>
+                                        <span class="text-danger">*至少需五個字</span>
                                     </div>
                                 </div>
                                 <textarea type="text" class="form-control" id="content" name="content" placeholder="活動介紹需至少五個字" rows="3"></textarea>
@@ -221,6 +227,7 @@ const submit_btn = document.querySelector('#submit_btn');
             'dateEnd',
             'company',
             'picture',
+            'region'
         ]
 	const fs={};
 	for(let v of fields){
