@@ -18,8 +18,6 @@ if($stmt->rowCount()==0){
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-
-
 ?>
 <?php include __DIR__.'/head.php' ?>
 <?php include __DIR__.'/nav.php' ?>
@@ -249,6 +247,9 @@ $(document).ready(function () {
                             <div class="col-lg-4  d-flex justify-content-center">
                                 <button id="submit_btn" type="submit" class="btn btn-primary btn-block my-3">確認送出</button>
                             </div>
+                            <div class="col-lg-4  d-flex justify-content-center">
+                                <a class="btn btn-primary btn-block my-3" onclick="goback()" style="color:white;cursor: pointer">回到上一頁</a>
+                            </div>
                         </div>                            
                         <div id="info" class="alert alert-success" style="display:none" role="alert">
                         </div> 
@@ -348,6 +349,15 @@ $(document).ready(function () {
     }
     }
 
+    //返回前頁
+    var sun_times=0;
+    const goback=()=>{
+        let pre_p = document.referrer;
+        if(pre_p == null){
+            location.href = "Su_member_list.php";
+        }
+        history.go(-1);
+    }
 
 
 const checkForm = ()=>{
