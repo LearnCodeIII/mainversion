@@ -5,7 +5,12 @@ $pagename = "";
 
 
 if(isset($_SESSION['admin'])){
-    $user = $_SESSION['admin'];
+    $user = "小編：";
+    $user .= $_SESSION['admin'];
+    
+}else if(isset($_SESSION['theater'])){
+    $user = $_SESSION['theater'];
+
 }else {
     header("Location: ./login.php");
     exit;
@@ -70,7 +75,7 @@ if(isset($_SESSION['admin'])){
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text bg-dark text-white">活動廠商名稱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="company" name="company" <?=$user?> disabled>
+                                    <input type="text" class="form-control" id="company" name="company" value="<?=$user?>" disabled>
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="companyHelp" class="form-text text-muted"></small>

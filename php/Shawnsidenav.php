@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <nav class="sidenav">
     <ul class="navbar-nav">
         <!-- <li class="nav-item <?= $phpname == "phpHome"?"active":""; ?>">

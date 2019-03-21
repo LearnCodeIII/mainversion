@@ -18,7 +18,7 @@ $result = [
 	"ErrCode" => 0
 ];
 
-
+	
 #設定當前頁數
 $page = isset($_GET['page'])? intval($_GET['page']):1;
 

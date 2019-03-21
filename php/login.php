@@ -9,22 +9,55 @@ if(isset($_POST['user']) and isset($_POST['password'])){
     $user = $_POST['user'];
     $password = $_POST['password'];
 
+
+    //Admin方登入
     $sql = "SELECT * FROM `admins` WHERE `admin_id`=? AND `password`=SHA1(?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         $user,
         $password,
     ]);
-
-
     if($stmt->rowCount()==1) {
         $_SESSION['admin'] = $user;
 
         header('Location: ./mainpage.php');
         exit;
-    } else {
-        $msg = '帳號或密碼錯誤';
     }
+    
+    //member方登入
+    $m_sql = "SELECT * FROM `member` WHERE `email`=? AND `pwd`=?";
+    $m_stmt = $pdo->prepare($m_sql);
+    $m_stmt->execute([
+        $user,
+        $password,
+    ]);
+    if($m_stmt->rowCount()==1) {
+        $_SESSION['member'] = $user;
+
+        header('Location: ./mainpage.php');
+        exit;
+    }
+    
+    //cinema
+    $c_sql = "SELECT * FROM `cinema` WHERE `account`=? AND `password`=?";
+    $c_stmt = $pdo->prepare($c_sql);
+    $c_stmt->execute([
+        $user,
+        $password,
+    ]);
+    if($c_stmt->rowCount()==1) {
+        $_SESSION['theater'] = $user;
+        $_SESSION['theater'] = 
+
+
+
+
+        header('Location: ./mainpage.php');
+        exit;
+    }
+
+    $msg = '帳號或密碼錯誤';
+ 
 
 }
 
@@ -34,7 +67,7 @@ if(isset($_POST['user']) and isset($_POST['password'])){
 <?php include __DIR__.'./sidenav.php'?>
 <section class="dashboard">
     <div class="container">
-        <?php if(! isset($_SESSION['admin'])): ?>
+        <?php if(! isset($_SESSION['admin'])  || isset($_SESSION['member']) ||  isset($_SESSION['theater'])  ): ?>
             <?php if(isset($msg)): ?>
                 <div class="alert alert-danger" role="alert">
                     <?= $msg ?>
