@@ -25,7 +25,7 @@ if (!isset($sid)){
 
 // 此處先將換的照片轉乘SHA1，然後產稱的FILENAME可給後面的 
 // UPDATE時使用，因此要把轉換名稱跟UPDATE寫在同一支API才會省去抓切換圖片的FILENAME值
-$upload_dir =__DIR__. "/../pic/roy/";
+$upload_dir =__DIR__. "/../pic/forum/";
 // 先設定好上傳後的路徑，若要放在當下資料夾子資料夾可用DIR
 // 若要放其他資料夾放入完整路徑
 
@@ -115,7 +115,7 @@ if(isset($_POST['headline']) and !empty($sid)){
     // }
 
 // 更新上傳檔案
-    $upload_dir = __DIR__.'/../pic/roy/';
+    $upload_dir = __DIR__.'/../pic/forum/';
 
    
 // 因為前面已經有抓到轉換過的FILENAME因此這邊可直接使用來上傳

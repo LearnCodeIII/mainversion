@@ -9,9 +9,19 @@ include __DIR__ . '/PDO.php';
 <?php include __DIR__ . './Roysidenav.php'?>
 
 <head>
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
-    <!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key"></script> -->
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
+    <script>
+    tinymce.init({
+        selector: '#review'
+    });
+    // ClassicEditor
+    //         .create(document.querySelector('#review'))
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
 
+    </script>
     <style>
     .form-group small {
         color: red !important;
@@ -28,25 +38,23 @@ include __DIR__ . '/PDO.php';
                     <div class="card-body">
                         <h5 class="card-title">發布文章
                         </h5>
-                        <p>
-                            <span class="text-danger">*</span>為必填欄位
-                        </p>
+                
                         <form name="form1" method="post" onsubmit="return checkForm();">
                             <input type="hidden" name="checkme" value="check123">
                             <div class="form-group">
-                                <label for="headline"><span class="text-danger">*</span>文章標題</label>
+                                <label for="headline">影評標題</label>
                                 <input type="text" class="form-control" id="headline" name="headline" placeholder=""
                                     value="">
                                 <small id="headlineHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">
-                                <label for="review"><span class="text-danger">*</span>文章內容</label>
+                                <label for="review">影評</label>
                                 <!-- <textarea class="form-control" id="review" name="review" cols="30" rows="3"></textarea> -->
                                 <textarea class="form-control" name="review" id="review"></textarea>
                                 <small id="reviewHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">
-                                <label for="w_date"><span class="text-danger">*</span>觀看日期</label>
+                                <label for="w_date">觀看日期</label>
                                 <input type="date" class="form-control" id="w_date" name="w_date"
                                     placeholder="YYYY-MM-DD" value="">
                                 <small id="w_dateHelp" class="form-text text-muted"></small>
@@ -103,9 +111,17 @@ include __DIR__ . '/PDO.php';
 </section>
 
 <script>
+
+
 // 上傳檔案
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
+
+
+
+
+
+
 
 intro_pic.addEventListener("change", event => {
     // 當偵測到有變更後，觸發箭頭韓式EVENT
@@ -114,14 +130,14 @@ intro_pic.addEventListener("change", event => {
 
     fd.append('intro_pic', intro_pic.files[0]);
     fetch('Roy_data_insert_api.php', {
-        // 將轉碼也寫在同隻API
+            // 將轉碼也寫在同隻API
             method: 'POST',
             body: fd
         })
         .then(response => response.json())
         .then(obj => {
             console.log(obj);
-            myimg.setAttribute('src', '../pic/roy/' + obj.filename);
+            myimg.setAttribute('src', '../pic/forum/' + obj.filename);
             // 要指定好變更後的路徑
         });
 })
@@ -212,9 +228,12 @@ const checkForm = () => {
 
 
 
-
     if (isPassed) {
 
+        // 文字編輯器要放在NEWFORMDATA前面，要先用下方方式抓取送出的文章內容，才不會要送兩次
+        const edt = document.querySelector('#review')
+        console.log(edt);
+        edt.innerHTML += tinyMCE.activeEditor.getContent();
 
         let form = new FormData(document.form1);
 
@@ -246,15 +265,5 @@ const checkForm = () => {
     }
     return false;
 };
-
-// tinymce.init({
-//     selector: '#review'
-//   });
-
-ClassicEditor
-    .create(document.querySelector('#review'))
-    .catch(error => {
-        console.error(error);
-    });
 </script>
 <?php include __DIR__ . './foot.php'?>
