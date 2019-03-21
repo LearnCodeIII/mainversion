@@ -21,7 +21,8 @@ echo $row;
 <?php include __DIR__. './Roysidenav.php';  ?>
 
 <head>
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js'></script>
 
     <style>
     .form-group small {
@@ -32,7 +33,7 @@ echo $row;
 <section class="dashboard">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div id="info_bar" class="alert alert-success" role="alert" style="display: none">
                 </div>
@@ -47,21 +48,21 @@ echo $row;
                             <input type="hidden" name="sid" value="<?= $row["sid"]?>">
                             <!-- VALUE要設抓SID，否則API抓不到SID無法進去撈資料 -->
                             <div class="form-group">
-                                <label for="headline"><span class="text-danger">*</span>文章標題</label>
+                                <label for="headline">影評標題</label>
                                 <input type="text" class="form-control" id="headline" name="headline" placeholder=""
                                     value="<?= $row["headline"]?>">
                                 <small id="headlineHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">
-                                <label for="review"><span class="text-danger">*</span>文章內容</label>
+                                <label for="review">影評</label>
                                 <!-- <textarea class="form-control" id="review" name="review" cols="30" rows="3"><?= $row["review"]?></textarea> -->
                                 <textarea class="form-control" id="review"
                                     name="review"><?= htmlspecialchars($row["review"])?></textarea>
                                 <small id="reviewHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">
-                                <label for="w_date"><span class="text-danger">*</span>觀看日期</label>
-                                <input type="text" class="form-control" id="w_date" name="w_date"
+                                <label for="w_date">觀看日期</label>
+                                <input type="date" class="form-control" id="w_date" name="w_date"
                                     placeholder="YYYY-MM-DD" value="<?= $row["w_date"]?>">
                                 <small id="w_dateHelp" class="form-text text-muted"></small>
                             </div>
@@ -84,25 +85,27 @@ echo $row;
                                     placeholder="0-10" value="<?= $row["film_rate"]?>">
                                 <small id="film_rateHelp" class="form-text text-muted"></small>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="fav">我的最愛</label>
                                 <input type="text" class="form-control" id="fav" name="fav" placeholder="0-1"
                                     value="<?= $row["fav"]?>">
                                 <small id="favHelp" class="form-text text-muted"></small>
-                            </div>
+                            </div> -->
 
-                            <!-- <div class="form-group">
+                            <div class="form-group">
 
                                 <label for="intro_pic ">圖片</label>
                                 <figure>
-                                    <img id="myimg" src="../pic/roy/<?= $row["intro_pic"]?>" alt="" width="200px">
-                                    ROW要寫在SRC裡面
+                                    <img id="myimg" src="../pic/forum/<?=   $row["intro_pic"] ?>" alt="" width="200px">
+                                    <!-- 判斷是否有圖片，沒有就顯示預設圖片 -->
                                 </figure>
+                                <!-- 如果不換圖片無法提交的BUG -->
                                 <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
                                     value="">
+
                                 <small id="intro_picHelp" class="form-text text-muted"></small>
 
-                            </div> -->
+                            </div>
 
                             <button id="submit_btn" type="submit" class="btn btn-primary">Submit</button>
 
@@ -120,32 +123,36 @@ const submit_btn = document.querySelector('#submit_btn');
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
 
-// intro_pic.addEventListener("change", event => {
-//     // 當偵測到有變更後，觸發箭頭韓式EVENT
-//     //console.log(event.target);
-//     const fd = new FormData();
 
-//     fd.append('intro_pic', intro_pic.files[0]);
-//     fetch('Roy_upload_multi_api.php', {
-//             method: 'POST',
-//             body: fd
-//         })
-//         .then(response => response.json())
-//         .then(obj => {
-//             console.log(obj);
-//             myimg.setAttribute('src', '../pic/roy/' + obj.filename);
-//             // 要指定好變更後的路徑
-//         });
+intro_pic.addEventListener("change", event => {
+    // 當偵測到有變更後，觸發箭頭韓式EVENT
+    //console.log(event.target);
+    const fd = new FormData();
 
-// })
+    fd.append('intro_pic', intro_pic.files[0]);
+    fetch('Roy_data_edit_api.php', {
+            method: 'POST',
+            body: fd
+        })
+        .then(response => response.json())
+        .then(obj => {
+            console.log(obj);
+            myimg.setAttribute('src', '../pic/forum/' + obj.filename);
+            // 要指定好變更後的路徑
+        });
+
+})
 
 
+tinymce.init({
+    selector: '#review'
+  });
 
-ClassicEditor
-    .create(document.querySelector('#review'))
-    .catch(error => {
-        console.error(error);
-    });
+// ClassicEditor
+//     .create(document.querySelector('#review'))
+//     .catch(error => {
+//         console.error(error);
+//     });
 
 
 const fields = [
@@ -154,7 +161,7 @@ const fields = [
     'w_date',
     'w_cinema',
     'film_rate',
-    'fav'
+    // 'fav'
 ];
 
 // 拿到每個欄位的參照
@@ -197,7 +204,7 @@ const checkForm = () => {
         document.querySelector('#' + v + 'Help').innerHTML = '';
     }
 
-    if (fsv.headline.length > 20) {
+    if (fsv.headline.length > 50) {
         fs.headline.style.borderColor = 'red';
         document.querySelector('#headlineHelp').innerHTML = '請勿輸入超過20個字!';
 
@@ -220,14 +227,22 @@ const checkForm = () => {
     }
 
     // TODO 如果不想必檢查的方式
-    if (!fav_pattern.test(fsv.fav)) {
-        fs.fav.style.borderColor = 'red';
-        document.querySelector('#favHelp').innerHTML = '請輸入正確值!';
-        isPassed = false;
-    }
+    // if (!fav_pattern.test(fsv.fav)) {
+    //     fs.fav.style.borderColor = 'red';
+    //     document.querySelector('#favHelp').innerHTML = '請輸入正確值!';
+    //     isPassed = false;
+    // }
 
 
     if (isPassed) {
+
+        // 文字編輯器要放在NEWFORMDATA前面
+        const edt = document.querySelector('#review')
+        console.log(edt);
+        edt.innerHTML = tinyMCE.activeEditor.getContent();
+        // 修改不能用+=，否則內容會堆疊
+
+
         let form = new FormData(document.form1);
 
         submit_btn.style.display = 'none';

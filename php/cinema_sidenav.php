@@ -1,4 +1,3 @@
-
 <nav class="sidenav">
     <ul class="navbar-nav">
 
@@ -11,11 +10,11 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">播映資訊</a>
+            <a class="nav-link" href="#">充場面</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">Q&A設定</a>
+            <a class="nav-link" href="#">沒東西做</a>
         </li>
 
     </ul>

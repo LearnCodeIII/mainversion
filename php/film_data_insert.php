@@ -35,14 +35,14 @@ include __DIR__.'./film_sidenav.php';
                             <div class="col-lg-4 col-md-4">
 
                                 <div class="form-group">
-                                    <label for="name_tw">電影中文</label>
+                                    <label for="name_tw">電影名稱中文</label>
                                     <input type="text" class="form-control" id="name_tw" name="name_tw" placeholder=""
                                         value="">
                                     <small id="name_twHelp" class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name_en">電影英文</label>
+                                    <label for="name_en">電影名稱英文</label>
                                     <input type="text" class="form-control" id="name_en" name="name_en" placeholder=""
                                         value="">
                                     <small id="name_enHelp" class="form-text text-muted"></small>
@@ -69,7 +69,7 @@ include __DIR__.'./film_sidenav.php';
                                     <label class="custom-file-label" for="customFile" data-browse="上傳檔案">選擇檔案</label>
                                     <small id="movie_picHelp" class="form-text text-muted"></small>
                                     <div class="overflow-hidden" width="200px" height="200px">
-                                        <img id="output" src="" alt="">
+                                        <img width="300px" height="450px" id="output" src="" alt="">
                                     </div>
                                 </div>
 
@@ -79,10 +79,104 @@ include __DIR__.'./film_sidenav.php';
                             <div class="col-lg-4 col-md-4">
                                 <div class="form-group">
                                     <label for="movie_genre">電影類別</label>
-                                    <input type="text" class="form-control" id="movie_genre" name="movie_genre"
-                                        placeholder="" value="">
-                                    <small id="movie_genreHelp" class="form-text text-muted"></small>
+                                    <div
+                                        class="col-lg-12 d-flex flex-wrap justify-content-lg-start justify-content-md-center">
+                                        <div class="col-lg-3 col-md-3 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="all" name="all"
+                                                onclick="check_all('chk[]',this)">
+                                            <label id="l_all" class="custom-control-label" for="all">全選</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type1" name="chk[]"
+                                                value="動作片" onclick="check(this,'all','chk[]')">
+                                            <label name="sid" class="custom-control-label" for="type1">動作片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type2" name="chk[]"
+                                                value="動畫片" onclick="check(this,'all','chk[]')">
+                                            <label name="sid" class="custom-control-label" for="type2">動畫片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type3" name="chk[]"
+                                                value="喜劇片" onclick="check(this,'all','chk[]')">
+                                            <label name="name" class="custom-control-label" for="type3">喜劇片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type4" name="chk[]"
+                                                value="偵探片" onclick="check(this,'all','chk[]')">
+                                            <label name="nickname" class="custom-control-label" for="type4">偵探片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type5" name="chk[]"
+                                                value="紀錄片" onclick="check(this,'all','chk[]')">
+                                            <label name="gender" class="custom-control-label" for="type5">紀錄片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type6" name="chk[]"
+                                                value="戲劇片" onclick="check(this,'all','chk[]')">
+                                            <label name="age" class="custom-control-label" for="type6">戲劇片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type7" name="chk[]"
+                                                value="英雄片" onclick="check(this,'all','chk[]')">
+                                            <label name="birthday" class="custom-control-label" for="type7">英雄片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type8" name="chk[]"
+                                                value="恐怖片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type8">恐怖片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type9" name="chk[]"
+                                                value="武俠片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type9">武俠片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type10" name="chk[]"
+                                                value="靈異片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type10">靈異片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type11" name="chk[]"
+                                                value="文藝片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type11">文藝片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type12" name="chk[]"
+                                                value="警匪片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type12">警匪片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type13" name="chk[]"
+                                                value="科幻片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type13">科幻片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type14" name="chk[]"
+                                                value="懸疑片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type14">懸疑片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type15" name="chk[]"
+                                                value="驚悚片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type15">驚悚片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type16" name="chk[]"
+                                                value="戰爭片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type16">戰爭片</label>
+                                        </div>
+                                        <div class="col-lg-3 col-md-2 custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="type17" name="chk[]"
+                                                value="愛情片" onclick="check(this,'all','chk[]')">
+                                            <label name="email" class="custom-control-label" for="type17">愛情片</label>
+                                        </div>
+                                        <!-- <input type="text" class="form-control" id="movie_genre" name="movie_genre"
+                                            placeholder="" value=""> -->
+                                        <small id="movie_genreHelp" class="form-text text-muted"></small>
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="movie_ver">放映類型</label>
                                     <select class="custom-select" id="movie_ver" name="movie_ver">
@@ -146,13 +240,13 @@ include __DIR__.'./film_sidenav.php';
                                     <small id="runtimeHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="director_tw">導演中文</label>
+                                    <label for="director_tw">導演名稱中文</label>
                                     <input type="text" class="form-control" id="director_tw" name="director_tw"
                                         placeholder="" value="">
                                     <small id="director_twHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="director_en">導演英文</label>
+                                    <label for="director_en">導演名稱英文</label>
                                     <input type="text" class="form-control" id="director_en" name="director_en"
                                         placeholder="" value="">
                                     <small id="director_enHelp" class="form-text text-muted"></small>
@@ -181,7 +275,8 @@ include __DIR__.'./film_sidenav.php';
                             </div>
 
                         </div>
-                        <button id="submit_btn" type="submit" onclick="topFunction()" class="btn btn-primary btn-block">送出</button>
+                        <button id="submit_btn" type="submit" onclick="topFunction()"
+                            class="btn btn-primary btn-block">送出</button>
                     </form>
 
                 </div>
@@ -201,7 +296,7 @@ include __DIR__.'./film_sidenav.php';
         'name_en',
         'intro_tw',
         'intro_en',
-        'movie_genre',
+
         'movie_ver',
         'movie_rating',
         'trailer',
@@ -286,9 +381,38 @@ include __DIR__.'./film_sidenav.php';
 
     //按下時回到頁面最上方
     function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
+
+
+        //checkbox全選
+        function check_all(cName, obj) {
+        var checkboxs = document.getElementsByName(cName);
+        for (var i = 0; i < checkboxs.length; i++) {
+            checkboxs[i].checked = obj.checked;
+        }
+    }
+
+
+    //checkbox勾選狀態判斷
+    function check(obj, chkall, cName) {
+        if (obj.checked == false) {
+            document.getElementById(chkall).checked = false;
+        } else {
+            let checkItem = document.getElementsByName(cName).length;
+            let ci = 0;
+            for (let i = 0; i < checkItem; i++) {
+                if (document.getElementsByName(cName)[i].checked == true) {
+                    ci++;
+                }
+            }
+            if (ci == checkItem) {
+                document.getElementById(chkall).checked = true;
+            }
+        }
+    }
+
 
 
 </script>

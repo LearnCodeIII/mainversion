@@ -1,4 +1,5 @@
 <?php
+$groupname = "activity";
 $pagename = "pageMain";
 
 include __DIR__.'/PDO.php';
@@ -7,6 +8,7 @@ include __DIR__.'/PDO.php';
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./nav.php'?>
 <?php include __DIR__.'./Shawnsidenav.php'?>
+<script src="../js/sweet.js"></script>
 <section class="dashboard">
     <div class="container-fulid">
         <div class="row d-flex ">
@@ -19,7 +21,7 @@ include __DIR__.'/PDO.php';
                     <div class="input-group-prepend ">
                         <span class="input-group-text bg-dark text-white">活動關鍵字</span>
                     </div>
-                    <input type="text" class="form-control" id="search_keyword" name="search_keyword" placeholder="廠商、標題、標籤、地區、內容">
+                    <input type="text" class="form-control" id="search_keyword" name="search_keyword" placeholder="廠商、標題、內文、地址">
                 </div>
 
                 <div class="input-group mt-3 mb-3">
@@ -40,41 +42,29 @@ include __DIR__.'/PDO.php';
 
 
                 <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
-                    <label class="btn btn-dark ">活動狀態</label>               
-                    <label class="btn btn-light" for="search_lightS" onclick="btn_changeColor(this)">即將開始</label>
-                    <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">進行中　</label>
-                    <label class="btn btn-light" for="search_warning" onclick="btn_changeColor(this)">即將結束</label>
-                    <label class="btn btn-light" for="search_lightE" onclick="btn_changeColor(this)">已結束　</label>
-                </div>
-
-                <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
                     <label class="btn btn-dark ">活動類型</label>               
                     <label class="btn btn-light" for="search_primary" onclick="btn_changeColor(this)">徵才資訊</label>
-                    <label class="btn btn-light" for="search_info" onclick="btn_changeColor(this)">電影資訊</label>
+                    <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">長期活動</label>
+                    <label class="btn btn-light" for="search_warning" onclick="btn_changeColor(this)">戲院公告</label>
                     <label class="btn btn-light" for="search_danger" onclick="btn_changeColor(this)">會員專屬</label>
-                    <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">長期活動</label>
+                    <label class="btn btn-light" for="search_info" onclick="btn_changeColor(this)">電影資訊</label>
+                    <label class="btn btn-light" for="search_secondary" onclick="btn_changeColor(this)">官方活動</label>
+                    <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">維修公告</label>
                 </div>
                 <div class="btn-group mt-3 mb-3 d-flex justify-content-between" role="group">
                     <button class="btn btn-dark" type="submit" id="search_btn" >搜尋</button>
                 </div>
                 <nav>
-                    <ul class="pagination justify-content-center" id="pagination">
-                    </ul>
-                </nav>
-                <nav>
                     <ul class="pagination justify-content-center" id="search_pagination">
                     </ul>
                 </nav>
-                <input class="form-check-input" type="checkbox" id="search_lightS" value="search_lightS" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]"hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]"hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_lightE" value="search_lightE" name="search_contenttype[]"hidden><br>
-
-                <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]"hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]"hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_danger" value="search_danger" name="search_contenttype[]"hidden><h4>
-                <input class="form-check-input" type="checkbox" id="search_dark" value="search_dark" name="search_contenttype[]"hidden><h4>
-
+                <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_danger" value="search_danger" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_secondary" value="search_secondary" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_dark" value="search_dark" name="search_contenttype[]" hidden><br>
             </form>
             
         </div>
@@ -145,8 +135,8 @@ const wrap_str =
                 <span class="badge badge-dark" id="badge-dark"><%= dark%></span>
             </h6>
         </div>
-        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4" hidden>
-            <img src="../pic/activity/<%= picture %>" class="card-img-top" style="display:block;max-height:180px;max-width:180px;">
+        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4">
+            <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
         </div>
     </div>
     
@@ -167,99 +157,46 @@ const wrap_str =
         <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">更多資訊 <i class="fas fa-info-circle"></i></a></small> 
         <small class="d-flex justify-content-between">
                 
-                <div class="ml-3"><a class="text-white" href="http://localhost/test/learnBackend/php/ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
+                <div class="ml-3"><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
                 <div class="ml-3"><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
         </small>
     </div>
 </div>`;
 
 const wrap_func = _.template(wrap_str);
-const pagi_str = `<li class="page-item <%= active %>">
-				<a class="page-link" href="#<%= page %>"><%= page %></a>
-            </li>`;
-const pagi_func = _.template(pagi_str);
+
 const search_pagi_str = `<li class="page-item <%= active %>">
-				<a class="page-link" href="#<%= page %>"><%= page %></a>
+				<a class="page-link" href="#/page=<%= page %>"><%= page %></a>
             </li>`;
 const search_pagi_func = _.template(search_pagi_str);
-
-
-const myHashChange = () => {
-    
-
-    let h = location.hash.slice(1);
-    page = parseInt(h);
-    if(isNaN(page)){
-        page = 1;
-    }
-    pagi.innerHTML = page;
-    fetch('ShawnpageDatalistapi.php?page='+page)
-        .then(res=>{return res.json();})
-        .then(json=>{
-            ori_data = json;
-            let str='';
-            for(let d of ori_data.data){
-
-                if(d.contenttype.indexOf('primary')>-1){
-                    d.primary="徵才資訊"
-                }else d.primary="";
-                if(d.contenttype.indexOf('success')>-1){
-                    d.success="進行中"
-                }else d.success="";
-                if(d.contenttype.indexOf('warning')>-1){
-                    d.warning="即將結束"
-                }else d.warning="";
-                if(d.contenttype.indexOf('danger')>-1){
-                    d.danger="會員專屬活動"
-                }else d.danger="";
-                if(d.contenttype.indexOf('info')>-1){
-                    d.info="電影資訊"
-                }else d.info="";
-                if(d.contenttype.indexOf('secondary')>-1){
-                    d.secondary="活動結束"
-                }else d.secondary="";
-                if(d.contenttype.indexOf('dark')>-1){
-                    d.dark="長期活動";
-                }else d.dark="";
-                str += wrap_func(d);
-            }
-            data_body.innerHTML = str;
-
-            str = '';
-            for(let i=1;i<=ori_data.totalPages;i++){
-                let active = ori_data.page === i ? 'active':'';
-                str += pagi_func({
-                    active:active,
-                    page:i
-                });
-            }
-            pagi.innerHTML =str;
-            highlight();
-        });
-}
-window.addEventListener('hashchange',myHashChange);
-
-myHashChange();
-
 
 //搜尋功能
 
 const search_btn = document.querySelector('#search_btn');
  
 const searchForm = () =>{
-    if(search_keyword.value=="" && search_dateStart =="" && search_dateEnd ==""){
-        myHashChange();
-        return;
+    console.log('GO!')
+    if(search_keyword.value=="" && search_dateStart.value =="" && search_dateEnd.value ==""){
+        search_keyword.value=="";
+        search_dateStart.value ="1000-01-01";
+        search_dateEnd.value ="9999-01-01";
     }
-    let h = location.hash.slice(1);
+    if(search_dateStart.value ==""){
+        search_dateStart.value ="1000-01-01";
+    }
+    if(search_dateEnd.value ==""){
+        search_dateEnd.value ="9999-01-01";
+    }
+
+
+    let h = location.hash.slice(7);
     page = parseInt(h);
     if(isNaN(page)){
         page = 1;
     }
     search_pagi.innerHTML = page;
-    pagi.setAttribute('style','display:none')
     let form = new FormData(document.form1);
-    fetch('ShawnpageSearchapi.php',{
+    fetch('ShawnpageSearchapi.php?page='+page,{
         method:'POST',
         body:form
     })
@@ -267,10 +204,7 @@ const searchForm = () =>{
     .then(json=>{
         ori_data = json;
         console.log(ori_data);
-        if(!ori_data.success){
-            search_pagi.style="display:none";
-            return data_body.innerHTML ="搜尋結果沒有符合此條件的活動";
-        }
+        
         
         let str='';
         for(let d of ori_data.data){
@@ -279,22 +213,22 @@ const searchForm = () =>{
                 d.primary="徵才資訊"
             }else d.primary="";
             if(d.contenttype.indexOf('success')>-1){
-                d.success="進行中"
+                d.success="長期活動"
             }else d.success="";
             if(d.contenttype.indexOf('warning')>-1){
-                d.warning="即將結束"
+                d.warning="戲院公告"
             }else d.warning="";
             if(d.contenttype.indexOf('danger')>-1){
-                d.danger="會員專屬活動"
+                d.danger="會員專屬"
             }else d.danger="";
             if(d.contenttype.indexOf('info')>-1){
                 d.info="電影資訊"
             }else d.info="";
             if(d.contenttype.indexOf('secondary')>-1){
-                d.secondary="活動結束"
+                d.secondary="官方活動"
             }else d.secondary="";
             if(d.contenttype.indexOf('dark')>-1){
-                d.dark="長期活動";
+                d.dark="維修公告";
             }else d.dark="";
             str += wrap_func(d);
 
@@ -305,22 +239,29 @@ const searchForm = () =>{
         str = '';
             for(let i=1;i<=ori_data.totalPages;i++){
                 let active = ori_data.page === i ? 'active':'';
-                str += pagi_func({
+                str += search_pagi_func({
                     active:active,
                     page:i
                 });
             }
         search_pagi.innerHTML =str;
+        if(!ori_data.success){
+        return search_pagi.innerHTML ="<a href='./ShawnpageDatalist.php'>搜尋結果沒有符合此條件的活動，點此重新搜尋</a>";
+        }
         highlight();
     });
-    
+    search_dateStart.value="";
+    search_dateEnd.value="";
     return false;
 };
 
-//
+window.addEventListener('hashchange',searchForm);
+searchForm();
+
+//標提高亮
 function highlight(){
     var value = search_keyword.value;
-    if(!(value == "")){
+    if(removeAllSpace(value) != ""){
     for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-title')[i].innerHTML.split(value);
         document.querySelectorAll('.card-title')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
@@ -329,10 +270,10 @@ function highlight(){
 };
 
 
-//TODO:搜尋高亮 字串 切除空白轉字串
+//內文高亮
 function highlightContent(){
     var value = search_keyword.value;
-    if(!(value == "" )){
+    if(removeAllSpace(value) != ""){
         for(var i=0;i<100;i++){
         var values = document.querySelectorAll('.card-body')[i].innerHTML.split(value);
         document.querySelectorAll('.card-body')[i].innerHTML = values.join('<span style="background:yellow;">' + value + '</span>')
@@ -340,17 +281,53 @@ function highlightContent(){
     }
 }
 
+//去除字串所有空白
+function removeAllSpace(str) {
+return str.replace(/\s+/g, "");
+}
 
 
 //刪除功能
 function deleteIt(sid){
-		if(
-            confirm(`確認要刪除編號為${sid}的資料嗎`
-            
-            )){
-			location.href = 'ShawnpageDelete.php?sid=' + sid;
-		}
-	}
+    
+    const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false,
+    })
+
+    swalWithBootstrapButtons.fire({
+    title: `確認要刪除資料嗎?`,
+    text: "檔案刪除過後將無法還原!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '確認刪除',
+    cancelButtonText: '我再想想',
+    reverseButtons: true
+    }).then((result) => {
+    if (result.value) {
+        swalWithBootstrapButtons.fire({
+            type: 'success',
+            title: '確認刪除',
+            text: '您的資料已經刪除。',
+            footer: '提示：即將返回主畫面',
+            timer: 3000,
+        }).then((result) => {
+            location.href = 'ShawnpageDelete.php?sid=' + sid;
+        })
+    } else if (
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire({
+            type: 'error',
+            title: '取消刪除',
+            text: '您的資料沒有刪除。'
+        })
+    }
+    })
+}
 
 
 

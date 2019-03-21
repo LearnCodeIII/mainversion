@@ -1,6 +1,6 @@
 <?php
-include __DIR__. './PDO.php';
-
+require __DIR__. '/PDO.php';
+$groupname = 'theater';
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
 $pdo->query("DELETE FROM `cinema` WHERE `sid`=$sid");

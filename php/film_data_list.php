@@ -37,31 +37,31 @@ include __DIR__.'./film_sidenav.php';
     </div>
 
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-bordered table-hover">
         <thead class="thead-dark">
             <tr>
                 <th scope="col"><i class="fas fa-edit"></i></th>
                 <th scope="col"><i class="fas fa-trash-alt"></i></th>
-                <th scope="col">#</th>
-                <th scope="col">name_tw</th>
-                <th scope="col">name_en</th>
-                <th scope="col">intro_tw</th>
-                <th scope="col">intro_en</th>
-                <th scope="col">movie_pic</th>
-                <th scope="col">movie_genre</th>
-                <th scope="col">movie_ver</th>
-                <th scope="col">movie_rating</th>
-                <th scope="col">trailer</th>
-                <th scope="col">pirce</th>
-                <th scope="col">schedule</th>
-                <th scope="col">in_theaters</th>
-                <th scope="col">out_theaters</th>
-                <th scope="col">runtime</th>
-                <th scope="col">director_tw</th>
-                <th scope="col">director_en</th>
-                <th scope="col">country</th>
-                <th scope="col">subtitle</th>
-                <th scope="col">subtitle_lang</th>
+                <th scope="col">影片編號</th>
+                <th scope="col">電影名稱中文</th>
+                <th scope="col">電影名稱英文</th>
+                <th scope="col">電影介紹中文</th>
+                <th scope="col">電影介紹英文</th>
+                <th scope="col">電影圖</th>
+                <th scope="col">電影類別</th>
+                <th scope="col">放映類型</th>
+                <th scope="col">電影分級</th>
+                <th scope="col">預告片</th>
+                <th scope="col">價格</th>
+                <th scope="col">檔期</th>
+                <th scope="col">上映日期</th>
+                <th scope="col">下檔日期</th>
+                <th scope="col">片長</th>
+                <th scope="col">導演名稱中文</th>
+                <th scope="col">導演名稱英文</th>
+                <th scope="col">發行國家</th>
+                <th scope="col">提供字幕</th>
+                <th scope="col">字幕語言</th>
             </tr>
         </thead>
         <tbody id="data_body">
@@ -94,14 +94,16 @@ include __DIR__.'./film_sidenav.php';
                     <a href="film_data_edit.php?sid=<%= sid%>"><i class="fas fa-edit"></i></a>
                 </td>
                 <td>
-                    <a href="javascript:checkDelete(<%= sid%>)"><i class="fas fa-trash-alt"></i></a>
+                    <a href="javascript:checkDelete(<%= sid%>)"><i class="text-danger fas fa-trash-alt"></i></a>
                 </td>
                 <td><%= sid %></td>
                 <td><%= name_tw %></td>
                 <td><%= name_en %></td>
-                <td><%= intro_tw %></td>
+                <td height="200px"><%= intro_tw %></td>
                 <td><%= intro_en %></td>
-                <td><%= movie_pic %></td>
+
+                <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
+
                 <td><%= movie_genre %></td>
                 <td><%= movie_ver %></td>
                 <td><%= movie_rating %></td>
@@ -233,6 +235,7 @@ include __DIR__.'./film_sidenav.php';
             });
     };
 
+
     //按delete時先跳出確認視窗後再刪除
     const checkDelete = (sid) => {
 
@@ -242,7 +245,6 @@ include __DIR__.'./film_sidenav.php';
             alert("無資料被刪除");
         }
     }
-
 
 
 

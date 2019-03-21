@@ -1,4 +1,5 @@
 <?php
+$groupname = "activity";
 include __DIR__.'/PDO.php';
 
 header("Content-type:application/json");
