@@ -121,6 +121,7 @@ const tr_func = _.template(tr_str);
 
 // const page_func = _.template(page_str);
 
+
 const myHashChange = () => {
     // let h = location.search.slice(1);
     page = <?= isset($_GET['sid']) ? intval($_GET['sid']) : 0 ?>;
@@ -145,11 +146,8 @@ const myHashChange = () => {
 
 myHashChange();
 
-
 const postya = () => {
-    // submitBtn.style.display = 'none';
-
-    let form1 = new FormData(document.form1);
+    var form1 = new FormData(document.form1);
     fetch('comment_insert_api.php', {
             method: 'POST',
             body: form1
@@ -157,18 +155,16 @@ const postya = () => {
         .then(response => response.json())
         .then(obj => {
             console.log(obj);
-            // infoMsg.style.display = 'block';
-            if (obj.success) {
-                infoMsg.className = 'alert alert-success';
-                infoMsg.innerHTML = '資料新增成功';
-            } else {
-                infoMsg.className = 'alert alert-dager';
-                infoMsg.innerHTML = obj.errorMsg;
-            }
+            // let str = '';
+            // for (k in oriData.data) {
+            //     str += tr_func(oriData.data[k]);
+            // }
+            // data_body.innerHTML = str;
         });
-        // location.href = 'article_delete.php?sid=' + page;
-    return false;
+        setTimeout(myHashChange(), 500);
+          return false;
 };
+
 </script>
 
 <!-- <?php include __DIR__.'/__html_foot.php'; ?> -->
