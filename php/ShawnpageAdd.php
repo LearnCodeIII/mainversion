@@ -12,7 +12,7 @@ if(isset($_SESSION['admin'])){
     $theater = $_SESSION['theater'];
     
 
-    $sql = sprintf("SELECT * FROM cinema where `account` like %s ",$theater);
+    $sql = sprintf("SELECT * FROM cinema where `account` = %s ",$theater);
     $stmt = $pdo->query($sql);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
