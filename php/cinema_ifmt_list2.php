@@ -22,10 +22,7 @@ if($page > $total_pages) $page = $total_pages;
 $queue_btn1 = isset($_POST['queue_btn1']) ? $_POST['queue_btn1']:'';
 $queue_btn2 = isset($_POST['queue_btn2']) ? $_POST['queue_btn2']:'';
 
-$queue_btn1_1 = $queue_btn1;
-$queue_btn1_2 = $queue_btn1;
-$queue_btn2_1 = $queue_btn2;
-$queue_btn2_2 = $queue_btn2;
+
 
 // 搜尋功能
 $sn = isset($_GET['search']) ? $_GET['search'] : '';
@@ -33,56 +30,28 @@ $sn = isset($_GET['search']) ? $_GET['search'] : '';
 //如果搜尋欄的值不是空的
 
 try{
-//        預設正排序
-    $esql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-
-    if(empty($sn)){
-//        正排序
-        if($queue_btn1_1 == true){
-            $queue_btn1_2 = false;
-            $esql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-        }
-//        負排序
-        if($queue_btn1_2 == true){
-            $queue_btn1_1 = false;
-            $esql = sprintf("SELECT * FROM cinema ORDER BY `sid` DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-        }
-        $stmt = $pdo->query($esql);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
 //        計算搜尋後資料的頁數
-        $ssn = "'%".$_GET['search']."%'";
-        $st_sql = sprintf("SELECT COUNT(1) FROM cinema where `name` like %s ",$ssn);
-        $st_stmt = $pdo->query($st_sql);
-        $stotal_rows = $st_stmt->fetch(PDO::FETCH_NUM)[0];
-        $sper_page = 15;
-        $stotal_pages = ceil($stotal_rows/$sper_page);
-        if($page < 1) $page = 1;
-        if($page > $stotal_pages) $page = $stotal_pages;
+    $ssn = "'%".$_GET['search']."%'";
+    $st_sql = sprintf("SELECT COUNT(1) FROM cinema where `name` like %s ",$ssn);
+    $st_stmt = $pdo->query($st_sql);
+    $stotal_rows = $st_stmt->fetch(PDO::FETCH_NUM)[0];
+    $sper_page = 15;
+    $stotal_pages = ceil($stotal_rows/$sper_page);
+    if($page < 1) $page = 1;
+    if($page > $stotal_pages) $page = $stotal_pages;
 
-//        正排序
-        if($queue_btn2_1 == true){
-            $queue_btn2_2 = false;
-            $hsql = sprintf("SELECT * FROM cinema where `name` like %s LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
-        }
-//        負排序
-        if($queue_btn2_2 == true){
-            $queue_btn2_1 = false;
-            $hsql = sprintf("SELECT * FROM cinema where `name` like %s ORDER BY `sid` DESC LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
-        }
-        $stmt = $pdo->query($hsql);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(! empty($sn)){
+        $sql = sprintf("SELECT * FROM cinema where `name` like %s LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
+    //如果搜尋欄的是空的
+    } else {
+        $sql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
     }
+    $stmt = $pdo->query($sql);
+    // 所有資料一次拿出來
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }catch (PDOException $ex){
     $error_msg = '查無此資料';
 }
-
-
-function name_queue(){
-
-}
-
-
 ?>
 
 <?php include __DIR__. './head.php' ?>
@@ -96,16 +65,7 @@ function name_queue(){
                 <button type="submit" class="btn btn-primary"><i class="fas fa-search" aria-hidden="true"></i></button>
             </form>
         </div>
-
-        <!--排序按鈕-->
-        <div class="mb-3">
-            <div class="d-flex align-items-md-end">
-                <form id="queue" method="post">
-                    <button type="submit" id="queue_btn1" name="queue_btn1" value="true" type="button" class="btn btn-dark btn-sm mx-2">較早創建</button>
-                    <button type="submit" id="queue_btn2" name="queue_btn2" value="true" type="button" class="btn btn-dark btn-sm mx-2">最新創建</button>
-                </form>
-            </div>
-        </div>
+        
 
 
         <!--換頁按鈕-->

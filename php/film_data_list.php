@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/film_crud_session.php';
+// require __DIR__. '/film_crud_session.php';
 #頁面名稱
 $pagename = "film_data_list";
 
