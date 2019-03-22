@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/film_crud_session.php';
+// require __DIR__. '/film_crud_session.php';
 $page_name='film_data_delete';
 
 require __DIR__.'/PDO.php';
