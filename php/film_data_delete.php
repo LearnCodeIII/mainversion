@@ -1,6 +1,6 @@
 <?php
-// require __DIR__. '/__crud.php';
-//待處理權限
+require __DIR__. '/film_crud_session.php';
+$page_name='film_data_delete';
 
 require __DIR__.'/PDO.php';
 
