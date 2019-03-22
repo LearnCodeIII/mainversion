@@ -1,6 +1,6 @@
 <?php
-// require __DIR__. '/__crud.php';
-//權限尚未設定
+// require __DIR__. '/film_crud_session.php';
+
 
 require __DIR__.'/PDO.php';
 $pagename = "film_data_insert";

@@ -1,11 +1,4 @@
 <?php
-if(! isset($_SESSION)){
-  session_start();
-}
-if(! isset($_SESSION['admin'])){
-  header('Location:login.php');
-  exit;
-}
 require __DIR__.'/PDO.php';
 $groupname = "member";
 $spname = 'member_list';
@@ -52,7 +45,6 @@ $spname = 'member_list';
       <tr>
         <th scope="col" class="text-nowrap"><i class="fas fa-edit"></i></th>
         <th><i class="fas fa-trash-alt"></i></th>
-        <th><i class="fas fa-eye"></i></th>
         <th scope="col" class="text-nowrap">會員編號</th>
         <th scope="col" class="text-nowrap">姓名</th>
         <th scope="col" class="text-nowrap">暱稱</th>
@@ -100,11 +92,6 @@ const tr_str = `<tr>
           <td>
                 <a href="javascript: delete_it(<%= sid %>)">
                 <i class="text-danger fas fa-trash-alt"></i>
-                </a>
-          </td>
-          <td>
-                <a href="Su_member_preview.php?sid=<%= sid %>">
-                <i class="text-success fas fa-eye"></i>
                 </a>
           </td>
           <th scope="row"><%= sid %></th>

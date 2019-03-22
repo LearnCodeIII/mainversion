@@ -1,6 +1,6 @@
 <?php
+// require __DIR__. '/film_crud_session.php';
 
-// 這份 底下HTML的 修改時要顯示的內容值還沒有改完 value="<?= $row['name_en']
 require __DIR__.'/PDO.php';
 $page_name='film_data_edit';
 

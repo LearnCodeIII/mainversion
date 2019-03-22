@@ -3,12 +3,14 @@
 // include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
 
-
-
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
-
-$pdo->query("DELETE FROM `forum` WHERE `sid`=$sid");
-
+if(isset($_SESSION["admin"])){
+   
+    
+    $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+    
+    $pdo->query("DELETE FROM `forum` WHERE `sid`=$sid");
+    
+}
 $goto = "Roy_datalist.php"; // 預設值
 
 
@@ -31,9 +33,4 @@ header("Location: $goto");
 // console.log(current_page)
 // console.log(location.href)
 // location.href = `Roy_datalist.php#${current_page}`;
-
-
-
-
-
 </script>

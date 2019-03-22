@@ -1,6 +1,6 @@
 <?php
 $pagename = "pageMain";
-$groupname = 'comment';
+
 include __DIR__.'/PDO.php';
 ?>
 <?php include __DIR__.'./head.php'?>

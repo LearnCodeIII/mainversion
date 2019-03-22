@@ -1,6 +1,8 @@
 <?php include __DIR__. './PDO.php'?>
+
 <?php
 $groupname = 'theater';
+$pagename = "cinema_ifmt_list";
 
 //    一進來的瀏覽資料
 $per_page = 10;
@@ -20,7 +22,10 @@ if($page > $total_pages) $page = $total_pages;
 $queue_btn1 = isset($_POST['queue_btn1']) ? $_POST['queue_btn1']:'';
 $queue_btn2 = isset($_POST['queue_btn2']) ? $_POST['queue_btn2']:'';
 
-
+$queue_btn1_1 = $queue_btn1;
+$queue_btn1_2 = $queue_btn1;
+$queue_btn2_1 = $queue_btn2;
+$queue_btn2_2 = $queue_btn2;
 
 // 搜尋功能
 $sn = isset($_GET['search']) ? $_GET['search'] : '';
@@ -29,7 +34,7 @@ $sn = isset($_GET['search']) ? $_GET['search'] : '';
 try{
     if(! empty($sn)){
 //        計算搜尋後資料的頁數
-        $ssn = "'%".$_GET['search']."%'";
+        $ssn = isset($sn) ? "'%".$_GET['search']."%'":'';
         $st_sql = sprintf("SELECT COUNT(1) FROM cinema where `name` like %s ",$ssn);
         $st_stmt = $pdo->query($st_sql);
         $stotal_rows = $st_stmt->fetch(PDO::FETCH_NUM)[0];
@@ -38,6 +43,7 @@ try{
         if($page < 1) $page = 1;
         if($page > $stotal_pages) $page = $stotal_pages;
 
+        $sql = sprintf("SELECT * FROM cinema where `name` like %s LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
 //        正排序
         if($queue_btn1 == true){
             $queue_btn2 = false;
@@ -70,6 +76,7 @@ try{
 }catch (PDOException $ex){
     $error_msg = '查無此資料';
 }
+
 
 function name_queue(){
 

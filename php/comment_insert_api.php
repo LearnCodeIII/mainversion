@@ -1,7 +1,7 @@
 <?php 
 require __DIR__.'/PDO.php';
 $upload_dir = __DIR__.'/../pic/article/';
-$groupname = 'comment';
+
 // ↓ 輸出的內容格式 = json
 header('Content-Type: application/json');
 

@@ -149,7 +149,7 @@ try{
             </div>
 
             <!--        右邊連結-->
-            <div class="ml-5" style="width: 45%;border-radius: 30px;">
+            <div class="ml-5 h-100" style="width: 45%;border-radius: 30px;">
 
                 <!--                上方廣告-->
                 <div class="mb-5  w-100 h-50 overflow-hidden shadow-sm" style="border-radius: 30px">
