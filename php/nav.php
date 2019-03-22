@@ -5,7 +5,7 @@
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse " id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item <?= $groupname == "member"?"active":""; ?>">
 					<a class="nav-link" href="Su_member_list.php"><i class="fas fa-user-tie"></i> 會員系統</a>
@@ -27,6 +27,16 @@
 				</li>
 				<li class="nav-item <?= $groupname == "adversite"?"active":""; ?>">
 					<a class="nav-link" href="ann_client_list.php"><i class="fas fa-ad"></i> 廣告系統</a>
+				</li>
+			</ul>
+			<!-- <ul class="navbar-nav mr-auto">
+				<li class="nav-item <?= $groupname == "non"?"active":""; ?>">
+					<a class="nav-link" href="logout.php"><i class="fas fa-user-circle"></i> 登出</a>
+				</li>
+			</ul> -->
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item <?= $groupname == "member"?"active":""; ?>">
+					<a class="nav-link" href="work.php"> 　　</a>
 				</li>
 			</ul>
 		</div>
