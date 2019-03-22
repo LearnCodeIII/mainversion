@@ -26,8 +26,8 @@ include __DIR__.'/PDO.php';
       <td>07</td>
       <td>
         <ul>
-            <li>介面整合、github整合排錯</li>
-            <li>後臺活動頁面、活動預覽頁面、登出功能、登出功能</li>
+            <li>介面整合、github整合除錯、資料庫規劃</li>
+            <li>活動列表頁面、活動新增頁面、活動預覽頁面、登入功能</li>
             <li></li>
         </ul>
       </td>
@@ -38,8 +38,8 @@ include __DIR__.'/PDO.php';
       <td>05</td>
       <td>
         <ul>
-            <li></li>
-            <li></li>
+            <li>資料庫文章欄位設計、文章資料整理</li>
+            <li>後臺文章頁面、文章預覽頁面</li>
             <li></li>
         </ul>
       </td>
@@ -50,8 +50,8 @@ include __DIR__.'/PDO.php';
       <td>13</td>
       <td>
         <ul>
-            <li></li>
-            <li></li>
+        <li>資料庫戲院欄位設計、戲院資料整理</li>
+            <li>後臺文章頁面、文章預覽頁面</li>
             <li></li>
         </ul>
       </td>
@@ -62,8 +62,8 @@ include __DIR__.'/PDO.php';
       <td>23</td>
       <td>
         <ul>
-            <li></li>
-            <li></li>
+            <li>資料庫戲院欄位設計、戲院資料整理</li>
+            <li>後臺文章頁面、文章預覽頁面</li>
             <li></li>
         </ul>
       </td>
@@ -75,7 +75,7 @@ include __DIR__.'/PDO.php';
       <td>
         <ul>
             <li></li>
-            <li></li>
+            <li>後臺文章頁面、文章預覽頁面</li>
             <li></li>
         </ul>
       </td>
@@ -87,7 +87,7 @@ include __DIR__.'/PDO.php';
       <td>
         <ul>
             <li></li>
-            <li></li>
+            <li>後臺文章頁面、文章預覽頁面</li>
             <li></li>
         </ul>
       </td>
@@ -99,7 +99,7 @@ include __DIR__.'/PDO.php';
       <td>
         <ul>
             <li></li>
-            <li></li>
+            <li>後臺廣告頁面、廣告預覽頁面</li>
             <li></li>
         </ul>
       </td>
