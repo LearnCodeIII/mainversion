@@ -3,7 +3,7 @@
 require __DIR__. '/PDO.php';
 $page_name = 'data_edit';
 
-if($_SESSION["admin"]!=="roy"){
+if(!isset($_SESSION["admin"])){
     header('Location: login.php');
 }
 
@@ -51,6 +51,12 @@ echo $row;
                             <input type="hidden" name="checkme" value="check123">
                             <input type="hidden" name="sid" value="<?= $row["sid"]?>">
                             <!-- VALUE要設抓SID，否則API抓不到SID無法進去撈資料 -->
+                            <div class="form-group">
+                                <label for="headline">發布者</label>
+                                <input type="text" readonly class="form-control" id="issuer" name="issuer"
+                                    placeholder="<?= $row["issuer"]?>" value="">
+                                <small id="headlineHelp" class="form-text text-muted"></small>
+                            </div>
                             <div class="form-group">
                                 <label for="headline">影評標題</label>
                                 <input type="text" class="form-control" id="headline" name="headline" placeholder=""
@@ -150,7 +156,7 @@ intro_pic.addEventListener("change", event => {
 
 tinymce.init({
     selector: '#review'
-  });
+});
 
 // ClassicEditor
 //     .create(document.querySelector('#review'))
