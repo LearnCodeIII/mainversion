@@ -245,7 +245,8 @@ $spname = 'member_list_choose';
         let str = "";
         let input_label = document.getElementsByTagName('label');
         title.innerHTML = `<th scope="row"><i class="fas fa-edit"></i></th>
-                                <th><i class="fas fa-trash-alt"></i></th>`
+                                <th><i class="fas fa-trash-alt"></i></th>
+                                <th><i class="fas fa-eye"></i></th>`
         for (let i = 0; i <= title_index; i++) {
             title.innerHTML += `<th scope="col" class="text-nowrap">${input_label[temp_title[i]].innerText}</th>`
         }
@@ -260,6 +261,11 @@ $spname = 'member_list_choose';
                     <td>
                       <a href="javascript: delete_it(${ori_data.data[s][temp_title[0]]})">
                       <i class="text-danger fas fa-trash-alt"></i>
+                    </a>
+                    </td>
+                    <td>
+                      <a href="Su_member_preview.php?sid=${ori_data.data[s][temp_title[0]]}">
+                      <i class="text-success fas fa-eye"></i>
                     </a>
                     </td>`;
             for (let i = 0; i < column_num; i++) {

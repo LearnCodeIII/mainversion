@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/PDO.php';
 $pagename = "article_edit";
-
+$groupname = 'article';
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
 $sql = "SELECT * FROM `article` WHERE `sid`=$sid";
