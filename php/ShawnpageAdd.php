@@ -9,7 +9,7 @@ if(isset($_SESSION['admin'])){
     
 }else if(isset($_SESSION['theater'])){
     $theater=$_SESSION['theater'];
-    $sql = "SELECT * FROM `cinema` where account = 'spacebarroom1' ";
+    $sql = "SELECT * FROM `cinema` where account = '$theater' ";
     $stmt = $pdo->query($sql);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach($rows as $row){
