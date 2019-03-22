@@ -10,7 +10,7 @@ $result=[
 
 
 $sid = isset($_GET['sid'])? intval($_GET['sid']) : 0;
-$sql = "SELECT * FROM `member` WHERE sid=$sid";
+$sql = "SELECT m.*, p.`name` `perm_name` FROM `member` m JOIN `permission` p ON m.`permission`=p.`no` WHERE m.`sid`=$sid";
 $stmt = $pdo->query($sql);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -188,19 +188,7 @@ $(document).ready(function () {
                         <div class="form-group row align-items-center my-4">
                                     <label class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">權限</label>
                                     <input type="text" class="col-lg-4 mx-2 form-control text-center" id="" name="permission" placeholder="" 
-                                    value="<?php switch($row['gender'])
-                                    {case 0:
-                                        echo '黑名單';
-                                        break;
-                                    case 1 :
-                                        echo '一般會員';
-                                        break;
-                                    case 2 :
-                                        echo 'VIP會員';
-                                        break;
-                                    case 3 :
-                                        echo '版主';
-                                    } ?>" disabled>
+                                    value="<?= $row['perm_name']?>" disabled>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-4  d-flex justify-content-center">
