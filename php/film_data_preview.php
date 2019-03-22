@@ -91,9 +91,7 @@ include __DIR__.'./sidenav.php';
                                         <h4>預告片</h4>
                                     </label>
                                     <div class="">
-                                        <iframe width="550" height="305" src="<?= $row['trailer']?>" frameborder="0"
-                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
+                                    <a href="#" onclick="window.open(' <?= $row['trailer']?> ', 'Yahoo', config='height=500,width=500');"><?= $row['trailer']?></a>
                                     </div>
 
                                     <label for="movie_genre" class="mt-2">
@@ -263,7 +261,7 @@ include __DIR__.'./sidenav.php';
 
                             </div>
 
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-4 col-md-4 ml-1">
                                 <div class="form-group">
 
 
