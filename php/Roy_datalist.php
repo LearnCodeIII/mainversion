@@ -4,7 +4,7 @@ $groupname = "forum";
 // include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
 
-if($_SESSION["admin"]!=="roy"){
+if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION["theater"])){
     header('Location: login.php');
 }
 ?>
@@ -12,7 +12,7 @@ if($_SESSION["admin"]!=="roy"){
 <?php include __DIR__ . './nav.php'?>
 <?php include __DIR__ . './Roysidenav.php'?>
 
-<section class="dashboard">
+<section class="dashboard <?=isset($_SESSION["admin"])?"":"d-none" ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-center">
