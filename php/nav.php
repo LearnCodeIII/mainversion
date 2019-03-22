@@ -26,7 +26,7 @@
 					<a class="nav-link" href="Roy_datalist.php"><i class="fas fa-igloo"></i> 論壇系統</a>
 				</li>
 				<li class="nav-item <?= $groupname == "adversite"?"active":""; ?>">
-					<a class="nav-link" href="ann_client_list.php"><i class="fas fa-ad"></i> 廣告系統</a>
+					<a class="nav-link" href="REVISION_ann_ad_list.php"><i class="fas fa-ad"></i> 廣告系統</a>
 				</li>
 			</ul>
 			<!-- <ul class="navbar-nav mr-auto">
