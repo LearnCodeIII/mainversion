@@ -13,7 +13,7 @@
             <a class="nav-link" href="./comment_list.php">留言列表</a>
         </li>
         <li class="nav-item <?= $phpname == "phpSetting"?"active":""; ?>">
-            <a class="nav-link" href="#">管理者設置</a>
+            <!-- <a class="nav-link" href="#">管理者設置</a> -->
         </li>
     </ul>
 </nav>
