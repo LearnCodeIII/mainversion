@@ -151,7 +151,7 @@ try{
             </div>
 
             <!--        右邊連結-->
-            <div class="ml-5" style="width: 45%;border-radius: 30px;">
+            <div class="ml-5 h-100" style="width: 45%;border-radius: 30px;">
 
                 <!--                上方廣告-->
                 <div class="mb-5  w-100 h-50 overflow-hidden shadow-sm" style="border-radius: 30px">
@@ -192,7 +192,7 @@ try{
                             <div class="m-5">'無相關資料'</div>
                         <?php }else{ ?>
                             <?php foreach($ac_rows as $row): ?>
-                                <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $row['sid'] ?>" class="mx-auto my-2" style="width: 94%;height: 14%">
+                                <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $row['sid'] ?>" class="mx-auto my-2" style="width: 94%;height: 16%">
                                     <button type="button" class="btn btn-info mx-auto  w-100 h-100">
                                         <div class="font-weight-bold">活動名稱</div>
                                         <?= $row['name'] ?>

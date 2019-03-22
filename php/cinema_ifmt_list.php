@@ -1,6 +1,8 @@
 <?php include __DIR__. './PDO.php'?>
+
 <?php
 $groupname = 'theater';
+$pagename = "cinema_ifmt_list";
 
 //    一進來的瀏覽資料
 $per_page = 10;
