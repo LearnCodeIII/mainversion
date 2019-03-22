@@ -76,6 +76,7 @@ $(document).ready(function() {
             <div>
                 <label for="validationTextarea" class="my-2">Textarea</label>
                 <textarea id="editor" name="content"></textarea>
+            <!-- 2131 -->
             </div>
             
             
