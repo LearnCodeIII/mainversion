@@ -31,27 +31,10 @@ $queue_btn2_2 = $queue_btn2;
 $sn = isset($_GET['search']) ? $_GET['search'] : '';
 
 //如果搜尋欄的值不是空的
-
 try{
-//        預設正排序
-    $esql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-
-    if(empty($sn)){
-//        正排序
-        if($queue_btn1_1 == true){
-            $queue_btn1_2 = false;
-            $esql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-        }
-//        負排序
-        if($queue_btn1_2 == true){
-            $queue_btn1_1 = false;
-            $esql = sprintf("SELECT * FROM cinema ORDER BY `sid` DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-        }
-        $stmt = $pdo->query($esql);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
+    if(! empty($sn)){
 //        計算搜尋後資料的頁數
-        $ssn = "'%".$_GET['search']."%'";
+        $ssn = isset($sn) ? "'%".$_GET['search']."%'":'';
         $st_sql = sprintf("SELECT COUNT(1) FROM cinema where `name` like %s ",$ssn);
         $st_stmt = $pdo->query($st_sql);
         $stotal_rows = $st_stmt->fetch(PDO::FETCH_NUM)[0];
@@ -60,19 +43,36 @@ try{
         if($page < 1) $page = 1;
         if($page > $stotal_pages) $page = $stotal_pages;
 
+        $sql = sprintf("SELECT * FROM cinema where `name` like %s LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
 //        正排序
-        if($queue_btn2_1 == true){
-            $queue_btn2_2 = false;
-            $hsql = sprintf("SELECT * FROM cinema where `name` like %s LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
+        if($queue_btn1 == true){
+            $queue_btn2 = false;
+            $sql = sprintf("SELECT * FROM cinema where `name` like %s LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
         }
 //        負排序
-        if($queue_btn2_2 == true){
-            $queue_btn2_1 = false;
-            $hsql = sprintf("SELECT * FROM cinema where `name` like %s ORDER BY `sid` DESC LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
+        if($queue_btn2 == true){
+            $queue_btn1 = false;
+            $sql = sprintf("SELECT * FROM cinema where `name` like %s ORDER BY `sid` DESC LIMIT %s, %s",$ssn ,($page-1)*$sper_page, $sper_page);
         }
-        $stmt = $pdo->query($hsql);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//如果搜尋欄的是空的
+    } else {
+//        預設正排序
+        $sql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+//        正排序
+        if($queue_btn1 == true){
+            $queue_btn2 = false;
+            $sql = sprintf("SELECT * FROM cinema LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+        }
+//        負排序
+        if($queue_btn2 == true){
+            $queue_btn1 = false;
+            $sql = sprintf("SELECT * FROM cinema ORDER BY `sid` DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+        }
     }
+
+    $stmt = $pdo->query($sql);
+    // 所有資料一次拿出來
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }catch (PDOException $ex){
     $error_msg = '查無此資料';
 }
