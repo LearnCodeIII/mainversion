@@ -90,7 +90,7 @@ include __DIR__.'./sidenav.php';
                                     <label for="trailer" class="mt-2">
                                         <h4>預告片</h4>
                                     </label>
-                                    <div class="">
+                                    <div class="col-12">
                                     <a href="#" onclick="window.open(' <?= $row['trailer']?> ', 'Yahoo', config='height=500,width=500');"><?= $row['trailer']?></a>
                                     </div>
 
@@ -261,9 +261,8 @@ include __DIR__.'./sidenav.php';
 
                             </div>
 
-                            <div class="col-lg-4 col-md-4 ml-1">
+                            <div class="col-lg-4 col-md-4 ">
                                 <div class="form-group">
-
 
                                     <label for="subtitle" class="mt-2">
                                         <h4>是否提供字幕</h4>
