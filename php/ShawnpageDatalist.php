@@ -4,26 +4,34 @@ $groupname = "activity";
 $pagename = "pageMain";
 
 if(isset($_SESSION['admin'])){
-    $user = "小編：";
-    $user .= $_SESSION['admin'];
-    $level = 10;
-    
+    $t_user = $_SESSION['admin'];
+    $level = "admin";
 }else if(isset($_SESSION['theater'])){
     $theater=$_SESSION['theater'];
     $sql = "SELECT * FROM `cinema` where account = '$theater' ";
     $stmt = $pdo->query($sql);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach($rows as $row){
-        $c_sid = $row['sid'];
-        $c_user = $row['name'];
-        $c_img = $row['img'];
-        $c_taxID = $row['taxID'];
-        $c_phone = $row['phone'];
-        $c_address = $row['address'];
-        $c_intro = $row['intro'];
-    
+        $t_sid = $row['sid'];
+        $t_user = preg_replace('/\s(?=)/', '', $row['name']);
+        $t_userac = $row['account'];
+        $level =  "theater";
     }
-    $level = 2;
+}else if(isset($_SESSION['member'])){
+    $member=$_SESSION['member'];
+    $sql = "SELECT * FROM `cinema` where account = '$member' ";
+    $stmt = $pdo->query($sql);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach($rows as $row){
+        $t_sid = $row['sid'];
+        $t_user = preg_replace('/\s(?=)/', '', $row['name']);
+        $t_img = $row['img'];
+        $t_taxID = $row['taxID'];
+        $t_phone = $row['phone'];
+        $t_address = $row['address'];
+        $t_intro = $row['intro'];
+        $level =  "member";
+    }
 }else {
     header("Location: ./login.php");
     exit;
@@ -34,7 +42,9 @@ if(isset($_SESSION['admin'])){
 <?php include __DIR__.'./Shawnsidenav.php'?>
 <script src="../js/sweet.js"></script>
 <section class="dashboard">
-<input type="text" id="list_level" value="<?= $level ?>" hidden>
+
+<input type="text" id="account_level" value="<?= $level ?>" hidden>
+<input type="text" id="account_name" value="<?= $t_user ?>" hidden>
     <div class="container-fulid">
         <div class="row d-flex ">
             <div class="col-md-8">
@@ -66,7 +76,7 @@ if(isset($_SESSION['admin'])){
 
 
 
-                <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
+                <!-- <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
                     <label class="btn btn-dark ">活動類型</label>               
                     <label class="btn btn-light" for="search_primary" onclick="btn_changeColor(this)">徵才資訊</label>
                     <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">長期活動</label>
@@ -75,7 +85,7 @@ if(isset($_SESSION['admin'])){
                     <label class="btn btn-light" for="search_info" onclick="btn_changeColor(this)">電影資訊</label>
                     <label class="btn btn-light" for="search_secondary" onclick="btn_changeColor(this)">官方活動</label>
                     <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">維修公告</label>
-                </div>
+                </div> -->
                 <div class="btn-group mt-3 mb-3 d-flex justify-content-between" role="group">
                     <button class="btn btn-dark" type="submit" id="search_btn" >搜尋</button>
                 </div>
@@ -180,13 +190,13 @@ const wrap_str =
     <div class="card-footer d-flex justify-content-between bg-dark text-white" onclick="highlightContent();">
         <small >活動期限：<%= dateStart %>-<%= dateEnd %></small>
         <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">更多資訊 <i class="fas fa-info-circle"></i></a></small> 
-        <small class="d-flex justify-content-between">
-                
-                <div class="ml-3"><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
-                <div class="ml-3"><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
+        <small class="d-flex justify-content-between <%= company %>_control total_control">
+                <div class="ml-3 "><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
+                <div class="ml-3 "><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
         </small>
     </div>
 </div>`;
+
 
 const wrap_func = _.template(wrap_str);
 
@@ -194,6 +204,22 @@ const search_pagi_str = `<li class="page-item <%= active %>">
 				<a class="page-link" href="#/page=<%= page %>"><%= page %></a>
             </li>`;
 const search_pagi_func = _.template(search_pagi_str);
+
+//權限設置
+function hiddenSetting(){
+    let name_control= "."+account_name.value+"_control";
+    let total_length = document.querySelectorAll(`.total_control`).length
+    let length = document.querySelectorAll(`${name_control}`).length
+    for(let i=0;i<total_length;i++){
+        document.querySelectorAll(`.total_control`)[i].style.visibility='hidden';
+    }
+    for(let i=0;i<length;i++){
+        document.querySelectorAll(`${name_control}`)[i].style.visibility='visible';
+    }
+}
+
+
+
 
 //搜尋功能
 
@@ -255,9 +281,12 @@ const searchForm = () =>{
             if(d.contenttype.indexOf('dark')>-1){
                 d.dark="維修公告";
             }else d.dark="";
+            
             str += wrap_func(d);
 
         }
+
+        console.log(ori_data);
         
         data_body.innerHTML = str;
         

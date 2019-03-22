@@ -1,11 +1,4 @@
 <?php
-if(! isset($_SESSION)){
-  session_start();
-}
-if(! isset($_SESSION['admin'])){
-  header('Location:login.php');
-  exit;
-}
 require __DIR__.'/PDO.php';
 $groupname = "member";
 $spname = 'member_list';

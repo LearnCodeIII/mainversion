@@ -8,7 +8,8 @@ $result = [
     'success' => false,
     'errorCode' => 0,
     'errorMsg' => '資料輸入不完整',
-    'post' => [],       
+    'post' => [], // 做 echo 檢查      
+        
 ];
 $sn = isset($_POST['sn']) ? intval($_POST['sn']) : 0;
 
@@ -22,15 +23,9 @@ if(isset($_POST['client_name']) and !empty($sn)){
     $client_email = $_POST['client_email'];
     $contract_budget = $_POST['contract_budget'];
     $contract_start_date = $_POST['contract_start_date'];
-    $contract_start_date = $_POST['contract_end_date'];
-    $ad_name = $_POST['ad_name'];
-    $ad_pic = $_POST['ad_pic'];
-    $ad_link = $_POST['ad_link'];
-    $ad_link_count = $_POST['ad_link_count'];
-    $ad_start_time = $_POST['ad_start_time'];
-    $ad_end_time = $_POST['ad_end_time'];
+    $contract_end_date = $_POST['contract_end_date'];
 
-    $result['post'] = $_POST;
+    $result['post'] = $_POST;  // 做 echo 檢查
 
     if(empty($client_name) or empty($client_email) or empty($client_mobile)){
         $result['errorCode'] = 400;
@@ -81,12 +76,6 @@ if(isset($_POST['client_name']) and !empty($sn)){
                 `contract_budget`=?,
                 `contract_start_date`=?,
                 `contract_end_date`=?
-                `ad_name`=?
-                `ad_pic`=?
-                `ad_link`=?
-                `ad_link_count`=?
-                `ad_start_time`=?
-                `ad_end_time`=?
                 WHERE `sn`=?";
 
     try {
@@ -103,13 +92,7 @@ if(isset($_POST['client_name']) and !empty($sn)){
             $_POST['contract_budget'],
             $_POST['contract_start_date'],
             $_POST['contract_end_date'],
-            $_POST['ad_name'],
-            $_POST['ad_pic'],
-            $_POST['ad_link'],
-            $_POST['ad_link_count'],
-            $_POST['ad_start_time'],
-            $_POST['ad_end_time'],      
-            $sn
+
         ]);
 
         if($stmt->rowCount() == 1) {

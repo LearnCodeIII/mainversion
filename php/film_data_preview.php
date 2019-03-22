@@ -11,14 +11,14 @@ $stamt=$pdo->query($sql);
 $row = $stamt->fetch(PDO::FETCH_ASSOC);
 
 
-// if ($stamt->rowCount()==0) {
-//     header('Location: film_main.php');
-//     exit;
-// }
+if ($stamt->rowCount()==0) {
+    header('Location: film_main.php');
+    exit;
+}
 
 include __DIR__.'./head.php';
 include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php';
 ?>
 <style>
     .form-group small {
@@ -90,8 +90,10 @@ include __DIR__.'./film_sidenav.php';
                                     <label for="trailer" class="mt-2">
                                         <h4>預告片</h4>
                                     </label>
-                                    <div class="col-12">
-                                    <a href="#" onclick="window.open(' <?= $row['trailer']?> ', 'Yahoo', config='height=500,width=500');"><?= $row['trailer']?></a>
+                                    <div class="">
+                                        <iframe width="560" height="315" src="<?= $row['trailer']?>" frameborder="0"
+                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
                                     </div>
 
                                     <label for="movie_genre" class="mt-2">
@@ -261,8 +263,9 @@ include __DIR__.'./film_sidenav.php';
 
                             </div>
 
-                            <div class="col-lg-4 col-md-4 ">
+                            <div class="col-lg-4 col-md-4">
                                 <div class="form-group">
+
 
                                     <label for="subtitle" class="mt-2">
                                         <h4>是否提供字幕</h4>
