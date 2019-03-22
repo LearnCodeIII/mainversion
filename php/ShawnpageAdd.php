@@ -5,7 +5,7 @@ $groupname = "activity";
 if(isset($_SESSION['admin'])){
     $user = "小編：";
     $user .= $_SESSION['admin'];
-    $address = "隨地而坐"
+    $address = "隨地而坐";
     $level = 10;
     
 }else if(isset($_SESSION['theater'])){
@@ -93,7 +93,7 @@ if(isset($_SESSION['admin'])){
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text bg-dark text-white">戲院地址</span>
                                     </div>
-                                    <input type="text" class="form-control" id="region" name="region" value="<?=$address?>" readonly>
+                                    <input type="text" class="form-control" id="region" name="region" value="<?=$address?>" >
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="regionHelp" class="form-text text-muted"></small>
