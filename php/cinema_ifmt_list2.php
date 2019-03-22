@@ -65,16 +65,7 @@ try{
                 <button type="submit" class="btn btn-primary"><i class="fas fa-search" aria-hidden="true"></i></button>
             </form>
         </div>
-
-        <!--排序按鈕-->
-        <div class="mb-3">
-            <div class="d-flex align-items-md-end">
-                <form id="queue" method="post">
-                    <button type="submit" id="queue_btn1" name="queue_btn1" value="true" type="button" class="btn btn-dark btn-sm mx-2">較早創建</button>
-                    <button type="submit" id="queue_btn2" name="queue_btn2" value="true" type="button" class="btn btn-dark btn-sm mx-2">最新創建</button>
-                </form>
-            </div>
-        </div>
+        
 
 
         <!--換頁按鈕-->
