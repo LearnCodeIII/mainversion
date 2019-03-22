@@ -85,7 +85,7 @@ if(isset($_SESSION['admin'])){
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text bg-dark text-white">戲院名稱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="company" name="company" value="<?=$user?>" readonly>
+                                    <input type="text" class="form-control" id="company" name="company" value="<?=$user?>" >
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="companyHelp" class="form-text text-muted"></small>
