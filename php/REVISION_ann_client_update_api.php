@@ -22,7 +22,13 @@ if(isset($_POST['client_name']) and !empty($sn)){
     $client_email = $_POST['client_email'];
     $contract_budget = $_POST['contract_budget'];
     $contract_start_date = $_POST['contract_start_date'];
-    $contract_end_date = $_POST['contract_end_date'];
+    $contract_start_date = $_POST['contract_end_date'];
+    $ad_name = $_POST['ad_name'];
+    $ad_pic = $_POST['ad_pic'];
+    $ad_link = $_POST['ad_link'];
+    $ad_link_count = $_POST['ad_link_count'];
+    $ad_start_time = $_POST['ad_start_time'];
+    $ad_end_time = $_POST['ad_end_time'];
 
     $result['post'] = $_POST;
 
@@ -75,6 +81,12 @@ if(isset($_POST['client_name']) and !empty($sn)){
                 `contract_budget`=?,
                 `contract_start_date`=?,
                 `contract_end_date`=?
+                `ad_name`=?
+                `ad_pic`=?
+                `ad_link`=?
+                `ad_link_count`=?
+                `ad_start_time`=?
+                `ad_end_time`=?
                 WHERE `sn`=?";
 
     try {
@@ -91,8 +103,13 @@ if(isset($_POST['client_name']) and !empty($sn)){
             $_POST['contract_budget'],
             $_POST['contract_start_date'],
             $_POST['contract_end_date'],
+            $_POST['ad_name'],
+            $_POST['ad_pic'],
+            $_POST['ad_link'],
+            $_POST['ad_link_count'],
+            $_POST['ad_start_time'],
+            $_POST['ad_end_time'],      
             $sn
-
         ]);
 
         if($stmt->rowCount() == 1) {
