@@ -2,7 +2,7 @@
 $pagename = "pageMain";
 // include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
-if($_SESSION["admin"]!=="roy"){
+if(!isset($_SESSION["admin"])){
     header('Location: login.php');
 }
 
