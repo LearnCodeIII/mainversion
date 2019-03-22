@@ -114,7 +114,7 @@ const search_pagi_func = _.template(search_pagi_str);
 const searchForm = () =>{
     let sid;
 
-    let h = location.href.slice(75);
+    let h = location.href.slice(location.href.indexOf('sid=')+4)
     sid = parseInt(h);
     if(isNaN(sid)){
         sid = 1;
