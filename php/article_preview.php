@@ -1,6 +1,6 @@
 <?php
 include __DIR__.'/PDO.php';
-$groupname = 'article';
+
 $pagename = "preview";
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
@@ -10,36 +10,22 @@ $sql = "SELECT * FROM article WHERE `sid`=$sid";
 $stmt = $pdo->query($sql);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// if($stmt->rowCount()==0){
+//     header('Location: article_list.php');
+//     exit;
+// }
+
+// $cmsql = "SELECT `comment`.*,`article`.`sid`,`article`.`title`,`member`.`name`,`member`.`nickname`,`member`.`avatar` FROM `comment`LEFT JOIN `member` ON `comment`.`member_sid` = `member`.`sid` LEFT JOIN `article` ON `comment`.`article_sid`=`article`.`sid` WHERE `article`.`sid`=$sid";
+
+// $cmstmt = $pdo->query($cmsql);
+// $cmrow = $cmstmt->fetch(PDP::FETCH_ASSOC);
+
 $cm_time = date("Y-m-d h:i:sa");
 
-if(isset($_SESSION['admin'])){
-    $user = "小編：";
-    $user .= $_SESSION['admin'];
-    $level = 10;
-    
-}else if(isset($_SESSION['member'])){
-    $member=$_SESSION['member'];
-    $lo_sql = "SELECT * FROM `member` where email = '$member' ";
-    $lo_stmt = $pdo->query($lo_sql);
-    $lo_rows = $lo_stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach($lo_rows as $lo_row){
-        $user = $lo_row['sid'];
-        $user_name = $lo_row['name'];
-        $user_avatar = $lo_row['avatar'];
-
-    
-    }
-    $level = 2;
-}else {
-    header("Location: ./login.php");
-    exit;
-};
-
 ?>
-
 <?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./nav.php'?>
-<?php include __DIR__.'./RuthNav.php'?>
+<?php //include __DIR__.'./nav.php'?>
+<?php //include __DIR__.'./RuthNav.php'?>
 
 
 <style>
@@ -54,16 +40,13 @@ if(isset($_SESSION['admin'])){
     bottom: 30px;
     right: 30px;
 }
-
-.toast-header {
-    border-radius: 10px 10px 10px 0px;
+.toast-header{
+    border-radius:10px 10px 10px 0px;
     box-shadow: 1px 1px 5px #cccccc;
-}
+};
 
-;
-
-.border10 {
-    border-radius: 10%;
+.border10{
+    border-radius:10%;
 }
 </style>
 
@@ -96,26 +79,22 @@ if(isset($_SESSION['admin'])){
 
         <form name="form1" method="post" onsubmit="return postya();">
             <div class="form-row">
-                <input type="hidden" class="form-control" name="member_sid" value="<?=$lo_row['sid']?>">
-                <div class="">
-                    <img src="../pic/avatar/<?=$user_avatar?>" class="mt-1 ml-2" width="30" height="auto" alt="...">
+                <div class="col">
+                    <select class="form-control" name="member_sid">
+                        <option value="1">皮卡丘</option>
+                        <option value="2">小火龍</option>
+                        <option value="3">傑尼龜</option>
+                        <option value="4">妙蛙種子</option>
+                    </select>
                 </div>
-                <div>
-                    <p class="mt-2"><?=$user_name?></p>
-                </div>
-                <div class="col-10">
+                <div class="col-9">
                     <input type="text" class="form-control" name="comment" placeholder="留下評論......">
                     <input type="hidden" class="form-control" name="article_sid" value="<?= $row['sid']?>">
                     <input type="hidden" class="form-control" name="cm_date" value="<?= $cm_time ?>">
                 </div>
                 <div class="col">
-                    <div>
-                        <button type="submit" class="btn btn-primary">送出留言</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">送出</button>
                 </div>
-
-            </div>
-            <div class="form-row">
             </div>
         </form>
     </div>
@@ -127,7 +106,7 @@ let oriData;
 const data_body = document.querySelector('#commentarea');
 
 let tr_str = `<div class="toast-header my-2">
-                <div class="">
+<div class="">
                 <img src="../pic/avatar/<%= avatar%>" class="mb-1" width="30" alt="...">
                 </div>
                 <div class="ml-2">
@@ -187,10 +166,11 @@ const postya = () => {
             //     str += tr_func(oriData.data[k]);
             // }
             // data_body.innerHTML = str;
-            setTimeout(myHashChange(), 300);
+        setTimeout(myHashChange(), 300);
         });
-    return false;
+          return false;
 };
+
 </script>
 
 <!-- <?php include __DIR__.'/__html_foot.php'; ?> -->
