@@ -5,6 +5,7 @@ $groupname = "activity";
 if(isset($_SESSION['admin'])){
     $user = "小編：";
     $user .= $_SESSION['admin'];
+    $address = "隨地而坐"
     $level = 10;
     
 }else if(isset($_SESSION['theater'])){
