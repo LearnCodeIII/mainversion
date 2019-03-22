@@ -1,15 +1,20 @@
 <?php
 require __DIR__ . '/PDO.php';
-$page_name = 'ann_client_create';
+$page_name = 'REVISION_ann_client_create';
 ?>
 
-<?php include __DIR__ . '/head.php'; ?>
-<?php include __DIR__ . '/nav.php'; ?>
-<?php include __DIR__.'/ann_side_nav.php'?>
+<?php include __DIR__ . '/head.php';?>
+<?php include __DIR__ . '/nav.php';?>
+<?php include __DIR__ . '/ann_side_nav.php'?>
 
 <style>
 .form-group small {
     color: red !important;
+}
+
+.btn-toolbar {
+    display: flex;
+    justify-content: center;
 }
 </style>
 
@@ -22,21 +27,21 @@ $page_name = 'ann_client_create';
                 </div>
 
                 <div class="card">
-                    <h5 class="card-header">新增客戶資料</h5>
+                    <h5 class="card-header text-center">客戶資料新增</h5>
                     <div class="card-body">
                         <form name="form1" method="post" onsubmit="return checkForm();">
                             <input type="hidden" name="checkme" value="check123">
-                            <input type="hidden" name="sn" value="<?= $row['sn']?>">
+                            <input type="hidden" name="sn" value="<?=$row['sn']?>">
 
                             <div class="form-group">
                                 <label for="client_name">公司名稱</label>
                                 <input type="text" class="form-control" id="client_name" name="client_name"
-                                    placeholder="" value="">
+                                    placeholder="" value="" autofocus>
                                 <small id="client_nameHelp" class="form-text text-muted"></small>
                             </div>
 
                             <div class="form-group">
-                                <label for="client_number">客戶編號</label>
+                                <label for="client_number">統一編號</label>
                                 <input type="text" class="form-control" id="client_number" name="client_number"
                                     placeholder="" value="">
                                 <small id="client_numberHelp" class="form-text text-muted"></small>
@@ -47,7 +52,7 @@ $page_name = 'ann_client_create';
                                 <textarea class="form-control" id="client_address" name="client_address" cols="30"
                                     rows="3"></textarea>
                                 <small id="client_addressHelp" class="form-text text-muted"></small>
-                            </div>
+                            </div>          
 
                             <div class="form-group">
                                 <label for="client_poc">聯絡人</label>
@@ -73,26 +78,77 @@ $page_name = 'ann_client_create';
                             <div class="form-group">
                                 <label for="contract_budget">廣告預算</label>
                                 <input type="text" class="form-control" id="contract_budget" name="contract_budget"
-                                    placeholder="" value="">
-                                <small id="contract_budgetHelp" class="form-text text-muted"></small>
+                                    placeholder="幣別: 新台幣" value="">
+                                <small id="contract_budgetHelp" class="form-text text-muted">金額須與合約內容一致</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="contract_start_date">合約開始日</label>
-                                <input type="text" class="form-control" id="contract_start_date"
+                                <input type="date" class="form-control" id="contract_start_date"
                                     name="contract_start_date" placeholder="" value="">
                                 <small id="contract_start_dateHelp" class="form-text text-muted"></small>
                             </div>
 
                             <div class="form-group">
                                 <label for="contract_end_date">合約結束日</label>
-                                <input type="text" class="form-control" id="contract_end_date" name="contract_end_date"
+                                <input type="date" class="form-control" id="contract_end_date" name="contract_end_date"
                                     placeholder="" value="">
                                 <small id="contract_end_dateHelp" class="form-text text-muted"></small>
                             </div>
 
-                            <button id="submit_btn" type="submit" class="btn btn-primary">新增資料</button>
-                            <button id="submit_btn" type="reset" class="btn btn-primary">重新填寫</button>
+
+
+                            <div class="form-group">
+                                <label for="ad_name">廣告名稱</label>
+                                <input type="text" class="form-control" id="ad_name" name="ad_name" placeholder=""
+                                    value="">
+                                <small id="ad_nameHelp" class="form-text text-muted"></small>
+                            </div>
+
+                                <div class="form-group">
+                                    <label for="ad_pic">廣告圖檔</label>
+                                    <input type="file" class="form-control-file" id="ad_pic" name="ad_pic" placeholder=""
+                                    value="">
+                                    <small id="ad_picHelp" class="form-text text-muted"></small>
+                                </div>
+                    
+                            <div class="form-group">
+                                <label for="ad_link">廣告連結</label>
+                                <input type="text" class="form-control" id="ad_link" name="ad_link" placeholder="" value="">
+                                <small id="ad_linkHelp" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ad_link_count">點擊次數</label>
+                                <input type="text" class="form-control" id="ad_link_count" name="ad_link_count" placeholder="" value="">
+                                <small id="ad_link_countHelp" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ad_start_time">廣告放送開始時間</label>
+                                <input type="text" class="form-control" id="ad_start_time" name="ad_start_time" placeholder="" value="">
+                                <small id="ad_start_timeHelp" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ad_end_time">廣告放送結束時間</label>
+                                <input type="text" class="form-control" id="ad_end_time" name="ad_end_time"
+                                    placeholder="" value="">
+                                <small id="ad_end_timeHelp" class="form-text text-muted"></small>
+                            </div>
+
+
+
+
+                            
+                            <div class="btn-toolbar text-center" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                    <button id="submit_btn" type="submit" class="btn btn-primary">新增資料</button>
+                                </div>
+                                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                    <button id="submit_btn" type="reset" class="btn btn-primary">重新填寫</button>
+                                </div>
+                            </div>
                         </form>
 
                     </div> <!-- card -->
@@ -114,6 +170,12 @@ const fields = [
     'contract_budget',
     'contract_start_date',
     'contract_end_date',
+    'ad_name',
+    'ad_pic',
+    'ad_link',
+    'ad_link_count',
+    'ad_start_time',
+    'ad_end_time',
 ];
 
 const fs = {};
@@ -144,7 +206,7 @@ const checkForm = () => {
 
     if (fsv.client_name.length < 2) {
         fs.client_name.style.borderColor = 'red';
-        document.querySelector('#client_nameHelp').innerHTML = "請輸入正確客戶公司!";
+        document.querySelector('#client_nameHelp').innerHTML = "請輸入正確公司名!";
         isPassed = false;
     }
 
@@ -179,7 +241,15 @@ const checkForm = () => {
 
                 if (obj.success) {
                     info_bar.className = 'alert alert-success';
-                    info_bar.innerHTML = '資料新增成功';
+                    info_bar.innerHTML = '資料新增成功!';
+
+                    // func = () => {
+                    //     location.href = "ann_client_list.php";
+                    // }
+                    // setTimeout(() => {
+                    //     func();
+                    // }, 5000);
+
                 } else {
                     info_bar.className = 'alert alert-danger';
                     info_bar.innerHTML = obj.errorMsg;
@@ -191,4 +261,4 @@ const checkForm = () => {
     return false;
 };
 </script>
-<?php include __DIR__ . '/foot.php'; ?>
+<?php include __DIR__ . '/foot.php';?>
