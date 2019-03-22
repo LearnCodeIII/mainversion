@@ -1,6 +1,6 @@
 <?php 
 require __DIR__.'/PDO.php';
-
+$groupname = 'article';
 $result = [
     'success' => false,
     'page' => 0,
