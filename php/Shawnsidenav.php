@@ -9,9 +9,9 @@
         <li class="nav-item">
             <a class="nav-link" href="./ShawnpageAdd.php">新增活動</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="./ShawnpageDisplay.php">活動瀏覽</a>
-        </li>
+        </li> -->
         <!-- <li class="nav-item">
             <a class="nav-link" href="#">活動評論</a>
         </li>
