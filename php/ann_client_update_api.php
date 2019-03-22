@@ -8,7 +8,8 @@ $result = [
     'success' => false,
     'errorCode' => 0,
     'errorMsg' => '資料輸入不完整',
-    'post' => [],       
+    'post' => [], // 做 echo 檢查      
+        
 ];
 $sn = isset($_POST['sn']) ? intval($_POST['sn']) : 0;
 
@@ -24,7 +25,7 @@ if(isset($_POST['client_name']) and !empty($sn)){
     $contract_start_date = $_POST['contract_start_date'];
     $contract_end_date = $_POST['contract_end_date'];
 
-    $result['post'] = $_POST;
+    $result['post'] = $_POST;  // 做 echo 檢查
 
     if(empty($client_name) or empty($client_email) or empty($client_mobile)){
         $result['errorCode'] = 400;
@@ -91,7 +92,6 @@ if(isset($_POST['client_name']) and !empty($sn)){
             $_POST['contract_budget'],
             $_POST['contract_start_date'],
             $_POST['contract_end_date'],
-            $sn
 
         ]);
 

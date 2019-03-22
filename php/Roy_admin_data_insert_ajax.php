@@ -3,24 +3,10 @@ $pagename = "pageMain";
 // include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
 
-// if($_SESSION["admin"]!=="roy"){
-//     header('Location: login.php');
-// }
-
-
-if(isset($_SESSION["admin"])){
-    $k =$_SESSION["admin"];
-}
-if(isset($_SESSION["member"])){
-    $k =$_SESSION["member"];
-}
-if(isset($_SESSION["theater"])){
-    $k =$_SESSION["theater"];
-}
-
-if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION["theater"])){
+if($_SESSION["admin"]!=="roy"){
     header('Location: login.php');
 }
+
 ?>
 <?php include __DIR__ . './head.php'?>
 <?php include __DIR__ . './nav.php'?>
@@ -59,8 +45,8 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
                             <input type="hidden" name="checkme" value="check123">
                             <div class="form-group">
                                 <label for="headline">發布者</label>
-                                <input type="text" readonly class="form-control" id="issuer" name="issuer" placeholder="<?= $k?>"
-                                    value="<?=$k?>">
+                                <input type="text" readonly class="form-control" id="issuer" name="issuer" placeholder="<?= $_SESSION["admin"]?>"
+                                    value="<?= $_SESSION["admin"]?>">
                                 <small id="headlineHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">

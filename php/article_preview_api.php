@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__.'/PDO.php';
-$groupname = 'article';
+
 header('Content-Type: application/json');
 
 $result = [

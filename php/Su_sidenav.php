@@ -16,14 +16,14 @@
         <li class="nav-item <?= $spname == "member_blacklist"?"active":"" ?>">
             <a class="nav-link" href="./Su_member_blacklist.php">黑名單管理</a>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">--以下待補--</a>
         </li>
             <a class="nav-link" href="#">成就管理</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">會員排名</a>
-        </li> -->
+        </li>
 
 
     </ul>
