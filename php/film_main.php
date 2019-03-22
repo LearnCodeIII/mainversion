@@ -64,6 +64,7 @@ include __DIR__.'./film_sidenav.php';
             <!-- <th scope="col">發行國家</th> -->
             <!-- <th scope="col">提供字幕</th> -->
             <th scope="col">字幕語言</th>
+            <th scope="col"><i class="far fa-eye"></i></th>
         </tr>
     </thead>
     <tbody id="data_body">
@@ -106,7 +107,9 @@ include __DIR__.'./film_sidenav.php';
                 <td><%= runtime %></td>
 
                 <td><%= subtitle_lang %></td>
-
+                <td>
+                <a href="film_data_preview.php?sid=<%= sid %>"><i class="far fa-eye"></i></i></a>
+                </td>
             </tr>
             `;
 
