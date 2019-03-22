@@ -73,15 +73,15 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="dateEndHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">戲院名稱</span>
+                                        <span class="input-group-text bg-dark text-white">活動名稱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="company" name="company" placeholder="" value="<?=$row['company']?>" disabled>
+                                    <input type="text" class="form-control" id="company" name="company" placeholder="" value="<?=$row['company']?>" readonly>
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="companyHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">戲院地址</span>
+                                        <span class="input-group-text bg-dark text-white">活動地址</span>
                                     </div>
                                     <input type="text" class="form-control" id="region" name="region" placeholder="" value="<?=$row['region']?>" >
                                     <span class="text-danger">*</span>

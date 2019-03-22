@@ -5,6 +5,7 @@ $groupname = "activity";
 if(isset($_SESSION['admin'])){
     $user = "小編：";
     $user .= $_SESSION['admin'];
+    $address = "小編家";
     $level = 10;
     
 }else if(isset($_SESSION['theater'])){
@@ -82,7 +83,7 @@ if(isset($_SESSION['admin'])){
                                 <small id="dateEndHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">戲院名稱</span>
+                                        <span class="input-group-text bg-dark text-white">活動名稱</span>
                                     </div>
                                     <input type="text" class="form-control" id="company" name="company" value="<?=$user?>" readonly>
                                     <span class="text-danger">*</span>
@@ -90,9 +91,9 @@ if(isset($_SESSION['admin'])){
                                 <small id="companyHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">戲院地址</span>
+                                        <span class="input-group-text bg-dark text-white">活動地址</span>
                                     </div>
-                                    <input type="text" class="form-control" id="region" name="region" value="<?=$address?>" readonly>
+                                    <input type="text" class="form-control" id="region" name="region" value="<?=$address?>">
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="regionHelp" class="form-text text-muted"></small>
