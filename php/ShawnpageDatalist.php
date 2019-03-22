@@ -43,8 +43,8 @@ if(isset($_SESSION['admin'])){
 <script src="../js/sweet.js"></script>
 <section class="dashboard">
 
-<input type="text" id="account_level" value="<?= $level ?>" >
-<input type="text" id="account_name" value="<?= $t_user ?>" >
+<input type="text" id="account_level" value="<?= $level ?>" hidden>
+<input type="text" id="account_name" value="<?= $t_user ?>" hidden>
     <div class="container-fulid">
         <div class="row d-flex ">
             <div class="col-md-8">
@@ -76,7 +76,7 @@ if(isset($_SESSION['admin'])){
 
 
 
-                <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
+                <!-- <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
                     <label class="btn btn-dark ">活動類型</label>               
                     <label class="btn btn-light" for="search_primary" onclick="btn_changeColor(this)">徵才資訊</label>
                     <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">長期活動</label>
@@ -85,7 +85,7 @@ if(isset($_SESSION['admin'])){
                     <label class="btn btn-light" for="search_info" onclick="btn_changeColor(this)">電影資訊</label>
                     <label class="btn btn-light" for="search_secondary" onclick="btn_changeColor(this)">官方活動</label>
                     <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">維修公告</label>
-                </div>
+                </div> -->
                 <div class="btn-group mt-3 mb-3 d-flex justify-content-between" role="group">
                     <button class="btn btn-dark" type="submit" id="search_btn" >搜尋</button>
                 </div>
