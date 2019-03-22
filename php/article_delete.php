@@ -1,6 +1,6 @@
 <?php
 require __DIR__.'/PDO.php';
-
+$groupname = 'article';
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
 $pdo->query("DELETE FROM `article` WHERE `sid`=$sid");
