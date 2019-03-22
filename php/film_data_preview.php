@@ -11,10 +11,10 @@ $stamt=$pdo->query($sql);
 $row = $stamt->fetch(PDO::FETCH_ASSOC);
 
 
-if ($stamt->rowCount()==0) {
-    header('Location: film_main.php');
-    exit;
-}
+// if ($stamt->rowCount()==0) {
+//     header('Location: film_main.php');
+//     exit;
+// }
 
 include __DIR__.'./head.php';
 include __DIR__.'./nav.php';
@@ -91,7 +91,7 @@ include __DIR__.'./sidenav.php';
                                         <h4>預告片</h4>
                                     </label>
                                     <div class="">
-                                        <iframe width="560" height="315" src="<?= $row['trailer']?>" frameborder="0"
+                                        <iframe width="550" height="305" src="<?= $row['trailer']?>" frameborder="0"
                                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                             allowfullscreen></iframe>
                                     </div>
