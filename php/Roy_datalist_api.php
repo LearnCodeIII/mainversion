@@ -11,7 +11,9 @@ include __DIR__."./PDO.php";
         "page" => 0,
         "totalPages" =>0,
         "perPage" => $per_page,
-        "data" => [],
+        "data" => [],//倒所有論壇文章陣列
+        "c_data"=>[],//倒戲院名稱陣列
+        "f_data"=>[],//倒電影名稱陣列
         // 設定一空陣列到時候可以倒進去
         "errorCode" =>0,
         // 除錯用
@@ -63,8 +65,19 @@ include __DIR__."./PDO.php";
     $pagename = "datalist";
     // 隨意設定一名稱，讓NAV可以用三元運算來設定規則
 
+    
+    //撈取戲院資訊串給INSERT戲院下拉選單
+    $cinema_sql = "SELECT `name` FROM `cinema` ";
+    $cinema_stmt = $pdo->query($cinema_sql);
+    $cinema_row = $cinema_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result["c_data"] =  $cinema_row;
+    
+    //撈取戲院資訊串給INSERT戲院下拉選單
+    $film_sql = "SELECT `name_tw` FROM `film_primary_table` ";
+    $film_stmt = $pdo->query($film_sql);
+    $film_row = $film_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result["f_data"] =  $film_row;
+
+
     echo json_encode($result, JSON_UNESCAPED_UNICODE);
 ?>
-
-
-
