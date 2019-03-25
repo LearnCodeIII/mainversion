@@ -7,18 +7,17 @@ include __DIR__ . '/PDO.php';
 //     header('Location: login.php');
 // }
 
+if (isset($_SESSION["admin"])) {
+    $k = $_SESSION["admin"];
+}
+if (isset($_SESSION["member"])) {
+    $k = $_SESSION["member"];
+}
+if (isset($_SESSION["theater"])) {
+    $k = $_SESSION["theater"];
+}
 
-if(isset($_SESSION["admin"])){
-    $k =$_SESSION["admin"];
-}
-if(isset($_SESSION["member"])){
-    $k =$_SESSION["member"];
-}
-if(isset($_SESSION["theater"])){
-    $k =$_SESSION["theater"];
-}
-
-if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION["theater"])){
+if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION["theater"])) {
     header('Location: login.php');
 }
 ?>
@@ -29,19 +28,36 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
 <head>
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script>
-    tinymce.init({
-        selector: '#review'
-    });
+    // tinymce.init({
+    //     selector: '#review'
+    // });
     // ClassicEditor
     //         .create(document.querySelector('#review'))
     //         .catch(error => {
     //             console.error(error);
     //         });
+
+    // 時間選取器
+
+    $(function() {
+        var date = $('#w_date').datepicker({
+            dateFormat: 'yy-mm-dd'
+            // 設定時間格式
+        }).val();
+        $('#w_date').datepicker();
+    });
     </script>
     <style>
     .form-group small {
         color: red !important;
+    }
+
+    .stylenone {
+        margin: 0 auto;
+        padding: 0;
     }
     </style>
 </head>
@@ -57,12 +73,110 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
                         </h5>
                         <form name="form1" method="post" onsubmit="return checkForm();">
                             <input type="hidden" name="checkme" value="check123">
-                            <div class="form-group">
-                                <label for="headline">發布者</label>
-                                <input type="text" readonly class="form-control" id="issuer" name="issuer" placeholder="<?= $k?>"
-                                    value="<?=$k?>">
-                                <small id="headlineHelp" class="form-text text-muted"></small>
+                            <div class="container  px-0 d-flex justify-content-between">
+                                <div class="info-box px-0 col-lg-4">
+                                    <div class="form-group ">
+                                        <label for="headline">登入帳號</label>
+                                        <input type="text" readonly class="form-control" id="issuer" name="issuer"
+                                            placeholder="<?=$k?>" value="<?=$k?>">
+                                        <small id="headlineHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="w_film">觀看電影</label>
+                                        <select class="form-control" id="w_film" name="w_film">
+                                            <!-- 表單內容由API串接生成 -->
+                                        </select>
+                                        <small id="w_filmHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="film_rate">電影評分</label>
+                                        <select class="form-control " id="film_rate" name="film_rate">
+                                            <option></option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                        </select>
+                                        <small id="film_rateHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="film_fav_count">電影最愛</label>
+                                        <select class="form-control" id="film_fav_count" name="film_fav_count">
+                                            <option></option>
+                                            <option>是</option>
+                                            <option>否</option>
+                                        </select>
+                                        <small id="film_fav_countHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="w_date">觀看日期</label>
+                                        <input type="text" class="form-control" id="w_date" name="w_date" placeholder=""
+                                            value="">
+                                        <small id="w_dateHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="info-box px-0 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="re_spoilers">是否爆雷</label>
+                                        <select class="form-control" id="re_spoilers" name="re_spoilers">
+                                            <!-- 表單要下NAME，是抓NAME為參數值 -->
+                                            <option></option>
+                                            <option>是</option>
+                                            <option>否</option>
+                                        </select>
+                                        <small id="re_spoilersHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="w_cinema">觀看戲院</label>
+                                        <select class="form-control" id="w_cinema" name="w_cinema">
+                                            <!-- 表單內容由API串接生成 -->
+                                        </select>
+                                        <small id="w_cinemaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cinema_rate">戲院評分</label>
+                                        <select class="form-control" id="cinema_rate" name="cinema_rate">
+                                            <option></option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                        </select>
+                                        <small id="cinema_rateHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cinema_push_count">戲院最愛</label>
+                                        <select class="form-control" id="cinema_push_count" name="cinema_push_count">
+                                            <option></option>
+                                            <option>是</option>
+                                            <option>否</option>
+                                        </select>
+                                        <small id="cinema_push_countHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="pic-pre px-0 col-lg-3 d-flex justify-content-center">
+                                    <div class="card border-0" style="width: 18rem; ">
+                                        <div class=" text-center ">
+                                            <h5 class="card-title">Card title</h5>
+                                        </div>
+                                        <img src="./dr-strange.jpg" class="card-img-top stylenone" alt=""
+                                            style="width: 12rem;">
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="headline">影評標題</label>
                                 <input type="text" class="form-control" id="headline" name="headline" placeholder=""
@@ -70,43 +184,18 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
                                 <small id="headlineHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group ">
-                                <label for="review">影評</label>
+                                <label for="review">電影評論</label>
                                 <!-- <textarea class="form-control" id="review" name="review" cols="30" rows="3"></textarea> -->
-                                <textarea class="form-control" name="review" id="review"></textarea>
+                                <textarea class="form-control" name="review" id="review" cols="30" rows="3"></textarea>
+                                <small id="reviewHelp" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group ">
+                                <label for="cinema_comment">戲院評論</label>
+                                <textarea class="form-control" name="cinema_comment" id="cinema_comment" cols="30"
+                                    rows="3"></textarea>
                                 <small id="reviewHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">
-                                <label for="w_date">觀看日期</label>
-                                <input type="date" class="form-control" id="w_date" name="w_date"
-                                    placeholder="YYYY-MM-DD" value="">
-                                <small id="w_dateHelp" class="form-text text-muted"></small>
-                            </div>
-                            <!-- 無效 -->
-                            <!-- <div class="form-group">
-                                <label for="i_date">發布時間</label>
-                                <input type="text" class="form-control" id="i_date" name="i_date"
-                                    placeholder="YYYY-MM-DD" value="">
-                                <small id="w_dateHelp" class="form-text text-muted"></small>
-                            </div> -->
-                            <div class="form-group">
-                                <label for="w_cinema">觀看戲院</label>
-                                <input type="text" class="form-control" id="w_cinema" name="w_cinema" placeholder=""
-                                    value="">
-                                <small id="w_cinemaHelp" class="form-text text-muted"></small>
-                            </div>
-                            <div class="form-group">
-                                <label for="film_rate">電影評分</label>
-                                <input type="text" class="form-control" id="film_rate" name="film_rate"
-                                    placeholder="0-10" value="">
-                                <small id="film_rateHelp" class="form-text text-muted"></small>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label for="fav">我的最愛</label>
-                                <input type="text" class="form-control" id="fav" name="fav" placeholder="0-1" value="">
-                                <small id="favHelp" class="form-text text-muted"></small>
-                            </div> -->
-                            <div class="form-group">
-
                                 <label for="intro_pic ">圖片</label>
                                 <figure>
                                     <img id="myimg" src="" alt="" width="200px">
@@ -115,7 +204,6 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
                                 <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
                                     value="">
                                 <small id="intro_picHelp" class="form-text text-muted"></small>
-
                             </div>
 
                             <button id="submit_btn" type="submit" class="btn btn-primary">Submit</button>
@@ -136,6 +224,7 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
 // 上傳檔案
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
+
 
 
 
@@ -174,7 +263,8 @@ const fields = [
     'w_cinema',
     'film_rate',
     // 'fav',
-    `intro_pic`,
+    'intro_pic',
+    're_spoilers'
 ];
 
 // 拿到每個欄位的參照
@@ -251,9 +341,9 @@ const checkForm = () => {
     if (isPassed) {
 
         // 文字編輯器要放在NEWFORMDATA前面，要先用下方方式抓取送出的文章內容，才不會要送兩次
-        const edt = document.querySelector('#review')
-        console.log(edt);
-        edt.innerHTML += tinyMCE.activeEditor.getContent();
+        // const edt = document.querySelector('#review')
+        // console.log(edt);
+        // edt.innerHTML += tinyMCE.activeEditor.getContent();
 
         let form = new FormData(document.form1);
 
@@ -285,5 +375,46 @@ const checkForm = () => {
     }
     return false;
 };
+
+// 戲院下拉選單
+let cinema_data;
+const cinema_rate = document.querySelector('#w_cinema');
+const cinema_str = `<option><%=name%></option>`
+const cinema_func = _.template(cinema_str);
+
+fetch("Roy_datalist_api.php")
+    .then(response => response.json())
+    .then(json => {
+        cinema_data = json;
+        console.log(cinema_data);
+
+        // 文章內容匯入
+        let cinema_str = '';
+        for (let v of cinema_data.c_data) {
+            // 取API中C_DATA資料
+            cinema_str += cinema_func(v);
+        }
+        cinema_rate.innerHTML = cinema_str;
+    })
+
+// 電影下拉選單   
+let film_data;
+const w_film = document.querySelector('#w_film');
+const w_film_str = `<option><%=name_tw%></option>`
+const w_film_func = _.template(w_film_str);
+
+fetch("Roy_datalist_api.php")
+    .then(response => response.json())
+    .then(json => {
+        film_data = json;
+        console.log(film_data);
+
+        // 文章內容匯入
+        let w_film_str = '';
+        for (let v of film_data.f_data) {
+            w_film_str += w_film_func(v);
+        }
+        w_film.innerHTML = w_film_str;
+    })
 </script>
 <?php include __DIR__ . './foot.php'?>

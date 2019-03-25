@@ -12,6 +12,13 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
 <?php include __DIR__ . './nav.php'?>
 <?php include __DIR__ . './Roysidenav.php'?>
 
+
+<style>
+/* .review-content {
+    width: 4%;
+    表頭欄寬
+} */
+</style>
 <section class="dashboard <?=isset($_SESSION["admin"])?"":"d-none" ?>">
     <div class="container-fluid">
         <div class="row">
@@ -38,25 +45,37 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
             </div>
         </div>
         <div class="row">
-            <table class="table  text-center">
-                <thead class="thead-dark table-bordered">
+            <table class="table  text-center ">
+                <thead class="  thead-dark table-bordered   ">
                     <tr>
-                        <th scope="col">影評編號</th>
-                        <th scope="col">影評標題</th>
-                        <th scope="col">影評</th>
-                        <th scope="col">發布時間</th>
-                        <th scope="col">觀看日期</th>
-                        <th scope="col">觀看戲院</th>
-                        <th scope="col">電影評分</th>
-                        <th scope="col">我的最愛</th>
-                        <th scope="col">預覽</th>
-                        <th scope="col">編輯</i></th>
-                        <th scope="col">刪除</i></th>
-                        <a href=""></a>
+                        <th class="review-content" scope="col">評論編號</th>
+                        <th class="review-content" scope="col">全文預覽</th>
+                        <th class="review-content" scope="col">編輯</th>
+                        <th class="review-content" scope="col">隱藏</th>
+                        <th class="review-content" scope="col">刪除</th>
+                        <th class="review-content" scope="col">文章點擊</th>
+                        <th class="review-content" scope="col">電影</th>
+                        <th class="review-content" scope="col">爆雷</th>
+                        <th class="review-content" scope="col">電影評分</th>
+                        <th class="review-content" scope="col">電影最愛</th>
+                        <th class="review-content" scope="col">評論者</th>
+                        <th class="review-content" scope="col">標題</th>
+                        <th class="review-content" scope="col">影評</th>
+                        <th class="review-content" scope="col">檢舉內容</th>
+                        <th class="review-content" scope="col">檢舉</th>
+                        <th class="review-content" scope="col">文章票數</th>
+                        <th class="review-content" scope="col">文章推數</th>
+                        <th class="review-content" scope="col">留言數</th>
+                        <th class="review-content" scope="col">發布時間</th>
+                        <th class="review-content" scope="col">觀看日期</th>
+                        <th class="review-content" scope="col">最後修改</th>
+                        <th class="review-content" scope="col">觀看戲院</th>
+                        <th class="review-content" scope="col">戲院評論</th>
+                        <th class="review-content" scope="col">戲院評分</th>
+                        <th class="review-content" scope="col">戲院最愛</th>
                     </tr>
                 </thead>
                 <tbody id="forum_databody" class="thead-light table-bordered">
-
                 </tbody>
             </table>
         </div>
@@ -81,22 +100,81 @@ const forum_databody = document.querySelector("#forum_databody");
 // <a href="./Roy_data_delete.php?sid=<%=sid%>"> 不須刪除提醒的寫法
 const tr_str = ` <tr>
                     <td><%=sid%></td>
-                    <td><%=headline%></td>
-                    <td><%=review%></td>
-                    <td><%=i_date%></td>
-                    <td><%=w_date%></td>
-                    <td><%=w_cinema%></td>
-                    <td><%=film_rate%></td>
-                    <td><%=fav%></td>
-                    <td><a href="./Roy_datapreview.php?sid=<%=sid%>"><i class="fas fa-eye"></i></a></td>
+                    <td>
+                        <a href="./Roy_datapreview.php?sid=<%=sid%>">
+                            <i class="fas fa-eye"></i>
+                        </a>
+            
+                    </td>
                     <td><a href="./Roy_data_edit.php?sid=<%=sid%>"><i class="far fa-edit"></i></a></td>
+                    <td><%=sid%></td>
                     <td>
                         <a href="javascript:delete_it(<%=sid%>)">
                             <i class="far fa-trash-alt"></i>
                         </a>
                     </td>
-
-                </tr>`
+                    <td><%=review_click%></td>
+                    <td><%=w_film%></td>
+                    <td><%=re_spoilers%></td>
+                    <td><%=film_rate%></td>
+                    <td><%=film_fav_count%></td>
+                    <td><%=issuer%></td>
+                    <td>
+                        <a href="#set_headline<%=sid%>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="set_headline<%=sid%>">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#set_review<%=sid%>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="set_review<%=sid%>">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#set_report<%=sid%>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="set_report<%=sid%>">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                    <td><%=re_report%></td>
+                    <td><%=re_vote_count%></td>
+                    <td><%=re_push_count%></td>
+                    <td><%=re_reply_count%></td>
+                    <td class="text-nowrap"><%=i_date%></td>
+                    <td><%=w_date%></td>
+                    <td class="text-nowrap"><%=re_last_edit%></td>
+                    <td><%=w_cinema%></td>
+                    <td>
+                        <a href="#set_cinema_comment<%=sid%>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="set_cinema_comment<%=sid%>">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                    <td><%=cinema_rate%></td>
+                    <td><%=cinema_push_count%></td>
+                </tr>
+                <tr class="col-lg-12 panel-collapse collapse in" id="set_headline<%=sid%>">
+                        <td colspan="100%"  class=" text-left">
+                        <p>編號<%=sid%>標題內容：</p>
+                        <%=headline%>
+                        </td>
+                </tr>
+                <tr class="col-lg-12 panel-collapse collapse in" id="set_review<%=sid%>">
+                        <td colspan="100%" class=" text-left">
+                        <p>編號<%=sid%>電影評價內容：</p>
+                        <%=review%>
+                        </td>
+                </tr>
+                <tr class="col-lg-12 panel-collapse collapse in" id="set_cinema_comment<%=sid%>">
+                        <td colspan="100%" class=" text-left">
+                        <p>編號<%=sid%>戲院評價內容：</p>
+                        <%=review%>
+                        </td>
+                </tr>
+                <tr class="col-lg-12 panel-collapse collapse in" id="set_report<%=sid%>">
+                        <td colspan="100%" class=" text-left">
+                        <p>編號<%=sid%>檢舉內容：</p>
+                        <%=re_report_content%>
+                        </td>
+                </tr>
+                `
 
 //刪除提醒
 function delete_it(sid) {
@@ -145,6 +223,9 @@ const myHashChange = () => {
             let str = '';
 
             for (let v of ori_data.data) {
+
+                console.log(ori_data.data[0]["re_spoilers"])
+
                 str += tr_func(v);
             }
             forum_databody.innerHTML = str;
@@ -154,11 +235,11 @@ const myHashChange = () => {
             str = '';
             for (let i = 1; i <= ori_data.totalPages; i++) {
                 let active = ori_data.page === i ? 'active' : '';
-          
+
                 let hide = ""
                 str += pagi_func({
                     active: active,
-                    h:hide,
+                    h: hide,
                     page: i
                 });
                 const pagi_next = `<li class="page-item ${page>=ori_data.totalPages? "disabled":""}">
