@@ -169,7 +169,7 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                 <div class="pic-pre px-0 col-lg-3 d-flex justify-content-center">
                                     <div class="card border-0" style="width: 18rem; ">
                                         <div class=" text-center ">
-                                            <h5 class="card-title">Card title</h5>
+                                            <h5 class="card-title card_name">Card title</h5>
                                         </div>
                                         <img src="./dr-strange.jpg" class="card-img-top stylenone" alt=""
                                             style="width: 12rem;">
@@ -397,7 +397,7 @@ fetch("Roy_datalist_api.php")
         cinema_rate.innerHTML = cinema_str;
     })
 
-// 電影下拉選單   
+// 電影下拉選單
 let film_data;
 const w_film = document.querySelector('#w_film');
 const w_film_str = `<option><%=name_tw%></option>`
@@ -407,7 +407,7 @@ fetch("Roy_datalist_api.php")
     .then(response => response.json())
     .then(json => {
         film_data = json;
-        console.log(film_data);
+        console.log(film_data.f_data);
 
         // 文章內容匯入
         let w_film_str = '';
@@ -416,5 +416,30 @@ fetch("Roy_datalist_api.php")
         }
         w_film.innerHTML = w_film_str;
     })
+
+
+const card_name = document.querySelector('.card_name');
+w_film.addEventListener("change", event => {
+    card_name.innerHTML = w_film.value;
+})
+
+
+
+// 抓到所選電影CHANGE對應到的索引值
+w_film.addEventListener('change',catchPicture)
+        function catchPicture(){
+            console.log('maybe')
+            for (let i = 0; i < w_film.childNodes.length; i++) {
+                var aa = "";
+                if (w_film.childNodes[i].selected == true) {
+
+                    console.log('enter');
+                    return console.log(i)
+                }
+                console.log('no enter');
+            
+            }
+        }
+
 </script>
 <?php include __DIR__ . './foot.php'?>
