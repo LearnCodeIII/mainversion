@@ -73,7 +73,7 @@ include __DIR__."./PDO.php";
     $result["c_data"] =  $cinema_row;
     
     //撈取戲院資訊串給INSERT戲院下拉選單
-    $film_sql = "SELECT `name_tw` FROM `film_primary_table` ";
+    $film_sql = "SELECT `name_tw`, `movie_pic` FROM `film_primary_table` ";
     $film_stmt = $pdo->query($film_sql);
     $film_row = $film_stmt->fetchAll(PDO::FETCH_ASSOC);
     $result["f_data"] =  $film_row;

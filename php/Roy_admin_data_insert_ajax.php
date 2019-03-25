@@ -82,7 +82,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         <small id="headlineHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="w_film">觀看電影</label>
+                                        <label for="w_film">觀看電影<span class="card_name1 text-light"></span></label>
+                                        <!-- SPAN藏值 -->
                                         <select class="form-control" id="w_film" name="w_film">
                                             <!-- 表單內容由API串接生成 -->
                                         </select>
@@ -170,8 +171,9 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                     <div class="card border-0" style="width: 18rem; ">
                                         <div class=" text-center ">
                                             <h5 class="card-title card_name">Card title</h5>
+                                           
                                         </div>
-                                        <img src="./dr-strange.jpg" class="card-img-top stylenone" alt=""
+                                        <img id="prepic" src="" class="card-img-top stylenone" alt=""
                                             style="width: 12rem;">
                                     </div>
                                 </div>
@@ -397,18 +399,37 @@ fetch("Roy_datalist_api.php")
         cinema_rate.innerHTML = cinema_str;
     })
 
-// 電影下拉選單
+
 let film_data;
 const w_film = document.querySelector('#w_film');
 const w_film_str = `<option><%=name_tw%></option>`
 const w_film_func = _.template(w_film_str);
 
+// 用於變動圖片需要之參數
+const card_name = document.querySelector('.card_name');
+const card_name1 = document.querySelector('.card_name1');
+
+
+// 抓到所選電影CHANGE對應到的索引值------------變動圖片必要內容
+w_film.addEventListener('change', event => {
+    for (let i = 0; i < w_film.childNodes.length; i++) {
+        // 抓到ID的整個陣列物件後加LENGTH得知數量
+        if (w_film.childNodes[i].selected == true) {
+            // 觀看第幾個物件是否有在CHANGE事件後觸發SELECT有救回傳
+            card_name1.innerHTML = i;
+            console.log(i)
+            return i
+
+        }
+    }
+})
+
+
+// 電影下拉選單
 fetch("Roy_datalist_api.php")
     .then(response => response.json())
     .then(json => {
         film_data = json;
-        console.log(film_data.f_data);
-
         // 文章內容匯入
         let w_film_str = '';
         for (let v of film_data.f_data) {
@@ -418,28 +439,41 @@ fetch("Roy_datalist_api.php")
     })
 
 
-const card_name = document.querySelector('.card_name');
+// 額外加入偵測下拉選單變換後抓到索引值選取對應JPG名稱後串聯設回IMG欄------------變動圖片必要內容
+// 可根據下拉選單變動對應變更照片
+w_film.addEventListener('change', event => {
+    var a = parseInt(card_name1.innerHTML)
+    // 將先前印到HTML裡的值抓回來
+    console.log(a)
+    let prepicindex = film_data.f_data[a]["movie_pic"]
+    console.log(prepicindex);
+
+    prepic.setAttribute("src", '../pic/film_upload/' + prepicindex)
+})
+
+
+// 下拉選單換後選到對應值後寫入HTML
 w_film.addEventListener("change", event => {
     card_name.innerHTML = w_film.value;
 })
 
 
 
-// 抓到所選電影CHANGE對應到的索引值
-w_film.addEventListener('change',catchPicture)
-        function catchPicture(){
-            console.log('maybe')
-            for (let i = 0; i < w_film.childNodes.length; i++) {
-                var aa = "";
-                if (w_film.childNodes[i].selected == true) {
+// // 抓到所選電影CHANGE對應到的索引值
+// w_film.addEventListener('change', catchPicture)
 
-                    console.log('enter');
-                    return console.log(i)
-                }
-                console.log('no enter');
-            
-            }
-        }
+// function catchPicture() {
+//     console.log('maybe')
+//     for (let i = 0; i < w_film.childNodes.length; i++) {
+//         var aa = "";
+//         if (w_film.childNodes[i].selected == true) {
 
+//             console.log('enter');
+//             return console.log(i)
+//         }
+//         console.log('no enter');
+
+//     }
+// }
 </script>
 <?php include __DIR__ . './foot.php'?>
