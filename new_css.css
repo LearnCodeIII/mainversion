@@ -1,0 +1,24 @@
+.nav_width{
+    width: 280px;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+.nav_width a{
+    /* color: #ccc; */
+    text-decoration:none
+}
+
+.myinfo{
+    position: absolute !important;
+    bottom: 0;
+}
+
+.info_img{
+    width: 48px;
+    height: 48px;
+}
+body{
+    /* background:#eee; */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    }
