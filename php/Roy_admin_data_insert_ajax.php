@@ -66,18 +66,28 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         padding: 0;
     }
 
+    .starcontainer {
+        width: 50%;
+        height: 30px;
+    }
+
     .starbox2 {
         color: transparent;
         font-size: 24px;
         padding: 0 0.3rem;
-        z-index:5
+        z-index: 5;
+        left: 0;
+        right: 0;
     }
 
     .starbox {
         color: lightblue;
         font-size: 24px;
         padding: 0 0.3rem;
-        z-index:4
+        z-index: 4;
+        left: 0;
+        right: 0;
+        /* 讓感應區域左右填滿 */
     }
     </style>
 </head>
@@ -110,19 +120,9 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                     </div>
                                     <div class="form-group">
                                         <label for="film_rate">電影評分</label>
-                                        <select class="form-control " id="film_rate" name="film_rate">
-                                            <option></option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="film_rate" name="film_rate"
+                                            placeholder="" value="123">
+                                    
                                         <small id="film_rateHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
@@ -136,31 +136,33 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                     </div>
                                     <div class="form-group position-relative">
                                         <label for="film_fav_count ">電影最愛</label>
-                                        <div
-                                            class="d-flex starbox  position-absolute justify-content-between marginnone">
-                                            <span class="fas fa-star "></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                        </div>
-                                        <div
-                                            class="d-flex starbox2  position-absolute justify-content-between marginnone">
-                                            <span class="fas fa-star "></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
-                                            <span class="fas fa-star"></span>
+                                        <div class="starcontainer ">
+                                            <div
+                                                class="d-flex starbox  position-absolute justify-content-between marginnone">
+                                                <span class="fas fa-star "></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                            </div>
+                                            <div
+                                                class="d-flex starbox2  position-absolute justify-content-between marginnone">
+                                                <span class="fas fa-star "></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                                <span class="fas fa-star"></span>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -557,25 +559,25 @@ w_film.addEventListener("change", event => {
 //     }
 // }
 
+
+const film_rate = document.querySelector("film_rate")
+
 var f_rate;
 var f_rate_count = 0
-console.log(f_rate_count)
+// 先在外面下全域接值
 // 評分系統
-
-
-
-
-
 $(".starbox2 span").mouseenter(function() {
     // $(this).css("color","lightblue")
-    $(this).css("color", "#ffee58")
-    $(this).prevAll().css("color", "#ffee58")
+    $(this).css("color", "#ffee58").prevAll().css("color", "#ffee58")
+    // 進入的當下與前面所有的變色，綜合寫法
 })
 $(".starbox2 span").mouseleave(function() {
-    $(this).next().css("color", "transparent")
+    $(this).css("color", "transparent")
+    // 離開的當下變色
 })
 $(".starbox2").mouseleave(function() {
     $(".starbox2 span").css("color", "transparent")
+    // 離開整個大外框變色
 })
 
 
@@ -583,30 +585,15 @@ $(".starbox2").mouseleave(function() {
 $(".starbox2 span").click(function() {
     f_rate = $(this).index();
     // 點選後回傳是第幾顆星
-    f_rate_count = f_rate
+    f_rate_count = f_rate + 1
+    console.log(f_rate_count)
+    // film_rate.innerHTML = f_rate_count;
+    // 把值抓到外面
     // console.log(f_rate_count)
-    $(".starbox span").eq(f_rate_count).css("color", "green").prevAll().css("color", "green")
-    $(".starbox span").eq(f_rate_count).nextAll().css("color", "lightblue")
-
-
-    // 當個和前面所有變綠合併寫法
-
-    return f_rate_count;
+    $(".starbox span").eq(f_rate).css("color", "green").prevAll().css("color", "green")
+    // 點擊的當下與其先前的變色，綜合寫法
+    $(".starbox span").eq(f_rate).nextAll().css("color", "lightblue")
+    // 同時點擊的之後全變回綠合併寫法
 })
-
-
-
-
-
-
-
-
-// $(".starbox span").mouseleave(function() {
-//     $(this).css("color", "green")
-// })
-
-// $(".starbox").mouseleave(function() {
-//     $(".starbox span").css("color", "green")
-// })
 </script>
 <?php include __DIR__ . './foot.php'?>
