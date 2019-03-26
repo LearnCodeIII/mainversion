@@ -67,7 +67,7 @@ include __DIR__."./PDO.php";
 
     
     //撈取戲院資訊串給INSERT戲院下拉選單
-    $cinema_sql = "SELECT `name` FROM `cinema` ";
+    $cinema_sql = "SELECT `name`,`img` FROM `cinema` ";
     $cinema_stmt = $pdo->query($cinema_sql);
     $cinema_row = $cinema_stmt->fetchAll(PDO::FETCH_ASSOC);
     $result["c_data"] =  $cinema_row;

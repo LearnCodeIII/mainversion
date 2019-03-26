@@ -30,6 +30,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script>
     // tinymce.init({
     //     selector: '#review'
@@ -55,9 +57,27 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         color: red !important;
     }
 
+    .marginnone {
+        margin: 0
+    }
+
     .stylenone {
         margin: 0 auto;
         padding: 0;
+    }
+
+    .starbox2 {
+        color: transparent;
+        font-size: 24px;
+        padding: 0 0.3rem;
+        z-index:5
+    }
+
+    .starbox {
+        color: lightblue;
+        font-size: 24px;
+        padding: 0 0.3rem;
+        z-index:4
     }
     </style>
 </head>
@@ -82,8 +102,7 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         <small id="headlineHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="w_film">觀看電影<span class="card_name1 text-light"></span></label>
-                                        <!-- SPAN藏值 -->
+                                        <label for="w_film">觀看電影</label>
                                         <select class="form-control" id="w_film" name="w_film">
                                             <!-- 表單內容由API串接生成 -->
                                         </select>
@@ -115,6 +134,36 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         </select>
                                         <small id="film_fav_countHelp" class="form-text text-muted"></small>
                                     </div>
+                                    <div class="form-group position-relative">
+                                        <label for="film_fav_count ">電影最愛</label>
+                                        <div
+                                            class="d-flex starbox  position-absolute justify-content-between marginnone">
+                                            <span class="fas fa-star "></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                        </div>
+                                        <div
+                                            class="d-flex starbox2  position-absolute justify-content-between marginnone">
+                                            <span class="fas fa-star "></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                            <span class="fas fa-star"></span>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group ">
                                         <label for="w_date">觀看日期</label>
                                         <input type="text" class="form-control" id="w_date" name="w_date" placeholder=""
@@ -170,15 +219,22 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                 <div class="pic-pre px-0 col-lg-3 d-flex justify-content-center">
                                     <div class="card border-0" style="width: 18rem; ">
                                         <div class=" text-center ">
-                                            <h5 class="card-title card_name">Card title</h5>
-                                           
+                                            <h5 class="card-title card_name"></h5>
                                         </div>
                                         <img id="prepic" src="" class="card-img-top stylenone" alt=""
                                             style="width: 12rem;">
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="pic-pre px-0 col-lg-3 d-flex justify-content-center">
+                                <div class="card border-0" style="width: 18rem; ">
+                                    <div class=" text-center ">
+                                        <h5 class="card-title card_name_cinema"></h5>
+                                    </div>
+                                    <img id="cinema_prepic" src="" class="card-img-top stylenone" alt=""
+                                        style="width: 12rem;">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="headline">影評標題</label>
                                 <input type="text" class="form-control" id="headline" name="headline" placeholder=""
@@ -226,13 +282,6 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 // 上傳檔案
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
-
-
-
-
-
-
-
 
 intro_pic.addEventListener("change", event => {
     // 當偵測到有變更後，觸發箭頭韓式EVENT
@@ -380,15 +429,21 @@ const checkForm = () => {
 
 // 戲院下拉選單
 let cinema_data;
+// 抓戲院回傳資料
 const cinema_rate = document.querySelector('#w_cinema');
 const cinema_str = `<option><%=name%></option>`
 const cinema_func = _.template(cinema_str);
+
+const card_name_cinema = document.querySelector('.card_name_cinema');
+var j = 0;
+// 用來抓下拉捲單變更回傳之物件索引值(戲院)
+// console.log(j)
 
 fetch("Roy_datalist_api.php")
     .then(response => response.json())
     .then(json => {
         cinema_data = json;
-        console.log(cinema_data);
+        // console.log(cinema_data);
 
         // 文章內容匯入
         let cinema_str = '';
@@ -398,9 +453,38 @@ fetch("Roy_datalist_api.php")
         }
         cinema_rate.innerHTML = cinema_str;
     })
+// 抓到所選戲院CHANGE對應到的索引值------------變動圖片必要內容
+w_cinema.addEventListener('change', event => {
+    for (let i = 0; i < w_cinema.childNodes.length; i++) {
+        // 抓到ID的整個陣列物件後加LENGTH得知數量
+        if (w_cinema.childNodes[i].selected == true) {
+            // 觀看第幾個物件是否有在CHANGE事件後觸發SELECT有救回傳
+            j = i;
+            // 把I值抓出去
+            // console.log(i)
+            return i
+        }
+    }
+})
+// 額外加入偵測下拉選單變換後抓到索引值選取對應JPG名稱後串聯設回IMG欄------------變動圖片必要內容
+// 可根據下拉選單變動對應變更照片
+w_cinema.addEventListener('change', event => {
+    console.log(j)
+    let cinemaprepicindex = cinema_data.c_data[j]["img"]
+    // 將索引中物件裡的圖片名稱抓出來
+    console.log(cinemaprepicindex);
+    cinema_prepic.setAttribute("src", '../pic/cinema/' + cinemaprepicindex)
+})
+// // 下拉選單換後選到對應值後寫入HTML
+// w_cinema.addEventListener("change", event => {
+//     card_name_cinema.innerHTML = w_cinema.value;
+// })
+
+
 
 
 let film_data;
+// 抓電影回傳資料
 const w_film = document.querySelector('#w_film');
 const w_film_str = `<option><%=name_tw%></option>`
 const w_film_func = _.template(w_film_str);
@@ -408,7 +492,9 @@ const w_film_func = _.template(w_film_str);
 // 用於變動圖片需要之參數
 const card_name = document.querySelector('.card_name');
 const card_name1 = document.querySelector('.card_name1');
-
+var k = 0;
+// 用來抓下拉捲單變更回傳之物件索引值
+// console.log(k)
 
 // 抓到所選電影CHANGE對應到的索引值------------變動圖片必要內容
 w_film.addEventListener('change', event => {
@@ -416,12 +502,21 @@ w_film.addEventListener('change', event => {
         // 抓到ID的整個陣列物件後加LENGTH得知數量
         if (w_film.childNodes[i].selected == true) {
             // 觀看第幾個物件是否有在CHANGE事件後觸發SELECT有救回傳
-            card_name1.innerHTML = i;
-            console.log(i)
+            k = i;
+            // 把I值抓出去
+            // console.log(i)
             return i
-
         }
     }
+})
+// 額外加入偵測下拉選單變換後抓到索引值選取對應JPG名稱後串聯設回IMG欄------------變動圖片必要內容
+// 可根據下拉選單變動對應變更照片
+w_film.addEventListener('change', event => {
+    console.log(k)
+    let prepicindex = film_data.f_data[k]["movie_pic"]
+    // 將索引中物件裡的圖片名稱抓出來
+    console.log(prepicindex);
+    prepic.setAttribute("src", '../pic/film_upload/' + prepicindex)
 })
 
 
@@ -437,20 +532,6 @@ fetch("Roy_datalist_api.php")
         }
         w_film.innerHTML = w_film_str;
     })
-
-
-// 額外加入偵測下拉選單變換後抓到索引值選取對應JPG名稱後串聯設回IMG欄------------變動圖片必要內容
-// 可根據下拉選單變動對應變更照片
-w_film.addEventListener('change', event => {
-    var a = parseInt(card_name1.innerHTML)
-    // 將先前印到HTML裡的值抓回來
-    console.log(a)
-    let prepicindex = film_data.f_data[a]["movie_pic"]
-    console.log(prepicindex);
-
-    prepic.setAttribute("src", '../pic/film_upload/' + prepicindex)
-})
-
 
 // 下拉選單換後選到對應值後寫入HTML
 w_film.addEventListener("change", event => {
@@ -475,5 +556,57 @@ w_film.addEventListener("change", event => {
 
 //     }
 // }
+
+var f_rate;
+var f_rate_count = 0
+console.log(f_rate_count)
+// 評分系統
+
+
+
+
+
+$(".starbox2 span").mouseenter(function() {
+    // $(this).css("color","lightblue")
+    $(this).css("color", "#ffee58")
+    $(this).prevAll().css("color", "#ffee58")
+})
+$(".starbox2 span").mouseleave(function() {
+    $(this).next().css("color", "transparent")
+})
+$(".starbox2").mouseleave(function() {
+    $(".starbox2 span").css("color", "transparent")
+})
+
+
+
+$(".starbox2 span").click(function() {
+    f_rate = $(this).index();
+    // 點選後回傳是第幾顆星
+    f_rate_count = f_rate
+    // console.log(f_rate_count)
+    $(".starbox span").eq(f_rate_count).css("color", "green").prevAll().css("color", "green")
+    $(".starbox span").eq(f_rate_count).nextAll().css("color", "lightblue")
+
+
+    // 當個和前面所有變綠合併寫法
+
+    return f_rate_count;
+})
+
+
+
+
+
+
+
+
+// $(".starbox span").mouseleave(function() {
+//     $(this).css("color", "green")
+// })
+
+// $(".starbox").mouseleave(function() {
+//     $(".starbox span").css("color", "green")
+// })
 </script>
 <?php include __DIR__ . './foot.php'?>
