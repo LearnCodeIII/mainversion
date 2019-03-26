@@ -1,10 +1,10 @@
 <nav class="sidenav">
     <ul class="navbar-nav">
-        <!-- <li class="nav-item <?= $phpname == "phpHome"?"active":""; ?>">
-            <a class="nav-link" href="./ShawnpageMain.php">活動面板</a>
-        </li> -->
         <li class="nav-item">
-            <a class="nav-link" href="./ShawnpageDatalist.php">活動列表</a>
+            <a class="nav-link" href="./ShawnpageDatalist.php">快速搜尋</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./ShawnpageMain.php">活動列表</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="./ShawnpageAdd.php">新增活動</a>
