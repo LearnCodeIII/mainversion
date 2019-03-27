@@ -119,23 +119,14 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         <small id="w_filmHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="film_rate">電影評分</label>
-                                        <input type="text" class="form-control" id="film_rate" name="film_rate"
-                                            placeholder="" value="123">
-                                    
+                                        <!-- <label for="film_rate">電影評分</label> -->
+                                        <input type="hidden" class="form-control" id="film_rate" name="film_rate"
+                                            placeholder="" value="">
+
                                         <small id="film_rateHelp" class="form-text text-muted"></small>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="film_fav_count">電影最愛</label>
-                                        <select class="form-control" id="film_fav_count" name="film_fav_count">
-                                            <option></option>
-                                            <option>是</option>
-                                            <option>否</option>
-                                        </select>
-                                        <small id="film_fav_countHelp" class="form-text text-muted"></small>
-                                    </div>
                                     <div class="form-group position-relative">
-                                        <label for="film_fav_count ">電影最愛</label>
+                                        <label for="film_fav_count ">電影評分</label>
                                         <div class="starcontainer ">
                                             <div
                                                 class="d-flex starbox  position-absolute justify-content-between marginnone">
@@ -165,6 +156,16 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="film_fav_count">電影最愛</label>
+                                        <select class="form-control" id="film_fav_count" name="film_fav_count">
+                                            <option></option>
+                                            <option>是</option>
+                                            <option>否</option>
+                                        </select>
+                                        <small id="film_fav_countHelp" class="form-text text-muted"></small>
+                                    </div>
+
 
                                     <div class="form-group ">
                                         <label for="w_date">觀看日期</label>
@@ -375,11 +376,11 @@ const checkForm = () => {
         document.querySelector('#w_dateHelp').innerHTML = '請輸入正確日期!';
         isPassed = false;
     }
-    if (!rate_pattern.test(fsv.film_rate)) {
-        fs.film_rate.style.borderColor = 'red';
-        document.querySelector('#film_rateHelp').innerHTML = '請輸入正確區間!';
-        isPassed = false;
-    }
+    // if (!rate_pattern.test(fsv.film_rate)) {
+    //     fs.film_rate.style.borderColor = 'red';
+    //     document.querySelector('#film_rateHelp').innerHTML = '請輸入正確區間!';
+    //     isPassed = false;
+    // }
 
     // TODO 如果不想必檢查的方式
     // if (!fav_pattern.test(fsv.fav)) {
@@ -560,7 +561,7 @@ w_film.addEventListener("change", event => {
 // }
 
 
-const film_rate = document.querySelector("film_rate")
+const film_rate = document.querySelector("#film_rate")
 
 var f_rate;
 var f_rate_count = 0
@@ -587,8 +588,9 @@ $(".starbox2 span").click(function() {
     // 點選後回傳是第幾顆星
     f_rate_count = f_rate + 1
     console.log(f_rate_count)
-    // film_rate.innerHTML = f_rate_count;
-    // 把值抓到外面
+    film_rate.value = f_rate_count;
+    // 把值抓到外面倒到外面ID下面的VALUE可作INPUT
+
     // console.log(f_rate_count)
     $(".starbox span").eq(f_rate).css("color", "green").prevAll().css("color", "green")
     // 點擊的當下與其先前的變色，綜合寫法
