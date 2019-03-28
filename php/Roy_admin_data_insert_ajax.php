@@ -71,7 +71,19 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         height: 30px;
     }
 
-    .starbox2 {
+    .starbox,
+    .starbox4 {
+        color: lightblue;
+        font-size: 24px;
+        padding: 0 0.3rem;
+        z-index: 3;
+        left: 0;
+        right: 0;
+        /* 讓感應區域左右填滿 */
+    }
+
+    .starbox2,
+    .starbox5 {
         color: transparent;
         font-size: 24px;
         padding: 0 0.3rem;
@@ -80,14 +92,14 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         right: 0;
     }
 
-    .starbox {
-        color: lightblue;
+    .starbox3,
+    .starbox6 {
+        color: transparent;
         font-size: 24px;
         padding: 0 0.3rem;
         z-index: 4;
         left: 0;
         right: 0;
-        /* 讓感應區域左右填滿 */
     }
     </style>
 </head>
@@ -119,7 +131,7 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         <small id="w_filmHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
-                                        <!-- <label for="film_rate">電影評分</label> -->
+                                        <!-- <label for="film_rate">電影評分INPUT</label> -->
                                         <input type="hidden" class="form-control" id="film_rate" name="film_rate"
                                             placeholder="" value="">
 
@@ -128,31 +140,15 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                     <div class="form-group position-relative">
                                         <label for="film_fav_count ">電影評分</label>
                                         <div class="starcontainer ">
+                                            <!-- 用JQ生成星星 -->
                                             <div
-                                                class="d-flex starbox  position-absolute justify-content-between marginnone">
-                                                <span class="fas fa-star "></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
+                                                class="d-flex starbox  position-absolute justify-content-between marginnone font_star">
                                             </div>
                                             <div
-                                                class="d-flex starbox2  position-absolute justify-content-between marginnone">
-                                                <span class="fas fa-star "></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
-                                                <span class="fas fa-star"></span>
+                                                class="d-flex starbox2  position-absolute justify-content-between marginnone font_star">
+                                            </div>
+                                            <div
+                                                class="d-flex starbox3  position-absolute justify-content-between marginnone font_star">
                                             </div>
                                         </div>
                                     </div>
@@ -192,25 +188,37 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         </select>
                                         <small id="w_cinemaHelp" class="form-text text-muted"></small>
                                     </div>
+
                                     <div class="form-group">
+                                        <!-- <label for="film_rate">戲院評分INPUT</label> -->
+                                        <input type="hidden" class="form-control" id="cinema_rate" name="cinema_rate"
+                                            placeholder="" value="">
+                                        <small id="cinema_rateHelp" class="form-text text-muted"></small>
+                                    </div>
+                                    <div class="form-group position-relative">
                                         <label for="cinema_rate">戲院評分</label>
-                                        <select class="form-control" id="cinema_rate" name="cinema_rate">
-                                            <option></option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select>
+                                        <div class="starcontainer ">
+                                            <!-- 用JQ生成星星 -->
+                                            <div
+                                                class="d-flex starbox4  position-absolute justify-content-between marginnone font_star">
+                                            </div>
+                                            <div
+                                                class="d-flex starbox5  position-absolute justify-content-between marginnone font_star">
+                                            </div>
+                                            <div
+                                                class="d-flex starbox6  position-absolute justify-content-between marginnone font_star">
+                                            </div>
+                                        </div>
                                         <small id="cinema_rateHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="cinema_push_count">戲院最愛</label>
+                                        <div class="heartcontainer">
+                                            <div class="heartbox">
+                                                <span><i class="fas fa-heart"></i></span>
+                                            </div>
+                                        </div>
+
                                         <select class="form-control" id="cinema_push_count" name="cinema_push_count">
                                             <option></option>
                                             <option>是</option>
@@ -433,7 +441,7 @@ const checkForm = () => {
 // 戲院下拉選單
 let cinema_data;
 // 抓戲院回傳資料
-const cinema_rate = document.querySelector('#w_cinema');
+const w_cinema = document.querySelector('#w_cinema');
 const cinema_str = `<option><%=name%></option>`
 const cinema_func = _.template(cinema_str);
 
@@ -454,7 +462,7 @@ fetch("Roy_datalist_api.php")
             // 取API中C_DATA資料
             cinema_str += cinema_func(v);
         }
-        cinema_rate.innerHTML = cinema_str;
+        w_cinema.innerHTML = cinema_str;
     })
 // 抓到所選戲院CHANGE對應到的索引值------------變動圖片必要內容
 w_cinema.addEventListener('change', event => {
@@ -562,27 +570,76 @@ w_film.addEventListener("change", event => {
 
 
 const film_rate = document.querySelector("#film_rate")
+const cinema_rate = document.querySelector("#cinema_rate")
+const font_star = document.querySelectorAll(".font_star")
+
+
+// 產生10顆星星HTML
+for (let font_star_num = 0; font_star_num < 10; font_star_num++) {
+    $(".font_star").append("<span class='fas fa-star'></span>")
+}
+
 
 var f_rate;
+var c_rate;
 var f_rate_count = 0
+var c_rate_count = 0
+
+
 // 先在外面下全域接值
 // 評分系統
-$(".starbox2 span").mouseenter(function() {
+
+//上層 進入的當下與前面所有的變色，綜合寫法
+// 電影&戲院
+$(".starbox2 span, .starbox5 span").mouseenter(function() {
     // $(this).css("color","lightblue")
     $(this).css("color", "#ffee58").prevAll().css("color", "#ffee58")
-    // 進入的當下與前面所有的變色，綜合寫法
 })
-$(".starbox2 span").mouseleave(function() {
+
+// 中間層
+// 電影
+$(".starbox2 span").mouseenter(function() {
+    // $(this).css("color","lightblue")
+    $(".starbox3 span").css("color", "lightblue")
+})
+// 戲院
+$(".starbox5 span").mouseenter(function() {
+    // $(this).css("color","lightblue")
+    $(".starbox6 span").css("color", "lightblue")
+})
+
+// 上層
+// 電影&戲院
+$(".starbox2 span, .starbox5 span").mouseleave(function() {
     $(this).css("color", "transparent")
-    // 離開的當下變色
 })
+
+// 中間層
+// 電影
+$(".starbox2 span").mouseleave(function() {
+    $(".starbox3 span").css("color", "transparent")
+})
+// 戲院
+$(".starbox5 span").mouseleave(function() {
+    $(".starbox6 span").css("color", "transparent")
+})
+
+// 上層離開整個大外框變色
+// 電影
 $(".starbox2").mouseleave(function() {
     $(".starbox2 span").css("color", "transparent")
-    // 離開整個大外框變色
+
+})
+// 上層離開整個大外框變色
+// 戲院
+$(".starbox5").mouseleave(function() {
+    $(".starbox5 span").css("color", "transparent")
+
 })
 
 
-
+// 下層
+// 電影
 $(".starbox2 span").click(function() {
     f_rate = $(this).index();
     // 點選後回傳是第幾顆星
@@ -595,6 +652,23 @@ $(".starbox2 span").click(function() {
     $(".starbox span").eq(f_rate).css("color", "green").prevAll().css("color", "green")
     // 點擊的當下與其先前的變色，綜合寫法
     $(".starbox span").eq(f_rate).nextAll().css("color", "lightblue")
+    // 同時點擊的之後全變回綠合併寫法
+})
+
+// 下層
+// 戲院
+$(".starbox5 span").click(function() {
+    c_rate = $(this).index();
+    // 點選後回傳是第幾顆星
+    c_rate_count = c_rate + 1
+    console.log(c_rate_count)
+    cinema_rate.value = c_rate_count;
+    // 把值抓到外面倒到外面ID下面的VALUE可作INPUT
+
+    // console.log(c_rate_count)
+    $(".starbox4 span").eq(c_rate).css("color", "green").prevAll().css("color", "green")
+    // 點擊的當下與其先前的變色，綜合寫法
+    $(".starbox4 span").eq(c_rate).nextAll().css("color", "lightblue")
     // 同時點擊的之後全變回綠合併寫法
 })
 </script>
