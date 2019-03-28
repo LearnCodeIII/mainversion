@@ -144,18 +144,43 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <input class="form-check-input" type="checkbox" id="space" value="space" name="contenttype[]" checked hidden >
                                         </div>
                                     </div>
-
-                                    <!-- <select class="custom-select custom-select-md" name="contenttype[]" id="contenttype" size="7" multiple >
-                                        <option value="primary">徵才資訊</option>
-                                        <option value="success">進行中</option>
-                                        <option value="warning">即將結束</option>
-                                        <option value="danger">會員專屬活動</option>
-                                        <option value="info">電影資訊</option>
-                                        <option value="secondary">活動結束</option>
-                                        <option value="dark">長期活動</option>
-                                    </select> -->
-
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend mr-3">
+                                        <span class="input-group-text bg-dark text-white">開放報名</span>
+                                        <div class="ml-3 mt-2 mb-2">
+                                            <div class="form-check form-check">
+                                                <input class="form-check-input" type="radio" id="signNo" value="no" name="signup[]"
+                                                <?php
+                                                if(stripos($row['signup'],"no")>-1){echo "checked";};
+                                                ?>
+                                                >
+                                                <label class="form-check-label" for="signNo">否。</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="signYes" value="yes" name="signup[]"
+                                                <?php
+                                                if(stripos($row['signup'],"yes")>-1){echo "checked";};
+                                                ?>>
+                                                <label class="form-check-label" for="signYes">是，人數不限。</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="signOther" value="other" name="signup[]"
+                                                <?php
+                                                if(stripos($row['signup'],"other")>-1){echo "checked";};
+                                                ?>>
+                                                <label class="form-check-label" for="signOther">是，上限人數</label>
+                                                <input class="form-check-input ml-1" type="text" id="signOtherNumber"  name="signup[]" size="3" value="
+                                                <?php
+                                                //todo 這裡還沒修好
+                                                if(stripos($row['signup'],"other")>-1){echo intval($row['signup']);};
+                                                ?>
+                                                ">
+                                                <label class="form-check-label">人。<span style="color:red">這裡還沒修好</span></label>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-dark text-white" id="inputGroupFileAddon01">活動圖片上傳</span>
