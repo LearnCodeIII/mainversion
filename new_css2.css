@@ -1,14 +1,36 @@
+
+body{
+    background-color: #dee2e6 !important
+}
+
 .nav_width{
     width: 280px;
     height: 100vh;
     overflow: hidden;
     position: relative;
+    transition: 0.5s;
 }
 .height{
     width: 280px;
     height:80vh;
     position: relative;
 }
+
+@media (max-width: 992px) {
+    #nav_menu{
+        display: block;
+    }
+    /* .nav_width{
+        height: 0;
+    } */
+        };
+        
+
+.active{
+    height:0;
+}
+
+
 
 .transition{
     transition: 0.5s;
@@ -36,8 +58,9 @@ body{
     }
 
 
-    .pos-f-t{
-        width: 100%;
+    .nav_menu{
+        display: none;
+        /* width: 100%; */
         position: fixed;
         top: 0;
         right: 0;
