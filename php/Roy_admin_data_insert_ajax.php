@@ -66,7 +66,9 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         padding: 0;
     }
 
-    .starcontainer {
+    .starcontainer,
+    .heartcontainer,
+    .thundercontainer {
         width: 50%;
         height: 30px;
     }
@@ -101,6 +103,56 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         left: 0;
         right: 0;
     }
+
+
+    .heartbox1 i,
+    .heartbox3 i,
+    .thunderbox1 i{
+        font-size: 32px;
+        background-color: #565656;
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+        z-index: 3;
+    }
+
+    .heartbox1 i.active,
+    .heartbox3 i.active,
+    .thunderbox1 i.active{
+        font-size: 32px;
+        background-color: #565656;
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(180, 180, 180, 0.5);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+
+    }
+
+    .heartbox2 i,
+    .heartbox4 i,
+    .thunderbox2 i {
+        font-size: 32px;
+        background-color: transparent;
+        color: transparent;
+        z-index: 4;
+    }
+
+    .heartbox2 .heartbox2pink,
+    .heartbox4 .heartbox2pink {
+        color: rgb(240, 120, 210);
+        text-shadow: 1px 1px 1px gray, 1px -1px 1px gray, -1px 1px 1px gray, -1px -1px 1px gray;
+    }
+
+    .thunderbox2 .thunderbox2pink {
+        color: rgb(252, 211, 78);
+        text-shadow: 1px 1px 1px gray, 1px -1px 1px gray, -1px 1px 1px gray, -1px -1px 1px gray;
+    }
+
+
+
     </style>
 </head>
 <section class="dashboard">
@@ -152,33 +204,45 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group filmcheck">
                                         <label for="film_fav_count">電影最愛</label>
-                                        <select class="form-control" id="film_fav_count" name="film_fav_count">
-                                            <option></option>
-                                            <option>是</option>
-                                            <option>否</option>
-                                        </select>
+                                        <input type="hidden" name="film_fav_count" id="film_fav_countX">
+                                        <input type="checkbox" id="film_fav_count" class="d-none">
+                                        <!-- 設兩個不同ID一個用於NAME送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
+                                        <div class="heartcontainer position-relative">
+                                            <div class="heartbox3">
+                                                <span><i class="fas fa-heart position-absolute"></i></span>
+                                            </div>
+                                            <div class="heartbox4">
+                                                <span><i class="fas fa-heart position-absolute"></i></span>
+                                            </div>
+                                        </div>
                                         <small id="film_fav_countHelp" class="form-text text-muted"></small>
                                     </div>
 
 
                                     <div class="form-group ">
                                         <label for="w_date">觀看日期</label>
-                                        <input type="text" class="form-control" id="w_date" name="w_date" placeholder=""
-                                            value="">
+                                        <input type="text" class="form-control bg-white" id="w_date" name="w_date" placeholder=""
+                                            value="" readonly>
                                         <small id="w_dateHelp" class="form-text text-muted"></small>
                                     </div>
                                 </div>
                                 <div class="info-box px-0 col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group spoilerscheck">
                                         <label for="re_spoilers">是否爆雷</label>
-                                        <select class="form-control" id="re_spoilers" name="re_spoilers">
-                                            <!-- 表單要下NAME，是抓NAME為參數值 -->
-                                            <option></option>
-                                            <option>是</option>
-                                            <option>否</option>
-                                        </select>
+                                        <input type="hidden" name="re_spoilers" id="re_spoilersX">
+                                        <input type="checkbox" id="re_spoilers" >
+                                        <!-- 設兩個不同ID一個用於NAME送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
+                                        <div class="thundercontainer position-relative">
+                                            <div class="thunderbox1">
+                                                <span><i class="fas fa-bolt position-absolute"></i></span>
+                                 
+                                            </div>
+                                            <div class="thunderbox2">
+                                                <span><i class="fas fa-bolt position-absolute"></i></span>
+                                            </div>
+                                        </div>                
                                         <small id="re_spoilersHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group ">
@@ -211,19 +275,19 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         </div>
                                         <small id="cinema_rateHelp" class="form-text text-muted"></small>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group cinemacheck">
                                         <label for="cinema_push_count">戲院最愛</label>
-                                        <div class="heartcontainer">
-                                            <div class="heartbox">
-                                                <span><i class="fas fa-heart"></i></span>
+                                        <input type="hidden" name="cinema_push_count" id="cinema_push_countX">
+                                        <input type="checkbox" id="cinema_push_count" class="d-none">
+                                        <!-- 設兩個相同ID一個用於送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
+                                        <div class="heartcontainer position-relative">
+                                            <div class="heartbox1">
+                                                <span><i class="fas fa-heart position-absolute"></i></span>
+                                            </div>
+                                            <div class="heartbox2">
+                                                <span><i class="fas fa-heart position-absolute"></i></span>
                                             </div>
                                         </div>
-
-                                        <select class="form-control" id="cinema_push_count" name="cinema_push_count">
-                                            <option></option>
-                                            <option>是</option>
-                                            <option>否</option>
-                                        </select>
                                         <small id="cinema_push_countHelp" class="form-text text-muted"></small>
                                     </div>
                                 </div>
@@ -326,7 +390,8 @@ const fields = [
     'film_rate',
     // 'fav',
     'intro_pic',
-    're_spoilers'
+    // 're_spoilers' 會造成SUBMIT問題
+
 ];
 
 // 拿到每個欄位的參照
@@ -367,7 +432,7 @@ const checkForm = () => {
         fs[v].style.borderColor = '#cccccc';
         document.querySelector('#' + v + 'Help').innerHTML = '';
     }
-
+    console.log("123");
     if (fsv.headline.length > 50) {
         fs.headline.style.borderColor = 'red';
         document.querySelector('#headlineHelp').innerHTML = '請勿輸入超過50個字!';
@@ -572,6 +637,7 @@ w_film.addEventListener("change", event => {
 const film_rate = document.querySelector("#film_rate")
 const cinema_rate = document.querySelector("#cinema_rate")
 const font_star = document.querySelectorAll(".font_star")
+const cinema_push_count = document.querySelector("#cinema_push_count")
 
 
 // 產生10顆星星HTML
@@ -670,6 +736,72 @@ $(".starbox5 span").click(function() {
     // 點擊的當下與其先前的變色，綜合寫法
     $(".starbox4 span").eq(c_rate).nextAll().css("color", "lightblue")
     // 同時點擊的之後全變回綠合併寫法
+})
+
+// 戲院移入愛心變色
+$(".heartbox2 i").hover(function() {
+    $(".heartbox1 i").toggleClass("active")
+})
+// 戲院移入愛心變色，回傳TRUE FALSE
+$(".heartbox2 i").click(function() {
+    $(this).toggleClass("heartbox2pink")
+
+    // 抓TRUE FALSE送回表單INPUT
+    var cinemafav = $("#cinema_push_count").prop("checked")
+    // 讓TRUE的反義在每次CLICK丟回去取代來切換TRUE FALSE
+    cinemafav = !cinemafav
+    // 每次點將值帶入
+    $(".cinemacheck :checkbox").prop("checked", cinemafav)
+    // 確認目前為TRUE OR FALSE
+
+    // console.log(cinemafav)
+    cinema_push_countX.value = cinemafav;
+    // console.log(cinema_push_countX)
+})
+
+
+// 電影入愛心變色
+$(".heartbox4 i").hover(function() {
+    $(".heartbox3 i").toggleClass("active")
+})
+// 電影入愛心變色，回傳TRUE FALSE
+$(".heartbox4 i").click(function() {
+    $(this).toggleClass("heartbox2pink")
+
+    // 抓TRUE FALSE送回表單INPUT
+    var filmfav = $("#film_fav_count").prop("checked")
+    // 讓TRUE的反義在每次CLICK丟回去取代來切換TRUE FALSE
+    filmfav = !filmfav
+    // 每次點將值帶入
+    $(".filmcheck :checkbox").prop("checked", filmfav)
+    // 確認目前為TRUE OR FALSE
+
+    console.log(filmfav)
+    film_fav_countX.value = filmfav;
+    // console.log(film_fav_countX);
+})
+
+
+
+// 暴雷閃電變色
+$(".thunderbox2 i").hover(function() {
+    $(".thunderbox1 i").toggleClass("active")
+})
+// 暴雷閃電變色，回傳TRUE FALSE
+$(".thunderbox2 i").click(function() {
+    $(this).toggleClass("thunderbox2pink")
+
+    // 抓TRUE FALSE送回表單INPUT
+    var spoilersconfirm = $("#re_spoilers").prop("checked")
+    // 讓TRUE的反義在每次CLICK丟回去取代來切換TRUE FALSE
+    spoilersconfirm = !spoilersconfirm
+    // 每次點將值帶入
+    $(".spoilerscheck :checkbox").prop("checked", spoilersconfirm)
+    // 確認目前為TRUE OR FALSE
+
+    console.log(spoilersconfirm)
+    re_spoilersX.value = spoilersconfirm;
+    console.log(re_spoilersX);
 })
 </script>
 <?php include __DIR__ . './foot.php'?>

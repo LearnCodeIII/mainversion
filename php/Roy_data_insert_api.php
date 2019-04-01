@@ -67,12 +67,13 @@ if (isset($_POST["checkme"])) {
     $headline = htmlspecialchars($_POST["headline"]);
     $review = htmlspecialchars($_POST['review']);
     $w_date = htmlspecialchars($_POST['w_date']);
-    $w_cinema = htmlspecialchars($_POST['w_cinema']);
-    $film_rate = htmlspecialchars($_POST['film_rate']);
-    // $spoilers = htmlspecialchars($_POST['re_spoilers']);
-    // $fav = htmlspecialchars($_POST['fav']);
-    // $intro_pic = htmlspecialchars($_POST['intro_pic']);
-    // 這串要拿掉，值的屬性不同會判讀有誤
+    // $w_cinema = htmlspecialchars($_POST['w_cinema']);
+    // $film_rate = htmlspecialchars($_POST['film_rate']);
+
+    // // $spoilers = htmlspecialchars($_POST['re_spoilers']);
+    // // $fav = htmlspecialchars($_POST['fav']);
+    // // $intro_pic = htmlspecialchars($_POST['intro_pic']);
+    // // 這串要拿掉，值的屬性不同會判讀有誤
 
     $result["post"] = $_POST; // 做 echo 檢查
 
@@ -83,7 +84,7 @@ if (isset($_POST["checkme"])) {
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
         // 如果以上有錯就會進入這裡回傳，不會進資料庫
         exit;
-    }else{
+    } else {
         $result["success"] = true;
     }
 
@@ -92,15 +93,23 @@ if (isset($_POST["checkme"])) {
     $spoilers = $_POST["re_spoilers"];
     $film_fav_count = $_POST["film_fav_count"];
     $cinema_push_count = $_POST["cinema_push_count"];
+    // var_dump($cinema_push_count);
 
-    if ($spoilers === "是") {
+    if ($spoilers === "true") {
         $spoilers = 1;
     }
-    if ($film_fav_count === "是") {
-        $film_fav_count = 1;
+
+    // 判讀關係，POST出來為字串，所以判讀要加上""
+    if ($cinema_push_count === "true") {
+        $cinema_push_count = true;
+    } else {
+        $cinema_push_count = false;
     }
-    if ($cinema_push_count === "是") {
-        $cinema_push_count = 1;
+
+    if ($film_fav_count === "true") {
+        $film_fav_count = true;
+    } else {
+        $film_fav_count = false;
     }
 
     $sql = "INSERT INTO `forum`(`w_film`, `re_spoilers`, `film_rate`, `film_fav_count`, `issuer`, `headline`, `review`, `w_date`, `w_cinema`, `cinema_rate`, `cinema_comment`, `cinema_push_count`, `intro_pic`)
