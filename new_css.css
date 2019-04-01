@@ -1,17 +1,58 @@
+body{
+    /* background:#eee; */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    }
+
 .nav_width{
-    width: 280px;
+    width: 240px;
     height: 100vh;
     overflow: hidden;
-    position: relative;
+    position: fixed;
+    transition: 0.5s
 }
+/* RWD出現的menu */
+.pos-f-t{
+    z-index: 99;
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.nav_wrapper{
+    width:200px;
+    height: 90vh;
+    overflow: hidden;
+    /* position: absolute; */
+}
+
+@media (max-width: 992px) {
+    .pos-f-t{
+        display: block;
+    }
+    .nav_width{
+        /* display: none; */
+        width: 0;
+        height: 0;
+    }
+    .dashboard{
+        position: absolute;
+        /* display: flex; */
+        top:0;
+        left:0;
+        /* right:0; */
+        bottom:auto;
+    }
+    };
+        
 .height{
-    width: 280px;
+    width: 240px;
     height:80vh;
     position: relative;
 }
 
 .transition{
-    transition: 0.5s;
+    /* transition: 0.5s; */
 }
 
 .nav_width a{
@@ -30,17 +71,17 @@
     height: 48px;
     overflow: hidden;
 }
-body{
-    /* background:#eee; */
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    }
 
+.dashboard {
+    position: absolute;
+    top:0;
+    left:240px;
+    right:0;
+    bottom:auto;
+    padding:3rem;
+}
 
-    .pos-f-t{
-        width: 100%;
-        position: fixed;
-        top: 0;
-        right: 0;
-    }
-
-    
+.box{
+    height: 300vh;
+    background-color: #ccc;
+}
