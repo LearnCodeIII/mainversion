@@ -20,7 +20,7 @@ body{
 }
 
 .nav_wrapper{
-    width:200px;
+    width:240px;
     height: 90vh;
     overflow: hidden;
     /* position: absolute; */
@@ -33,7 +33,7 @@ body{
     .nav_width{
         /* display: none; */
         width: 0;
-        height: 0;
+        /* height: 0; */
     }
     .dashboard{
         position: absolute;
