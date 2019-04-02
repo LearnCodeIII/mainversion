@@ -10,7 +10,8 @@ $sql = "SELECT * FROM article WHERE `sid`=$sid";
 $stmt = $pdo->query($sql);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$cm_time = date("Y-m-d h:i:sa");
+date_default_timezone_set('Asia/Taipei');
+$cm_time = '';
 
 if(isset($_SESSION['admin'])){
     $user = "小編：";
@@ -37,9 +38,8 @@ if(isset($_SESSION['admin'])){
 
 ?>
 
-<?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./nav.php'?>
-<?php include __DIR__.'./RuthNav.php'?>
+<?php include __DIR__.'./new_head.php'?>
+<?php include __DIR__.'./new_nav.php'?>
 
 
 <style>
@@ -104,13 +104,13 @@ if(isset($_SESSION['admin'])){
                     <p class="mt-2"><?=$user_name?></p>
                 </div>
                 <div class="col-10">
-                    <input type="text" class="form-control" name="comment" placeholder="留下評論......">
+                    <input type="text" class="form-control" id="content" name="comment" placeholder="留下評論......">
                     <input type="hidden" class="form-control" name="article_sid" value="<?= $row['sid']?>">
-                    <input type="hidden" class="form-control" name="cm_date" value="<?= $cm_time ?>">
+                    <input type="hidden" class="form-control" id="cm_date" name="cm_date" value="<?= $cm_time ?>">
                 </div>
                 <div class="col">
                     <div>
-                        <button type="submit" class="btn btn-primary">送出留言</button>
+                        <button type="submit" id="gocomment" class="btn btn-primary">送出留言</button>
                     </div>
                 </div>
 
@@ -171,6 +171,14 @@ const myHashChange = () => {
 
 };
 
+$('#gocomment').click(function(){
+    var date = new Date().toDateString();
+    var time = new Date().toLocaleTimeString();
+    $('#cm_date').val(date + time);
+})
+// var cm_time = Date()
+// $('#cm_date').val(cm_time)
+var cm_time;
 myHashChange();
 
 const postya = () => {
@@ -189,6 +197,7 @@ const postya = () => {
             // data_body.innerHTML = str;
             setTimeout(myHashChange(), 300);
         });
+        $('#content').val('');
     return false;
 };
 </script>

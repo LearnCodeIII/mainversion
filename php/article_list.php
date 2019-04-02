@@ -1,5 +1,6 @@
 <?php
-$pagename = "pageMain";
+$pagename = "article_list";
+$groupname = "article";
 
 include __DIR__.'/PDO.php';
 ?>
