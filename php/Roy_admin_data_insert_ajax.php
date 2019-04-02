@@ -29,6 +29,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="../js/sweet.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -107,7 +109,7 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 
     .heartbox1 i,
     .heartbox3 i,
-    .thunderbox1 i{
+    .thunderbox1 i {
         font-size: 32px;
         background-color: #565656;
         color: transparent;
@@ -120,7 +122,7 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 
     .heartbox1 i.active,
     .heartbox3 i.active,
-    .thunderbox1 i.active{
+    .thunderbox1 i.active {
         font-size: 32px;
         background-color: #565656;
         color: transparent;
@@ -150,9 +152,6 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         color: rgb(252, 211, 78);
         text-shadow: 1px 1px 1px gray, 1px -1px 1px gray, -1px 1px 1px gray, -1px -1px 1px gray;
     }
-
-
-
     </style>
 </head>
 <section class="dashboard">
@@ -170,10 +169,10 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                             <div class="container  px-0 d-flex justify-content-between">
                                 <div class="info-box px-0 col-lg-4">
                                     <div class="form-group ">
-                                        <label for="headline">登入帳號</label>
+                                        <label for="issuer">登入帳號</label>
                                         <input type="text" readonly class="form-control" id="issuer" name="issuer"
                                             placeholder="<?=$k?>" value="<?=$k?>">
-                                        <small id="headlineHelp" class="form-text text-muted"></small>
+                                        <small id="issuerHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="w_film">觀看電影</label>
@@ -223,8 +222,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 
                                     <div class="form-group ">
                                         <label for="w_date">觀看日期</label>
-                                        <input type="text" class="form-control bg-white" id="w_date" name="w_date" placeholder=""
-                                            value="" readonly>
+                                        <input type="text" class="form-control bg-white" id="w_date" name="w_date"
+                                            placeholder="" value="" readonly>
                                         <small id="w_dateHelp" class="form-text text-muted"></small>
                                     </div>
                                 </div>
@@ -232,17 +231,17 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                     <div class="form-group spoilerscheck">
                                         <label for="re_spoilers">是否爆雷</label>
                                         <input type="hidden" name="re_spoilers" id="re_spoilersX">
-                                        <input type="checkbox" id="re_spoilers" >
+                                        <input type="checkbox" id="re_spoilers" class="d-none">
                                         <!-- 設兩個不同ID一個用於NAME送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
                                         <div class="thundercontainer position-relative">
                                             <div class="thunderbox1">
                                                 <span><i class="fas fa-bolt position-absolute"></i></span>
-                                 
+
                                             </div>
                                             <div class="thunderbox2">
                                                 <span><i class="fas fa-bolt position-absolute"></i></span>
                                             </div>
-                                        </div>                
+                                        </div>
                                         <small id="re_spoilersHelp" class="form-text text-muted"></small>
                                     </div>
                                     <div class="form-group ">
@@ -416,9 +415,9 @@ const checkForm = () => {
 
 
     // 評分限制
-    let rate_pattern = /^[1-9]$|^[1][0]$/;
+    // let rate_pattern = /^[1-9]$|^[1][0]$/;
     // 喜好限制
-    let fav_pattern = /^[0-1]$/;
+    // let fav_pattern = /^[0-1]$/;
 
     // dd/mm/yyyy
     // let date_pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
@@ -432,11 +431,28 @@ const checkForm = () => {
         fs[v].style.borderColor = '#cccccc';
         document.querySelector('#' + v + 'Help').innerHTML = '';
     }
-    console.log("123");
+
     if (fsv.headline.length > 50) {
         fs.headline.style.borderColor = 'red';
         document.querySelector('#headlineHelp').innerHTML = '請勿輸入超過50個字!';
 
+        isPassed = false;
+    }
+    if (fsv.headline.length == 0) {
+        fs.headline.style.borderColor = 'red';
+        document.querySelector('#headlineHelp').innerHTML = '請輸入內容!';
+        isPassed = false;
+    }
+    if (fsv.review.length == 0) {
+        fs.review.style.borderColor = 'red';
+        document.querySelector('#reviewHelp').innerHTML = '請輸入內容!';
+        console.log("123");
+        isPassed = false;
+    }
+    if (fsv.review.length > 1000) {
+        fs.review.style.borderColor = 'red';
+        document.querySelector('#reviewHelp').innerHTML = '請勿超過1000字!';
+        console.log("123");
         isPassed = false;
     }
     // if (!email_pattern.test(fsv.review)) {
@@ -802,6 +818,20 @@ $(".thunderbox2 i").click(function() {
     console.log(spoilersconfirm)
     re_spoilersX.value = spoilersconfirm;
     console.log(re_spoilersX);
+})
+
+
+
+
+
+
+$("#submit_btn").click(function() {
+    Swal.fire({
+        title: 'Error!',
+        text: 'Do you want to continue',
+        type: 'error',
+        confirmButtonText: 'Cool'
+    })
 })
 </script>
 <?php include __DIR__ . './foot.php'?>
