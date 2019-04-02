@@ -1,18 +1,46 @@
 body{
     /* background:#eee; */
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
     }
 
 .nav_width{
+    font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
     width: 240px;
     height: 100vh;
     overflow: hidden;
     position: fixed;
     transition: 0.5s
 }
+.navbar-brand{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+
+.nav_width a{
+    color: #ccc !important;
+    text-decoration:none;
+}
+
+.nav_width a:hover{
+    color: #dc3545 !important;
+    font-weight: bold;
+    text-decoration:none;
+}
+.nav_wrapper a{
+    color: #ccc !important;
+    text-decoration:none;
+}
+
+.nav_wrapper a:hover{
+    color: #ffe2a4 !important;
+    font-weight: bold;
+    text-decoration:none;
+}
+
 /* RWD出現的menu */
 .pos-f-t{
     z-index: 99;
+    /* width: %; */
     display: none;
     position: fixed;
     top: 0;
@@ -20,10 +48,20 @@ body{
 }
 
 .nav_wrapper{
+    font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
     width:240px;
-    height: 95vh;
+    height: auto;
     overflow: hidden;
     /* position: absolute; */
+}
+
+.nav_wrapper .card-header{
+    padding: 0.1rem 2rem;;
+    margin: 0;
+}
+.nav_wrapper .card-body{
+    padding: 0.5rem 2rem;
+    margin: 0;
 }
 
 @media (max-width: 992px) {
@@ -49,12 +87,8 @@ body{
         
 .height{
     width: 240px;
-    height:100vh;
+    height:auto;
     position: relative;
-}
-
-.transition{
-    /* transition: 0.5s; */
 }
 
 .nav_width a{
@@ -63,8 +97,14 @@ body{
 }
 
 .myinfo{
+    width: 100%;
     position: absolute !important;
     bottom: 0;
+}
+.myinfo2{
+    width: auto;
+    position: absolute !important;
+    bottom: auto;
 }
 
 .info_img{
