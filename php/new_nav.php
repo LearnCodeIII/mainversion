@@ -85,10 +85,17 @@
                     <div id="collapse4" class="collapse <?= $groupname == "article"?"show":""; ?>" aria-labelledby="heading4" data-parent="#accordionExample">
                         <div class="card-body">
                             <ul>
+<<<<<<< HEAD
                                 <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a href="article_list.php">新聞列表</a></li>
                                 <li class="<?= $pagename == "article_search"?"thisPage":""; ?>"><a href="article_search.php">新聞搜尋</a></li>
                                 <li class="<?= $pagename == "comment_list"?"thisPage":""; ?>"><a href="comment_list.php">留言列表</a></li>
                                 <li class="<?= $pagename == "article_insert"?"thisPage":""; ?>"><a href="article_insert.php">新增文章</a></li>
+=======
+                                <li><a href="">新聞列表</a></li>
+                                <li><a href="">新聞搜尋</a></li>
+                                <li><a href="">留言列表</a></li>
+                                <li><a href="">新增文章</a></li>
+>>>>>>> parent of 0d6a830... ................
                             </ul>
                         </div>
                     </div>
