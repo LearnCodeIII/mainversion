@@ -3,8 +3,8 @@ $pagename = "pageMain";
 
 include __DIR__.'/PDO.php';
 ?>
-<?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./sidenav.php'?>
+<?php include __DIR__.'./new_head.php'?>
+<?php include __DIR__.'./new_nav.php'?>
 
 <!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
 <!-- <script src="../js/jquery-ui.js"></script> -->
