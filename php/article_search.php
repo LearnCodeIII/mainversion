@@ -4,8 +4,8 @@ $groupname = "article";
 
 include __DIR__.'/PDO.php';
 ?>
-<?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./sidenav.php'?>
+<?php include __DIR__.'./new_head.php'?>
+<?php include __DIR__.'./new_nav.php'?>
 
 
 <style>
