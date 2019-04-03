@@ -8,13 +8,13 @@ if(! isset($_SESSION['admin'])){
 }
 require __DIR__.'/PDO.php';
 $groupname = "member";
-$spname = 'member_list';
+$pagepname = 'member_list';
 ?>
 <?php include __DIR__.'/head.php' ?>
 <?php include __DIR__.'/nav.php' ?>
 <?php include __DIR__.'./Su_sidenav.php'?>
 <style>
-  #show_avatar{
+  #show_avatar {
     object-fit:contain;
   }
 </style>
