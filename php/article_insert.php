@@ -1,11 +1,15 @@
 <?php
-$pagename = "article_insert";
-$groupname = "article";
+$pagename = "pageMain";
 
 include __DIR__.'/PDO.php';
 ?>
 <?php include __DIR__.'./head.php'?>
+<<<<<<< HEAD
 <?php include __DIR__.'./sidenav.php'?>
+=======
+<?php include __DIR__.'./nav.php'?>
+<?php include __DIR__.'./RuthNav.php'?>
+>>>>>>> parent of 16e275e... 修改自己der部分 應該ok
 <!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
 <!-- <script src="../js/jquery-ui.js"></script> -->

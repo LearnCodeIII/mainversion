@@ -1,8 +1,7 @@
 <?php
 include __DIR__.'/PDO.php';
 
-$pagename = "article_list";
-$groupname = "article";
+$pagename = "preview";
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
