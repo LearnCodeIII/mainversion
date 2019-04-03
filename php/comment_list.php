@@ -1,5 +1,6 @@
 <?php
-$pagename = "pageMain";
+$pagename = "comment_list";
+$groupname = "article";
 
 include __DIR__.'/PDO.php';
 ?>

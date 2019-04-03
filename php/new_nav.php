@@ -271,15 +271,9 @@
                     <div id="collapse4" class="collapse " aria-labelledby="heading4" data-parent="#accordionExample2">
                         <div class="card-body">
                             <ul>
-<<<<<<< HEAD
                                 <li><a href="">新聞列表</a></li>
                                 <li><a href="">新聞搜尋</a></li>
                                 <li><a href="">留言列表</a></li>
-=======
-                                <li class="<?= $groupname == "article"?"thisPage":""; ?>"><a href="article_list.php">新聞列表</a></li>
-                                <li class=""><a href="article_search.php">新聞搜尋</a></li>
-                                <li><a href="comment_list.php">留言列表</a></li>
->>>>>>> parent of 16e275e... 修改自己der部分 應該ok
                                 <li><a href="">新增文章</a></li>
                             </ul>
                         </div>
