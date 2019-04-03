@@ -72,11 +72,11 @@
                     data-parent="#accordionExample">
                     <div class="card-body">
                         <ul>
-                            <li class="<?= $pagename == "film_main"?"thisPage":""; ?>"><a href="">影片總覽</a></li>
-                            <li class="<?= $pagename == "film_data_list"?"thisPage":""; ?>"><a href="">影片清單</a></li>
+                            <li class="<?= $pagename == "film_main"?"thisPage":""; ?>"><a href="./film_main.php">影片總覽</a></li>
+                            <li class="<?= $pagename == "film_data_list"?"thisPage":""; ?>"><a href="./film_data_list.php">影片清單</a></li>
                             <li class="<?= $pagename == "film_list_choose"?"thisPage":""; ?>"><a
-                                    href="film_data_search.php">自訂影片清單</a></li>
-                            <li class="<?= $pagename == "film_data_search"?"thisPage":""; ?>"><a href="">影片搜尋</a></li>
+                                    href="./film_list_choose.php">自訂影片清單</a></li>
+                            <li class="<?= $pagename == "film_data_search"?"thisPage":""; ?>"><a href="./film_data_search.php">影片搜尋</a></li>
                             <li class="<?= $pagename == "film_data_insert"?"thisPage":""; ?>"><a
                                     href="./film_data_insert.php">新增影片資訊</a></li>
                         </ul>
