@@ -73,10 +73,7 @@ if(isset($_SESSION['admin'])){
                     <input type="date" class="form-control" id="search_dateEnd" name="search_dateEnd">
                 </div>
 
-
-
-
-                <!-- <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
+                <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
                     <label class="btn btn-dark ">活動類型</label>               
                     <label class="btn btn-light" for="search_primary" onclick="btn_changeColor(this)">徵才資訊</label>
                     <label class="btn btn-light" for="search_success" onclick="btn_changeColor(this)">長期活動</label>
@@ -85,7 +82,7 @@ if(isset($_SESSION['admin'])){
                     <label class="btn btn-light" for="search_info" onclick="btn_changeColor(this)">電影資訊</label>
                     <label class="btn btn-light" for="search_secondary" onclick="btn_changeColor(this)">官方活動</label>
                     <label class="btn btn-light" for="search_dark" onclick="btn_changeColor(this)">維修公告</label>
-                </div> -->
+                </div>
                 <div class="btn-group mt-3 mb-3 d-flex justify-content-between" role="group">
                     <button class="btn btn-dark" type="submit" id="search_btn" >搜尋</button>
                 </div>
@@ -93,13 +90,13 @@ if(isset($_SESSION['admin'])){
                     <ul class="pagination justify-content-center" id="search_pagination">
                     </ul>
                 </nav>
-                <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_danger" value="search_danger" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_secondary" value="search_secondary" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_dark" value="search_dark" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_primary" value="primary" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_success" value="success" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_warning" value="warning" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_danger" value="danger" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_info" value="info" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_secondary" value="secondary" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_dark" value="dark" name="search_contenttype[]" hidden><br>
             </form>
             
         </div>
@@ -223,20 +220,22 @@ function hiddenSetting(){
 
 //搜尋功能
 
+search_dateStart.addEventListener("focus",function(){search_dateStart.value=""})
+search_dateEnd.addEventListener("focus",function(){search_dateEnd.value=""})
+
 const search_btn = document.querySelector('#search_btn');
  
 const searchForm = () =>{
-    console.log('GO!')
     if(search_keyword.value=="" && search_dateStart.value =="" && search_dateEnd.value ==""){
         search_keyword.value=="";
-        search_dateStart.value ="1000-01-01";
-        search_dateEnd.value ="9999-01-01";
+        search_dateStart.value ="1970-01-01";
+        search_dateEnd.value ="2100-01-01";
     }
     if(search_dateStart.value ==""){
-        search_dateStart.value ="1000-01-01";
+        search_dateStart.value ="1970-01-01";
     }
     if(search_dateEnd.value ==""){
-        search_dateEnd.value ="9999-01-01";
+        search_dateEnd.value ="2100-01-01";
     }
 
 
@@ -254,10 +253,10 @@ const searchForm = () =>{
     .then(response=>{return response.json();})
     .then(json=>{
         ori_data = json;
-        console.log(ori_data);
-        
-        
+        search_dateStart.value=ori_data['Code']['search_dateStart']
+        search_dateEnd.value=ori_data['Code']['search_dateEnd']
         let str='';
+
         for(let d of ori_data.data){
 
             if(d.contenttype.indexOf('primary')>-1){
@@ -286,7 +285,6 @@ const searchForm = () =>{
 
         }
 
-        console.log(ori_data);
         
         data_body.innerHTML = str;
         
@@ -308,7 +306,7 @@ const searchForm = () =>{
     search_dateEnd.value="";
     return false;
 };
-
+search_keyword.addEventListener("keydown",searchForm);
 window.addEventListener('hashchange',searchForm);
 searchForm();
 

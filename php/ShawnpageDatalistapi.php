@@ -37,7 +37,7 @@ if($page>$total_pages)$page=$total_pages;
 $result['page']=$page;
 
 #顯示資料
-$sql = sprintf("SELECT * FROM `activity` ORDER BY `activity`.`dateEnd` DESC LIMIT %s, %s",($page-1)*$per_page,$per_page);
+$sql = sprintf("SELECT * FROM `activity` ORDER BY `activity`.`sid` DESC LIMIT %s, %s",($page-1)*$per_page,$per_page);
 $stmt = $pdo->query($sql);
 $result['data'] = $stmt->fetchALL(PDO::FETCH_ASSOC);
 

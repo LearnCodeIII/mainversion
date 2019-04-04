@@ -1,0 +1,40 @@
+html,body{
+    background:#eee;
+    font-family:'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
+}
+.navbar {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:99;
+    background-color:rgb(39, 39, 39) !important;
+}
+.navbar-brand{
+    font-weight: bold;
+}
+.sidenav {
+    font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
+    background:rgb(39, 39, 39);
+    width:100%;
+    max-width:120px;
+    position:fixed;
+    top:56px;
+    left:0;
+    bottom:0;
+    z-index:98;
+    display:flex;
+    justify-content: center;
+    
+}
+.sidenav a {
+    color:rgb(216, 216, 216);
+}
+.dashboard {
+    position:fixed;
+    top:56px;
+    left:120px;
+    right:0;
+    bottom:auto;
+    padding:3rem;
+}

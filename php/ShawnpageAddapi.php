@@ -28,6 +28,7 @@ if(isset($_POST['name'])){
     $picture=$_POST['picture'];
     $region=$_POST['region'];
     $contenttype=implode($_POST['contenttype']);
+    $signup=implode($_POST['signup']);
 
     $_POST['picture']=isset($_POST['picture'])?$_POST['picture']:"";
     $_POST['contenttype']=isset($_POST['contenttype'])?$_POST['contenttype']:"";
@@ -44,9 +45,9 @@ if(isset($_POST['name'])){
     
 
     $sql = "INSERT INTO `activity`(
-        `name`, `content`, `dateStart`, `dateEnd`, `company` , `contenttype`, `picture` , `region`
+        `name`, `content`, `dateStart`, `dateEnd`, `company` , `contenttype`, `picture` , `region`, `signup`
         ) VALUES (
-          ?, ?, ?, ?, ? , ? , ? , ?
+          ?, ?, ?, ?, ? , ? , ? , ?, ?
         )";
 
 
@@ -60,7 +61,8 @@ if(isset($_POST['name'])){
             $_POST['company'],
             implode(",",$_POST['contenttype']),
             $_POST['picture'],
-            $_POST['region']
+            $_POST['region'],
+            implode(",",$_POST['signup'])
         ]);
 
         if($stmt->rowCount()==1){

@@ -18,7 +18,7 @@ $result = [
 	"totalPages" => 0,
 	"Msg" => 0,
 	"Code" => 0,
-	"data" => []
+	"data" => [],
 ];
 
 $_POST['search_contenttype']=isset($_POST['search_contenttype'])?$_POST['search_contenttype']:"";
@@ -27,7 +27,7 @@ $result['Code']=[
 'search_keyword'=>$_POST['search_keyword'],
 'search_dateStart'=>$_POST['search_dateStart'],
 'search_dateEnd'=>$_POST['search_dateEnd'],
-
+'search_contenttype'=>$_POST['search_contenttype']
 ];
 
 
@@ -67,7 +67,7 @@ if(isset($_POST['search_keyword'])){
 	$result['page']=$page;
 
 	#顯示資料
-	$sql = sprintf("SELECT * FROM `activity` WHERE (`name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword)  AND `dateStart` >= :search_dateStart  AND `dateEnd` <= :search_dateEnd ORDER BY `activity`.`dateEnd` DESC LIMIT %s, %s",($page-1)*$per_page,$per_page);
+	$sql = sprintf("SELECT * FROM `activity` WHERE (`name` LIKE :search_keyword OR `content` LIKE :search_keyword OR `company` LIKE :search_keyword OR `region` LIKE :search_keyword)  AND `dateStart` >= :search_dateStart  AND `dateEnd` <= :search_dateEnd ORDER BY `activity`.`sid` DESC LIMIT %s, %s",($page-1)*$per_page,$per_page);
 	$stmt = $pdo->prepare($sql);
 	$stmt->bindParam(":search_keyword",$search_keyword);
 	$stmt->bindParam(":search_dateStart",$search_dateStart);
