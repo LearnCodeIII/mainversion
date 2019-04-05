@@ -1,6 +1,5 @@
 <?php
 //TODO 設定管理權限使用
-// include __DIR__ . '/__cred.php';
 include __DIR__ . '/PDO.php';
 
 if(isset($_SESSION["admin"])){

@@ -1,6 +1,5 @@
 <?php
-$pagename = "pageMain";
-// include __DIR__ . '/__cred.php';
+$pagename = "Roy_datapreview";
 include __DIR__ . '/PDO.php';
 if(!isset($_SESSION["admin"])){
     header('Location: login.php');
@@ -8,8 +7,7 @@ if(!isset($_SESSION["admin"])){
 
 ?>
 <?php include __DIR__ . './head.php'?>
-<?php include __DIR__ . './nav.php'?>
-<?php include __DIR__ . './Roysidenav.php'?>
+<?php include __DIR__ . './sidenav.php'?>
 
 <section class="dashboard">
     <div class="container-fluid ">
@@ -77,13 +75,13 @@ if (!isNaN(sid)) {
             }
             review_body.innerHTML = str;
             
-            if (obj.success) {
-                info_bar.className = 'alert alert-success';
-                info_bar.innerHTML = '資料讀取成功';
-            } else {
-                info_bar.className = 'alert alert-danger';
-                info_bar.innerHTML = obj.errorMsg;
-            }
+            // if (obj.success) {
+            //     info_bar.className = 'alert alert-success';
+            //     info_bar.innerHTML = '資料讀取成功';
+            // } else {
+            //     info_bar.className = 'alert alert-danger';
+            //     info_bar.innerHTML = obj.errorMsg;
+            // }
         });
 } else {
     info_bar.className = 'alert alert-danger';

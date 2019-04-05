@@ -1,7 +1,6 @@
 <?php
-// require __DIR__. '/__cred.php';
 require __DIR__. '/PDO.php';
-$page_name = 'data_edit';
+$page_name = 'Roy_data_edit';
 
 if(!isset($_SESSION["admin"])){
     header('Location: login.php');
