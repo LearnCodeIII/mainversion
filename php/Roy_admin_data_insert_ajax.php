@@ -1,11 +1,6 @@
 <?php
-$pagename = "pageMain";
-// include __DIR__ . '/__cred.php';
+$pagename = "Roy_admin_data_insert_ajax";
 include __DIR__ . '/PDO.php';
-
-// if($_SESSION["admin"]!=="roy"){
-//     header('Location: login.php');
-// }
 
 if (isset($_SESSION["admin"])) {
     $k = $_SESSION["admin"];
@@ -22,16 +17,20 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 }
 ?>
 <?php include __DIR__ . './head.php'?>
-<?php include __DIR__ . './nav.php'?>
-<?php include __DIR__ . './Roysidenav.php'?>
+<?php include __DIR__ . './sidenav.php'?>
 
 <head>
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="../js/sweet.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- FANCYBOX -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script>
@@ -55,6 +54,10 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
     });
     </script>
     <style>
+    body {
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+
     .form-group small {
         color: red !important;
     }
@@ -156,8 +159,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 </head>
 <section class="dashboard">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row ">
+            <div class="col-lg-8 stylenone">
                 <div id="info_bar" class="alert alert-success" role="alert" style="display: none">
                 </div>
                 <div class="card">
@@ -166,68 +169,14 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                         </h5>
                         <form name="form1" method="post" onsubmit="return checkForm();">
                             <input type="hidden" name="checkme" value="check123">
-                            <div class="container  px-0 d-flex justify-content-between">
-                                <div class="info-box px-0 col-lg-4">
-                                    <div class="form-group ">
-                                        <label for="issuer">登入帳號</label>
-                                        <input type="text" readonly class="form-control" id="issuer" name="issuer"
-                                            placeholder="<?=$k?>" value="<?=$k?>">
-                                        <small id="issuerHelp" class="form-text text-muted"></small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="w_film">觀看電影</label>
-                                        <select class="form-control" id="w_film" name="w_film">
-                                            <!-- 表單內容由API串接生成 -->
-                                        </select>
-                                        <small id="w_filmHelp" class="form-text text-muted"></small>
-                                    </div>
-                                    <div class="form-group">
-                                        <!-- <label for="film_rate">電影評分INPUT</label> -->
-                                        <input type="hidden" class="form-control" id="film_rate" name="film_rate"
-                                            placeholder="" value="">
-
-                                        <small id="film_rateHelp" class="form-text text-muted"></small>
-                                    </div>
-                                    <div class="form-group position-relative">
-                                        <label for="film_fav_count ">電影評分</label>
-                                        <div class="starcontainer ">
-                                            <!-- 用JQ生成星星 -->
-                                            <div
-                                                class="d-flex starbox  position-absolute justify-content-between marginnone font_star">
-                                            </div>
-                                            <div
-                                                class="d-flex starbox2  position-absolute justify-content-between marginnone font_star">
-                                            </div>
-                                            <div
-                                                class="d-flex starbox3  position-absolute justify-content-between marginnone font_star">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group filmcheck">
-                                        <label for="film_fav_count">電影最愛</label>
-                                        <input type="hidden" name="film_fav_count" id="film_fav_countX">
-                                        <input type="checkbox" id="film_fav_count" class="d-none">
-                                        <!-- 設兩個不同ID一個用於NAME送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
-                                        <div class="heartcontainer position-relative">
-                                            <div class="heartbox3">
-                                                <span><i class="fas fa-heart position-absolute"></i></span>
-                                            </div>
-                                            <div class="heartbox4">
-                                                <span><i class="fas fa-heart position-absolute"></i></span>
-                                            </div>
-                                        </div>
-                                        <small id="film_fav_countHelp" class="form-text text-muted"></small>
-                                    </div>
-
-
+                            <div class="container  px-0 justify-content-between">
+                                <div class="info-box d-flex px-0 col-lg-6 justify-content-between">
                                     <div class="form-group ">
                                         <label for="w_date">觀看日期</label>
                                         <input type="text" class="form-control bg-white" id="w_date" name="w_date"
                                             placeholder="" value="" readonly>
                                         <small id="w_dateHelp" class="form-text text-muted"></small>
                                     </div>
-                                </div>
-                                <div class="info-box px-0 col-lg-4">
                                     <div class="form-group spoilerscheck">
                                         <label for="re_spoilers">是否爆雷</label>
                                         <input type="hidden" name="re_spoilers" id="re_spoilersX">
@@ -236,7 +185,6 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         <div class="thundercontainer position-relative">
                                             <div class="thunderbox1">
                                                 <span><i class="fas fa-bolt position-absolute"></i></span>
-
                                             </div>
                                             <div class="thunderbox2">
                                                 <span><i class="fas fa-bolt position-absolute"></i></span>
@@ -244,97 +192,184 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                         </div>
                                         <small id="re_spoilersHelp" class="form-text text-muted"></small>
                                     </div>
-                                    <div class="form-group ">
-                                        <label for="w_cinema">觀看戲院</label>
-                                        <select class="form-control" id="w_cinema" name="w_cinema">
-                                            <!-- 表單內容由API串接生成 -->
-                                        </select>
-                                        <small id="w_cinemaHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="issuerarea d-flex col-lg-6 p-0 justify-content-between">
+                                    <div class="form-group  p-0 m-0">
+                                        <label for="issuer">登入帳號</label>
+                                        <input type="text" readonly class="form-control" id="issuer" name="issuer"
+                                            placeholder="<?=$k?>" value="<?=$k?>">
+                                        <small id="issuerHelp" class="form-text text-muted"></small>
                                     </div>
+                                    <div class="card p-1" style="width: 5rem; height: 5rem">
+                                        <img id="currentavatar" class="card-img-top" src="" alt="Card image cap">
 
-                                    <div class="form-group">
-                                        <!-- <label for="film_rate">戲院評分INPUT</label> -->
-                                        <input type="hidden" class="form-control" id="cinema_rate" name="cinema_rate"
-                                            placeholder="" value="">
-                                        <small id="cinema_rateHelp" class="form-text text-muted"></small>
-                                    </div>
-                                    <div class="form-group position-relative">
-                                        <label for="cinema_rate">戲院評分</label>
-                                        <div class="starcontainer ">
-                                            <!-- 用JQ生成星星 -->
-                                            <div
-                                                class="d-flex starbox4  position-absolute justify-content-between marginnone font_star">
-                                            </div>
-                                            <div
-                                                class="d-flex starbox5  position-absolute justify-content-between marginnone font_star">
-                                            </div>
-                                            <div
-                                                class="d-flex starbox6  position-absolute justify-content-between marginnone font_star">
-                                            </div>
-                                        </div>
-                                        <small id="cinema_rateHelp" class="form-text text-muted"></small>
-                                    </div>
-                                    <div class="form-group cinemacheck">
-                                        <label for="cinema_push_count">戲院最愛</label>
-                                        <input type="hidden" name="cinema_push_count" id="cinema_push_countX">
-                                        <input type="checkbox" id="cinema_push_count" class="d-none">
-                                        <!-- 設兩個相同ID一個用於送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
-                                        <div class="heartcontainer position-relative">
-                                            <div class="heartbox1">
-                                                <span><i class="fas fa-heart position-absolute"></i></span>
-                                            </div>
-                                            <div class="heartbox2">
-                                                <span><i class="fas fa-heart position-absolute"></i></span>
-                                            </div>
-                                        </div>
-                                        <small id="cinema_push_countHelp" class="form-text text-muted"></small>
                                     </div>
                                 </div>
-                                <div class="pic-pre px-0 col-lg-3 d-flex justify-content-center">
-                                    <div class="card border-0" style="width: 18rem; ">
-                                        <div class=" text-center ">
-                                            <h5 class="card-title card_name"></h5>
+                                <div class="form-group my-3">
+                                    <label for="headline">影評標題</label>
+                                    <input type="text" class="form-control" id="headline" name="headline" placeholder=""
+                                        value="">
+                                    <small id="headlineHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="filmarea d-flex">
+                                    <div class="info-box px-0 col-lg-8 ">
+
+                                        <div class="form-group">
+                                            <label for="w_film">觀看電影</label>
+                                            <select class="form-control" id="w_film" name="w_film">
+                                                <!-- 表單內容由API串接生成 -->
+                                            </select>
+                                            <small id="w_filmHelp" class="form-text text-muted"></small>
                                         </div>
-                                        <img id="prepic" src="" class="card-img-top stylenone" alt=""
-                                            style="width: 12rem;">
+                                        <div class="form-group">
+                                            <!-- <label for="film_rate">電影評分INPUT</label> -->
+                                            <input type="hidden" class="form-control" id="film_rate" name="film_rate"
+                                                placeholder="" value="">
+
+                                            <small id="film_rateHelp" class="form-text text-muted"></small>
+                                        </div>
+                                        <div class="filmratingbox d-flex ">
+                                            <div class="form-group col-lg-8 position-relative stylenone">
+                                                <label for="film_fav_count ">電影評分</label>
+                                                <div class="starcontainer ">
+                                                    <!-- 用JQ生成星星 -->
+                                                    <div
+                                                        class="d-flex starbox  position-absolute justify-content-between marginnone font_star">
+                                                    </div>
+                                                    <div
+                                                        class="d-flex starbox2  position-absolute justify-content-between marginnone font_star">
+                                                    </div>
+                                                    <div
+                                                        class="d-flex starbox3  position-absolute justify-content-between marginnone font_star">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-lg-4 filmcheck text-center">
+                                                <label for="film_fav_count">電影最愛</label>
+                                                <input type="hidden" name="film_fav_count" id="film_fav_countX">
+                                                <input type="checkbox" id="film_fav_count" class="d-none">
+                                                <!-- 設兩個不同ID一個用於NAME送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
+                                                <div class="heartcontainer position-relative">
+                                                    <div class="heartbox3">
+                                                        <span><i class="fas fa-heart position-absolute"></i></span>
+                                                    </div>
+                                                    <div class="heartbox4">
+                                                        <span><i class="fas fa-heart position-absolute"></i></span>
+                                                    </div>
+                                                </div>
+                                                <small id="film_fav_countHelp" class="form-text text-muted"></small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="review">電影評論</label>
+                                            <!-- <textarea class="form-control" id="review" name="review" cols="30" rows="3"></textarea> -->
+                                            <textarea class="form-control textrowgrow" name="review" id="review"
+                                                cols="30" rows="5"></textarea>
+                                            <small id="reviewHelp" class="form-text text-muted"></small>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="pic-pre px-0 py-1 col-lg-4 d-flex justify-content-end stylenone align-items-center">
+                                        <div class="card border-0 text-right " style="width: 16rem; max-height:30rem">
+                                            <div class=" d-none ">
+                                                <h5 class="card-title card_name"></h5>
+                                            </div>
+                                            <a id="filmfancybox" class="fancyboxiframe " href="">
+                                                <img id="prepic" src="" class="card-img-top stylenone " alt=""
+                                                    style="width: 12rem;">
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="pic-pre px-0 col-lg-3 d-flex justify-content-center">
-                                <div class="card border-0" style="width: 18rem; ">
-                                    <div class=" text-center ">
-                                        <h5 class="card-title card_name_cinema"></h5>
+
+
+                                <div class="cinemaarea d-flex">
+                                    <div class="info-box px-0 col-lg-8">
+                                        <div class="form-group ">
+                                            <label for="w_cinema">觀看戲院</label>
+                                            <select class="form-control" id="w_cinema" name="w_cinema">
+                                                <!-- 表單內容由API串接生成 -->
+                                            </select>
+                                            <small id="w_cinemaHelp" class="form-text text-muted"></small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <!-- <label for="film_rate">戲院評分INPUT</label> -->
+                                            <input type="hidden" class="form-control" id="cinema_rate"
+                                                name="cinema_rate" placeholder="" value="">
+                                            <small id="cinema_rateHelp" class="form-text text-muted"></small>
+                                        </div>
+                                        <div class="cinemaratebox d-flex">
+                                            <div class="form-group col-lg-8 position-relative stylenone">
+                                                <label for="cinema_rate">戲院評分</label>
+                                                <div class="starcontainer ">
+                                                    <!-- 用JQ生成星星 -->
+                                                    <div
+                                                        class="d-flex starbox4  position-absolute justify-content-between marginnone font_star">
+                                                    </div>
+                                                    <div
+                                                        class="d-flex starbox5  position-absolute justify-content-between marginnone font_star">
+                                                    </div>
+                                                    <div
+                                                        class="d-flex starbox6  position-absolute justify-content-between marginnone font_star">
+                                                    </div>
+                                                </div>
+                                                <small id="cinema_rateHelp" class="form-text text-muted"></small>
+                                            </div>
+                                            <div class="form-group col-lg-4 cinemacheck text-center">
+                                                <label for="cinema_push_count">戲院最愛</label>
+                                                <input type="hidden" name="cinema_push_count" id="cinema_push_countX">
+                                                <input type="checkbox" id="cinema_push_count" class="d-none">
+                                                <!-- 設兩個相同ID一個用於送資料，一個用於顯示，避免未選無法SUBMIT，最後再用D_NONE隱藏 -->
+                                                <div class="heartcontainer position-relative">
+                                                    <div class="heartbox1">
+                                                        <span><i class="fas fa-heart position-absolute"></i></span>
+                                                    </div>
+                                                    <div class="heartbox2">
+                                                        <span><i class="fas fa-heart position-absolute"></i></span>
+                                                    </div>
+                                                </div>
+                                                <small id="cinema_push_countHelp" class="form-text text-muted"></small>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <img id="cinema_prepic" src="" class="card-img-top stylenone" alt=""
-                                        style="width: 12rem;">
+                                    <div class="pic-pre py-1 col-lg-4 d-flex stylenone align-items-center">
+                                        <div class="card border-0 text-right" style="width: 18rem; max-height:18rem ">
+                                            <div class="  d-none">
+                                                <h5 class="card-title card_name_cinema"></h5>
+                                            </div>
+                                            <a id="cinemafancybox" class="fancyboxiframe" href="">
+                                                <img id="cinema_prepic" src="" class="card-img-top text-right" alt=""
+                                                    style="width: 12rem; height:10rem">
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="headline">影評標題</label>
-                                <input type="text" class="form-control" id="headline" name="headline" placeholder=""
-                                    value="">
-                                <small id="headlineHelp" class="form-text text-muted"></small>
-                            </div>
-                            <div class="form-group ">
-                                <label for="review">電影評論</label>
-                                <!-- <textarea class="form-control" id="review" name="review" cols="30" rows="3"></textarea> -->
-                                <textarea class="form-control" name="review" id="review" cols="30" rows="3"></textarea>
-                                <small id="reviewHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group ">
                                 <label for="cinema_comment">戲院評論</label>
-                                <textarea class="form-control" name="cinema_comment" id="cinema_comment" cols="30"
-                                    rows="3"></textarea>
+                                <textarea class="form-control textrowgrow" name="cinema_comment" id="cinema_comment"
+                                    cols="30" rows="5"></textarea>
                                 <small id="reviewHelp" class="form-text text-muted"></small>
                             </div>
+
+
+
+
                             <div class="form-group">
-                                <label for="intro_pic ">圖片</label>
+                                <!-- <label for="intro_pic ">圖片</label> -->
                                 <figure>
-                                    <img id="myimg" src="" alt="" width="200px">
+                                    <img id="myimg" src="" alt="" width="100%">
                                 </figure>
-                                <!-- 如果不換圖片無法提交的BUG -->
-                                <input type="file" class="form-control" id="intro_pic" name="intro_pic" placeholder=""
-                                    value="">
+                                <div class="custom-file">
+                                    <!-- 要包BS LABEL才能正常顯示 -->
+                                    <label class="custom-file-label" for="intro_pic">上傳圖片</label>
+                                    <!-- 將上傳圖片與上傳圖片檔案分開，如此不用夾帶檔案也能正常送表單，但是上傳圖片API與送表單API要分開 -->
+                                    <input type="file" class="custom-file-input" id="intro_picX">
+                                    <input type="text" class="form-control" id="intro_pic" name="intro_pic"
+                                        placeholder="" value="" hidden>
+                                </div>
                                 <small id="intro_picHelp" class="form-text text-muted"></small>
                             </div>
 
@@ -347,8 +382,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
         </div>
 
 
-
-
+        <!-- <a id="iframe" href="http://localhost/20190404/php/film_data_preview.php?sid=3">This goes to
+            iframe</a> -->
     </div>
 </section>
 
@@ -357,13 +392,15 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
 const myimg = document.querySelector("#myimg");
 const intro_pic = document.querySelector("#intro_pic");
 
-intro_pic.addEventListener("change", event => {
+// 上傳圖片，ID與送DATABASE要不同
+const intro_picupload = document.querySelector("#intro_picX");
+intro_picupload.addEventListener("change", event => {
     // 當偵測到有變更後，觸發箭頭韓式EVENT
     //console.log(event.target);
     const fd = new FormData();
 
-    fd.append('intro_pic', intro_pic.files[0]);
-    fetch('Roy_data_insert_api.php', {
+    fd.append('intro_picupload', intro_picupload.files[0]);
+    fetch('Roy_data_img_upload_api.php', {
             // 將轉碼也寫在同隻API
             method: 'POST',
             body: fd
@@ -373,6 +410,7 @@ intro_pic.addEventListener("change", event => {
             console.log(obj);
             myimg.setAttribute('src', '../pic/forum/' + obj.filename);
             // 要指定好變更後的路徑
+            intro_pic.value = obj.filename
         });
 })
 
@@ -482,39 +520,89 @@ const checkForm = () => {
 
 
     if (isPassed) {
+        // 上傳前確認
+        Swal.fire({
+            title: '是否確認上傳?',
+            text: "請點選確認繼續或取消離開",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確認',
+            cancelButtonText: '取消',
 
-        // 文字編輯器要放在NEWFORMDATA前面，要先用下方方式抓取送出的文章內容，才不會要送兩次
-        // const edt = document.querySelector('#review')
-        // console.log(edt);
-        // edt.innerHTML += tinyMCE.activeEditor.getContent();
+        }).then((result) => {
+            // 確認有按下上傳確認鍵後開始FETCH
+            if (result.value) {
+                // 文字編輯器要放在NEWFORMDATA前面，要先用下方方式抓取送出的文章內容，才不會要送兩次
+                // const edt = document.querySelector('#review')
+                // console.log(edt);
+                // edt.innerHTML += tinyMCE.activeEditor.getContent();
 
-        let form = new FormData(document.form1);
 
-        submit_btn.style.display = 'none';
+                let form = new FormData(document.form1);
+                submit_btn.style.display = 'none';
+                fetch('Roy_data_insert_api.php', {
+                        method: 'POST',
+                        body: form
+                    })
+                    .then(response => response.json())
+                    .then(obj => {
+                        console.log(obj);
+                        info_bar.style.display = 'block';
+                        if (obj.success) {
+                            info_bar.className = 'alert alert-success';
+                            info_bar.innerHTML = '資料新增成功';
+                            func = () => {
+                                location.href = "Roy_datalist.php";
+                            }
+                            setTimeout(() => {
+                                func();
+                            }, 5000);
+                        } else {
+                            info_bar.className = 'alert alert-danger';
+                            info_bar.innerHTML = obj.errorMsg;
+                        }
+                        submit_btn.style.display = 'block';
+                    });
 
-        fetch('Roy_data_insert_api.php', {
-                method: 'POST',
-                body: form
-            })
-            .then(response => response.json())
-            .then(obj => {
-                console.log(obj);
-                info_bar.style.display = 'block';
-                if (obj.success) {
-                    info_bar.className = 'alert alert-success';
-                    info_bar.innerHTML = '資料新增成功';
-                    // func = () => {
-                    //     location.href = "Roy_datalist.php";
-                    // }
-                    // setTimeout(() => {
-                    //     func();
-                    // }, 5000);
-                } else {
-                    info_bar.className = 'alert alert-danger';
-                    info_bar.innerHTML = obj.errorMsg;
-                }
-                submit_btn.style.display = 'block';
-            });
+                // 跳出結果確認視窗,並倒數
+                let timerInterval
+                Swal.fire({
+                    // 大括號設定內容
+                    type: "success",
+                    confirmButtonText: '確認',
+                    title: '成功',
+                    text: "檔案已上傳完成，將在五秒後跳轉",
+                    // 顯示圖片類型
+                    // type: 'success',
+                    // 倒數計時
+                    html: '檔案已上傳完成，將在<strong class="submitcheck"></strong>秒後跳轉<br><br>',
+                    timer: 5100,
+                    onBeforeOpen: () => {
+                        const content = Swal.getContent()
+                        const $ = content.querySelector.bind(content)
+                        timerInterval = setInterval(() => {
+                            Swal.getContent().querySelector('strong.submitcheck')
+                                .textContent = (Swal.getTimerLeft() / 1000)
+                                .toFixed(0)
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    // 如果點選確認提前跳轉
+                    location.href = "Roy_datalist.php"
+                })
+            }
+        })
+    } else {
+        Swal.fire({
+            type: 'error',
+            title: '錯誤',
+            text: '請確認是否輸入正確資訊',
+        })
     }
     return false;
 };
@@ -564,13 +652,48 @@ w_cinema.addEventListener('change', event => {
     console.log(j)
     let cinemaprepicindex = cinema_data.c_data[j]["img"]
     // 將索引中物件裡的圖片名稱抓出來
-    console.log(cinemaprepicindex);
     cinema_prepic.setAttribute("src", '../pic/cinema/' + cinemaprepicindex)
+
+    // 抓到當筆資料SID，SQL記得要加撈SID
+    let cinema_prepicsid = cinema_data.c_data[j]["sid"]
+    // 根據得到的SID值將圖片上的連結導向戲院串接API
+    cinemafancybox.setAttribute("href", "cinema_ifmt_list_review.php?sid=" + cinema_prepicsid)
+    console.log(cinema_prepicsid);
+
 })
 // // 下拉選單換後選到對應值後寫入HTML
 // w_cinema.addEventListener("change", event => {
 //     card_name_cinema.innerHTML = w_cinema.value;
 // })
+
+var memberindex = [];
+let member_data;
+fetch("Roy_datalist_api.php")
+    .then(response => response.json())
+    .then(json => {
+        member_data = json;
+        memberindex = member_data.m_data
+        console.log(memberindex);
+        // console.log(issuer.value);
+
+        // 抓到目前登入者跟資料庫對應到的物件並回傳物件
+        function isLoginMember(memberobj) {
+            return memberobj.name === issuer.value;
+        }
+        // 搜尋符合條件的物件        
+        var currentissuer = memberindex.find(isLoginMember)
+        if (currentissuer) {
+            console.log(currentissuer.avatar);
+            // 抓出物件中大頭貼照片並傳至HTML中
+            currentavatar.setAttribute("src", '../pic/avatar/' + currentissuer.avatar)
+        }else{
+            // 如沒符合條件則設為預設圖片
+            currentavatar.setAttribute("src", '../pic/avatar/null.jpg')
+        }
+    })
+
+
+
 
 
 
@@ -587,6 +710,9 @@ const card_name1 = document.querySelector('.card_name1');
 var k = 0;
 // 用來抓下拉捲單變更回傳之物件索引值
 // console.log(k)
+
+var currentfilmsid = "";
+// 抓當下圖片SID
 
 // 抓到所選電影CHANGE對應到的索引值------------變動圖片必要內容
 w_film.addEventListener('change', event => {
@@ -609,7 +735,15 @@ w_film.addEventListener('change', event => {
     // 將索引中物件裡的圖片名稱抓出來
     console.log(prepicindex);
     prepic.setAttribute("src", '../pic/film_upload/' + prepicindex)
+
+
+    // 抓到當筆資料SID,SQL記得要加撈SID
+    let prepicsid = film_data.f_data[k]["sid"]
+    // 根據得到的SID值將圖片上的連結導向電影介紹串接API
+    filmfancybox.setAttribute("href", "film_data_preview.php?sid=" + prepicsid)
+    currentfilmsid = prepicsid
 })
+console.log(currentfilmsid)
 
 
 // 電影下拉選單
@@ -630,6 +764,21 @@ w_film.addEventListener("change", event => {
     card_name.innerHTML = w_film.value;
 })
 
+// 控制FANCYBOX，用來塞電影圖片點開預覽電影相關資訊
+$(".fancyboxiframe").fancybox({
+    "fitToView": false,
+    "autoSize": false,
+    'transitionIn': 'none',
+    'transitionOut': 'none',
+    'type': 'iframe',
+
+    // 要控制FANCYBOX CSS要用下面的方式，在上面寫用括號或沒括號"WIDTH:XXX"無效
+    iframe: {
+        css: {
+            height: '1000px',
+        }
+    }
+})
 
 
 // // 抓到所選電影CHANGE對應到的索引值
@@ -658,7 +807,8 @@ const cinema_push_count = document.querySelector("#cinema_push_count")
 
 // 產生10顆星星HTML
 for (let font_star_num = 0; font_star_num < 10; font_star_num++) {
-    $(".font_star").append("<span class='fas fa-star'></span>")
+    // 要家FLEXFILL增加感應區
+    $(".font_star").append("<span class='fas fa-star flex-fill'></span>")
 }
 
 
@@ -820,18 +970,14 @@ $(".thunderbox2 i").click(function() {
     console.log(re_spoilersX);
 })
 
-
-
-
-
-
-$("#submit_btn").click(function() {
-    Swal.fire({
-        title: 'Error!',
-        text: 'Do you want to continue',
-        type: 'error',
-        confirmButtonText: 'Cool'
-    })
+// 點TEXT AREA增加列高
+$("textarea.textrowgrow").on({
+    focus: function() {
+        $(this).attr("rows", "10");
+    },
+    blur: function() {
+        $(this).attr("rows", "4");
+    }
 })
 </script>
 <?php include __DIR__ . './foot.php'?>

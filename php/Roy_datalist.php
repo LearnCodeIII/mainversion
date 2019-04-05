@@ -1,17 +1,17 @@
 <?php
-$pagename = "forum";
-$groupname = "forum";
-// include __DIR__ . '/__cred.php';
+$pagename = "Roy_datalist";
 include __DIR__ . '/PDO.php';
 
-if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION["theater"])){
+if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION["theater"])) {
     header('Location: login.php');
 }
 ?>
 <?php include __DIR__ . './head.php'?>
-<?php include __DIR__ . './nav.php'?>
-<?php include __DIR__ . './Roysidenav.php'?>
+<?php include __DIR__ . './sidenav.php'?>
 
+<head>
+    <script src="../js/sweet.js"></script>
+</head>
 
 <style>
 /* .review-content {
@@ -19,7 +19,7 @@ if(!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSION
     表頭欄寬
 } */
 </style>
-<section class="dashboard <?=isset($_SESSION["admin"])?"":"d-none" ?>">
+<section class="dashboard <?=isset($_SESSION["admin"]) ? "" : "d-none"?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-center">
@@ -104,7 +104,7 @@ const tr_str = ` <tr>
                         <a href="./Roy_datapreview.php?sid=<%=sid%>">
                             <i class="fas fa-eye"></i>
                         </a>
-            
+
                     </td>
                     <td><a href="./Roy_data_edit.php?sid=<%=sid%>"><i class="far fa-edit"></i></a></td>
                     <td><%=sid%></td>
@@ -178,13 +178,47 @@ const tr_str = ` <tr>
 
 //刪除提醒
 function delete_it(sid) {
-    if (confirm("確定要刪除編號" + sid + "的資料嗎")) {
-        location.href = "Roy_data_delete.php?sid=" + sid;
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false,
+    })
+    swalWithBootstrapButtons.fire({
+        title: "確定要刪除編號" + sid + "的資料嗎",
+        text: "刪除後將無法回復",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '確認刪除',
+        cancelButtonText: '取消刪除',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            swalWithBootstrapButtons.fire({
+                title: '刪除成功',
+                text: "您的檔案已被刪除",
+                confirmButtonText: '確認',
+                type: 'success'
+            }).then((result) => {
+                location.href = "Roy_data_delete.php?sid=" + sid;
+            })
+        } else if (
+            // Read more about handling dismissals
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+                title: '取消成功',
+                text: "檔案未被刪除",
+                confirmButtonText: '確認',
+                type: 'error'
+            })
+        }
+    })
 }
+
+
 const tr_func = _.template(tr_str);
-
-
 //分頁按鈕生成
 const pagi_str = `<li class="page-item  <%= active%>" style="visibility:<%= h %>">
                     <a class="page-link" href="#<%= page %>"><%= page %></a>

@@ -1,5 +1,4 @@
 <?php
-// require __DIR__. '/__cred.php';
 require __DIR__. './PDO.php';
 
 header('Content-Type: application/json');
