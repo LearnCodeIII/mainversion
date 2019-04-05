@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="../css/new_css.css">
+    <link rel="stylesheet" href="../css/main.css">
     <script src="../js/jquery-3.3.1.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/underscore.js"></script>
     <script src="../js/bs-custom-file-input.min.js"></script>
+    <link rel="stylesheet" href="../vegas/vegas.min.css">
+    <script src="../vegas/vegas.min.js"></script>
     
 
 </head>
