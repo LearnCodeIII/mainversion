@@ -10,31 +10,31 @@ include __DIR__.'./head.php';
 include __DIR__.'./sidenav.php'
 
 
-if(isset($_SESSION['admin'])){
-    $user = "小編：";
-    $user .= $_SESSION['admin'];
-    $level = 10;
+// if(isset($_SESSION['admin'])){
+//     $user = "小編：";
+//     $user .= $_SESSION['admin'];
+//     $level = 10;
     
-}else if(isset($_SESSION['theater'])){
-    $theater=$_SESSION['theater'];
-    $sql = "SELECT * FROM `cinema` where account = '$theater' ";
-    $stmt = $pdo->query($sql);
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach($rows as $row){
-        $c_sid = $row['sid'];
-        $c_user = $row['name'];
-        $c_img = $row['img'];
-        $c_taxID = $row['taxID'];
-        $c_phone = $row['phone'];
-        $c_address = $row['address'];
-        $c_intro = $row['intro'];
+// }else if(isset($_SESSION['theater'])){
+//     $theater=$_SESSION['theater'];
+//     $sql = "SELECT * FROM `cinema` where account = '$theater' ";
+//     $stmt = $pdo->query($sql);
+//     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     foreach($rows as $row){
+//         $c_sid = $row['sid'];
+//         $c_user = $row['name'];
+//         $c_img = $row['img'];
+//         $c_taxID = $row['taxID'];
+//         $c_phone = $row['phone'];
+//         $c_address = $row['address'];
+//         $c_intro = $row['intro'];
     
-    }
-    $level = 2;
-}else {
-    header("Location: ./login.php");
-    exit;
-};
+//     }
+//     $level = 2;
+// }else {
+//     header("Location: ./login.php");
+//     exit;
+// };
 
 ?>
 <section class="dashboard">
