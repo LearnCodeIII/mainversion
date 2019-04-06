@@ -37,6 +37,7 @@ include __DIR__.'./sidenav.php'
 // };
 
 ?>
+
 <section class="dashboard">
 
     <div class="row d-flex justify-content-center">
@@ -66,17 +67,16 @@ include __DIR__.'./sidenav.php'
     </div>
 
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover ">
         <thead class="thead-dark">
             <tr>
-                <th scope="col"><i class="fas fa-edit"></i></th>
-                <th scope="col"><i class="fas fa-trash-alt"></i></th>
+                <th scope="col">操作</i></th>
                 <th scope="col">影片編號</th>
                 <th scope="col">電影名稱中文</th>
                 <th scope="col">電影名稱英文</th>
-                <th scope="col">電影介紹中文</th>
-                <th scope="col">電影介紹英文</th>
-                <th scope="col">電影圖</th>
+                <th scope="col" max-width="200px">電影介紹中文</th>
+                <th scope="col" max-width="200px">電影介紹英文</th>
+                <th scope="col" max-width="120px">電影圖</th>
                 <th scope="col">電影類別</th>
                 <th scope="col">放映類型</th>
                 <th scope="col">電影分級</th>
@@ -101,6 +101,7 @@ include __DIR__.'./sidenav.php'
     <!-- </div> -->
 </section>
 
+<script src="../js/sweet.js"></script>
 <script>
     let page = 1;
     let ori_data;
@@ -120,23 +121,21 @@ include __DIR__.'./sidenav.php'
     const tr_str = `
             <tr>
                 <td>
-                    <a href="film_data_edit.php?sid=<%= sid%>"><i class="fas fa-edit"></i></a>
-                </td>
-                <td>
-                    <a href="javascript:checkDelete(<%= sid%>)"><i class="text-danger fas fa-trash-alt"></i></a>
+                    <a href="film_data_edit.php?sid=<%= sid%>"><i class="fas fa-edit h4"></i></a>
+                    <a href="javascript:checkDelete(<%= sid%>)"><i class="text-danger fas fa-trash-alt h4"></i></a>
                 </td>
                 <td><%= sid %></td>
-                <td><%= name_tw %></td>
-                <td><%= name_en %></td>
-                <td height="200px"><%= intro_tw %></td>
-                <td><%= intro_en %></td>
+                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= name_tw %>"><%= name_tw %></td>
+                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= name_en %>"><%= name_en %></td>
+                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= intro_tw %>"><%= intro_tw %></td>                                
+                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= intro_en %>"><%= intro_en %></td>
 
                 <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
 
-                <td><%= movie_genre %></td>
+                <td class="text-truncate" style="max-width: 150px;" title="<%= movie_genre %>"><%= movie_genre %></td>
                 <td><%= movie_ver %></td>
                 <td><%= movie_rating %></td>
-                <td><%= trailer %></td>
+                <td class="text-truncate" style="max-width: 150px; max-height: 150px;" title="<%= trailer %>"><%= trailer %></td>
                 <td><%= pirce %></td>
                 <td><%= schedule %></td>
                 <td><%= in_theaters %></td>
@@ -202,16 +201,16 @@ include __DIR__.'./sidenav.php'
                 //製作頁碼按鈕
                 p_btn_num = 7;//設定可顯示幾個頁碼按鈕(建議使用奇數)
                 str = '';
-                for (let i =-parseInt(p_btn_num/2); i<=parseInt(p_btn_num/2); i++) {
+                for (let i = -parseInt(p_btn_num / 2); i <= parseInt(p_btn_num / 2); i++) {
                     let active = i === 0 ? 'active' : '';
                     let vh = '';
-                    if (parseInt(ori_data.page)+i<=0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
+                    if (parseInt(ori_data.page) + i <= 0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
                         vh = 'hidden';
                     }
                     str += page_func({
                         active: active,
-                        v:vh,
-                        page: ori_data.page+i,
+                        v: vh,
+                        page: ori_data.page + i,
                     });
                 }
                 page_list.innerHTML = str;
@@ -265,16 +264,52 @@ include __DIR__.'./sidenav.php'
     };
 
 
-    //按delete時先跳出確認視窗後再刪除
+
+    //表格多出來內容用tooltip顯示
+    $('table[data-toggle="tooltip"]').tooltip("shown.bs.tooltip");
+    //但是一直沒生效 Q_Q
+
+
+    //按delete時先跳出確認視窗後再刪除()
     const checkDelete = (sid) => {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false,
+        })
 
-        if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`) == true) {
-            location.href = 'film_data_delete.php?sid=' + sid;
-        } else {
-            alert("無資料被刪除");
-        }
+        swalWithBootstrapButtons.fire({
+            title: '確定要刪除?',
+            text: "刪除就沒辦法復原了喔!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '是的，我要刪除!',
+            cancelButtonText: '我不刪了!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire({
+                    title: '已刪除',
+                    text: "這項資料已被刪除!",
+                    type: 'success',
+                    timer: 3000,
+                }).then((result) => {
+                    location.href = 'film_data_delete.php?sid=' + sid;
+                })
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    type: 'error',
+                    title: '取消刪除',
+                    text: '您的資料沒有刪除。'
+                })
+            }
+        })
+
     }
-
 
 
     window.addEventListener('hashchange', myHashChange);
