@@ -195,10 +195,12 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="pictureHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group">
-                                            <span class="input-group-text bg-dark text-white" id="inputGroupFileAddon01">活動圖片預覽</span>
+                                        <span class="input-group-text bg-dark text-white" id="inputGroupFileAddon01">活動圖片預覽</span>
+                                    </div>
+                                    <div class="imgWarp" style="height:400px width:700px;">
+                                        <img id="myimg" class="mt-3 mb-3" src="../pic/activity/<?= $row['picture'] ?>" alt="" style="height:100% width:100%;">
                                     </div>        
                                 </div>
-                                <img id="myimg" class="mt-3 mb-3" src="../pic/activity/<?= $row['picture'] ?>" alt="" style="max-height:400px max-width:700px;">
                             </div>
                             <div class="col-md-6 ">
                                 <div class="input-group mt-3">
