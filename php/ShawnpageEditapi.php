@@ -22,6 +22,7 @@ if(isset($_POST['name'])){
 	$dateEnd=$_POST['dateEnd'];
     $company=$_POST['company'];
     $contenttype=implode($_POST['contenttype']);
+    $signup=implode($_POST['signup']);
 
     $result['post']=$_POST;
 
@@ -36,7 +37,8 @@ if(isset($_POST['name'])){
         `company`=?,
         `contenttype`=?,
         `picture`=?,
-        `region`=?
+        `region`=?,
+        `signup`=?
         WHERE `sid`=?";
 
     try {
@@ -50,6 +52,7 @@ if(isset($_POST['name'])){
             implode(",",$_POST['contenttype']),
             $_POST['picture'],
             $_POST['region'],
+            implode(",",$_POST['signup']),
             $sid
         ]);
         if($stmt->rowCount()==1) {

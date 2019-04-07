@@ -97,8 +97,7 @@ const wrap_str =
         <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">收合資訊 <i class="fas fa-info-circle"></i></a></small> 
         <small class="d-flex justify-content-between">
                 
-                <div class="ml-3"><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
-                <div class="ml-3"><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
+         
         </small>
     </div>
 </div>`;

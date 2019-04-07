@@ -169,13 +169,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 if(stripos($row['signup'],"other")>-1){echo "checked";};
                                                 ?>>
                                                 <label class="form-check-label" for="signOther">是，上限人數</label>
-                                                <input class="form-check-input ml-1" type="text" id="signOtherNumber"  name="signup[]" size="3" value="
-                                                <?php
-                                                //todo 這裡還沒修好
-                                                if(stripos($row['signup'],"other")>-1){echo intval($row['signup']);};
-                                                ?>
-                                                ">
-                                                <label class="form-check-label">人。<span style="color:red">這裡還沒修好</span></label>
+                                                <input class="form-check-input ml-1" type="text" id="signOtherNumber"  name="signup[]" size="3" value="<?php
+                                                if(stripos($row['signup'],"other")>-1){echo  preg_replace('/[^\d]/','',$row['signup']);};
+                                                ?>"
+                                                >
                                             </div>
                                         </div>
                                     </div>
