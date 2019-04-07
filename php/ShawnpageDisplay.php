@@ -94,11 +94,6 @@ const wrap_str =
     
     <div class="card-footer d-flex justify-content-between bg-dark text-white" onclick="highlightContent();">
         <small >活動期限：<%= dateStart %>-<%= dateEnd %></small>
-        <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">收合資訊 <i class="fas fa-info-circle"></i></a></small> 
-        <small class="d-flex justify-content-between">
-                
-         
-        </small>
     </div>
 </div>`;
 

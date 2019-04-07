@@ -195,6 +195,7 @@ const wrap_str =
         <small class="d-flex justify-content-between <%= company %>_control total_control">
 
                 <div class="ml-3 "><a class="text-white collapsed" data-toggle="collapse" data-target="#qtcode<%=sid%>">QRCODE<i class="fas fa-qrcode ml-1" ></i></a></div> 
+                <div class="ml-3 "><a class="text-white" target="_blank" href="ShawnpageDisplay.php?sid=<%= sid %>">預覽<i class="fas fa-eye ml-1"></i></a></div> 
                 <div class="ml-3 "><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
                 <div class="ml-3 "><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
         </small>
