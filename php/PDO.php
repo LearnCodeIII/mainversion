@@ -3,8 +3,8 @@
 //設定資料庫
 $db_host='localhost';
 $db_name='movie';
-$db_user='ruruya';
-$db_pass='9527';
+$db_user='shawnlin';
+$db_pass='13879428';
 $dsn="mysql:host=${db_host};dbname=${db_name}";
 
 

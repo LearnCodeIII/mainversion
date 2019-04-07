@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/PDO.php';
 $groupname = "activity";
-
+$pagename = "ShawnpageEdit";
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 $sql = "SELECT * FROM activity WHERE sid=$sid";
@@ -15,8 +15,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./nav.php'?>
-<?php include __DIR__.'./Shawnsidenav.php'?>
+<?php include __DIR__.'./sidenav.php'?>
 <script>
     $(document).ready(function () {
   bsCustomFileInput.init()
