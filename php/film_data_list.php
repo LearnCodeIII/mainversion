@@ -119,7 +119,7 @@ include __DIR__.'./sidenav.php'
 
     //用underscore.js的template字串
     const tr_str = `
-            <tr>
+            <tr >
                 <td>
                     <a href="film_data_edit.php?sid=<%= sid%>"><i class="fas fa-edit h4"></i></a>
                     <a href="javascript:checkDelete(<%= sid%>)"><i class="text-danger fas fa-trash-alt h4"></i></a>
@@ -127,15 +127,27 @@ include __DIR__.'./sidenav.php'
                 <td><%= sid %></td>
                 <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= name_tw %>"><%= name_tw %></td>
                 <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= name_en %>"><%= name_en %></td>
-                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= intro_tw %>"><%= intro_tw %></td>                                
-                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= intro_en %>"><%= intro_en %></td>
-
+                <td >
+                    <p title="<%= intro_tw %>" class="text-truncate" style="max-width:200px;" data-toggle="tooltip" data-placement="right"><%= intro_tw %></p>
+                    <button type="button" class="btn btn-info seeAll">展開全文</button>
+                    <button type="button" style="display:none" class="btn btn-info seeAll">收合</button>
+                </td>
+                <td >
+                    <p title="<%= intro_en %>" class="text-truncate" style="max-width:200px;" data-toggle="tooltip" data-placement="right"><%= intro_en %></p>
+                    <button type="button" class="btn btn-info seeAll">展開全文</button>
+                    <button type="button" style="display:none" class="btn btn-info seeAll">收合</button>
+                </td>
+                
                 <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
 
-                <td class="text-truncate" style="max-width: 150px;" title="<%= movie_genre %>"><%= movie_genre %></td>
+                <td class="text-truncate" style="max-width: 150px;" title="<%= movie_genre %>"><%= movie_genre %>
+                    
+                </td>
                 <td><%= movie_ver %></td>
                 <td><%= movie_rating %></td>
-                <td class="text-truncate" style="max-width: 150px; max-height: 150px;" title="<%= trailer %>"><%= trailer %></td>
+                <td class="text-truncate" style="max-width: 150px; max-height: 150px;" title="<%= trailer %>">
+                    <a href="<%= trailer %>"><i class="fas fa-play-circle h4"></i></a>
+                </td>
                 <td><%= pirce %></td>
                 <td><%= schedule %></td>
                 <td><%= in_theaters %></td>
@@ -268,6 +280,15 @@ include __DIR__.'./sidenav.php'
     //表格多出來內容用tooltip顯示
     $('table[data-toggle="tooltip"]').tooltip("shown.bs.tooltip");
     //但是一直沒生效 Q_Q
+
+
+    //顯示全文按鈕
+    $("#data_body").on("click", ".seeAll", function () {
+        $(this).closest("td").find("p").toggleClass("text-truncate");
+        
+    //靠顯示隱藏製造顯示全文的按鈕文字改變的假效果
+        $(this).closest("td").find("button").toggle();
+    });
 
 
     //按delete時先跳出確認視窗後再刪除()
