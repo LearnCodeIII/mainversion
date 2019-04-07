@@ -6,7 +6,7 @@
 
 -- 資料庫相關
 -- 1.activity的照片要換掉
--- 2.cinema新增一個logo欄位
+-- 2.cinema新增一個logo欄位 / 將LOGO圖直接塞進去  有空在寫新增與編輯LOGO的功能
 -- 3.video記得先新增一個欄位叫' movie_cinema '在插入下列sql
 
 
