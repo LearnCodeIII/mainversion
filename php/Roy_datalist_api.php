@@ -14,6 +14,7 @@ include __DIR__."./PDO.php";
         "data" => [],//倒所有論壇文章陣列
         "c_data"=>[],//倒戲院名稱陣列
         "f_data"=>[],//倒電影名稱陣列
+        "m_data"=>[],//倒會員名稱陣列
         // 設定一空陣列到時候可以倒進去
         "errorCode" =>0,
         // 除錯用
@@ -67,13 +68,19 @@ include __DIR__."./PDO.php";
 
     
     //撈取戲院資訊串給INSERT戲院下拉選單
-    $cinema_sql = "SELECT `name` FROM `cinema` ";
+    $member_sql = "SELECT `sid`, `name`,`avatar`,`email` FROM `member` ";
+    $member_stmt = $pdo->query($member_sql);
+    $member_row = $member_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result["m_data"] =  $member_row;
+
+    //撈取戲院資訊串給INSERT戲院下拉選單
+    $cinema_sql = "SELECT `sid`, `name`,`img` FROM `cinema` ";
     $cinema_stmt = $pdo->query($cinema_sql);
     $cinema_row = $cinema_stmt->fetchAll(PDO::FETCH_ASSOC);
     $result["c_data"] =  $cinema_row;
     
     //撈取戲院資訊串給INSERT戲院下拉選單
-    $film_sql = "SELECT `name_tw` FROM `film_primary_table` ";
+    $film_sql = "SELECT `sid`, `name_tw`, `movie_pic` FROM `film_primary_table` ";
     $film_stmt = $pdo->query($film_sql);
     $film_row = $film_stmt->fetchAll(PDO::FETCH_ASSOC);
     $result["f_data"] =  $film_row;

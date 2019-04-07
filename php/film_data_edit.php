@@ -1,8 +1,9 @@
 <?php
 // require __DIR__. '/film_crud_session.php';
 
-require __DIR__.'/PDO.php';
+$groupname = "film";
 $page_name='film_data_edit';
+require __DIR__.'/PDO.php';
 
 $sid=isset($_GET['sid'])?intval($_GET['sid']):0;
 
@@ -16,8 +17,8 @@ if ($stamt->rowCount()==0) {
 $row = $stamt->fetch(PDO::FETCH_ASSOC);
 
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
+
 ?>
 <style>
     .form-group small {

@@ -1,12 +1,11 @@
 <?php
 require __DIR__.'/PDO.php';
 
+$groupname = "film";
 $pagename = "film_list_choose";
-// $groupname = "film";
 
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
 
 
 ?>

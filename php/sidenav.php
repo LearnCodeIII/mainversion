@@ -1,7 +1,7 @@
 <section class="accordion nav_width bg-dark">
     <div class="nav_wrapper">
         <div class="navbar-brand d-flex justify-content-center align-content-center text-light">
-            <div class="p-3">.<span>M</span>ovieee</div>
+            <div class="p-3"><a href="mainpage.php">.<span class="text-warning">M</span>ovieee</a></div>
         </div>
         <div class="bg-gradient-dark" id="accordionExample">
             <div class="card bg-dark text-right">
@@ -212,7 +212,7 @@
         </button>
     </nav>
     <div class="collapse" id="navbarToggleExternalContent">
-        <div class="nav_wrapper bg-dark">
+        <div class="nav_wrapper">
 
             <div class="bg-gradient-dark" id="accordionExample2">
                 <div class="card bg-dark">
