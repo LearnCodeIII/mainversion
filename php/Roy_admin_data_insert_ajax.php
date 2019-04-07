@@ -275,7 +275,8 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                             <div class=" d-none ">
                                                 <h5 class="card-title card_name"></h5>
                                             </div>
-                                            <a id="filmfancybox" class="fancyboxiframe " href="">
+                                            <!-- 超連結先設D-NONE避免誤觸，再用JS偵測事件REMOVE CLASS -->
+                                            <a id="filmfancybox" class="fancyboxiframe d-none" href="">
                                                 <img id="prepic" src="" class="card-img-top stylenone " alt=""
                                                     style="width: 12rem;">
                                             </a>
@@ -339,9 +340,10 @@ if (!isset($_SESSION["admin"]) && !isset($_SESSION["member"]) && !isset($_SESSIO
                                             <div class="  d-none">
                                                 <h5 class="card-title card_name_cinema"></h5>
                                             </div>
-                                            <a id="cinemafancybox" class="fancyboxiframe" href="">
-                                                <img id="cinema_prepic" src="" class="card-img-top text-right" alt=""
-                                                    style="width: 12rem; height:10rem">
+                                            <!-- 超連結先設D-NONE避免誤觸，再用JS偵測事件REMOVE CLASS -->
+                                            <a id="cinemafancybox" class="fancyboxiframe d-none" href="">
+                                                <img id="cinema_prepic" src="" class="card-img-top text-right "
+                                                    alt="" style="width: 12rem; height:10rem">
                                             </a>
                                         </div>
                                     </div>
@@ -607,6 +609,34 @@ const checkForm = () => {
     return false;
 };
 
+// 偵測登入者回傳使用者頭像
+var memberindex = [];
+let member_data;
+fetch("Roy_datalist_api.php")
+    .then(response => response.json())
+    .then(json => {
+        member_data = json;
+        memberindex = member_data.m_data
+        console.log(memberindex);
+        // console.log(issuer.value);
+
+        // 抓到目前登入者跟資料庫對應到的物件並回傳物件
+        function isLoginMember(memberobj) {
+            return memberobj.name === issuer.value;
+        }
+        // 搜尋符合條件的物件
+        var currentissuer = memberindex.find(isLoginMember)
+        if (currentissuer) {
+            console.log(currentissuer.avatar);
+            // 抓出物件中大頭貼照片並傳至HTML中
+            currentavatar.setAttribute("src", '../pic/avatar/' + currentissuer.avatar)
+        } else {
+            // 如沒符合條件則設為預設圖片
+            currentavatar.setAttribute("src", '../pic/avatar/null.jpg')
+        }
+    })
+
+
 // 戲院下拉選單
 let cinema_data;
 // 抓戲院回傳資料
@@ -646,6 +676,8 @@ w_cinema.addEventListener('change', event => {
         }
     }
 })
+
+
 // 額外加入偵測下拉選單變換後抓到索引值選取對應JPG名稱後串聯設回IMG欄------------變動圖片必要內容
 // 可根據下拉選單變動對應變更照片
 w_cinema.addEventListener('change', event => {
@@ -666,35 +698,10 @@ w_cinema.addEventListener('change', event => {
 //     card_name_cinema.innerHTML = w_cinema.value;
 // })
 
-var memberindex = [];
-let member_data;
-fetch("Roy_datalist_api.php")
-    .then(response => response.json())
-    .then(json => {
-        member_data = json;
-        memberindex = member_data.m_data
-        console.log(memberindex);
-        // console.log(issuer.value);
-
-        // 抓到目前登入者跟資料庫對應到的物件並回傳物件
-        function isLoginMember(memberobj) {
-            return memberobj.name === issuer.value;
-        }
-        // 搜尋符合條件的物件        
-        var currentissuer = memberindex.find(isLoginMember)
-        if (currentissuer) {
-            console.log(currentissuer.avatar);
-            // 抓出物件中大頭貼照片並傳至HTML中
-            currentavatar.setAttribute("src", '../pic/avatar/' + currentissuer.avatar)
-        }else{
-            // 如沒符合條件則設為預設圖片
-            currentavatar.setAttribute("src", '../pic/avatar/null.jpg')
-        }
-    })
-
-
-
-
+// CHANGE只能針對INPUT事件有效，圖片SRC改變不會有反應，因此不能直接選圖片ID偵測
+$("#w_cinema").on("change", function() {
+    $("#cinemafancybox").removeClass("d-none");
+})
 
 
 
@@ -764,7 +771,13 @@ w_film.addEventListener("change", event => {
     card_name.innerHTML = w_film.value;
 })
 
-// 控制FANCYBOX，用來塞電影圖片點開預覽電影相關資訊
+// CHANGE只能針對INPUT事件有效，圖片SRC改變不會有反應，因此不能直接選圖片ID偵測
+$("#w_film").on("change", function() {
+    $("#filmfancybox").removeClass("d-none");
+})
+
+
+// 控制FANCYBOX，用來塞電影圖片點開預覽戲院電影相關資訊
 $(".fancyboxiframe").fancybox({
     "fitToView": false,
     "autoSize": false,
