@@ -18,6 +18,7 @@ if(isset($_SESSION['admin'])){
     $user = "小編：";
     $user .= $_SESSION['admin'];
     $level = 10;
+    $user_avatar = 'null';
     
 }else if(isset($_SESSION['member'])){
     $member=$_SESSION['member'];

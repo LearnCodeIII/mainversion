@@ -10,7 +10,7 @@
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
                             aria-controls="collapse1">
-                            會員系統
+                            會員系統  <i class="fas fa-users"></i>
                         </button>
                     </h2>
                 </div>
@@ -39,7 +39,7 @@
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
                             aria-controls="collapse2">
-                            廠商系統
+                            廠商系統  <i class="fas fa-landmark"></i>
                         </button>
                     </h2>
                 </div>
@@ -62,8 +62,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
-                            aria-controls="collapse3">
-                            電影資料庫
+                            aria-controls="collapse3">電影資料庫  <i class="fas fa-film"></i> 
                         </button>
                     </h2>
                 </div>
@@ -89,7 +88,7 @@
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
                             aria-controls="collapse4">
-                            文章專區
+                            文章專區  <i class="far fa-newspaper"></i> 
                         </button>
                     </h2>
                 </div>
@@ -98,8 +97,8 @@
                     aria-labelledby="heading4" data-parent="#accordionExample">
                     <div class="card-body">
                         <ul>
-                            <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a
-                                    href="article_list.php">新聞列表</a></li>
+                            <!-- <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a
+                                    href="article_list.php">新聞列表</a></li> -->
                             <li class="<?= $pagename == "article_search"?"thisPage":""; ?>"><a
                                     href="article_search.php">新聞搜尋</a></li>
                             <li class="<?= $pagename == "comment_list"?"thisPage":""; ?>"><a
@@ -116,7 +115,7 @@
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
                             aria-controls="collapse5">
-                            活動系統
+                            活動系統  <i class="fas fa-calendar-check"></i></i>
                         </button>
                     </h2>
                 </div>
@@ -141,7 +140,7 @@
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
                             aria-controls="collapse6">
-                            廣告管理
+                            廣告管理  <i class="fas fa-ad"></i>
                         </button>
                     </h2>
                 </div>
@@ -164,7 +163,7 @@
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
                             aria-controls="collapse7">
-                            論壇管理
+                            論壇管理  <i class="fas fa-comments"></i>
                         </button>
                     </h2>
                 </div>
@@ -389,7 +388,7 @@
                 <div class="card myinfo2 bg-dark">
                     <div class="card-body d-flex align-items-center">
                         <div class="text-center info_img">
-                            <img src="../pic/avatar/null.jpg" class="img-fluid" alt="...">
+                            <img src="../pic/avatar/<?=$t_avatar?>" class="img-fluid" alt="...">
                         </div>
                         <p class="card-text text-light m-2">admin</p>
                         <div class="">
