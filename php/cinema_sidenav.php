@@ -6,7 +6,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="cinema_ifmt_list.php">戲院資訊</a>
+            <a class="nav-link" href="cinema_ifmt_list4.php">戲院資訊</a>
         </li>
     </ul>
 </nav>
