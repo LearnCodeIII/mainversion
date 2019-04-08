@@ -81,11 +81,11 @@ $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div id="edit_cards">
 
     </div>
-    <!-- <a href="#"  class="btn btn-info mx-2 trigger" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown" data-no="0" data-name="編輯測試" data-can="留言,收藏影片">變更</a>
-Modal structure
-<div id="modal"data-iziModal-fullscreen="true"  data-iziModal-title="變更權限"  data-iziModal-subtitle=""  data-iziModal-icon="icon-home"> 
-    Modal content
-    <form name="formEdit" method="post" onsubmit="return editForm()">
+    <!-- <a href="#" id="testtest" class="btn btn-info mx-2" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown" data-no="6" data-name="編輯測試" data-can="留言,收藏影片">變更</a> -->
+<!-- Modal structure -->
+<div id="modal" data-iziModal-fullscreen="true"  data-iziModal-title="變更權限" data-iziModal-icon="icon-home"> 
+    <!-- Modal content -->
+    <form name="formA" method="post" onsubmit="return editForm()">
                                 <input type="hidden" name="checkme" value="check123">
                                     <div class="my-3">
                                         <div class="form-group">
@@ -106,35 +106,35 @@ Modal structure
                                             <label id="l_all" class="custom-control-label" for="edit_all">全選</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_comment" name="edit_can[]" value="留言">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_comment" name="edit_can[]" value="留言">
                                             <label class="custom-control-label" for="edit_comment">留言</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_score" name="edit_can[]" value="影片評分">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_score" name="edit_can[]" value="影片評分">
                                             <label class="custom-control-label" for="edit_score">影片評分</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_collect" name="edit_can[]" value="收藏影片">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_collect" name="edit_can[]" value="收藏影片">
                                             <label class="custom-control-label" for="edit_collect">收藏影片</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_article_post" name="edit_can[]" value="討論區發文">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_article_post" name="edit_can[]" value="討論區發文">
                                             <label class="custom-control-label" for="edit_article_post">討論區發文</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_article_reply" name="edit_can[]" value="討論區回覆">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_article_reply" name="edit_can[]" value="討論區回覆">
                                             <label class="custom-control-label" for="edit_article_reply">討論區回覆</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_article_manage" name="edit_can[]" value="討論區文章管理">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_article_manage" name="edit_can[]" value="討論區文章管理">
                                             <label class="custom-control-label" for="edit_article_manage">討論區文章管理</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_activity_apply" name="edit_can[]" value="活動報名">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_activity_apply" name="edit_can[]" value="活動報名">
                                             <label class="custom-control-label" for="edit_activity_apply">活動報名</label>
                                         </div>
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="chkitems custom-control-input" id="edit_activity_VIPapply" name="edit_can[]" value="活動VIP報名">
+                                            <input type="checkbox" class="edit_chkitems custom-control-input" id="edit_activity_VIPapply" name="edit_can[]" value="活動VIP報名">
                                             <label class="custom-control-label" for="edit_activity_VIPapply">活動VIP報名</label>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@ Modal structure
                                         <button type="submit" id="submit_edit" class="btn btn-primary">確認變更</button>
                                     </div>
                         </form>
-</div> -->
+</div>
     <script>
 
         //製作權限卡片
@@ -172,14 +172,14 @@ Modal structure
                                     </div>
                                 </div>
                                 <a class="btn btn-warning mx-2" data-toggle="collapse" href="#card${perms[i]['no']}" role="button" aria-expanded="false" aria-controls="collapseExample">查看內容</a>
-                                <a href="#" class="btn btn-info mx-2" data-izimodal-open="#modal${perms[i]['no']}" data-izimodal-transitionin="fadeInDown">變更</a>
+                                <a href="#" class="btn btn-info mx-2 changes" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown" data-no="${perms[i]['no']}" data-name="${perms[i]['name']}">變更</a>
                                 <a href="javascript:delete_it(${perms[i]['sid']},${perms[i]['no']})" class="btn btn-danger mx-2">刪除</a>
                             </div>
                             </div>
                         </div>
                     `
             edits +=`<div class="modals" id="modal${perms[i]['no']}"data-iziModal-fullscreen="true"  data-iziModal-title="變更權限"  data-iziModal-subtitle=""  data-iziModal-icon="icon-home"> 
-                        <form name="formEdit" method="post" onsubmit="return editForm()">
+                        <form name="form${perms[i]['no']}" method="post" onsubmit="return editForm()">
                                 <input type="hidden" name="checkme" value="check123">
                                     <div class="my-3">
                                         <div class="form-group">
@@ -235,23 +235,23 @@ Modal structure
                                     <small id="edit_candoHelp" class="form-text my-2 text-danger"></small>
                                     <div class="text-center">
 
-                                        <button type="submit" id="submit_edit" class="btn btn-primary">確認變更</button>
+                                        <button type="submit" id="submit_edit" class="btn btn-primary sumbitEdit" data-no="${perms[i]['no']}">確認變更</button>
                                     </div>
                         </form>
                     </div>`
         }
         $("#perm_cards").html(cards);
-        $("#edit_cards").html(edits);
+        // $("#edit_cards").html(edits);
 
 
-        $(".modals").iziModal({
-            padding:20,
-            width:500
-        });
-$(document).on('click', '.trigger', function (event) {
-    event.preventDefault();
-    $('.modals').iziModal('open');
-});
+//         $(".modals").iziModal({
+//             padding:20,
+//             width:500
+//         });
+// $(document).on('click', '.trigger', function (event) {
+//     event.preventDefault();
+//     $('.modals').iziModal('open');
+// });
 
 
 
@@ -268,6 +268,32 @@ $(document).on('click', '.trigger', function (event) {
 //     event.preventDefault();
 //     $('#modal').iziModal('open');
 // });
+
+// $("#testtest").on("click",function(){
+//     let no = $(this).data("no");
+//     let name = $(this).data("name");
+//     console.log(no);
+//     console.log(name);
+
+//     $("#modal input").eq(1).val(name);
+//     $("#modal input").eq(2).val(no);
+// })
+        $("#modal").iziModal({
+            padding:20,
+            width:500
+        });
+$(document).on('click', '.changes', function (event){
+// $(".changes").on("click",function(){
+    let no = $(this).data("no");
+    let name = $(this).data("name");
+    console.log(this);
+    console.log(no);
+    console.log(name);
+    $("#modal input").eq(1).val(name);
+    $("#modal input").eq(2).val(no);
+    event.preventDefault();
+    $('#modal').iziModal('open');
+})
 
 //checkbox全選判斷
 var checkbox_count=$(".chkitems").length;//計算checkbox總數
@@ -287,20 +313,40 @@ $(".chkitems").click(function () {
                 $("#all").prop("checked","");
             }
         });
+
+
+var edit_checkbox_count=$(".edit_chkitems").length;//計算checkbox總數
+var edit_checked_count = $("#edit_chkboxes .edit_chkitems:checked").length;//計算被勾選的數量
+$("#edit_all").click(function(){
+    var edit_chkAllchecked = $(this).prop("checked");
+    $(".edit_chkitems").prop("checked", edit_chkAllchecked);
+});
+$(".edit_chkitems").click(function () {
+            var edit_checked = $(this).prop("checked");
+            edit_checked_count = $("#edit_chkboxes .edit_chkitems:checked").length;//重新抓取被勾選的數量
+            console.log(edit_checkbox_count);
+            console.log(edit_checked_count);
+            if (edit_checked_count == edit_checkbox_count){//如果與checkbox總數相等則將全選勾選
+                $("#edit_all").prop("checked","checked");
+            }else{
+                $("#edit_all").prop("checked","");
+            }
+        });
 //編輯資料
 const editForm = () => {
-            $("#submit_edit").css("display","none");
+    $("#submit_edit").css("display","none");
             let isPassed = true;
             let name=$("#edit_perm_name").val();
             if(name==''){
                 isPassed = false;
             }
-            if($("#edit_chkboxes .chkitems:checked").length==0){
+            if($("#edit_chkboxes .edit_chkitems:checked").length==0){
                 isPassed = false;
                 document.querySelector('#edit_candoHelp').innerHTML = '請選擇權限內容!';
             }
+
             if (isPassed) {
-            let form = new FormData(document.formEdit);
+            let form = new FormData(document.formA);
             console.log(form);
             fetch('Su_permission_edit_api.php', {
                 method: 'POST',
@@ -330,7 +376,7 @@ const editForm = () => {
             }
             $("#submit_edit").css("display","block");
         return false;
-    }
+}         
 //新增資料
         const checkForm = () => {
             $("#submit_btn").css("display","none");
