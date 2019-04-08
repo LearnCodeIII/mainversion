@@ -19,7 +19,7 @@
                 <div id="collapse1" class="collapse <?= $groupname == "member"?"show":""; ?>" aria-labelledby="heading1"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                    <ul class="text-light">
+                    <ul class="text-light pl-4">
                             <li class="<?= $pagename == "member_search"?"thisPage":""; ?>"><a
                                     href="./Su_member_search.php">會員總覽</a></li>
                             <li class="<?= $pagename == "member_insert"?"thisPage":""; ?>"><a

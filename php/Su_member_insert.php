@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/PDO.php';
 $groupname = "member";
-$page_name = 'member_insert';
+$pagename = 'member_insert';
 
 ?>
 <?php include __DIR__.'/head.php' ?>
