@@ -34,7 +34,7 @@ include __DIR__.'/PDO.php';
       <td>
         <ul>
             <li>資料庫文章欄位設計、文章資料整理、文章後臺</li>
-            <li>sidenav優化、UXptt製作</li>
+            <li>sidenav優化、UXppt製作</li>
         </ul>
       </td>
     </tr>
@@ -44,7 +44,7 @@ include __DIR__.'/PDO.php';
       <td>
         <ul>
             <li>資料庫會員欄位設計、會員資料整理、會員後臺</li>
-            <li>UXptt製作</li>
+            <li>UXppt製作</li>
         </ul>
       </td>
     </tr>
@@ -72,7 +72,7 @@ include __DIR__.'/PDO.php';
       <td>
         <ul>
             <li>資料庫影片欄位設計、影片資料整理、影片後臺</li>
-            <li>UXptt報告</li>
+            <li>UXppt報告</li>
         </ul>
       </td>
     </tr>
