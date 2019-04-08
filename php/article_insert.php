@@ -3,6 +3,32 @@ $pagename = "article_insert";
 $groupname = "article";
 
 include __DIR__.'/PDO.php';
+
+if(isset($_SESSION['admin'])){
+    $user = "小編：";
+    $user_name = "小編";
+    $user .= $_SESSION['admin'];
+    $level = 10;
+    $user_avatar = 'null.jpg';
+    
+}else if(isset($_SESSION['member'])){
+    $member=$_SESSION['member'];
+    $lo_sql = "SELECT * FROM `member` where email = '$member' ";
+    $lo_stmt = $pdo->query($lo_sql);
+    $lo_rows = $lo_stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach($lo_rows as $lo_row){
+        $user = $lo_row['sid'];
+        $user_name = $lo_row['name'];
+        $user_avatar = $lo_row['avatar'];
+
+    
+    }
+    $level = 2;
+}else {
+    header("Location: ./login.php");
+    exit;
+};
+
 ?>
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./sidenav.php'?>
@@ -47,14 +73,13 @@ $(document).ready(function() {
                 <small id="titleHelp" class="form-text text-muted"></small>
             </div>
             <label>Author</label>
-            <div class="form-row">
-                <div class="col-6">
-                    <input type="text" class="form-control" id="author" name="author" placeholder="作者" value="">
+            <div class="form-row d-flex flex-column">
+                <div class="col-12">
+                    <img src="../pic/avatar/<?=$user_avatar?>" class="figure-img img-fluid rounded" width="100" alt="作者頭像">
+                    <input type="text" class="form-control" id="author" name="author" value="<?=$user_name?>" readonly>
                     <small id="authorHelp" class="form-text text-muted"></small>
-                </div>
-                <div class="col-6">
-                    <input type="text" class="form-control" id="avatar" name="avatar" placeholder="作者頭像" value="">
-                    <small id="avatarHelp" class="form-text text-muted"></small>
+                    <input type="hidden" class="form-control" id="avatar" name="avatar" placeholder="作者頭像" value="<?=$user_avatar?>">
+                    
                 </div>
             </div>
 
