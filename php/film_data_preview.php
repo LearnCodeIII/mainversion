@@ -32,7 +32,7 @@ include __DIR__.'./sidenav.php'
 
     <div class="row">
         <div class="col-lg-12 col-md-6">
-
+        
             <div id="info_bar" class="alert alert-success" role="alert" style="display:none">
             </div>
 
@@ -41,7 +41,7 @@ include __DIR__.'./sidenav.php'
                 <div class="card-header card-title">
                     <h3>個別電影資訊一覽</h3>
                 </div>
-
+                <a onclick="history.go(-1)"><button class="btn btn-primary">回影片清單列表</button></a>
                 <div class="card-body">
                     <form name="form1" method="post" onsubmit="return checkForm();">
                         <input type="hidden" name="checkme" value="check123">
