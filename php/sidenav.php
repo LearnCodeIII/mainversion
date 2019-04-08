@@ -19,17 +19,15 @@
                 <div id="collapse1" class="collapse <?= $groupname == "member"?"show":""; ?>" aria-labelledby="heading1"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="text-light pl-4">
-                            <li class="<?= $pagename == "member_list"?"thisPage":""; ?>"><a
-                                    href="./Su_member_list.php">會員總覽</a></li>
-                            <li class="<?= $pagename == "member_list_choose"?"thisPage":""; ?>"><a
-                                    href="./Su_member_list_choose.php">自訂會員列表</a></li>
+                    <ul class="text-light">
                             <li class="<?= $pagename == "member_search"?"thisPage":""; ?>"><a
-                                    href="./Su_member_search.php">搜尋會員資料</a></li>
+                                    href="./Su_member_search.php">會員總覽</a></li>
                             <li class="<?= $pagename == "member_insert"?"thisPage":""; ?>"><a
                                     href="./Su_member_insert.php">新增會員資料</a></li>
                             <li class="<?= $pagename == "member_blacklist"?"thisPage":""; ?>"><a
                                     href="./Su_member_blacklist.php">管理黑名單</a></li>
+                            <li class="<?= $pagename == "member_permission"?"thisPage":""; ?>"><a
+                                    href="./Su_member_permission.php">權限管理</a></li>
                         </ul>
                     </div>
                 </div>

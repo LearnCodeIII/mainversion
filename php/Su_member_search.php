@@ -1,77 +1,104 @@
 <?php
+if(! isset($_SESSION)){
+    session_start();
+  }
+  if(! isset($_SESSION['admin'])){
+    header('Location:login.php');
+    exit;
+  }
 require __DIR__.'/PDO.php';
 $groupname = "member";
-$spname = 'member_search';
+$pagename = 'member_search';
 ?>
 <?php include __DIR__.'/head.php' ?>
-<?php include __DIR__.'/nav.php' ?>
-<?php include __DIR__.'./Su_sidenav.php'?>
+<?php include __DIR__.'/sidenav.php' ?>
 <style>
     #show_avatar {
         object-fit: contain;
     }
-    .fa-chevron-down{
-        position:absolute;
-        right:20px;
-        transition:.5s;
+
+    .fa-chevron-down {
+        position: absolute;
+        right: 20px;
+        transition: .5s;
         transform-origin: calc(50%-7px) calc(50%-8px);
     }
-    .rotate{
+
+    .rotate {
         transform: rotate(180deg);
+    }
+
+    .swal-title{
+        font-size: 1.5rem !important;
+        color: #ccc;
+    }
+    .modal{
+        z-index:100  !important;
+    }
+    .iziModal-overlay{
+        z-index:50  !important;
+    }
+    #sticky{
+        z-index:10;
     }
 </style>
 <section class="dashboard">
     <div class="row mx-3">
-        <button id="hideSrchbar" class="btn btn-info" style="color:white " data-toggle="collapse" data-target="#searchbar" aria-expanded="true" aria-controls="searchbar">隱藏搜尋列</button>
-    
+        <button id="hideSrchbar" class="btn btn-info" style="color:white " data-toggle="collapse"
+            data-target="#searchbar" aria-expanded="true" aria-controls="searchbar">隱藏搜尋列</button>
+
         <div class="card col collapse show" id="searchbar">
             <div class="card-body">
                 <form name="form1" method="post" action="" onsubmit="return checkForm()">
-                    <div id="step1" class="alert alert-primary text-center position-relative" role="alert" data-toggle="collapse" data-target="#set_condition" aria-expanded="true" aria-controls="set_condition">
-                            STEP-(1)設定搜尋條件
-                            <i id="step1Arrow" class="fas fa-chevron-down"></i>
+                    <div id="step1" class="alert alert-primary text-center position-relative" role="alert"
+                        data-toggle="collapse" data-target="#set_condition" aria-expanded="true"
+                        aria-controls="set_condition">
+                        STEP-(1)設定搜尋條件
+                        <i id="step1Arrow" class="fas fa-chevron-down"></i>
                     </div>
                     <div class="col-lg-12 show" id="set_condition">
                         <div class="row justify-content-center">
-                            <select class="col-lg-3 custom-select" name="sel-1">
+                            <select class="col-md-3 custom-select" name="sel-1">
                                 <option selected value='none'>選擇搜尋欄位</option>
                                 <option value="sid" class="custom-control-inline">會員編號</option>
                                 <option value="name" class="custom-control-inline">姓名</option>
                                 <option value="nickname" class="custom-control-inline">暱稱</option>
                             </select>
-                            <div class="col-lg-9">
+                            <div class="col-md-9 px-0 px-lg-3">
                                 <input type="text" class="form-control mb-2 mr-sm-2" id="" name="sel-1-k"
                                     placeholder="請填入關鍵字">
                             </div>
                         </div>
-    
+
                         <div class="row justify-content-center">
-                                <label class="col-lg-3 col-sm-5 form-check form-control"  for="">性別</label>
-                                <div class="col-lg-9 d-flex align-items-center">                                    
-                                    <div class="col-lg-2 col-sm-5 form-check">
-                                        <input class="form-check-input" type="radio" id="both" name="sel-2-k" value="男','女" checked>
-                                        <label class="form-check-label" for="both">
-                                            不拘
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2 col-sm-5 form-check">
-                                        <input class="form-check-input" type="radio" id="male" name="sel-2-k" value="男','">
-                                        <label class="form-check-label" for="male">
-                                            男
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2 col-sm-5 form-check">
-                                        <input class="form-check-input" type="radio" id="female" name="sel-2-k" value="女','">
-                                        <label class="form-check-label" for="female">
-                                            女
-                                        </label>
-                                    </div>
+                            <label class="col-md-3 form-check form-control" for="">性別</label>
+                            <div class="col-md-9 d-flex align-items-center">
+                                <div class="col-lg-2 col-sm-5 form-check">
+                                    <input class="form-check-input" type="radio" id="both" name="sel-2-k" value="男','女"
+                                        checked>
+                                    <label class="form-check-label" for="both">
+                                        不拘
+                                    </label>
                                 </div>
+                                <div class="col-lg-2 col-sm-5 form-check">
+                                    <input class="form-check-input" type="radio" id="male" name="sel-2-k" value="男','">
+                                    <label class="form-check-label" for="male">
+                                        男
+                                    </label>
+                                </div>
+                                <div class="col-lg-2 col-sm-5 form-check">
+                                    <input class="form-check-input" type="radio" id="female" name="sel-2-k"
+                                        value="女','">
+                                    <label class="form-check-label" for="female">
+                                        女
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="row justify-content-center">
-                                <label class="col-lg-3 col-sm-5 form-check form-control"  for="">權限</label>
-                                <div class="col-lg-9 d-flex align-items-center">                                    
-                                    <div class="col-lg-2 col-sm-5 form-check">
+                            <label class="col-md-3 form-check form-control" for="">權限</label>
+                            <div class="col-md-9 d-flex align-items-center flex-wrap" id="perm_options">
+                                <!-- <div class="col-lg-2 col-sm-5 form-check">
                                         <input class="form-check-input" type="radio" id="allperm" name="sel-3-k" value="0,1,2,3" checked>
                                         <label class="form-check-label" for="allperm">
                                             不拘
@@ -96,19 +123,21 @@ $spname = 'member_search';
                                         </label>
                                     </div>
                                     <div class="col-lg-2 col-sm-5 form-check">
-                                        <input class="form-check-input" type="radio" id="perm3" name="sel-3-k" value="2,''">
+                                        <input class="form-check-input" type="radio" id="perm3" name="sel-3-k" value="3,''">
                                         <label class="form-check-label" for="perm3">
                                             版主
                                         </label>
-                                    </div>
-                                </div>
+                                    </div> -->
+                            </div>
                         </div>
                     </div>
 
-                <div id="step2" class="alert alert-primary text-center mt-3 position-relative" role="alert" data-toggle="collapse" data-target="#set_column" aria-expanded="true" aria-controls="set_column">
+                    <div id="step2" class="alert alert-primary text-center mt-3 position-relative" role="alert"
+                        data-toggle="collapse" data-target="#set_column" aria-expanded="true"
+                        aria-controls="set_column">
                         STEP-(2)選擇顯示的資料欄位
                         <i id="step2Arrow" class="fas fa-chevron-down"></i>
-                </div>
+                    </div>
                     <!-- <input type="hidden" name="" value="sid"> -->
                     <div class="row justify-content-center show" id="set_column">
                         <div class="col-lg-12">
@@ -118,7 +147,8 @@ $spname = 'member_search';
                                 <label id="l_all" class="custom-control-label" for="all">全選</label>
                             </div>
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="sid" value="sid" checked disabled>
+                                <input type="checkbox" class="custom-control-input" id="sid" value="sid" checked
+                                    disabled>
                                 <label name="sid" class="custom-control-label" for="sid">會員編號</label>
                             </div>
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
@@ -166,12 +196,12 @@ $spname = 'member_search';
                                     value="avatar" onclick="check(this,'all','chk[]')">
                                 <label name="avatar" class="custom-control-label" for="avatar">頭像</label>
                             </div>
-                            <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                            <!-- <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="join_date" name="chk[]"
                                     value="join_date" onclick="check(this,'all','chk[]')">
                                 <label name="join_date" class="custom-control-label" for="join_date">入會日期</label>
-                            </div>
-                            <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                            </div> -->
+                            <!-- <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="pwd" name="chk[]" value="pwd"
                                     onclick="check(this,'all','chk[]')">
                                 <label name="pwd" class="custom-control-label" for="pwd">密碼</label>
@@ -186,23 +216,23 @@ $spname = 'member_search';
                                 <input type="checkbox" class="custom-control-input" id="pwd_err_c" name="chk[]"
                                     value="pwd_err_c" onclick="check(this,'all','chk[]')">
                                 <label name="pwd_err_c" class="custom-control-label" for="pwd_err_c">密碼錯誤次數</label>
-                            </div>
+                            </div> -->
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="last_login_d" name="chk[]"
                                     value="last_login_d" onclick="check(this,'all','chk[]')">
                                 <label name="last_login_d" class="custom-control-label"
                                     for="last_login_d">最近登入日期</label>
                             </div>
-                            <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                            <!-- <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="login_c" name="chk[]"
                                     value="login_c" onclick="check(this,'all','chk[]')">
                                 <label name="login_c" class="custom-control-label" for="login_c">登入次數</label>
-                            </div>
-                            <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
+                            </div> -->
+                            <!-- <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="rank" name="chk[]" value="rank"
                                     onclick="check(this,'all','chk[]')">
                                 <label name="rank" class="custom-control-label" for="rank">排名</label>
-                            </div>
+                            </div> -->
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="permission" name="chk[]"
                                     value="permission" onclick="check(this,'all','chk[]')">
@@ -224,30 +254,30 @@ $spname = 'member_search';
 
 
     <div class="row info justify-content-center"></div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center sticky-top bg-light" id="sticky">
         <div class="col-lg data_info"></div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 d-flex  justify-content-center align-items-center">
             <div class="row d-flex justify-content-center flex-nowrap">
                 <div class="col-lg">
                     <nav class="d-flex justify-content-center">
-                        <ul id="first_page" class="pagination pagination-sm justify-content-center"></ul>
-                        <ul id="pre_page" class="pagination pagination-sm justify-content-center"></ul>
+                        <ul id="first_page" class="pagination pagination-sm justify-content-center my-0"></ul>
+                        <ul id="pre_page" class="pagination pagination-sm justify-content-center my-0"></ul>
                     </nav>
                 </div>
                 <div class="col-lg-5">
                     <nav class="d-flex justify-content-center">
-                        <ul id="page_list" class="pagination pagination-sm justify-content-center"></ul>
+                        <ul id="page_list" class="pagination pagination-sm justify-content-center my-0"></ul>
                     </nav>
                 </div>
                 <div class="col-lg">
                     <nav class="d-flex justify-content-center">
-                        <ul id="next_page" class="pagination pagination-sm justify-content-center"></ul>
-                        <ul id="end_page" class="pagination pagination-sm justify-content-center"></ul>
+                        <ul id="next_page" class="pagination pagination-sm justify-content-center my-0"></ul>
+                        <ul id="end_page" class="pagination pagination-sm justify-content-center my-0"></ul>
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="col-lg page_info"></div>
+        <div class="col-lg page_info d-flex justify-content-end align-items-center"></div>
     </div>
 
     <div class="row">
@@ -283,10 +313,7 @@ $spname = 'member_search';
     const step2Arrow = document.querySelector('#step2Arrow');
     const searchbar = document.querySelector('#searchbar');
     const hideSrchbar = document.querySelector('#hideSrchbar');
-
-
-
-
+    const perm_options = document.querySelector('#perm_options');
 
     //使用underscore.js的template功能
     //先建立template字串 
@@ -327,7 +354,41 @@ $spname = 'member_search';
 
     //刪除資料
     function delete_it(sid) {
-            location.href = 'Su_member_list_delete.php?sid=' + sid;
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success mx-2',
+                cancelButton: 'btn btn-danger mx-2',
+                title: 'swal-title'
+            },
+            buttonsStyling: false,
+        })
+        swalWithBootstrapButtons.fire({
+            title: `確定刪除「會員編號：${sid}」的資料嗎?`,
+            text: "注意：刪除的資料無法被復原！",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '確定刪除',
+            cancelButtonText: '取消',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire(
+                    '刪除完成！',
+                    `已刪除「會員編號：${sid}」的資料`,
+                    'success'
+                ).then(result=>{
+                    location.href = 'Su_member_list_delete.php?sid=' + sid;
+                })
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    '已取消！',
+                    '沒有刪除任何資料',
+                    'error',
+                )
+            }
+        })
     }
     //取得勾選的欄位
     const get_checked_items = () => {
@@ -356,6 +417,7 @@ $spname = 'member_search';
         }
         //資料列
         for (let s in ori_data.data) {//用for in拿取ori_data(result陣列)中'data'的值
+            let sid = ori_data.data[s][temp_title[0]];
             str = '';
             str += `<th scope="row">
                       <a href="Su_member_edit.php?sid=${ori_data.data[s][temp_title[0]]}">
@@ -363,34 +425,18 @@ $spname = 'member_search';
                       </a>
                     </th>
                     <td>
-                      <a  style="cursor: pointer" data-toggle="modal" data-target="#sid${ori_data.data[s][temp_title[0]]}">
+                      <a  style="cursor: pointer" href="javascript:delete_it(${ori_data.data[s][temp_title[0]]});">
                       <i class="text-danger fas fa-trash-alt"></i>
                     </a>
-                    <div class="modal fade" id="sid${ori_data.data[s][temp_title[0]]}" tabindex="-1" role="dialog" aria-labelledby="sid${ori_data.data[s][temp_title[0]]}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header alert alert-danger">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">刪除資料</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h5>確定要刪除「會員編號：${ori_data.data[s][temp_title[0]]}」的會員資料?</h5>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" onclick="delete_it(${ori_data.data[s][temp_title[0]]})">確定</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
                     </td>
                     <td>
-                      <a href="Su_member_preview.php?sid=${ori_data.data[s][temp_title[0]]}">
+                      <a href="" data-izimodal-open="#modal${ori_data.data[s][temp_title[0]]}" data-izimodal-transitionin="fadeInDown" class="trigger"  data-num="${ori_data.data[s][temp_title[0]]}">
                       <i class="text-success fas fa-eye"></i>
-                    </a>
+                        </a>
+                        <div class="modal" id="modal${ori_data.data[s][temp_title[0]]}" data-iziModal-fullscreen="true" data-iziModal-title='<h5 class="text-center text-white font-weight-bold">會員資料預覽</h5>' data-iziModal-icon="icon-home" data-sid="${ori_data.data[s][temp_title[0]]}"> 
+                        </div>
                     </td>`;
+
             for (let i = 0; i < column_num; i++) {
                 if (temp_title[i] == 'avatar') {
                     str += `<td>
@@ -403,6 +449,7 @@ $spname = 'member_search';
             data_body.innerHTML += '<tr>' + str + '</tr>';
         };
     }
+
     //製作頁碼按鈕
     const create_page_btn = () => {
         p_btn_num = 7;//設定可顯示幾個頁碼按鈕(需使用奇數)
@@ -445,28 +492,50 @@ $spname = 'member_search';
     const create_data_info = () => {
         if (page >= ori_data.totalPage) {
             data_info.innerHTML = `
-          <div class="col-lg-5">總資料筆數：${ori_data.totalRows} 筆</div>
-          <div class="col-lg-7">本頁資料：第${(ori_data.totalPage - 1) * ori_data.dperPage + 1} ~ ${ori_data.totalRows} 筆</div>`
+          <div class="col-lg">總資料筆數：${ori_data.totalRows} 筆</div>
+          <div class="col-lg">本頁資料：第${(ori_data.totalPage - 1) * ori_data.dperPage + 1} ~ ${ori_data.totalRows} 筆</div>`
             page_info.innerHTML = `
           <div class="text-right">頁數：${ori_data.totalPage}  /  ${ori_data.totalPage}</div>`
         } else if (page < 1) {
             data_info.innerHTML = `
-          <div class="col-lg-5">總資料筆數：${ori_data.totalRows} 筆</div>
-          <div class="col-lg-7">本頁資料：第1 ~ ${ori_data.dperPage} 筆</div>`
+          <div class="col-lg">總資料筆數：${ori_data.totalRows} 筆</div>
+          <div class="col-lg">本頁資料：第1 ~ ${ori_data.dperPage} 筆</div>`
             page_info.innerHTML = `
           <div class="text-right">頁數：1 / ${ori_data.totalPage}</div>`
         } else {
             data_info.innerHTML = `
-          <div class="col-lg-5">總資料筆數：${ori_data.totalRows} 筆</div>
-          <div class="col-lg-7">本頁資料：第${(page - 1) * ori_data.dperPage + 1} ~ ${page * ori_data.dperPage} 筆</div>`
+          <div class="col-lg">總資料筆數：${ori_data.totalRows} 筆</div>
+          <div class="col-lg">本頁資料：第${(page - 1) * ori_data.dperPage + 1} ~ ${page * ori_data.dperPage} 筆</div>`
             page_info.innerHTML = `
           <div class="text-right">頁數：${page} / ${ori_data.totalPage}</div>`
         }
     }
+
+    //權限選擇欄位
+    const permission_catch = () => {
+        fetch("Su_member_permission_catch_api.php")
+            .then(res => {
+                return res.json();
+            })
+            .then(json => {
+                permissions = json;
+                console.log(permissions);
+                let perm_num = permissions.data.length;
+                console.log(perm_num);
+                let str = `<div class="col-lg-2 col-sm-5 form-check">
+                        <input class="form-check-input" type="radio" id="allperm" name="sel-3-k" value="0,1,2,3" checked>
+                        <label class="form-check-label" for="allperm">不拘</label>
+                     </div>`;
+                for (let i = 0; i < perm_num; i++) {
+                    str += `<div class="col-lg-2 col-sm-5 form-check">
+                            <input class="form-check-input" type="radio" id="perm${i}" name="sel-3-k" value="${i},''">
+                            <label class="form-check-label" for="perm${i}">${permissions.data[i]['name']}</label>
+                        </div>`
+                }
+                perm_options.innerHTML = str;
+            })
+    }
     //-----------------------------End Of Functions-------------------------------//
-
-
-
 
     const checkForm = () => {
         submit_btn.style.display = 'none';//按下提交後，按鈕消失(當資料處理結束才再設定顯示)
@@ -480,6 +549,7 @@ $spname = 'member_search';
         pre_page.innerHTML = "";
         next_page.innerHTML = "";
         end_page.innerHTML = "";
+        location.hash="";
 
         let form = new FormData(document.form1);
 
@@ -552,42 +622,73 @@ $spname = 'member_search';
                 //資料筆數、頁數資訊
                 create_data_info();
             });
+
     };
 
 
     //搜尋條件箭頭
-    const arrow1change=()=>{
-        if(set_condition.className==="col-lg-12 collapse"){
+    const arrow1change = () => {
+        if (set_condition.className === "col-lg-12 collapse") {
             step1Arrow.className = "fas fa-chevron-down";
-        }else{
+        } else {
             step1Arrow.className = "fas fa-chevron-down rotate";
         }
     }
 
     //選擇欄位箭頭
-    const arrow2change=()=>{
-        if(set_column.className==="row justify-content-center collapse"){
+    const arrow2change = () => {
+        if (set_column.className === "row justify-content-center collapse") {
             step2Arrow.className = "fas fa-chevron-down";
-        }else{
+        } else {
             step2Arrow.className = "fas fa-chevron-down rotate";
         }
     }
 
-    const hideSearchbar=()=>{
-        if(searchbar.className==="card col collapse"){
+    //搜尋列開合按鈕
+    const hideSearchbar = () => {
+        if (searchbar.className === "card col collapse") {
             hideSrchbar.innerHTML = '隱藏搜尋列';
-        }else{
+        } else {
             hideSrchbar.innerHTML = '打開搜尋列';
         }
     }
 
 
 
+    permission_catch();
     window.addEventListener('hashchange', myHashChange);
     step1.addEventListener('click', arrow1change);
     step2.addEventListener('click', arrow2change);
     hideSrchbar.addEventListener('click', hideSearchbar);
-// myHashChange();
+
+    var data_fav='';
+    $(document).on('click', '.trigger',  function(event) {
+        let dataNum=$(this).data("num");
+                console.log('Num: '+dataNum);
+        $(`#modal${dataNum}`).iziModal({
+            width:1000,
+            onOpening: function(modal){
+                modal.startLoading();
+                let getSid=$(`#modal${dataNum}`).data("sid");
+                console.log('sid:'+getSid);
+
+                    $.get('Su_member_previewInside_api.php', {
+                        "sid":getSid
+                        },function(data) {
+                            // console.log(data);
+                            $(`#modal${dataNum} .iziModal-content`).html(data);
+                        modal.stopLoading();
+                        },'html'); 
+
+            }
+        });
+        event.preventDefault();
+        $(`#modal${dataNum}`).iziModal('open');
+
+ 
+    });
+
 
 </script>
+<script src="../js/sweet.js"></script>
 <?php include __DIR__.'/foot.php' ?>
