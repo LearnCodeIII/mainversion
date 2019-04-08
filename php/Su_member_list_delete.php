@@ -8,11 +8,11 @@ $pdo -> query("DELETE FROM `member` WHERE `sid`=$sid");
 
 $suc_msg="已成功刪除資料!";
 
-echo "<script type='text/javascript'>alert('$suc_msg');</script>";
+echo "<script type='text/javascript'>history.go(-1)</script>";
 
-$goto = "Su_member_list.php";//預設值
-if(isset($_SERVER['HTTP_REFERER'])){
-    $goto = $_SERVER['HTTP_REFERER'];
-}
+// $goto = "Su_member_search.php";//預設值
+// if(isset($_SERVER['HTTP_REFERER'])){
+//     $goto = $_SERVER['HTTP_REFERER'];
+// }
 
-header("Location: $goto");
+// header("Location: $goto");

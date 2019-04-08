@@ -39,6 +39,7 @@ if(isset($_SESSION['admin'])){
 ?>
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./sidenav.php'?>
+
 <script src="../js/sweet.js"></script>
 <section class="dashboard">
 
@@ -151,10 +152,11 @@ const search_pagi = document.querySelector('#search_pagination');
 const data_body = document.querySelector('ul.list-unstyled');
 
 const wrap_str = 
-`<div class="card mb-3" style="background-color:white;">
+`
+<div class="card mb-3" style="background-color:white;">
     <div class="row no-gutters">
         
-        <div class="card-body col-xl-11 col-lg-9 col-md-9 col-sm-8 p-3">
+        <div class="card-body col-xl-10 col-lg-9 col-md-9 col-sm-8 p-3">
             <h5 class="card-title" id="text123" style="font-weight=bold;">【<%= company %>】<%= name %></h5>
             <h6 class="card-subtitle mb-2 ml-2 text-muted">
                 <span class="badge badge-primary " id="badge-primary"><%= primary%></span>
@@ -166,8 +168,11 @@ const wrap_str =
                 <span class="badge badge-dark" id="badge-dark"><%= dark%></span>
             </h6>
         </div>
-        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4">
-            <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
+            
+        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 ">
+            <div id="qtcode<%=sid%>" class="collapse">
+                <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
+            </div>
         </div>
     </div>
     
@@ -185,8 +190,13 @@ const wrap_str =
     
     <div class="card-footer d-flex justify-content-between bg-dark text-white" onclick="highlightContent();">
         <small >活動期限：<%= dateStart %>-<%= dateEnd %></small>
-        <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">更多資訊 <i class="fas fa-info-circle"></i></a></small> 
+        <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>">
+            <a class="text-white">更多資訊 <i class="fas fa-info-circle"></i></a>
+        </small> 
         <small class="d-flex justify-content-between <%= company %>_control total_control">
+
+                <div class="ml-3 "><a class="text-white collapsed" data-toggle="collapse" data-target="#qtcode<%=sid%>">QRCODE<i class="fas fa-qrcode ml-1" ></i></a></div> 
+                <div class="ml-3 "><a class="text-white" target="_blank" href="ShawnpageDisplay.php?sid=<%= sid %>">預覽<i class="fas fa-eye ml-1"></i></a></div> 
                 <div class="ml-3 "><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
                 <div class="ml-3 "><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
         </small>

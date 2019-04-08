@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__.'/PDO.php';
+$groupname = "film";
 $page_name='film_data_preview';
 
 $sid=isset($_GET['sid'])?intval($_GET['sid']):0;
@@ -17,8 +18,7 @@ $row = $stamt->fetch(PDO::FETCH_ASSOC);
 // }
 
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
 ?>
 <style>
     .form-group small {
@@ -32,7 +32,7 @@ include __DIR__.'./film_sidenav.php';
 
     <div class="row">
         <div class="col-lg-12 col-md-6">
-
+        
             <div id="info_bar" class="alert alert-success" role="alert" style="display:none">
             </div>
 
@@ -41,7 +41,7 @@ include __DIR__.'./film_sidenav.php';
                 <div class="card-header card-title">
                     <h3>個別電影資訊一覽</h3>
                 </div>
-
+                <a onclick="history.go(-1)"><button class="btn btn-primary">回影片清單列表</button></a>
                 <div class="card-body">
                     <form name="form1" method="post" onsubmit="return checkForm();">
                         <input type="hidden" name="checkme" value="check123">
@@ -91,7 +91,7 @@ include __DIR__.'./film_sidenav.php';
                                         <h4>預告片</h4>
                                     </label>
                                     <div class="col-12">
-                                    <a href="#" onclick="window.open(' <?= $row['trailer']?> ', 'Yahoo', config='height=500,width=500');"><?= $row['trailer']?></a>
+                                    <a href="#" onclick="window.open(' <?= $row['trailer']?> ',  config='height=500,width=500');"><?= $row['trailer']?></a>
                                     </div>
 
                                     <label for="movie_genre" class="mt-2">

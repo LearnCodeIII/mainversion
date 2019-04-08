@@ -1,17 +1,24 @@
 <?php
 
+$groupname = "film";
 $pagename = "film_main.php";
 
 include __DIR__.'/PDO.php';
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
 
 ?>
-
+<style>
+        #goTop {
+            position: relative;
+            right: 20px;
+            bottom: 30px;
+        }
+</style>
+    
 <section class="dashboard">
 
-<div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
         <div class="col-lg data_info"></div>
         <div class="col-lg-4">
             <div class="row d-flex justify-content-center flex-nowrap">
@@ -37,44 +44,49 @@ include __DIR__.'./film_sidenav.php';
         <div class="col-lg page_info"></div>
     </div>
 
-<!-- <div class="container"> -->
+    <!-- <div class="container"> -->
 
 
 
-<table class="table table-bordered table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">影片編號</th>
-            <th scope="col">電影名稱中文</th>
-            <th scope="col">電影名稱英文</th>
-            <!-- <th scope="col">電影介紹中文</th> -->
-            <!-- <th scope="col">電影介紹英文</th> -->
-            <th scope="col">電影圖</th>
-            <th scope="col">電影類別</th>
-            <!-- <th scope="col">放映類型</th> -->
-            <!-- <th scope="col">電影分級</th> -->
-            <th scope="col">預告片</th>
-            <th scope="col">價格</th>
-            <!-- <th scope="col">檔期</th> -->
-            <th scope="col">上映日期</th>
-            <th scope="col">下檔日期</th>
-            <th scope="col">片長</th>
-            <!-- <th scope="col">導演名稱中文</th> -->
-            <!-- <th scope="col">導演名稱英文</th> -->
-            <!-- <th scope="col">發行國家</th> -->
-            <!-- <th scope="col">提供字幕</th> -->
-            <th scope="col">字幕語言</th>
-            <th scope="col"><i class="far fa-eye"></i></th>
-        </tr>
-    </thead>
-    <tbody id="data_body">
-        
-    </tbody>
-</table>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">影片編號</th>
+                <th scope="col">電影名稱中文</th>
+                <th scope="col">電影名稱英文</th>
+                <!-- <th scope="col">電影介紹中文</th> -->
+                <!-- <th scope="col">電影介紹英文</th> -->
+                <th scope="col">電影圖</th>
+                <th scope="col">電影類別</th>
+                <!-- <th scope="col">放映類型</th> -->
+                <!-- <th scope="col">電影分級</th> -->
+                <th scope="col">預告片</th>
+                <th scope="col">價格</th>
+                <!-- <th scope="col">檔期</th> -->
+                <th scope="col">上映日期</th>
+                <th scope="col">下檔日期</th>
+                <th scope="col">片長</th>
+                <!-- <th scope="col">導演名稱中文</th> -->
+                <!-- <th scope="col">導演名稱英文</th> -->
+                <!-- <th scope="col">發行國家</th> -->
+                <!-- <th scope="col">提供字幕</th> -->
+                <th scope="col">字幕語言</th>
+                <th scope="col">詳細資料</th>
+            </tr>
+        </thead>
+        <tbody id="data_body">
 
-<!-- </div> -->
+        </tbody>
+    </table>
 
+    <!-- </div> -->
+    <button class="btn btn-primary position-fixed" id="goTop"><i class="fas fa-arrow-circle-up"></i></button>
 </section>
+
+<!-- fancybox -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
 <script>
     let page = 1;
     let ori_data;
@@ -89,17 +101,26 @@ include __DIR__.'./film_sidenav.php';
     const end_page = document.querySelector('#end_page');
     const data_info = document.querySelector('.data_info');
     const page_info = document.querySelector('.page_info');
-    
+
     const tr_str = `
             <tr>
                 <td><%= sid %></td>
                 <td><%= name_tw %></td>
                 <td><%= name_en %></td>
 
-                <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
+                <td>
+                    <a data-fancybox="gallery" href="../pic/film_upload/<%= movie_pic %>">
+                        <img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100">
+                    </a>
+                </td>
                 <td><%= movie_genre %></td>
 
-                <td><%= trailer %></td>
+                <td class="text-wrap" title="<%= trailer %>">
+                    <p><%= trailer %></p>
+                    <a href="#"  onclick="window.open('<%= trailer %>', config='height=500,width=500');" >
+                    <i class="fas fa-play-circle h4">
+                    </i></a>
+                </td>
                 <td><%= pirce %></td>
 
                 <td><%= in_theaters %></td>
@@ -113,32 +134,32 @@ include __DIR__.'./film_sidenav.php';
             </tr>
             `;
 
-            //全部的資料庫屬性名稱
-            // const tr_str = `
-            // <tr>
-            //     <td><%= sid %></td>
-            //     <td><%= name_tw %></td>
-            //     <td><%= name_en %></td>
-            //     <td><%= intro_tw %></td>
-            //     <td><%= intro_en %></td>
-            //     <td><%= movie_pic %></td>
-            //     <td><%= movie_genre %></td>
-            //     <td><%= movie_ver %></td>
-            //     <td><%= movie_rating %></td>
-            //     <td><%= trailer %></td>
-            //     <td><%= pirce %></td>
-            //     <td><%= schedule %></td>
-            //     <td><%= in_theaters %></td>
-            //     <td><%= out_theaters %></td>
-            //     <td><%= runtime %></td>
-            //     <td><%= director_tw %></td>
-            //     <td><%= director_en %></td>
-            //     <td><%= country %></td>
-            //     <td><%= subtitle %></td>
-            //     <td><%= subtitle_lang %></td>
+    //全部的資料庫屬性名稱
+    // const tr_str = `
+    // <tr>
+    //     <td><%= sid %></td>
+    //     <td><%= name_tw %></td>
+    //     <td><%= name_en %></td>
+    //     <td><%= intro_tw %></td>
+    //     <td><%= intro_en %></td>
+    //     <td><%= movie_pic %></td>
+    //     <td><%= movie_genre %></td>
+    //     <td><%= movie_ver %></td>
+    //     <td><%= movie_rating %></td>
+    //     <td><%= trailer %></td>
+    //     <td><%= pirce %></td>
+    //     <td><%= schedule %></td>
+    //     <td><%= in_theaters %></td>
+    //     <td><%= out_theaters %></td>
+    //     <td><%= runtime %></td>
+    //     <td><%= director_tw %></td>
+    //     <td><%= director_en %></td>
+    //     <td><%= country %></td>
+    //     <td><%= subtitle %></td>
+    //     <td><%= subtitle_lang %></td>
 
-            // </tr>
-            // `;
+    // </tr>
+    // `;
 
 
     const tr_func = _.template(tr_str);
@@ -159,7 +180,7 @@ include __DIR__.'./film_sidenav.php';
 
 
         fetch('film_data_list-api.php?page=' + page)
-            .then(res =>res.json())
+            .then(res => res.json())
             .then(json => {
                 ori_data = json;
                 console.log(ori_data);
@@ -175,11 +196,11 @@ include __DIR__.'./film_sidenav.php';
                     str += tr_func(v);
                     // console.log(v);
                 }
-                
+
                 data_body.innerHTML = str;
 
-                str='';
-                for(let i=1 ; i<=ori_data.totalPages ; i++){
+                str = '';
+                for (let i = 1; i <= ori_data.totalPages; i++) {
                     let active = ori_data.page === i ? 'active' : '';
 
                     str += pagi_func({
@@ -188,20 +209,20 @@ include __DIR__.'./film_sidenav.php';
                     });
                 }
                 data_page.innerHTML = str;
-                
-//製作頁碼按鈕
-p_btn_num = 7;//設定可顯示幾個頁碼按鈕(建議使用奇數)
+
+                //製作頁碼按鈕
+                p_btn_num = 7;//設定可顯示幾個頁碼按鈕(建議使用奇數)
                 str = '';
-                for (let i =-parseInt(p_btn_num/2); i<=parseInt(p_btn_num/2); i++) {
+                for (let i = -parseInt(p_btn_num / 2); i <= parseInt(p_btn_num / 2); i++) {
                     let active = i === 0 ? 'active' : '';
                     let vh = '';
-                    if (parseInt(ori_data.page)+i<=0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
+                    if (parseInt(ori_data.page) + i <= 0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
                         vh = 'hidden';
                     }
                     str += page_func({
                         active: active,
-                        v:vh,
-                        page: ori_data.page+i,
+                        v: vh,
+                        page: ori_data.page + i,
                     });
                 }
                 page_list.innerHTML = str;
@@ -251,12 +272,36 @@ p_btn_num = 7;//設定可顯示幾個頁碼按鈕(建議使用奇數)
                 }
 
 
-
             });
-        };
+    };
+
+   //回到最上方+往上才出現
+    var lastScrolltop=0;
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        console.log(lastScrolltop)
+        // console.log(windowHeight)
         
-        window.addEventListener('hashchange', myHashChange);
-        myHashChange();
+        if (scrollTop > lastScrolltop) {
+            $("#goTop").addClass("d-none")
+        }
+        else {
+            $("#goTop").removeClass("d-none")
+        }
+        lastScrolltop = scrollTop;
+    });
+    $("#goTop").click(function () {
+        // $(window).scrollTop(0);
+        //上面這個是直接跳到最上方
+        // 下面寫動畫方式
+        $("html").animate({
+            scrollTop: 0
+        }, 500);
+    });
+
+
+    window.addEventListener('hashchange', myHashChange);
+    myHashChange();
 
 </script>
 

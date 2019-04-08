@@ -15,10 +15,11 @@ date_default_timezone_set('Asia/Taipei');
 $cm_time = '';
 
 if(isset($_SESSION['admin'])){
-    $user = "小編：";
-    $user .= $_SESSION['admin'];
+    // $user = "小編：";
+    $user = $_SESSION['admin'];
     $level = 10;
-    
+    $user_avatar = 'null.jpg';
+    $user_name ='小編';
 }else if(isset($_SESSION['member'])){
     $member=$_SESSION['member'];
     $lo_sql = "SELECT * FROM `member` where email = '$member' ";
@@ -97,12 +98,12 @@ if(isset($_SESSION['admin'])){
 
         <form name="form1" method="post" onsubmit="return postya();">
             <div class="form-row">
-                <input type="hidden" class="form-control" name="member_sid" value="<?=$lo_row['sid']?>">
+                <input type="hidden" class="form-control" name="member_sid" value="228">
                 <div class="">
-                    <img src="../pic/avatar/<?=$user_avatar?>" class="mt-1 ml-2" width="30" height="auto" alt="...">
+                    <img src="../pic/avatar/null.jpg" class="mt-1 ml-2" width="30" height="auto" alt="...">
                 </div>
                 <div>
-                    <p class="mt-2"><?=$user_name?></p>
+                    <p class="mt-2">admin</p>
                 </div>
                 <div class="col-10">
                     <input type="text" class="form-control" id="content" name="comment" placeholder="留下評論......">

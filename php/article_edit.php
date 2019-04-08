@@ -16,8 +16,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./nav.php'?>
-<?php include __DIR__.'./RuthNav.php'?>
+<?php include __DIR__.'./sidenav.php'?>
+
 <!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
 <!-- <script src="../tinymce/js/tinymce/tinymce.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/tinymce.min.js"></script>
@@ -25,9 +25,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <style>
 #editor{
-    height:300px;
+    height:300px
 }
-
 </style>
 
 <script>

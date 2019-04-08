@@ -1,8 +1,9 @@
 <?php
 // require __DIR__. '/film_crud_session.php';
 
-require __DIR__.'/PDO.php';
+$groupname = "film";
 $page_name='film_data_edit';
+require __DIR__.'/PDO.php';
 
 $sid=isset($_GET['sid'])?intval($_GET['sid']):0;
 
@@ -16,8 +17,8 @@ if ($stamt->rowCount()==0) {
 $row = $stamt->fetch(PDO::FETCH_ASSOC);
 
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
+
 ?>
 <style>
     .form-group small {
@@ -30,6 +31,8 @@ include __DIR__.'./film_sidenav.php';
 
     <div class="row">
         <div class="col-lg-12 col-md-6">
+
+            <a onclick="history.go(-1)"><button class="btn btn-primary">回影片清單列表</button></a>
 
             <div id="info_bar" class="alert alert-success" role="alert" style="display:none">
             </div>
@@ -322,7 +325,7 @@ include __DIR__.'./film_sidenav.php';
 </section>
 
 
-
+<script src="../js/sweet.js"></script>
 <script>
 
     const info_bar = document.querySelector('#info_bar');
@@ -453,9 +456,44 @@ include __DIR__.'./film_sidenav.php';
                     info_bar.style.display = 'block';
 
                     if (obj.success) {
+
+                        //成功失敗跳sweets提醒視窗
+                        const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false,
+                        });
+                        swalWithBootstrapButtons.fire({
+                            title: `成功`,
+                            text: "已經修改此筆資料!",
+                            footer: '提示：即將返回主畫面',
+                            type: 'success',
+                            timer: 3000,
+                        }).then((result) => {
+                            location.href = 'film_data_list.php';
+                        })
+
+
                         info_bar.className = 'alert alert-success';
                         info_bar.innerHTML = '資料修改成功惹';
                     } else {
+                        const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false,
+                        });
+                        swalWithBootstrapButtons.fire({
+                            title: `失敗`,
+                            text: obj.msg,
+                            footer: '提示：資料沒有修改喔',
+                            type: 'error',
+                        })
+
+
                         info_bar.className = 'alert alert-danger';
                         info_bar.innerHTML = obj.errorMsg;
                     }

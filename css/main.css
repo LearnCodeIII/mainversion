@@ -14,7 +14,10 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
 }
-
+.navbar-brand a{ 
+    color: #444;
+    text-decoration:none;
+}
 
 .nav_width a{
     color: #ccc !important;
@@ -23,7 +26,7 @@ body{
 
 .nav_width a:hover{
     color: #dc3545 !important;
-    font-weight: bold;
+    /* font-weight: bold; */
     text-decoration:none;
 }
 .nav_wrapper a{
@@ -32,8 +35,8 @@ body{
 }
 
 .nav_wrapper a:hover{
-    color: #ffe2a4 !important;
-    font-weight: bold;
+    color: #ffe38f !important;
+    /* font-weight: bold; */
     text-decoration:none;
 }
 
@@ -62,6 +65,7 @@ body{
 .nav_wrapper .card-body{
     padding: 1rem 3rem;
     margin: 0;
+    width: 240px;
 }
 
 .myinfo2 .card-body{
@@ -71,7 +75,7 @@ body{
 
 .thisPage a{
     font-weight: 900;
-    color: rgb(255, 189, 189) !important;
+    color: #ffb7be !important;
 }
 .dashboard{
     font-family: 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
@@ -143,3 +147,9 @@ body{
     height: 300vh;
     background-color: #ccc;
 }
+
+.bg_gray{
+    background-color: #424a53 !important;
+}
+
+.bgcc{}

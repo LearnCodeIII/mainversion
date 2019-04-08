@@ -114,12 +114,12 @@ if($_POST['sel-1-k']!=''){
 
     //取得資料
     if ($kw1=='' && $kw2=="男','女" && $kw3=="0,1,2,3") {
-        $sql = sprintf("SELECT $select FROM `member` ORDER BY `sid` ASC LIMIT %s,%s", ($page-1)*$dper_page, $dper_page);
+        $sql = sprintf("SELECT sid,$select FROM `member` ORDER BY `sid` ASC LIMIT %s,%s", ($page-1)*$dper_page, $dper_page);
     }else{
         if($kw1==''){
-            $sql = sprintf("SELECT $select FROM `member` WHERE %s AND %s ORDER BY `sid` ASC LIMIT %s,%s", $cond2, $cond3, ($page-1)*$dper_page, $dper_page);
+            $sql = sprintf("SELECT sid,$select FROM `member` WHERE %s AND %s ORDER BY `sid` ASC LIMIT %s,%s", $cond2, $cond3, ($page-1)*$dper_page, $dper_page);
         }else{
-            $sql = sprintf("SELECT $select FROM `member` WHERE %s AND %s AND %s ORDER BY `sid` ASC LIMIT %s,%s", $cond1, $cond2, $cond3, ($page-1)*$dper_page, $dper_page);
+            $sql = sprintf("SELECT sid,$select FROM `member` WHERE %s AND %s AND %s ORDER BY `sid` ASC LIMIT %s,%s", $cond1, $cond2, $cond3, ($page-1)*$dper_page, $dper_page);
         }
         // $sql = "SELECT $select FROM `member` WHERE $cond1 AND $cond2 AND $cond3";
         // $sql = sprintf("SELECT $select FROM `member` WHERE %s AND %s AND %s LIMIT %s,%s", $cond1, $cond2, $cond3, ($page-1)*$dper_page, $dper_page);

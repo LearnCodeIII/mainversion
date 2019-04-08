@@ -47,7 +47,7 @@ $img_loaddata = isset($_POST['img_data']) ? $_POST['img_data']: '';
 ?>
 <?php include __DIR__. './head.php' ?>
 <?php $pagename = "cinema_ifmt"; ?>
-<?php include __DIR__. './nav.php' ?>
+<?php include __DIR__.'./sidenav.php'?>
 <?php include __DIR__. './cinema_sidenav.php' ?>
     <section class="dashboard">
     <style>
