@@ -93,16 +93,6 @@ $pagename = "pageMain";
 })();
 
 
-$(document).ready(function(){
-  $('div').zoom({url: '../pic/activity/217ae40614f2c0962a9c54843ab799a42c09aafe.jpg'});
-});
-
-
-
-
-
-
-
 
 //換文字顏色
 $('.sun').on("click",function(){
