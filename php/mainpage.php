@@ -80,6 +80,8 @@ html,body{
         <p style="color:white" class="dashboardLogoContents dashboardLogoContent2">.Everything</p>
         <p style="color:white" class="dashboardLogoContents dashboardLogoContent3">.Everyday</p>
         <p style="color:white" class="dashboardLogoContents dashboardLogoContent4">.Everynight</p>
+        <span style="color:white" class="dashboardLogoContents dashboardLogoContent5">.找製作團隊?</span>
+        <span style="color:white" class="dashboardLogoContents dashboardLogoContent6" onclick="javascript:window.location ='http://192.168.27.179/mainversion/mainversion/php/work.php'">Trivago!</span>
 
     </div>
 </section>
@@ -90,10 +92,8 @@ html,body{
     $('.dashboardLogoContents').animate({
             "textIndent":"800px"
         });
+    let secret=0;
     $('.dashboardLogo').on("mouseover",function(){
-        // $('.dashboardLogoContent').animate({
-            //     "fontSize":"5rem",
-            // });
         $('.dashboardLogoContent').animate({
             "fontSize":"4rem"
         });
@@ -109,6 +109,19 @@ html,body{
         $('.dashboardLogoContent4').animate({
             "textIndent":""
         },2200);
+        if(secret>10){
+            $('.dashboardLogoContent5').animate({
+                "textIndent":""
+            },1000);
+        }
+        if(secret>20){
+            $('.dashboardLogoContent6').animate({
+                "textIndent":""
+            },1000);
+        }
+
+        secret+=1;
+        console.log(secret)
     })
 
 
