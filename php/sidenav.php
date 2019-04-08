@@ -7,11 +7,11 @@
         </div>
         <div class="bg-gradient-dark" id="accordionExample">
             <div class="card bg-dark">
-                <div class="card-header" id="heading1">
+                <div class="card-header" id="heading1" data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
+                            aria-controls="collapse1">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
-                            aria-controls="collapse1"><i class="fas fa-user fa-fw"></i><span class="px-2"> 會員系統</span>
+                            ><i class="fas fa-user fa-fw"></i><span class="px-2"> 會員系統</span>
                         </button>
                     </h2>
                 </div>
@@ -33,11 +33,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading2">
+                <div class="card-header" id="heading2" data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
+                            aria-controls="collapse2">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
-                            aria-controls="collapse2"><i class="fas fa-landmark fa-fw"></i>
+                            ><i class="fas fa-landmark fa-fw"></i>
                             <span class="px-2">廠商系統</span>
                         </button>
                     </h2>
@@ -57,11 +57,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading3">
-                    <h2 class="mb-0 pl-3">
+                <div class="card-header" id="heading3" data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
+                            aria-controls="collapse3">
+                    <h2 class="mb-0 pl-3" >
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
-                            aria-controls="collapse3"><i class="fas fa-film fa-fw"></i>
+                            ><i class="fas fa-film fa-fw"></i>
                             <span class="px-2">電影資料庫</span>
                         </button>
                     </h2>
@@ -86,11 +86,10 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading4">
+                <div class="card-header" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
+                            aria-controls="collapse4">
                     <h2 class="mb-0 pl-3">
-                        <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
-                            aria-controls="collapse4"><i class="far fa-newspaper fa-fw"></i>
+                        <button class="btn btn-link text-light text-decoration-none"><i class="far fa-newspaper fa-fw"></i>
                             <span class="px-2">文章專區</span>
                         </button>
                     </h2>
@@ -113,11 +112,10 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading5">
+                <div class="card-header" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
+                            aria-controls="collapse5">
                     <h2 class="mb-0 pl-3">
-                        <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
-                            aria-controls="collapse5"> <i class="fas fa-calendar-check fa-fw"></i>
+                        <button class="btn btn-link text-light text-decoration-none"> <i class="fas fa-calendar-check fa-fw"></i>
                             <span class="px-2">活動系統</span>
                         </button>
                     </h2>
@@ -138,11 +136,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading6">
+                <div class="card-header" id="heading6" data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
+                            aria-controls="collapse6">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
-                            aria-controls="collapse6"><i class="fas fa-ad fa-fw"></i>
+                            ><i class="fas fa-ad fa-fw"></i>
                             <span class="px-2">廣告管理</span>
                         </button>
                     </h2>
@@ -161,11 +159,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading7">
+                <div class="card-header" id="heading7" data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
+                            aria-controls="collapse7">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
-                            aria-controls="collapse7"><i class="fas fa-comments fa-fw"></i>
+                            ><i class="fas fa-comments fa-fw"></i>
                             <span class="px-2">論壇管理</span>
                             </button>
                     </h2>
