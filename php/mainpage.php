@@ -80,7 +80,8 @@ html,body{
         <p style="color:white" class="dashboardLogoContents dashboardLogoContent2">.Everything</p>
         <p style="color:white" class="dashboardLogoContents dashboardLogoContent3">.Everyday</p>
         <p style="color:white" class="dashboardLogoContents dashboardLogoContent4">.Everynight</p>
-        <p style="color:white" class="dashboardLogoContents dashboardLogoContent5"><a href="http://192.168.27.179/mainversion/mainversion/php/work.php">.找工作表?</a></p>
+        <span style="color:white" class="dashboardLogoContents dashboardLogoContent5">.找製作團隊?</span>
+        <span style="color:white" class="dashboardLogoContents dashboardLogoContent6" onclick="javascript:window.location ='http://192.168.27.179/mainversion/mainversion/php/work.php'">Trivago!</span>
 
     </div>
 </section>
@@ -110,6 +111,11 @@ html,body{
         },2200);
         if(secret>10){
             $('.dashboardLogoContent5').animate({
+                "textIndent":""
+            },1000);
+        }
+        if(secret>20){
+            $('.dashboardLogoContent6').animate({
                 "textIndent":""
             },1000);
         }
