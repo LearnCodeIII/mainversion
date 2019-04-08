@@ -1,11 +1,11 @@
 <?php
 
+$groupname = "film";
 $pagename = "film_main.php";
 
 include __DIR__.'/PDO.php';
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
 
 ?>
 
@@ -99,7 +99,10 @@ include __DIR__.'./film_sidenav.php';
                 <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
                 <td><%= movie_genre %></td>
 
-                <td><%= trailer %></td>
+                <td class="text-wrap" title="<%= trailer %>">
+                    <p><%= trailer %></p>
+                    <a href="<%= trailer %>"><i class="fas fa-play-circle h4"></i></a>
+                </td>
                 <td><%= pirce %></td>
 
                 <td><%= in_theaters %></td>

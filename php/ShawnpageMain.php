@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/PDO.php';
 $groupname = "activity";
-$pagename = "pageMain";
+$pagename = "ShawnpageMain";
 
 if(isset($_SESSION['admin'])){
     $t_user = $_SESSION['admin'];
@@ -38,8 +38,7 @@ if(isset($_SESSION['admin'])){
 };
 ?>
 <?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./nav.php'?>
-<?php include __DIR__.'./Shawnsidenav.php'?>
+<?php include __DIR__.'./sidenav.php'?>
 <script src="../js/sweet.js"></script>
 <section class="dashboard">
 
@@ -47,11 +46,31 @@ if(isset($_SESSION['admin'])){
 <input type="text" id="account_name" value="<?= $t_user ?>" hidden>
     <div class="container-fulid">
         <div class="row d-flex ">
-            <div class="col-md-8">
-                <ul class="list-unstyled" >
-                </ul>  
+            <div class="col-md-12">
+            <nav>
+                    <ul class="pagination justify-content-center" id="search_pagination">
+                    </ul>
+                </nav>
             </div>
-            <form class="col-md-4" method="post" name="form1" onsubmit="return searchForm();">    
+            <div class="col-md-12">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">廠商</th>
+                            <th scope="col">活動名稱</th>
+                            <th scope="col">標籤</th>
+                            <th scope="col">QRCODE</th>
+                            <th scope="col">活動地址</th>
+                            <th scope="col">開始日期</th>
+                            <th scope="col">結束日期</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="data">
+                    </tbody>
+                </table>
+            </div>
+            <form class="col-md-4" method="post" name="form1" onsubmit="return searchForm();" style="display:none">    
                 <div class="input-group mt-3 mb-3">
                     <div class="input-group-prepend ">
                         <span class="input-group-text bg-dark text-white">活動關鍵字</span>
@@ -73,9 +92,6 @@ if(isset($_SESSION['admin'])){
                     <input type="date" class="form-control" id="search_dateEnd" name="search_dateEnd">
                 </div>
 
-
-
-
                 <div class="btn-group mt-2 mb-2 d-flex justify-content-between" role="group">
                     <label class="btn btn-dark ">活動類型</label>               
                     <label class="btn btn-light" for="search_primary" onclick="btn_changeColor(this)">徵才資訊</label>
@@ -89,17 +105,14 @@ if(isset($_SESSION['admin'])){
                 <div class="btn-group mt-3 mb-3 d-flex justify-content-between" role="group">
                     <button class="btn btn-dark" type="submit" id="search_btn" >搜尋</button>
                 </div>
-                <nav>
-                    <ul class="pagination justify-content-center" id="search_pagination">
-                    </ul>
-                </nav>
-                <input class="form-check-input" type="checkbox" id="search_primary" value="search_primary" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_success" value="search_success" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_warning" value="search_warning" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_danger" value="search_danger" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_info" value="search_info" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_secondary" value="search_secondary" name="search_contenttype[]" hidden><br>
-                <input class="form-check-input" type="checkbox" id="search_dark" value="search_dark" name="search_contenttype[]" hidden><br>
+                
+                <input class="form-check-input" type="checkbox" id="search_primary" value="primary" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_success" value="success" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_warning" value="warning" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_danger" value="danger" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_info" value="info" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_secondary" value="secondary" name="search_contenttype[]" hidden><br>
+                <input class="form-check-input" type="checkbox" id="search_dark" value="dark" name="search_contenttype[]" hidden><br>
             </form>
             
         </div>
@@ -152,50 +165,36 @@ function btn_changeColor(e){
 //換頁功能
 const pagi = document.querySelector('#pagination');
 const search_pagi = document.querySelector('#search_pagination');
-const data_body = document.querySelector('ul.list-unstyled');
+const data_body = document.querySelector('tbody.data');
 
 const wrap_str = 
-`<div class="card mb-3" style="background-color:white;">
-    <div class="row no-gutters">
-        
-        <div class="card-body col-xl-11 col-lg-9 col-md-9 col-sm-8 p-3">
-            <h5 class="card-title" id="text123" style="font-weight=bold;">【<%= company %>】<%= name %></h5>
-            <h6 class="card-subtitle mb-2 ml-2 text-muted">
-                <span class="badge badge-primary " id="badge-primary"><%= primary%></span>
-                <span class="badge badge-success" id="badge-success"><%= success%></span>
-                <span class="badge badge-warning" id="badge-warning"><%= warning%></span>
-                <span class="badge badge-danger" id="badge-danger"><%= danger%></span>
-                <span class="badge badge-info" id="badge-info"><%= info%></span>
-                <span class="badge badge-secondary" id="badge-secondary"><%= secondary%></span>
-                <span class="badge badge-dark" id="badge-dark"><%= dark%></span>
-            </h6>
-        </div>
-        <div class="col-xl-1 col-lg-3 col-md-3 col-sm-4">
-            <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
-        </div>
-    </div>
-    
-<div class="accordion" id="accordionExample<%=sid%>">
-    <div id="collapseTwo<%=sid%>" class="collapse" data-parent="#accordionExample<%=sid%>">
-        <div class="card-body">
-        <h5 class="card-text ml-2">活動內容：</h5>
-        <p class="card-text ml-2"><%= content %></p>
-        <h5 class="card-text ml-2">活動地址：</h5>
-        <p class="card-text ml-2"><%= region %></p>
-        </div>
-    </div>
-</div>
+`
+    <tr>
+        <td width="110px;"><%= company %></td>
+        <td width="200px;"><%= name %></td>
+        <td width="30px;">
+            <span class="badge badge-primary " id="badge-primary"><%= primary%></span>
+            <span class="badge badge-success" id="badge-success"><%= success%></span>
+            <span class="badge badge-warning" id="badge-warning"><%= warning%></span>
+            <span class="badge badge-danger" id="badge-danger"><%= danger%></span>
+            <span class="badge badge-info" id="badge-info"><%= info%></span>
+            <span class="badge badge-secondary" id="badge-secondary"><%= secondary%></span>
+            <span class="badge badge-dark" id="badge-dark"><%= dark%></span>
+        </td>
+        <td width="100px;">
+            <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&choe=UTF-8&chl=http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<%= sid %>" class="card-img-top" style="display:block;max-height:200px;max-width:200px;">
+        </td>
+        <td width="200px;"><%= region %></td>
+        <td width="110px;"><%= dateStart %></td>
+        <td width="110px;"><%= dateEnd %></td>
+        <td width="100px;">
+            <a  href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a>
+            <br>
+            <a  href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a>
+        </td>
+    </tr>
 
-    
-    <div class="card-footer d-flex justify-content-between bg-dark text-white" onclick="highlightContent();">
-        <small >活動期限：<%= dateStart %>-<%= dateEnd %></small>
-        <small class="ml-3 collapsed"  data-toggle="collapse" data-target="#collapseTwo<%=sid%>" aria-expanded="false" aria-controls="collapseTwo<%=sid%>"><a class="text-white">更多資訊 <i class="fas fa-info-circle"></i></a></small> 
-        <small class="d-flex justify-content-between <%= company %>_control total_control">
-                <div class="ml-3 "><a class="text-white" href="ShawnpageEdit.php?sid=<%= sid %>">修改<i class="fas fa-edit ml-1"></i></a></div> 
-                <div class="ml-3 "><a class="text-white" href="javascript:deleteIt(<%= sid %>);">刪除<i class="far fa-trash-alt ml-1"></i></a></div>
-        </small>
-    </div>
-</div>`;
+`;
 
 
 const wrap_func = _.template(wrap_str);
@@ -223,20 +222,22 @@ function hiddenSetting(){
 
 //搜尋功能
 
+search_dateStart.addEventListener("focus",function(){search_dateStart.value=""})
+search_dateEnd.addEventListener("focus",function(){search_dateEnd.value=""})
+
 const search_btn = document.querySelector('#search_btn');
  
 const searchForm = () =>{
-    console.log('GO!')
     if(search_keyword.value=="" && search_dateStart.value =="" && search_dateEnd.value ==""){
         search_keyword.value=="";
-        search_dateStart.value ="1000-01-01";
-        search_dateEnd.value ="9999-01-01";
+        search_dateStart.value ="1970-01-01";
+        search_dateEnd.value ="2100-01-01";
     }
     if(search_dateStart.value ==""){
-        search_dateStart.value ="1000-01-01";
+        search_dateStart.value ="1970-01-01";
     }
     if(search_dateEnd.value ==""){
-        search_dateEnd.value ="9999-01-01";
+        search_dateEnd.value ="2100-01-01";
     }
 
 
@@ -254,10 +255,10 @@ const searchForm = () =>{
     .then(response=>{return response.json();})
     .then(json=>{
         ori_data = json;
-        console.log(ori_data);
-        
-        
+        search_dateStart.value=ori_data['Code']['search_dateStart']
+        search_dateEnd.value=ori_data['Code']['search_dateEnd']
         let str='';
+
         for(let d of ori_data.data){
 
             if(d.contenttype.indexOf('primary')>-1){
@@ -286,7 +287,6 @@ const searchForm = () =>{
 
         }
 
-        console.log(ori_data);
         
         data_body.innerHTML = str;
         
@@ -308,7 +308,7 @@ const searchForm = () =>{
     search_dateEnd.value="";
     return false;
 };
-
+search_keyword.addEventListener("keydown",searchForm);
 window.addEventListener('hashchange',searchForm);
 searchForm();
 

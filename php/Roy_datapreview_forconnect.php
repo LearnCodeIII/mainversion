@@ -1,12 +1,10 @@
 <?php
-$pagename = "pageMain";
+$pagename = "Roy_datapreview_forconnect";
 
 include __DIR__ . '/PDO.php';
 
 ?>
 <?php include __DIR__ . './head.php'?>
-<!-- <?php include __DIR__ . './nav.php'?> -->
-<!-- <?php include __DIR__ . './Roysidenav.php'?> -->
 
 <section class="dashboard">
     <div class="container-fluid ">

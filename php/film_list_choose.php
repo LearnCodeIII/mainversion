@@ -1,12 +1,11 @@
 <?php
 require __DIR__.'/PDO.php';
 
+$groupname = "film";
 $pagename = "film_list_choose";
-// $groupname = "film";
 
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
 
 
 ?>
@@ -200,7 +199,10 @@ include __DIR__.'./film_sidenav.php';
         </div>
     </div>
 </section>
+
+<script src="../js/sweet.js"></script>
 <script>
+    
     let page = 1;
     let ori_data;
 
@@ -259,12 +261,43 @@ include __DIR__.'./film_sidenav.php';
 
     //按delete時先跳出確認視窗後再刪除
     const checkDelete = (sid) => {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false,
+        })
 
-        if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`) == true) {
-            location.href = 'film_data_delete.php?sid=' + sid;
-        } else {
-            alert("無資料被刪除");
-        }
+        swalWithBootstrapButtons.fire({
+            title: '確定要刪除?',
+            text: "刪除就沒辦法復原了喔!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '是的，我要刪除!',
+            cancelButtonText: '我不刪了!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire({
+                    title: '已刪除',
+                    text: "這項資料已被刪除!",
+                    type: 'success',
+                    timer: 3000,
+                }).then((result) => {
+                    location.href = 'film_data_delete.php?sid=' + sid;
+                })
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    type: 'error',
+                    title: '取消刪除',
+                    text: '您的資料沒有刪除。'
+                })
+            }
+        })
+
     }
 
 

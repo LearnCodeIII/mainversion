@@ -4,13 +4,8 @@ $groupname = "article";
 
 include __DIR__.'/PDO.php';
 ?>
-<<<<<<< HEAD
-<?php include __DIR__.'./new_head.php'?>
-<?php include __DIR__.'./new_nav.php'?>
-=======
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./sidenav.php'?>
->>>>>>> parent of 0d6a830... ................
 
 
 <style>
@@ -29,8 +24,14 @@ include __DIR__.'/PDO.php';
     white-space: nowrap;
     max-width:30px;
 };
-</style>
 
+.none{
+    display:none;
+}
+
+</style>
+<script src="../js/sweet.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <section class="dashboard">
 
     <div class="container-fluid">
@@ -49,13 +50,11 @@ include __DIR__.'/PDO.php';
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th class="title text-truncate" scope="col">title</th>
-                    <th scope="col">author</th>
-                    <th scope="col">date</th>
-                    <th class="content text-truncate" scope="col">content</th>
-                    <th scope="col">預覽</i></th>
-                    <th scope="col">編輯</i></th>
-                    <th scope="col">刪除</i></th>
+                    <th class="title text-truncate" scope="col">新聞標題(點擊預覽)</th>
+                    <th scope="col">作者</th>
+                    <th scope="col">發佈時間</th>
+                    <th class="content text-truncate" scope="col">內文</th>
+                    <th scope="col">編輯/刪除</i></th>
                 </tr>
             </thead>
             <tbody id="data_body">
@@ -73,13 +72,14 @@ const data_body = document.querySelector('#data_body');
 
 let tr_str = `<tr>
                 <th scope="row"><%= sid %></th>
-                <td class="title text-truncate"><%= title %></td>
+                <td class="title text-truncate"><a href="article_preview.php?sid=<%= sid %>"><%= title %></a></td>
                 <td><%= author %></td>
                 <td><%= date %></td>
                 <td class="content text-truncate"><%= content %></td>
-                <td><a href="article_preview.php?sid=<%= sid %>"><i class="fas fa-eye"></a></td>
-                <td><a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></a></td>
-                <td><a href="javascript: delete_it(<%= sid %>)"><i class="fas fa-trash-alt"></a></td>
+                <td>
+                <a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></i></a>/
+                <a href="javascript:deleteIt(<%= sid %>)"><i class="fas fa-trash-alt"></i></a>
+                </td>
                 </tr>`;
 
 const tr_func = _.template(tr_str);
@@ -116,6 +116,7 @@ const myHashChange = () => {
         page = 1;
     };
     // ul_page.innerHTML = page;
+    
 
     fetch('article_search_api.php?page=' + page+'&searchkey='+document.searchform.searchkey.value)
         .then(res => {
@@ -132,7 +133,14 @@ const myHashChange = () => {
             }
             data_body.innerHTML = str;
             // str = 塞好data的tr_str 
-
+            if(page>oriData.totalPages){
+                page=oriData.totalPages;
+                $('#next').addClass('none');
+            };
+            if(page<=1){
+                page=1;
+                $('#prev').addClass('none');
+            };
             str = '';
             for (i = 1; i <= oriData.totalPages; i++) {
 
@@ -143,12 +151,11 @@ const myHashChange = () => {
                     page: i
                 });
             }
-            ul_page.innerHTML = `<li class="page-item <%= active %>">
+            ul_page.innerHTML = `<li class="page-item" id="prev">
                 <a class="page-link" href="#${page-1}">上一頁</a>
-                </li>` + str + `<li class="page-item <%= active %>">
-                <a class="page-link" href="#${page+1}">下一頁</a>
+                </li>` + str + `<li class="page-item ">
+                <a class="page-link" href="#${page+1}" id="next">下一頁</a>
                 </li>`;
-
         });
 
 };
@@ -157,9 +164,45 @@ window.addEventListener('hashchange', myHashChange);
 myHashChange();
 
 
-function delete_it(sid) {
-    if (confirm(`確定要刪除編號 ${sid} 的資料嗎?`)) {
-        location.href = 'article_delete.php?sid=' + sid;
+//刪除資料
+function deleteIt(sid){
+    
+    const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false,
+    })
+
+    swalWithBootstrapButtons.fire({
+    title: `確定要刪除編號 ${sid} 的文章嗎?`,
+    text: "檔案刪除過後將無法還原!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '確認刪除',
+    cancelButtonText: '我再想想',
+    reverseButtons: true
+    }).then((result) => {
+    if (result.value) {
+        swalWithBootstrapButtons.fire({
+            type: 'success',
+            title: '確認刪除',
+            text: '您的資料已經刪除。',
+            footer: '提示：即將返回主畫面',
+            timer: 3000,
+        }).then((result) => {
+            location.href = 'article_delete.php?sid=' + sid;
+        })
+    } else if (
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire({
+            type: 'error',
+            title: '取消刪除',
+            text: '您的資料沒有刪除。'
+        })
     }
-};
+    })
+}
 </script>

@@ -4,11 +4,13 @@ $groupname = "article";
 
 include __DIR__.'/PDO.php';
 ?>
-<?php include __DIR__.'./new_head.php'?>
-<?php include __DIR__.'./new_nav.php'?>
+<?php include __DIR__.'./head.php'?>
+<?php include __DIR__.'./sidenav.php'?>
 
 <!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
 <!-- <script src="../js/jquery-ui.js"></script> -->
+<!-- <link rel="stylesheet" href="../css/animate.css"> -->
+<script src="../js/sweet.js"></script>
 <style>
 .content {
     /* display: block; */
@@ -47,13 +49,12 @@ include __DIR__.'/PDO.php';
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th class="title text-truncate" scope="col">新聞標題</th>
+                    <th class="title text-truncate" scope="col">新聞標題（Preview）</th>
                     <th scope="col">作者</th>
                     <th scope="col">日期</th>
                     <th class="content text-truncate" scope="col">新聞內容預覽</th>
-                    <th scope="col">預覽</i></th>
-                    <th scope="col">編輯</i></th>
-                    <th scope="col">刪除</i></th>
+                    <th scope="col">編輯/刪除</i></th>
+
                 </tr>
             </thead>
             <tbody id="data_body">
@@ -72,13 +73,14 @@ const data_body = document.querySelector('#data_body');
 
 let tr_str = `<tr>
                 <th scope="row"><%= sid %></th>
-                <td class="title text-truncate"><%= title %></td>
+                <td class="title text-truncate"><a href="article_preview.php?sid=<%= sid %>"><%= title %></a></td>
                 <td><%= author %></td>
                 <td><%= date %></td>
                 <td class="content text-truncate"><%= content %></td>
-                <td><a href="article_preview.php?sid=<%= sid %>"><i class="fas fa-eye"></a></td>
-                <td><a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></a></td>
-                <td><a href="javascript: delete_it(<%= sid %>)"><i class="fas fa-trash-alt"></a></td>
+                <td>
+                <a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></i></a>/
+                <a href="" type="button" id="delete<%= sid %>"><i class="fas fa-trash-alt"></i></a>
+                </td>
                 </tr>`;
 
 const tr_func = _.template(tr_str);
@@ -90,7 +92,7 @@ let page_str = `<li class="page-item <%= active %>">
 
 const page_func = _.template(page_str);
 
-
+// 換頁
 const myHashChange = () => {
     let h = location.hash.slice(1);
     page = parseInt(h);
@@ -138,12 +140,71 @@ const myHashChange = () => {
 window.addEventListener('hashchange', myHashChange);
 myHashChange();
 
+//刪除資料
+// function deleteIt(sid){
+    
+//     const swalWithBootstrapButtons = Swal.mixin({
+//     customClass: {
+//         confirmButton: 'btn btn-success',
+//         cancelButton: 'btn btn-danger'
+//     },
+//     buttonsStyling: false,
+//     })
 
-function delete_it(sid) {
-    if (confirm(`確定要刪除編號 ${sid} 的資料嗎?`)) {
-        location.href = 'article_delete.php?sid=' + sid;
-    }
-};
+//     swalWithBootstrapButtons.fire({
+//     title: `確定要刪除編號 ${sid} 的文章嗎?`,
+//     text: "檔案刪除過後將無法還原!",
+//     type: 'warning',
+//     showCancelButton: true,
+//     confirmButtonText: '確認刪除',
+//     cancelButtonText: '我再想想',
+//     reverseButtons: true
+//     }).then((result) => {
+//     if (result.value) {
+//         swalWithBootstrapButtons.fire({
+//             type: 'success',
+//             title: '確認刪除',
+//             text: '您的資料已經刪除。',
+//             footer: '提示：即將返回主畫面',
+//             timer: 3000,
+//         }).then((result) => {
+//             location.href = 'article_delete.php?sid=' + sid;
+//         })
+//     } else if (
+//         result.dismiss === Swal.DismissReason.cancel
+//     ) {
+//         swalWithBootstrapButtons.fire({
+//             type: 'error',
+//             title: '取消刪除',
+//             text: '您的資料沒有刪除。'
+//         })
+//     }
+//     })
+// }
+
+var dSid = 'delete'+`${sid}`; 
+
+
+$('#dSid`).click(){
+    swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this imaginary file!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+}
+
+
 </script>
 
 <?php include __DIR__.'./foot.php'; ?>

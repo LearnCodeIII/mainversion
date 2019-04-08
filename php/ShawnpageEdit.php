@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/PDO.php';
 $groupname = "activity";
-
+$pagename = "ShawnpageEdit";
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 $sql = "SELECT * FROM activity WHERE sid=$sid";
@@ -15,8 +15,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__.'./head.php'?>
-<?php include __DIR__.'./nav.php'?>
-<?php include __DIR__.'./Shawnsidenav.php'?>
+<?php include __DIR__.'./sidenav.php'?>
 <script>
     $(document).ready(function () {
   bsCustomFileInput.init()
@@ -170,13 +169,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 if(stripos($row['signup'],"other")>-1){echo "checked";};
                                                 ?>>
                                                 <label class="form-check-label" for="signOther">是，上限人數</label>
-                                                <input class="form-check-input ml-1" type="text" id="signOtherNumber"  name="signup[]" size="3" value="
-                                                <?php
-                                                //todo 這裡還沒修好
-                                                if(stripos($row['signup'],"other")>-1){echo intval($row['signup']);};
-                                                ?>
-                                                ">
-                                                <label class="form-check-label">人。<span style="color:red">這裡還沒修好</span></label>
+                                                <input class="form-check-input ml-1" type="text" id="signOtherNumber"  name="signup[]" size="3" value="<?php
+                                                if(stripos($row['signup'],"other")>-1){echo  preg_replace('/[^\d]/','',$row['signup']);};
+                                                ?>"
+                                                >
                                             </div>
                                         </div>
                                     </div>
@@ -195,10 +191,12 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="pictureHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group">
-                                            <span class="input-group-text bg-dark text-white" id="inputGroupFileAddon01">活動圖片預覽</span>
+                                        <span class="input-group-text bg-dark text-white" id="inputGroupFileAddon01">活動圖片預覽</span>
+                                    </div>
+                                    <div class="imgWarp" style="height:400px width:700px;">
+                                        <img id="myimg" class="mt-3 mb-3" src="../pic/activity/<?= $row['picture'] ?>" alt="" style="height:100% width:100%;">
                                     </div>        
                                 </div>
-                                <img id="myimg" class="mt-3 mb-3" src="../pic/activity/<?= $row['picture'] ?>" alt="" style="max-height:400px max-width:700px;">
                             </div>
                             <div class="col-md-6 ">
                                 <div class="input-group mt-3">

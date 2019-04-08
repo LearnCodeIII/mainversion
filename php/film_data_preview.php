@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__.'/PDO.php';
+$groupname = "film";
 $page_name='film_data_preview';
 
 $sid=isset($_GET['sid'])?intval($_GET['sid']):0;
@@ -17,8 +18,7 @@ $row = $stamt->fetch(PDO::FETCH_ASSOC);
 // }
 
 include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
+include __DIR__.'./sidenav.php'
 ?>
 <style>
     .form-group small {
@@ -91,7 +91,7 @@ include __DIR__.'./film_sidenav.php';
                                         <h4>預告片</h4>
                                     </label>
                                     <div class="col-12">
-                                    <a href="#" onclick="window.open(' <?= $row['trailer']?> ', 'Yahoo', config='height=500,width=500');"><?= $row['trailer']?></a>
+                                    <a href="#" onclick="window.open(' <?= $row['trailer']?> ',  config='height=500,width=500');"><?= $row['trailer']?></a>
                                     </div>
 
                                     <label for="movie_genre" class="mt-2">

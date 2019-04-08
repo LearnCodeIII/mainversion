@@ -1,40 +1,145 @@
-html,body{
-    background:#eee;
-    font-family:'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
-}
-.navbar {
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:99;
-    background-color:rgb(39, 39, 39) !important;
+body{
+    /* background:#eee; */
+    }
+
+.nav_width{
+    font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
+    width: 240px;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    transition: 0.5s
 }
 .navbar-brand{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
 }
-.sidenav {
+
+
+.nav_width a{
+    color: #ccc !important;
+    text-decoration:none;
+}
+
+.nav_width a:hover{
+    color: #dc3545 !important;
+    font-weight: bold;
+    text-decoration:none;
+}
+.nav_wrapper a{
+    color: #ccc !important;
+    text-decoration:none;
+}
+
+.nav_wrapper a:hover{
+    color: #ffe2a4 !important;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+/* RWD出現的menu */
+.pos-f-t{
+    z-index: 99;
+    /* width: %; */
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.nav_wrapper{
     font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
-    background:rgb(39, 39, 39);
-    width:100%;
-    max-width:120px;
-    position:fixed;
-    top:56px;
-    left:0;
-    bottom:0;
-    z-index:98;
-    display:flex;
-    justify-content: center;
-    
+    width:240px;
+    height: auto;
+    overflow: hidden;
+    /* position: absolute; */
 }
-.sidenav a {
-    color:rgb(216, 216, 216);
+
+.nav_wrapper .card-header{
+    padding: 0.1rem 2rem;;
+    margin: 0;
 }
+.nav_wrapper .card-body{
+    padding: 1rem 3rem;
+    margin: 0;
+}
+
+.myinfo2 .card-body{
+    padding: 0.5rem 1.5rem;
+}
+
+
+.thisPage a{
+    font-weight: 900;
+    color: rgb(255, 189, 189) !important;
+}
+.dashboard{
+    font-family: 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
+}
+@media (max-width: 992px) {
+    .pos-f-t{
+        display: block;
+    }
+    .nav_width{
+        /* display: none; */
+        width: 0;
+        /* height: 0; */
+    }
+    .dashboard{
+        position: absolute;
+        display: block;
+        /* width: 100%; */
+        top:0;
+        left:0 !important;
+        right:0;
+        bottom:auto;
+        transition: 0.5s;
+    }
+    };
+        
+.height{
+    width: 240px;
+    height:auto;
+    position: relative;
+}
+
+.nav_width a{
+    /* color: #ccc; */
+    text-decoration:none
+}
+
+.myinfo{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    position: absolute !important;
+    bottom: 0;
+}
+.myinfo2{
+    padding: 0;
+    margin: 0 auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* width: auto; */
+    position: absolute !important;
+    bottom: auto;
+}
+
+.info_img{
+    border-radius: 50% !important;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+}
+
 .dashboard {
-    position:fixed;
-    top:56px;
-    left:120px;
+    position: absolute;
+    top:0;
+    left:240px;
     right:0;
     bottom:auto;
-    padding:3rem;
+    padding:3rem 1rem;
+}
+
+.box{
+    height: 300vh;
+    background-color: #ccc;
 }

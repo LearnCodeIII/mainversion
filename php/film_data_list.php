@@ -1,40 +1,43 @@
 <?php
 // require __DIR__. '/film_crud_session.php';
 #頁面名稱
+$groupname = "film";
 $pagename = "film_data_list";
 
 include __DIR__.'/PDO.php';
-include __DIR__.'./head.php';
-include __DIR__.'./nav.php';
-include __DIR__.'./film_sidenav.php';
 
-if(isset($_SESSION['admin'])){
-    $user = "小編：";
-    $user .= $_SESSION['admin'];
-    $level = 10;
+include __DIR__.'./head.php';
+include __DIR__.'./sidenav.php'
+
+
+// if(isset($_SESSION['admin'])){
+//     $user = "小編：";
+//     $user .= $_SESSION['admin'];
+//     $level = 10;
     
-}else if(isset($_SESSION['theater'])){
-    $theater=$_SESSION['theater'];
-    $sql = "SELECT * FROM `cinema` where account = '$theater' ";
-    $stmt = $pdo->query($sql);
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach($rows as $row){
-        $c_sid = $row['sid'];
-        $c_user = $row['name'];
-        $c_img = $row['img'];
-        $c_taxID = $row['taxID'];
-        $c_phone = $row['phone'];
-        $c_address = $row['address'];
-        $c_intro = $row['intro'];
+// }else if(isset($_SESSION['theater'])){
+//     $theater=$_SESSION['theater'];
+//     $sql = "SELECT * FROM `cinema` where account = '$theater' ";
+//     $stmt = $pdo->query($sql);
+//     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     foreach($rows as $row){
+//         $c_sid = $row['sid'];
+//         $c_user = $row['name'];
+//         $c_img = $row['img'];
+//         $c_taxID = $row['taxID'];
+//         $c_phone = $row['phone'];
+//         $c_address = $row['address'];
+//         $c_intro = $row['intro'];
     
-    }
-    $level = 2;
-}else {
-    header("Location: ./login.php");
-    exit;
-};
+//     }
+//     $level = 2;
+// }else {
+//     header("Location: ./login.php");
+//     exit;
+// };
 
 ?>
+
 <section class="dashboard">
 
     <div class="row d-flex justify-content-center">
@@ -64,17 +67,16 @@ if(isset($_SESSION['admin'])){
     </div>
 
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover ">
         <thead class="thead-dark">
             <tr>
-                <th scope="col"><i class="fas fa-edit"></i></th>
-                <th scope="col"><i class="fas fa-trash-alt"></i></th>
+                <th scope="col">操作</i></th>
                 <th scope="col">影片編號</th>
                 <th scope="col">電影名稱中文</th>
                 <th scope="col">電影名稱英文</th>
-                <th scope="col">電影介紹中文</th>
-                <th scope="col">電影介紹英文</th>
-                <th scope="col">電影圖</th>
+                <th scope="col" max-width="200px">電影介紹中文</th>
+                <th scope="col" max-width="200px">電影介紹英文</th>
+                <th scope="col" max-width="120px">電影圖</th>
                 <th scope="col">電影類別</th>
                 <th scope="col">放映類型</th>
                 <th scope="col">電影分級</th>
@@ -99,6 +101,7 @@ if(isset($_SESSION['admin'])){
     <!-- </div> -->
 </section>
 
+<script src="../js/sweet.js"></script>
 <script>
     let page = 1;
     let ori_data;
@@ -116,25 +119,35 @@ if(isset($_SESSION['admin'])){
 
     //用underscore.js的template字串
     const tr_str = `
-            <tr>
+            <tr >
                 <td>
-                    <a href="film_data_edit.php?sid=<%= sid%>"><i class="fas fa-edit"></i></a>
-                </td>
-                <td>
-                    <a href="javascript:checkDelete(<%= sid%>)"><i class="text-danger fas fa-trash-alt"></i></a>
+                    <a href="film_data_edit.php?sid=<%= sid%>"><i class="fas fa-edit h4"></i></a>
+                    <a href="javascript:checkDelete(<%= sid%>)"><i class="text-danger fas fa-trash-alt h4"></i></a>
                 </td>
                 <td><%= sid %></td>
-                <td><%= name_tw %></td>
-                <td><%= name_en %></td>
-                <td height="200px"><%= intro_tw %></td>
-                <td><%= intro_en %></td>
-
+                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= name_tw %>"><%= name_tw %></td>
+                <td class="text-truncate" style="max-width:200px; max-height:200px;" data-toggle="tooltip" data-placement="right" title="<%= name_en %>"><%= name_en %></td>
+                <td >
+                    <p title="<%= intro_tw %>" class="text-truncate" style="max-width:200px;" data-toggle="tooltip" data-placement="right"><%= intro_tw %></p>
+                    <button type="button" class="btn btn-info seeAll">展開全文</button>
+                    <button type="button" style="display:none" class="btn btn-info seeAll">收合</button>
+                </td>
+                <td >
+                    <p title="<%= intro_en %>" class="text-truncate" style="max-width:200px;" data-toggle="tooltip" data-placement="right"><%= intro_en %></p>
+                    <button type="button" class="btn btn-info seeAll">展開全文</button>
+                    <button type="button" style="display:none" class="btn btn-info seeAll">收合</button>
+                </td>
+                
                 <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
 
-                <td><%= movie_genre %></td>
+                <td class="text-truncate" style="max-width: 150px;" title="<%= movie_genre %>"><%= movie_genre %>
+                    
+                </td>
                 <td><%= movie_ver %></td>
                 <td><%= movie_rating %></td>
-                <td><%= trailer %></td>
+                <td class="text-truncate" style="max-width: 150px; max-height: 150px;" title="<%= trailer %>">
+                    <a href="<%= trailer %>"><i class="fas fa-play-circle h4"></i></a>
+                </td>
                 <td><%= pirce %></td>
                 <td><%= schedule %></td>
                 <td><%= in_theaters %></td>
@@ -200,16 +213,16 @@ if(isset($_SESSION['admin'])){
                 //製作頁碼按鈕
                 p_btn_num = 7;//設定可顯示幾個頁碼按鈕(建議使用奇數)
                 str = '';
-                for (let i =-parseInt(p_btn_num/2); i<=parseInt(p_btn_num/2); i++) {
+                for (let i = -parseInt(p_btn_num / 2); i <= parseInt(p_btn_num / 2); i++) {
                     let active = i === 0 ? 'active' : '';
                     let vh = '';
-                    if (parseInt(ori_data.page)+i<=0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
+                    if (parseInt(ori_data.page) + i <= 0 || parseInt(ori_data.page) + i > parseInt(ori_data.tol_page)) {
                         vh = 'hidden';
                     }
                     str += page_func({
                         active: active,
-                        v:vh,
-                        page: ori_data.page+i,
+                        v: vh,
+                        page: ori_data.page + i,
                     });
                 }
                 page_list.innerHTML = str;
@@ -263,16 +276,61 @@ if(isset($_SESSION['admin'])){
     };
 
 
-    //按delete時先跳出確認視窗後再刪除
+
+    //表格多出來內容用tooltip顯示
+    $('table[data-toggle="tooltip"]').tooltip("shown.bs.tooltip");
+    //但是一直沒生效 Q_Q
+
+
+    //顯示全文按鈕
+    $("#data_body").on("click", ".seeAll", function () {
+        $(this).closest("td").find("p").toggleClass("text-truncate");
+        
+    //靠顯示隱藏製造顯示全文的按鈕文字改變的假效果
+        $(this).closest("td").find("button").toggle();
+    });
+
+
+    //按delete時先跳出確認視窗後再刪除()
     const checkDelete = (sid) => {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false,
+        })
 
-        if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`) == true) {
-            location.href = 'film_data_delete.php?sid=' + sid;
-        } else {
-            alert("無資料被刪除");
-        }
+        swalWithBootstrapButtons.fire({
+            title: '確定要刪除?',
+            text: "刪除就沒辦法復原了喔!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '是的，我要刪除!',
+            cancelButtonText: '我不刪了!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire({
+                    title: '已刪除',
+                    text: "這項資料已被刪除!",
+                    type: 'success',
+                    timer: 3000,
+                }).then((result) => {
+                    location.href = 'film_data_delete.php?sid=' + sid;
+                })
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    type: 'error',
+                    title: '取消刪除',
+                    text: '您的資料沒有刪除。'
+                })
+            }
+        })
+
     }
-
 
 
     window.addEventListener('hashchange', myHashChange);

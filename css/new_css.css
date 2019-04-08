@@ -1,5 +1,6 @@
-body{
-    /* background:#eee; */
+html,body{
+    background:#eee;
+    font-family:'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
     }
 
 .nav_width{
@@ -22,7 +23,7 @@ body{
 }
 
 .nav_width a:hover{
-    color: #dc3545 !important;
+    color: #fff !important;
     font-weight: bold;
     text-decoration:none;
 }
@@ -32,7 +33,7 @@ body{
 }
 
 .nav_wrapper a:hover{
-    color: #ffe2a4 !important;
+    color: #fff !important;
     font-weight: bold;
     text-decoration:none;
 }
@@ -71,7 +72,7 @@ body{
 
 .thisPage a{
     font-weight: 900;
-    color: rgb(255, 189, 189) !important;
+    color: #ffc107 !important;
 }
 
 @media (max-width: 992px) {
