@@ -671,7 +671,6 @@ $pagename = 'member_search';
                 modal.startLoading();
                 let getSid=$(`#modal${dataNum}`).data("sid");
                 console.log('sid:'+getSid);
-
                     $.get('Su_member_previewInside_api.php', {
                         "sid":getSid
                         },function(data) {
@@ -684,11 +683,7 @@ $pagename = 'member_search';
         });
         event.preventDefault();
         $(`#modal${dataNum}`).iziModal('open');
-
- 
     });
-
-
 </script>
 <script src="../js/sweet.js"></script>
 <?php include __DIR__.'/foot.php' ?>
