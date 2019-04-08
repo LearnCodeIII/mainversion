@@ -94,7 +94,7 @@ $pagename = "pageMain";
 
 
 $(document).ready(function(){
-  $('div').zoom({url: '../pic/activity/217ae40614f2c0962a9c54843ab799a42c09aafe.jpg'});
+  $('div').zoom({url: 'ShawnpageDisplay.php?sid=84'});
 });
 
 
