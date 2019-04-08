@@ -6,12 +6,23 @@ $pagename = "pageMain";
 
 ?>
 <?php include __DIR__.'./head.php'?>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script src="../js/sweet.js"></script>
+<script src="../js/tilt.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
+<style>
+    html,body{
+        font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
+    }
+</style>
+
 <div class="container">
     <ul class="list-unstyled" >
     </ul>  
 </div>
-
 <script>
 //
 (function () {
@@ -34,8 +45,11 @@ $pagename = "pageMain";
         if (/^(loaded|complete)$/.test(d.readyState))
           clearInterval(t), run();
       }, 0);
+
+
   };
 })();
+
 
 
 
@@ -153,12 +167,20 @@ const searchForm = () =>{
         }
 
         data_body.innerHTML = str;
-
+        
+        
+        
     });
 };
 
 searchForm();
-
+$
+$('html').on("mouseover",function(){
+    $('img').tilt({
+        glare: true,
+        maxGlare: .5
+    })
+})
 
 </script>
 
