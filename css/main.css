@@ -65,6 +65,7 @@ body{
 .nav_wrapper .card-body{
     padding: 1rem 3rem;
     margin: 0;
+    width: 240px;
 }
 
 .myinfo2 .card-body{
@@ -150,3 +151,5 @@ body{
 .bg_gray{
     background-color: #424a53 !important;
 }
+
+.bgcc{}
