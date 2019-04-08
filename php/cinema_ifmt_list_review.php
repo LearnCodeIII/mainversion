@@ -688,6 +688,7 @@ try{
     <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
     <script>
         // 進頁面時的openView動畫
         start();
@@ -712,6 +713,13 @@ try{
             gutter: 6
         });
 
+        // 修復瀑布流卡圖 加載imagesLoaded
+            var $grid = $('.grid').masonry({
+            });
+            $grid.imagesLoaded().progress( function() {
+                $grid.masonry('layout');
+            });
+
 
         // 滾輪捲動互動效果
         $(window).scroll(function(){
@@ -719,7 +727,6 @@ try{
             console.log(s);
             $('#rightBtnTop').click(function () {
             });
-
 
             // rightBar文字
             if(s <= 500){
