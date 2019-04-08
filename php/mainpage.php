@@ -12,6 +12,8 @@ include __DIR__.'/PDO.php';
 html,body{
     overflow:hidden;
     height:100%;
+    font-family:Verdana;
+    font-weight:bolder;
 }
 .accordion{
     z-index:99;
@@ -75,9 +77,9 @@ html,body{
     <div class="board4"></div>
     <div class="board5 p-2 px-3 d-flex justify-content-center align-items-center dashboardLogo flex-column">
         <h1 style="color:white" class="dashboardLogoContent">.Moiveee</h1>
-        <p style="color:white" class="dashboardLogoContents dashboardLogoContent2">Everything</p>
-        <p style="color:white" class="dashboardLogoContents dashboardLogoContent3">Everyday</p>
-        <p style="color:white" class="dashboardLogoContents dashboardLogoContent4">Everynight</p>
+        <p style="color:white" class="dashboardLogoContents dashboardLogoContent2">.Everything</p>
+        <p style="color:white" class="dashboardLogoContents dashboardLogoContent3">.Everyday</p>
+        <p style="color:white" class="dashboardLogoContents dashboardLogoContent4">.Everynight</p>
 
     </div>
 </section>
@@ -93,7 +95,7 @@ html,body{
             //     "fontSize":"5rem",
             // });
         $('.dashboardLogoContent').animate({
-            "fontSize":"3rem"
+            "fontSize":"4rem"
         });
         $('.dashboardLogoContents').css({
             "color":"white"
