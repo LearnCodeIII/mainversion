@@ -4,6 +4,7 @@ $groupname = "member";
 
 $result=[
     'fav_types'=>[],
+    'count-fav_types'=>[],
     'recommend_m'=>[],
     'rec_m_num'=>''
 ];
@@ -18,7 +19,16 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $result['fav_types'] = explode(',',$row['fav_type']);
 $tps = $result['fav_types'];
 
-for($i=0 ; $i < count($tps) ; $i++){
+//判斷fav_types是否為空
+if($tps==[""]){
+    $count_tps = 0;
+}else{
+    $count_tps = count($tps);
+}
+$result['count-fav_types'] = $count_tps;
+
+
+for($i=0 ; $i < $count_tps ; $i++){
     $r_sql = sprintf("SELECT `name_tw`,`name_en`,`intro_tw`,`movie_genre`,`in_theaters`,`out_theaters`,`movie_pic` FROM `film_primary_table` WHERE `movie_genre` LIKE %s","'%".$tps[$i]."%'");
     $r_stmt =$pdo->query($r_sql);
     $r_rows = $r_stmt-> fetchAll(PDO::FETCH_ASSOC);
@@ -110,7 +120,7 @@ $(document).ready(function () {
                             <small id="emailHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group row my-4 flex-nowrap">
-                            <div class="col-lg-2 mx-2 col-form-label d-flex align-items-center justify-content-center bg-dark text-white rounded">
+                            <div class="col-sm-2 mx-2 col-form-label d-flex align-items-center justify-content-center bg-dark text-white rounded">
                             <label class="text-center" for="fav_type">喜愛電影類型</label>
                             </div>
                             <div class="col-lg-9 d-flex flex-wrap justify-content-lg-start justify-content-md-center">
@@ -190,6 +200,14 @@ $(document).ready(function () {
                                     <input type="text" class="col-lg-4 mx-2 form-control text-center" id="" name="permission" placeholder="" 
                                     value="<?= $row['perm_name']?>" disabled>
                         </div>
+                        <div class="form-group row align-items-center my-4">
+                                    <label for="join_date" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">入會日期</label>
+                                    <input type="text" class="col-lg-4 mx-2 form-control text-center"  placeholder="" value="<?= $row['join_date'] ?>" readonly>
+                        </div>
+                                <div class="form-group row align-items-center my-4">
+                                    <label for="last_login_d" class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">最近登入</label>
+                                    <input type="text" class="col-lg-4 mx-2 form-control text-center" id="last_login_d" name="last_login_d" placeholder="" value="<?= $row['last_login_d'] ?>" readonly>
+                        </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-4  d-flex justify-content-center">
                                 <a class="btn btn-primary btn-block my-3" onclick="goback()" style="color:white;cursor: pointer">回到上一頁</a>
@@ -233,7 +251,6 @@ $(document).ready(function () {
 
 //使用underscore.js的template字串
 const tr_str = `
- 
             <p class="text-center my-0 bg-secondary border-top" style="color:white" data-toggle="collapse" data-target="#recommend_m<%= i %>" aria-expanded="true" aria-controls="recommend_m<%= i %>"><%= name_tw %></p>
 
             <div class="card mx-auto mb-2 collapse" style="max-width: 700px;" id="recommend_m<%= i %>">

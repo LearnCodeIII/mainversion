@@ -5,8 +5,7 @@ $page_name = 'member_insert';
 
 ?>
 <?php include __DIR__.'/head.php' ?>
-<?php include __DIR__.'/nav.php' ?>
-<?php include __DIR__.'./Su_sidenav.php'?>
+<?php include __DIR__.'/sidenav.php' ?>
 <style>
     .form-group small {
         color: red !important;
@@ -15,6 +14,7 @@ $page_name = 'member_insert';
     #output {
         object-fit: contain;
     }
+
 </style>
 <script>
     $(document).ready(function () {
@@ -24,14 +24,13 @@ $page_name = 'member_insert';
 <section class="dashboard">
     <div class="row justify-content-center">
         <div class="col-lg-7">
-            <!-- <div id="info" class="alert alert-success" style="display:none" role="alert">
-            </div> -->
-            <div class="card">
+            <div class="card border-secondary ">
                 <div class="card-body px-5">
+
                     <h5 class="card-title text-center">新增會員資料
                     </h5>
                     <div>
-                    <span style="color:red">＊</span>為必填項目
+                        <span style="color:red">＊</span>為必填項目
                     </div>
                     <form name="form1" method="post" onsubmit="return checkForm()">
                         <input type="hidden" name="checkme" value="check123">
@@ -39,7 +38,7 @@ $page_name = 'member_insert';
                             <label for="name"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">姓名</label>
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="name" name="name"
-                                placeholder="" value=""><span style="color:red">＊</span>
+                                placeholder="" value="" onchange="checkName(this.id)"><span style="color:red">＊</span>
                             <small id="nameHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
@@ -52,7 +51,8 @@ $page_name = 'member_insert';
                             <label for="birthday"
                                 class="col-lg-2 mx-2  col-form-label text-center bg-dark text-white rounded">生日</label>
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="birthday"
-                                name="birthday" placeholder="YYYY - MM - DD" value=""><span style="color:red">＊</span>
+                                name="birthday" placeholder="YYYY - MM - DD" value=""
+                                onchange="checkBirth(this.id)"><span style="color:red">＊</span>
                             <small id="birthdayHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
@@ -81,14 +81,14 @@ $page_name = 'member_insert';
                             <label for="mobile"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">手機</label>
                             <input type="text" class="col-lg-4 mx-2 form-control text-center" id="mobile" name="mobile"
-                                placeholder="" value="">
+                                placeholder="" value="" onchange="checkMobile(this.id)">
                             <small id="mobileHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="email"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">電子信箱</label>
                             <input type="text" class="col-lg-7 mx-2 form-control text-center" id="email" name="email"
-                                placeholder="" value=""><span style="color:red">＊</span>
+                                placeholder="" value="" onchange="checkEmail(this.id)"><span style="color:red">＊</span>
                             <small id="emailHelp" class="form-text text-muted ml-2 my-0"></small>
                         </div>
                         <div class="form-group row align-items-center my-4">
@@ -96,15 +96,16 @@ $page_name = 'member_insert';
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">設定密碼</label>
                             <input type="password" class="col-lg-4 mx-2 form-control text-center" id="pwd" name="pwd"
                                 placeholder="" value=""><span style="color:red">＊</span>
-                            <!-- <small id="pwdHelp" class="form-text text-muted"></small> -->
+                            <small id="pwdHelp" class="form-text text-muted"></small>
                         </div>
-                        <!-- <div class="form-group row">
-                            <label for="pwdchk" class="col-sm-2 col-form-label text-center bg-dark text-white rounded">確認密碼</label>
-                            <div class="col-sm-4 ml-0">
-                            <input type="password" class="form-control text-center" id="pwdchk" name="pwdchk" placeholder="請再次輸入您設定的密碼" value="">
-                            </div>
+                        <div class="form-group row">
+                            <label for="pwdchk"
+                                class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">確認密碼</label>
+                            <input type="password" class="col-lg-4 mx-2 form-control text-center" id="pwdchk"
+                                name="pwdchk" placeholder="請再次輸入您設定的密碼" value="" onchange="checkPwd(this.id)"><span
+                                style="color:red">＊</span>
                             <small id="pwdchkHelp" class="form-text text-muted"></small>
-                        </div> -->
+                        </div>
                         <div class="form-group row align-items-center my-4">
                             <label for="avatar"
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">上傳頭像</label>
@@ -126,7 +127,7 @@ $page_name = 'member_insert';
                         </div>
                         <div class="form-group row my-4">
                             <div
-                                class="col-lg-2 mx-2 col-form-label d-flex align-items-center justify-content-center bg-dark text-white rounded">
+                                class="col-sm-2 mx-2 col-form-label d-flex align-items-center justify-content-center bg-dark text-white rounded">
                                 <label class="text-center" for="fav_type">喜愛電影類型</label>
                             </div>
                             <div class="col-lg-9 d-flex flex-wrap justify-content-lg-start justify-content-md-center">
@@ -225,8 +226,8 @@ $page_name = 'member_insert';
                         <div class="form-group row align-items-center my-4">
                             <label
                                 class="col-lg-2 mx-2 col-form-label text-center bg-dark text-white rounded">權限</label>
-                            <div class="col-lg-9 d-flex">
-                                <div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
+                            <div class="col-lg-9 d-flex" id="perm_options">
+                                <!-- <div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
                                     <input class="form-check-input" type="radio" name="permission" id="perm0" value="0">
                                     <label class="form-check-label" for="perm0">
                                         黑名單
@@ -251,17 +252,36 @@ $page_name = 'member_insert';
                                     <label class="form-check-label" for="perm3">
                                         版主
                                     </label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
+
                         <div class="row justify-content-center">
                             <div class="col-lg-4  d-flex justify-content-center">
                                 <button id="submit_btn" type="submit"
                                     class="btn btn-primary btn-block my-3">確認送出</button>
                             </div>
                         </div>
-                        <div id="info" class="alert alert-success" style="display:none" role="alert">
+                        <!-- 訊息提示窗 -->
+                        <div id="info" style="display:none">
+                            <div class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+                                style="background-color:rgba(0,0,0,.5);padding-right: 17px; display: block;">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div id="infoMsg">
+                                        </div>
+                                        <div class="modal-footer py-1">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="closemodal()">確認</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="gobackpage()">返回會員列表</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!--  -->
                     </form>
                 </div>
             </div>
@@ -271,13 +291,39 @@ $page_name = 'member_insert';
 <script>
     const info = document.querySelector('#info');
     const submit_btn = document.querySelector('#submit_btn');
+    const infoMsg = document.querySelector('#infoMsg');
+    const perm_options = document.querySelector('#perm_options');
 
     const fields = [
         'name',
         'email',
         'mobile',
         'birthday',
+        'pwd',
+        'pwdchk'
     ];
+    //權限選擇欄位
+    const permission_catch = () => {
+        fetch("Su_member_permission_catch_api.php")
+            .then(res => {
+                return res.json();
+            })
+            .then(json => {
+                permissions = json;
+                console.log(permissions);
+                let perm_num = permissions.data.length;
+                console.log(perm_num);
+                let str = ""
+                for (let i = 0; i < perm_num; i++) {
+                    str += `<div class="col-lg-2 col-sm-3 mx-2 flex-sm-shrink-1">
+                            <input class="form-check-input" type="radio" name="permission" id="perm${i}" value="${i}">
+                            <label class="form-check-label" for="perm${i}">${permissions.data[i]['name']}</label>
+                            </div>`
+                }
+                perm_options.innerHTML = str;
+            })
+    }
+    permission_catch();
 
     //拿到每個input參照
     const fs = {};
@@ -342,6 +388,73 @@ $page_name = 'member_insert';
     }
 
 
+    //輸入格式檢查
+    let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    let mobile_pattern = /^09\d{2}\-?\d{3}\-?\d{3}$/;
+    let birthday_pattern = /^\d{4}\-?\d{2}\-?\d{2}$/;
+
+
+    const checkName = (x) => {
+        let obj = document.getElementById(x);
+        if (obj.value.length < 2) {
+            obj.style.borderColor = 'red';
+            document.querySelector('#' + x + 'Help').innerHTML = '請輸入正確的姓名!';
+        } else {
+            obj.style.borderColor = '#ccc';
+            document.querySelector('#' + x + 'Help').innerHTML = '';
+        }
+    }
+
+    const checkBirth = (x) => {
+        let obj = document.getElementById(x);
+        if (!birthday_pattern.test(obj.value)) {
+            obj.style.borderColor = 'red';
+            document.querySelector('#' + x + 'Help').innerHTML = '請輸入正確的生日!';
+        } else {
+            obj.style.borderColor = '#ccc';
+            document.querySelector('#' + x + 'Help').innerHTML = '';
+        }
+    }
+    const checkMobile = (x) => {
+        let obj = document.getElementById(x);
+        if (!mobile_pattern.test(obj.value)) {
+            obj.style.borderColor = 'red';
+            document.querySelector('#' + x + 'Help').innerHTML = '請輸入正確的手機號碼!';
+        } else {
+            obj.style.borderColor = '#ccc';
+            document.querySelector('#' + x + 'Help').innerHTML = '';
+        }
+    }
+    const checkEmail = (x) => {
+        let obj = document.getElementById(x);
+        if (!email_pattern.test(obj.value)) {
+            obj.style.borderColor = 'red';
+            document.querySelector('#' + x + 'Help').innerHTML = '請輸入正確的Email!';
+        } else {
+            obj.style.borderColor = '#ccc';
+            document.querySelector('#' + x + 'Help').innerHTML = '';
+        }
+    }
+    const checkPwd = (x) => {
+        let obj = document.getElementById(x);
+        let pwd = document.getElementById('pwd');
+        if (obj.value != pwd.value) {
+            obj.style.borderColor = 'red';
+            document.querySelector('#' + x + 'Help').innerHTML = '請正確輸入您設定的密碼!';
+        } else {
+            obj.style.borderColor = '#ccc';
+            document.querySelector('#' + x + 'Help').innerHTML = '';
+        }
+    }
+
+    //訊息提示窗btn
+    const closemodal = () => {
+        info.style.display = "none";
+    }
+    const gobackpage = () => {
+        location.href = "Su_member_search.php";
+    }
+
 
 
     const checkForm = () => {
@@ -354,21 +467,11 @@ $page_name = 'member_insert';
             fsv[v] = fs[v].value;
         };
 
-
-
-
-
-        let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        let mobile_pattern = /^09\d{2}\-?\d{3}\-?\d{3}$/;
-        let birthday_pattern = /^\d{4}\-?\d{2}\-?\d{2}$/;
-
-
-
         for (let v of fields) {
             fs[v].style.borderColor = '#ccc';
             document.querySelector('#' + v + 'Help').innerHTML = '';
         };
-        
+
         if (fsv.name.length < 2) {
             fs.name.style.borderColor = 'red';
             document.querySelector('#nameHelp').innerHTML = '請輸入正確的姓名!';
@@ -389,6 +492,12 @@ $page_name = 'member_insert';
             document.querySelector('#birthdayHelp').innerHTML = '請輸入正確的生日!';
             isPassed = false;
         }
+        if (fsv.pwd != fsv.pwdchk) {
+            fs.pwdchk.style.borderColor = 'red';
+            document.querySelector('#pwdchkHelp').innerHTML = '請正確輸入您設定的密碼!';
+            isPassed = false;
+        }
+
 
         if (isPassed) {
             let form = new FormData(document.form1);
@@ -400,13 +509,28 @@ $page_name = 'member_insert';
                 .then(response => response.json())
                 .then(obj => {
                     console.log(obj);
-                    info.style.display = 'block';
+                    // info.style.display = 'block';
                     if (obj.success) {
-                        info.className = "alert alert-success";
-                        info.innerHTML = "資料新增成功";
+                        // info.style.display = "block";
+                        // infoMsg.className = "alert alert-success my-0";
+                        // infoMsg.innerHTML = `<h5>資料新增成功</h5>`;
+                        Swal.fire({
+                            // position: 'top-end',
+                            type: 'success',
+                            title: '資料新增成功！',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
                     } else {
-                        info.className = "alert alert-danger";
-                        info.innerHTML = obj.errorMsg;
+                        // info.style.display = "block";
+                        // infoMsg.className = "alert alert-danger my-0";
+                        // infoMsg.innerHTML = `<h5>${obj.errorMsg}</h5>`;
+                        Swal.fire({
+                            // position: 'top-end',
+                            type: 'warning',
+                            title: `${obj.errorMsg}`,
+                            showConfirmButton: true
+                        })
                     }
                     submit_btn.style.display = 'block';
                 });
@@ -415,8 +539,6 @@ $page_name = 'member_insert';
         return false;
     }
 
-
-
 </script>
-
+<script src="../js/sweet.js"></script>
 <?php include __DIR__.'/foot.php' ?>
