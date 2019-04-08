@@ -53,22 +53,25 @@ try{
 }
 
 
-////----------------------ad撈廣告資料套入廣告頁
-//try{
-//    $ad_sql = "SELECT * FROM  `ad` WHERE `ad`.`client_name`='$name'";
-//    $ad_stmt = $pdo->query($ad_sql);
-//    $ad_row = $ad_stmt->fetchAll(PDO::FETCH_ASSOC);
-//    $ad_rows = isset($ad_row) ? $ad_row : '';
-//    //先抓個name去下面判斷是否有資料
-//    foreach($ad_rows as $row ) {
-//        $ad_name = $row['ad_name'];
-//        $start_date = $row['contract_start_date'];
-//        $end_date = $row['contract_end_date'];
-//    }
-//
-//}catch(PDOException $ex){
-//    $ad_miss_msg = '無相關資料';
-//}
+//----------------------ad撈廣告資料套入廣告頁
+try{
+    $ad_sql = "SELECT * FROM `ad` WHERE `ad`.`client_name` = '$name'";
+    $ad_stmt = $pdo->query($ad_sql);
+    $ad_row = $ad_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $ad_rows2 = isset($ad_row) ? $ad_row : '';
+
+
+    //先抓個name去下面判斷是否有資料
+    foreach($ad_rows2 as $row ) {
+        $ad_name = $row['ad_name'];
+        $start_date = $row['contract_start_date'];
+        $end_date = $row['contract_end_date'];
+    }
+
+}catch(PDOException $ex){
+    $ad_miss_msg = '無相關資料';
+}
+
 
 
 //----------------------vd撈影片資料套入影片瀑布流
@@ -590,7 +593,7 @@ try{
                 <div class="adBg">
                     <img src="../pic/cinema/ad-bg.jpg" alt="">
                 </div>
-<!--                --><?php //if(!isset($ad_name)){ ?>
+                <?php if(!isset($ad_name)){ ?>
                     <div class="adTextBox" style="font-size: 18px;font-weight: 600;left:30px">
                         <span style="font-size: 70px">無</span><br>相關廣告
                     </div>
@@ -615,32 +618,33 @@ try{
                     <div class="adTextBox" style="font-size: 18px;font-weight: 600;left:1080px">
                         <span style="font-size: 70px">無</span><br>相關廣告
                     </div>
-<!--                --><?php //}else{ ?>
-<!--                <div class="adTableBox">-->
-<!--                    <table class="table table-hover adTable" id="ad">-->
-<!--                        <thead class="thead-dark">-->
-<!--                        <tr>-->
-<!--                            <th>廣告名稱</th>-->
-<!--                            <th>開始時間</th>-->
-<!--                            <th>結束時間</th>-->
-<!--                            <th>預算</th>-->
-<!--                        </tr>-->
-<!--                        </thead>-->
-<!--                        <tbody>-->
-<!--                        --><?//= $ad_rows['ad_name'] ?>
-<!--                        --><?php //foreach($ad_rows as $row): ?>
-<!---->
-<!--                            <tr class="adTr" onclick="document.location ='#'">-->
-<!--                                <td>--><?//= $row['ad_name'] ?><!--</td>-->
-<!--                                <td>--><?//= $row['contract_start_date'] ?><!--</td>-->
-<!--                                <td>--><?//= $row['contract_end_date'] ?><!--</td>-->
-<!--                                <td>--><?//= $row['contract_budget'] ?><!--</td>-->
-<!--                            </tr>-->
-<!--                        --><?php //endforeach; ?>
-<!--                        </tbody>-->
-<!--                    </table>-->
-<!--                    --><?php //}; ?>
-<!--                </div>-->
+                <?php }else{ ?>
+                <div class="adTableBox">
+                    <table class="table table-hover adTable" id="ad">
+                        <thead class="thead-dark">
+                        <tr>
+<!--                            <th>TEST</th>-->
+                            <th>廣告名稱</th>
+                            <th>開始時間</th>
+                            <th>結束時間</th>
+                            <th>預算</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($ad_rows2 as $row): ?>
+                            <tr class="adTr" onclick="document.location ='#'">
+
+                                <td><?= print_r($ad_rows) ?></td>
+                                <td><?= $row['ad_name'] ?></td>
+                                <td><?= $row['contract_start_date'] ?></td>
+                                <td><?= $row['contract_end_date'] ?></td>
+                                <td><?= $row['contract_budget'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?php }; ?>
+                </div>
             </div>
         </div>
 
@@ -674,9 +678,9 @@ try{
                                 <div class="videoBtnBox d-flex w-100 text-center">
 
                                     <!--                            TODO:設定連結-->
-                                    <a class="col-4" href="  #  "><div class="videoBtn py-3 "><i class="fas fa-link"></i> 連結 Link</div></a>
+                                    <a class="col-4" href="   #   "><div class="videoBtn py-3 "><i class="fas fa-link"></i> 連結 Link</div></a>
                                     <a class="col-4" href="<?= $row['trailer'] ?>" target="_blank" style="margin: 0 0.5px;"><div class="videoBtn py-3 "><i class="fas fa-video"></i> 預告片 Trailer</div></a>
-                                    <a class="col-4" href="  #   "><div class="videoBtn py-3 "><i class="far fa-calendar-alt"></i> 檔期 Schedule</div></a>
+                                    <a class="col-4" href="   #   "><div class="videoBtn py-3 "><i class="far fa-calendar-alt"></i> 檔期 Schedule</div></a>
                                 </div>
                             </div>
                         <?php endforeach ?>
@@ -690,7 +694,7 @@ try{
     <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
+<!--    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>-->
     <script>
         // 進頁面時的openView動畫
         start();
@@ -715,12 +719,12 @@ try{
             gutter: 6
         });
 
-        // 修復瀑布流卡圖 加載imagesLoaded
-            var $grid = $('.grid').masonry({
-            });
-            $grid.imagesLoaded().progress( function() {
-                $grid.masonry('layout');
-            });
+        // // 修復瀑布流卡圖 加載imagesLoaded
+        //     var $grid = $('.grid').masonry({
+        //     });
+        //     $grid.imagesLoaded().progress( function() {
+        //         $grid.masonry('layout');
+        //     });
 
 
         // 滾輪捲動互動效果
