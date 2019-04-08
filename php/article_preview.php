@@ -16,9 +16,10 @@ $cm_time = '';
 
 if(isset($_SESSION['admin'])){
     $user = "小編：";
+    $user_name = "小編";
     $user .= $_SESSION['admin'];
     $level = 10;
-    $user_avatar = 'null';
+    $user_avatar = 'null.jpg';
     
 }else if(isset($_SESSION['member'])){
     $member=$_SESSION['member'];
