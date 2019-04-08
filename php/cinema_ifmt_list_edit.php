@@ -1,6 +1,7 @@
 <?php
 require __DIR__. '/PDO.php';
 $groupname = 'theater';
+$pagename = "cinema_ifmt_list";
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
