@@ -46,13 +46,14 @@ include __DIR__.'/PDO.php';
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col-1">留言序號</th>
+                    <th scope="col-1">評論序號</th>
+                    <th scope="col-1">文章序號</th>
                     <th scope="col-1">會員帳號</th>
                     <th scope="col">作者</th>
                     <th scope="col">作者頭像</th>
-                    <th scope="col">日期</th>
+                    <th scope="col">評論時間</th>
                     </th>
-                    <th scope="col">留言內容</th>
+                    <th scope="col">評論內容</th>
                     <!-- <th scope="col">預覽</i></th> -->
                     <!-- <th scope="col">編輯</i></th> -->
                     <th scope="col">刪除</i></th>
@@ -74,6 +75,7 @@ const data_body = document.querySelector('#data_body');
 
 let tr_str = `<tr>
                     <th scope="col"><%= sid %></th>
+                    <th scope="col"><%= article_sid %></th>
                     <th scope="col-1"><%= member_sid %></th>
                     <th scope="col"><%= nickname %></th>
                     <th scope="col"><img src="../pic/avatar/<%= avatar %>" width="100" height="auto"></th>

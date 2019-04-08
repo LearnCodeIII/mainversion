@@ -43,7 +43,7 @@
                     </h2>
                 </div>
 
-                <div id="collapse2" class="collapse <?= $groupname == "cinema"?"show":""; ?>" aria-labelledby="heading2"
+                <div id="collapse2" class="collapse <?= $groupname == "theater"?"show":""; ?>" aria-labelledby="heading2"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
                         <ul class="pl-4">
