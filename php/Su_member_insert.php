@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/PDO.php';
 $groupname = "member";
-$pagename = 'member_insert';
+$page_name = 'member_insert';
 
 ?>
 <?php include __DIR__.'/head.php' ?>
@@ -25,7 +25,7 @@ $pagename = 'member_insert';
     <div class="row justify-content-center">
         <div class="col-lg-7">
             <div class="card border-secondary ">
-                <div class="card-body px-5">
+                <div class="card-body px-5 bg-light">
 
                     <h5 class="card-title text-center">新增會員資料
                     </h5>
