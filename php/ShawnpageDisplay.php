@@ -93,16 +93,6 @@ $pagename = "pageMain";
 })();
 
 
-$(document).ready(function(){
-  $('div').zoom({url: 'ShawnpageDisplay.php?sid=84'});
-});
-
-
-
-
-
-
-
 
 //換文字顏色
 $('.sun').on("click",function(){
