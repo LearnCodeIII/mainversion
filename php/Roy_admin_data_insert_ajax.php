@@ -1,4 +1,5 @@
 <?php
+$groupname = "forum";
 $pagename = "Roy_admin_data_insert_ajax";
 include __DIR__ . '/PDO.php';
 
