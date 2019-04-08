@@ -1,4 +1,4 @@
-<?php include __DIR__. '/PDO.php'?>
+<?php include __DIR__. './PDO.php'?>
 <?php
 $groupname = 'theater';
 $pagename = 'theater';
@@ -16,7 +16,7 @@ foreach($rows as $row){
     $phone = $row['phone'];
     $address = $row['address'];
     $intro = $row['intro'];
-    $logo = $row['logo'] ? $row['logo'] : '../pic/cinema/'.$row['img'];
+    $logo = $row['Logo'];
 }
 
 
@@ -53,22 +53,23 @@ try{
 }
 
 
-////----------------------ad撈廣告資料套入廣告頁
-//try{
-//    $ad_sql = "SELECT * FROM  `ad` WHERE `ad`.`client_name`='$name'";
-//    $ad_stmt = $pdo->query($ad_sql);
-//    $ad_row = $ad_stmt->fetchAll(PDO::FETCH_ASSOC);
-//    $ad_rows = isset($ad_row) ? $ad_row : '';
-//    //先抓個name去下面判斷是否有資料
-//    foreach($ad_rows as $row ) {
-//        $ad_name = $row['ad_name'];
-//        $start_date = $row['contract_start_date'];
-//        $end_date = $row['contract_end_date'];
-//    }
-//
-//}catch(PDOException $ex){
-//    $ad_miss_msg = '無相關資料';
-//}
+//----------------------ad撈廣告資料套入廣告頁
+try{
+    $ad_sql = "SELECT * FROM  `ad` WHERE `ad`.`client_name`='$name' ";
+    $ad_stmt = $pdo->query($ad_sql);
+    $ad_row = $ad_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $ad_rows = isset($ad_row) ? $ad_row : '';
+    //先抓個name去下面判斷是否有資料
+
+    foreach($ad_rows as $row ) {
+        $ad_name = $row['ad_name'];
+        $start_date = $row['contract_start_date'];
+        $end_date = $row['contract_end_date'];
+    }
+
+}catch(PDOException $ex){
+    $ad_miss_msg = '無相關資料';
+}
 
 
 //----------------------vd撈影片資料套入影片瀑布流
@@ -500,7 +501,7 @@ try{
             </div>
         </div>
         <div class="rightBtn googleFont">
-            <a href="#"><div class="rightBtnTop" id="rightBtnTop">Top</div></a>
+            <a href=""><div class="rightBtnTop" id="rightBtnTop">Top</div></a>
             <a href="cinema_ifmt_list.php"><div class="rightBtnBack">Back</div></a>
         </div>
 
@@ -566,14 +567,14 @@ try{
                         <div class="acBox col-3 ml-4 p-0 d-flex" style="height: 42%">
                             <div class="acImg" >
                                 <?php if($row['picture']=='space'){?>
-                                    <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><img src="../pic/cinema/<?= $logo ?>"></a>
+                                    <a href="   #   "><img src="../pic/cinema/<?= $logo ?>" alt=""></a>
                                 <?php }else{?>
-                                    <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><img src="../pic/activity/<?= $row['picture'] ?>"></a>
+                                    <a href="   #   "><img src="../pic/activity/<?= $row['picture'] ?>" alt=""></a>
                                 <?php } ?>
                             </div>
                         </div>
                         <div class="acTitle col-2" style="font-weight: 600">
-                            <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><?= $row['name'] ?></a>
+                            <a href="    #    "><?= $row['name'] ?></a>
                         </div>
                     <?php endforeach ?>
                 <?php } else { ?>
@@ -584,13 +585,12 @@ try{
 
 
         <!--                廣告頁    -->
-        <div class="fullPage googleFont overflow-hidden" id="fullPage4" style="margin-left: -16px;min-height: 90vh;max-height: 100%">
+        <div class="fullPage googleFont overflow-hidden" id="fullPage4" style="margin-left: -16px;height: 90vh">
             <div class="adContainer position-relative">
-
                 <div class="adBg">
                     <img src="../pic/cinema/ad-bg.jpg" alt="">
                 </div>
-<!--                --><?php //if(!isset($ad_name)){ ?>
+                <?php if(!isset($ad_name)){ ?>
                     <div class="adTextBox" style="font-size: 18px;font-weight: 600;left:30px">
                         <span style="font-size: 70px">無</span><br>相關廣告
                     </div>
@@ -615,32 +615,30 @@ try{
                     <div class="adTextBox" style="font-size: 18px;font-weight: 600;left:1080px">
                         <span style="font-size: 70px">無</span><br>相關廣告
                     </div>
-<!--                --><?php //}else{ ?>
-<!--                <div class="adTableBox">-->
-<!--                    <table class="table table-hover adTable" id="ad">-->
-<!--                        <thead class="thead-dark">-->
-<!--                        <tr>-->
-<!--                            <th>廣告名稱</th>-->
-<!--                            <th>開始時間</th>-->
-<!--                            <th>結束時間</th>-->
-<!--                            <th>預算</th>-->
-<!--                        </tr>-->
-<!--                        </thead>-->
-<!--                        <tbody>-->
-<!--                        --><?//= $ad_rows['ad_name'] ?>
-<!--                        --><?php //foreach($ad_rows as $row): ?>
-<!---->
-<!--                            <tr class="adTr" onclick="document.location ='#'">-->
-<!--                                <td>--><?//= $row['ad_name'] ?><!--</td>-->
-<!--                                <td>--><?//= $row['contract_start_date'] ?><!--</td>-->
-<!--                                <td>--><?//= $row['contract_end_date'] ?><!--</td>-->
-<!--                                <td>--><?//= $row['contract_budget'] ?><!--</td>-->
-<!--                            </tr>-->
-<!--                        --><?php //endforeach; ?>
-<!--                        </tbody>-->
-<!--                    </table>-->
-<!--                    --><?php //}; ?>
-<!--                </div>-->
+                <?php }else{ ?>
+                <div class="adTableBox">
+                    <table class="table table-hover adTable" id="ad">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>廣告名稱</th>
+                            <th>開始時間</th>
+                            <th>結束時間</th>
+                            <th>預算</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($ad_rows as $row): ?>
+                            <tr class="adTr" onclick="document.location ='   #    '">
+                                <td><?= $row['ad_name'] ?></td>
+                                <td><?= $row['contract_start_date'] ?></td>
+                                <td><?= $row['contract_end_date'] ?></td>
+                                <td><?= $row['contract_budget'] ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                        </tbody>
+                    </table>
+                    <?php }; ?>
+                </div>
             </div>
         </div>
 
@@ -654,32 +652,32 @@ try{
                                 <span style="font-size:70px">無</span><br>相關影片
                             </div>
                         <?php }else{ ?>
-                        <?php foreach ($vd_rows as $row):?>
-                            <div class="videoBox grid-item">
+                            <?php foreach ($vd_rows as $row):?>
+                                <div class="videoBox grid-item">
 
-                                <!--                            TODO:設定圖片連結-->
-                                <a href="   #   ">
-                                    <div class="videoImgBox w-100 overflow-hidden">
-                                        <img class="w-100" src="../pic/film_upload/<?= $row['movie_pic'] ?>" alt="">
+                                    <!--                            TODO:設定圖片連結-->
+                                    <a href="   #   ">
+                                        <div class="videoImgBox w-100 overflow-hidden">
+                                            <img class="w-100" src="../pic/film_upload/<?= $row['movie_pic'] ?>" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="videoTextBox bg-light p-3">
+                                        <span class="videoTitleCn" style="font-size: 30px"><b><?= $row['name_tw'] ?></b></span>
+                                        <span class="videoTitleEn" style="font-size: 16px"><?= $row['name_en'] ?></span><br>
+                                        <span class="videoCountry" style="font-size: 12px">"from" <b><?= $row['country'] ?></b></span><br>
+                                        <span class="videoDiretorCn" style="font-size: 18px"><?= $row['director_tw'] ?></span>
+                                        <span class="videoDiretorEn" style="font-size: 12px"><small><?= $row['director_en'] ?></small></span><br>
+                                        <span class="videoIntro mt-2" style="font-size: 14px"><?= $row['intro_tw'] ?></span>
                                     </div>
-                                </a>
-                                <div class="videoTextBox bg-light p-3">
-                                    <span class="videoTitleCn" style="font-size: 30px"><b><?= $row['name_tw'] ?></b></span>
-                                    <span class="videoTitleEn" style="font-size: 16px"><?= $row['name_en'] ?></span><br>
-                                    <span class="videoCountry" style="font-size: 12px">"from" <b><?= $row['country'] ?></b></span><br>
-                                    <span class="videoDiretorCn" style="font-size: 18px"><?= $row['director_tw'] ?></span>
-                                    <span class="videoDiretorEn" style="font-size: 12px"><small><?= $row['director_en'] ?></small></span><br>
-                                    <span class="videoIntro mt-2" style="font-size: 14px"><?= $row['intro_tw'] ?></span>
-                                </div>
-                                <div class="videoBtnBox d-flex w-100 text-center">
+                                    <div class="videoBtnBox d-flex w-100 text-center">
 
-                                    <!--                            TODO:設定連結-->
-                                    <a class="col-4" href="  #  "><div class="videoBtn py-3 "><i class="fas fa-link"></i> 連結 Link</div></a>
-                                    <a class="col-4" href="<?= $row['trailer'] ?>" target="_blank" style="margin: 0 0.5px;"><div class="videoBtn py-3 "><i class="fas fa-video"></i> 預告片 Trailer</div></a>
-                                    <a class="col-4" href="  #   "><div class="videoBtn py-3 "><i class="far fa-calendar-alt"></i> 檔期 Schedule</div></a>
+                                        <!--                            TODO:設定連結-->
+                                        <a class="col-4" href="  #  "><div class="videoBtn py-3 "><i class="fas fa-link"></i> 連結 Link</div></a>
+                                        <a class="col-4" href="<?= $row['trailer'] ?>" target="_blank" style="margin: 0 0.5px;"><div class="videoBtn py-3 "><i class="fas fa-video"></i> 預告片 Trailer</div></a>
+                                        <a class="col-4" href="  #   "><div class="videoBtn py-3 "><i class="far fa-calendar-alt"></i> 檔期 Schedule</div></a>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach ?>
+                            <?php endforeach ?>
                         <?php }; ?>
                     </div>
                 </div>
@@ -690,7 +688,6 @@ try{
     <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
     <script>
         // 進頁面時的openView動畫
         start();
@@ -715,13 +712,6 @@ try{
             gutter: 6
         });
 
-        // 修復瀑布流卡圖 加載imagesLoaded
-            var $grid = $('.grid').masonry({
-            });
-            $grid.imagesLoaded().progress( function() {
-                $grid.masonry('layout');
-            });
-
 
         // 滾輪捲動互動效果
         $(window).scroll(function(){
@@ -729,6 +719,7 @@ try{
             console.log(s);
             $('#rightBtnTop').click(function () {
             });
+
 
             // rightBar文字
             if(s <= 500){
