@@ -28,7 +28,7 @@ include __DIR__.'/PDO.php';
 
 ;
 </style>
-
+<script src="../js/sweet.js"></script>
 <section class="dashboard">
 
     <div class="container-fluid">
@@ -138,11 +138,55 @@ window.addEventListener('hashchange', myHashChange);
 myHashChange();
 
 
-function delete_it(sid) {
-    if (confirm(`確定要刪除編號 ${sid} 的資料嗎?`)) {
-        location.href = 'comment_delete.php?sid=' + sid;
+// function delete_it(sid) {
+//     if (confirm(`確定要刪除編號 ${sid} 的資料嗎?`)) {
+//         location.href = 'comment_delete.php?sid=' + sid;
+//     }
+// };
+
+//刪除資料
+function delete_it(sid){
+    
+    const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false,
+    })
+
+    swalWithBootstrapButtons.fire({
+    title: `確定要刪除編號 ${sid} 的留言嗎?`,
+    text: "檔案刪除過後將無法還原!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '確認刪除',
+    cancelButtonText: '我再想想',
+    reverseButtons: true
+    }).then((result) => {
+    if (result.value) {
+        swalWithBootstrapButtons.fire({
+            type: 'success',
+            title: '確認刪除',
+            text: '您的資料已經刪除。',
+            footer: '提示：即將返回主畫面',
+            timer: 3000,
+        }).then((result) => {
+            location.href = 'comment_delete.php?sid=' + sid;
+        })
+    } else if (
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire({
+            type: 'error',
+            title: '取消刪除',
+            text: '您的資料沒有刪除。'
+        })
     }
-};
+    })
+}
+
+
 </script>
 
 <!-- <?php include __DIR__.'/__html_foot.php'; ?> -->
