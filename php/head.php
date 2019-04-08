@@ -17,7 +17,8 @@
     <script src="../js/bs-custom-file-input.min.js"></script>
     <link rel="stylesheet" href="../vegas/vegas.min.css">
     <script src="../vegas/vegas.min.js"></script>
-    
+    <link rel="stylesheet" href="../iziModal-master/css/iziModal.min.css"> 
+    <script src="../iziModal-master/js/iziModal.min.js"></script>
 
 </head>
 

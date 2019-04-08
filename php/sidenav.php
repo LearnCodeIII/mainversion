@@ -8,10 +8,10 @@
         <div class="bg-gradient-dark" id="accordionExample">
             <div class="card bg-dark">
                 <div class="card-header" id="heading1">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
-                            aria-controls="collapse1"><i class="fas fa-users">  會員系統</i>
+                            aria-controls="collapse1"><i class="fas fa-user fa-fw"></i><span class="px-2"> 會員系統</span>
                         </button>
                     </h2>
                 </div>
@@ -19,28 +19,26 @@
                 <div id="collapse1" class="collapse <?= $groupname == "member"?"show":""; ?>" aria-labelledby="heading1"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="text-light pl-4">
-                            <li class="<?= $pagename == "member_list"?"thisPage":""; ?>"><a
-                                    href="./Su_member_list.php">會員總覽</a></li>
-                            <li class="<?= $pagename == "member_list_choose"?"thisPage":""; ?>"><a
-                                    href="./Su_member_list_choose.php">自訂會員列表</a></li>
+                    <ul class="text-light pl-4">
                             <li class="<?= $pagename == "member_search"?"thisPage":""; ?>"><a
-                                    href="./Su_member_search.php">搜尋會員資料</a></li>
+                                    href="./Su_member_search.php">會員總覽</a></li>
                             <li class="<?= $pagename == "member_insert"?"thisPage":""; ?>"><a
                                     href="./Su_member_insert.php">新增會員資料</a></li>
                             <li class="<?= $pagename == "member_blacklist"?"thisPage":""; ?>"><a
                                     href="./Su_member_blacklist.php">管理黑名單</a></li>
+                            <li class="<?= $pagename == "member_permission"?"thisPage":""; ?>"><a
+                                    href="./Su_member_permission.php">權限管理</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="card bg-dark">
                 <div class="card-header" id="heading2">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
-                            aria-controls="collapse2"><i class="fas fa-landmark"></i>  
-                            廠商系統
+                            aria-controls="collapse2"><i class="fas fa-landmark fa-fw"></i>
+                            <span class="px-2">廠商系統</span>
                         </button>
                     </h2>
                 </div>
@@ -49,7 +47,8 @@
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
                         <ul class="pl-4">
-                            <li class="<?= $pagename == "cinema_ifmt_list"?"thisPage":""; ?>"><a href="cinema_ifmt_list.php">戲院資訊</a></li>
+                            <li class="<?= $pagename == "cinema_ifmt_list"?"thisPage":""; ?>"><a
+                                    href="cinema_ifmt_list.php">戲院資訊</a></li>
                             <li class="<?= $pagename == "cinema_insert"?"thisPage":""; ?>"><a
                                     href="cinema_insert.php">新增戲院資料</a></li>
 
@@ -59,10 +58,11 @@
             </div>
             <div class="card bg-dark">
                 <div class="card-header" id="heading3">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
-                            aria-controls="collapse3">  <i class="fas fa-film"></i> 電影資料庫 
+                            aria-controls="collapse3"><i class="fas fa-film fa-fw"></i>
+                            <span class="px-2">電影資料庫</span>
                         </button>
                     </h2>
                 </div>
@@ -71,11 +71,14 @@
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
                         <ul class="pl-4">
-                            <li class="<?= $pagename == "film_main"?"thisPage":""; ?>"><a href="./film_main.php">影片總覽</a></li>
-                            <li class="<?= $pagename == "film_data_list"?"thisPage":""; ?>"><a href="./film_data_list.php">影片清單</a></li>
+                            <li class="<?= $pagename == "film_main"?"thisPage":""; ?>"><a
+                                    href="./film_main.php">影片總覽</a></li>
+                            <li class="<?= $pagename == "film_data_list"?"thisPage":""; ?>"><a
+                                    href="./film_data_list.php">影片清單</a></li>
                             <li class="<?= $pagename == "film_list_choose"?"thisPage":""; ?>"><a
                                     href="./film_list_choose.php">自訂影片清單</a></li>
-                            <li class="<?= $pagename == "film_data_search"?"thisPage":""; ?>"><a href="./film_data_search.php">影片搜尋</a></li>
+                            <li class="<?= $pagename == "film_data_search"?"thisPage":""; ?>"><a
+                                    href="./film_data_search.php">影片搜尋</a></li>
                             <li class="<?= $pagename == "film_data_insert"?"thisPage":""; ?>"><a
                                     href="./film_data_insert.php">新增影片資訊</a></li>
                         </ul>
@@ -84,10 +87,11 @@
             </div>
             <div class="card bg-dark">
                 <div class="card-header" id="heading4">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
-                            aria-controls="collapse4"><i class="far fa-newspaper"></i> 文章專區 
+                            aria-controls="collapse4"><i class="far fa-newspaper fa-fw"></i>
+                            <span class="px-2">文章專區</span>
                         </button>
                     </h2>
                 </div>
@@ -110,17 +114,19 @@
             </div>
             <div class="card bg-dark">
                 <div class="card-header" id="heading5">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
-                            aria-controls="collapse5"> <i class="fas fa-calendar-check"></i> 活動系統</button>
+                            aria-controls="collapse5"> <i class="fas fa-calendar-check fa-fw"></i>
+                            <span class="px-2">活動系統</span>
+                        </button>
                     </h2>
                 </div>
 
                 <div id="collapse5" class="collapse <?= $groupname == "activity"?"show":""; ?>"
                     aria-labelledby="heading5" data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul  class="pl-4">
+                        <ul class="pl-4">
                             <li class="<?= $pagename == "ShawnpageMain"?"thisPage":""; ?>"><a
                                     href="./ShawnpageMain.php">活動總覽</a></li>
                             <li class="<?= $pagename == "ShawnpageDatalist"?"thisPage":""; ?>"><a
@@ -133,11 +139,11 @@
             </div>
             <div class="card bg-dark">
                 <div class="card-header" id="heading6">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
-                            aria-controls="collapse6"><i class="fas fa-ad"></i> 
-                            廣告管理 
+                            aria-controls="collapse6"><i class="fas fa-ad fa-fw"></i>
+                            <span class="px-2">廣告管理</span>
                         </button>
                     </h2>
                 </div>
@@ -156,11 +162,12 @@
             </div>
             <div class="card bg-dark">
                 <div class="card-header" id="heading7">
-                    <h2 class="mb-0 pl-4">
+                    <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
                             data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
-                            aria-controls="collapse7"><i class="fas fa-comments"></i> 
-                            論壇管理</button>
+                            aria-controls="collapse7"><i class="fas fa-comments fa-fw"></i>
+                            <span class="px-2">論壇管理</span>
+                            </button>
                     </h2>
                 </div>
 
@@ -179,7 +186,7 @@
             <div class="card myinfo bg-dark" style="width:100%;">
                 <div class="card-body d-flex flex-column align-items-center">
                     <div class="text-center info_img">
-                    <img src="../pic/avatar/<?=$user_avatar?>" class="img-fluid" alt="...">
+                        <img src="../pic/avatar/<?=$user_avatar?>" class="img-fluid" alt="...">
                     </div>
                     <p class="card-text text-light m-2">wellcom!<?=$user_name?></p>
                     <div class="">
