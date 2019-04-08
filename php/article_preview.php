@@ -59,7 +59,7 @@ if(isset($_SESSION['admin'])){
 
 .toast-header {
     border-radius: 10px 10px 10px 0px;
-    box-shadow: 1px 1px 5px #cccccc;
+    box-shadow: 1px 0px 2px #cccccc;
 }
 
 ;

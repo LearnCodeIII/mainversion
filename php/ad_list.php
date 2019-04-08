@@ -2,6 +2,7 @@
 
 require __DIR__ . '/PDO.php'; 
 $pagename = 'ad_list';
+$groupname = 'ad';
 
 $per_page = 10;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
