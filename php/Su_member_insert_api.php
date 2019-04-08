@@ -158,7 +158,7 @@ if (isset($_POST['checkme'])) {
         // $pdo->commit();
     } catch (PDOException $ex) {//需先設定PDO錯誤模式，才會顯示此內容(該設定在__connect_db.php)
         $result['errorCode'] = 403;
-        $result['errorMsg'] = 'Email重複輸入!';
+        $result['errorMsg'] = 'Email已被使用!';
         // $pdo->rollback();
     };
 

@@ -37,6 +37,17 @@ include __DIR__.'./sidenav.php'
 // };
 
 ?>
+<style>
+    #goTop {
+        position: relative;
+        right: 20px;
+        bottom: 30px;
+    }
+    .wrap{
+        overflow: hidden;
+    }
+</style>
+
 
 <section class="dashboard">
 
@@ -66,9 +77,9 @@ include __DIR__.'./sidenav.php'
         <div class="col-lg page_info"></div>
     </div>
 
-
-    <table class="table table-bordered table-hover ">
-        <thead class="thead-dark">
+ 
+       <table class="table table-bordered table-hover">
+           <thead class="thead-dark">
             <tr>
                 <th scope="col">操作</i></th>
                 <th scope="col">影片編號</th>
@@ -94,13 +105,17 @@ include __DIR__.'./sidenav.php'
             </tr>
         </thead>
         <tbody id="data_body">
-
-        </tbody>
+        </tbody>    
     </table>
 
-    <!-- </div> -->
+    <button class="btn btn-primary position-fixed" id="goTop"><i class="fas fa-arrow-circle-up"></i></button>
 </section>
 
+
+<!-- fancybox -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<!-- sweets alert -->
 <script src="../js/sweet.js"></script>
 <script>
     let page = 1;
@@ -138,7 +153,11 @@ include __DIR__.'./sidenav.php'
                     <button type="button" style="display:none" class="btn btn-info seeAll">收合</button>
                 </td>
                 
-                <td><img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100"></td>
+                <td>
+                    <a data-fancybox="gallery" href="../pic/film_upload/<%= movie_pic %>">
+                        <img src="../pic/film_upload/<%= movie_pic %>" alt="" width="100">
+                    </a>
+                </td>
 
                 <td class="text-truncate" style="max-width: 150px;" title="<%= movie_genre %>"><%= movie_genre %>
                     
@@ -146,7 +165,9 @@ include __DIR__.'./sidenav.php'
                 <td><%= movie_ver %></td>
                 <td><%= movie_rating %></td>
                 <td class="text-truncate" style="max-width: 150px; max-height: 150px;" title="<%= trailer %>">
-                    <a href="<%= trailer %>"><i class="fas fa-play-circle h4"></i></a>
+                    <a href="#"  onclick="window.open('<%= trailer %>', config='height=500,width=500');" >
+                    <i class="fas fa-play-circle h4">
+                    </i></a>
                 </td>
                 <td><%= pirce %></td>
                 <td><%= schedule %></td>
@@ -285,9 +306,34 @@ include __DIR__.'./sidenav.php'
     //顯示全文按鈕
     $("#data_body").on("click", ".seeAll", function () {
         $(this).closest("td").find("p").toggleClass("text-truncate");
-        
-    //靠顯示隱藏製造顯示全文的按鈕文字改變的假效果
+
+        //靠顯示隱藏製造顯示全文的按鈕文字改變的假效果
         $(this).closest("td").find("button").toggle();
+    });
+
+
+    //回到最上方+往上才出現
+    var lastScrolltop=0;
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        console.log(lastScrolltop)
+        // console.log(windowHeight)
+        
+        if (scrollTop > lastScrolltop) {
+            $("#goTop").addClass("d-none")
+        }
+        else {
+            $("#goTop").removeClass("d-none")
+        }
+        lastScrolltop = scrollTop;
+    });
+    $("#goTop").click(function () {
+        // $(window).scrollTop(0);
+        //上面這個是直接跳到最上方
+        // 下面寫動畫方式
+        $("html").animate({
+            scrollTop: 0
+        }, 500);
     });
 
 
