@@ -3,7 +3,7 @@
 require __DIR__ . '/PDO.php';
 $page_name = 'ad_client_update';
 $pagename = 'ad_client_update';
-
+$groupname = 'ad';
 $sn = isset($_GET['sn']) ? intval($_GET['sn']) : 0;
 
 $sql = "SELECT * FROM ad WHERE sn = $sn";
