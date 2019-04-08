@@ -1,4 +1,5 @@
 <?php
+$groupname = "forum";
 $pagename = "Roy_datalist";
 include __DIR__ . '/PDO.php';
 

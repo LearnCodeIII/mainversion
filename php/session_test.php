@@ -11,14 +11,14 @@ if(isset($_SESSION['admin'])){
         $user_avatar ='null.jpg';}
     
 }else if(isset($_SESSION['member'])){
-    $member=$_SESSION['member'];
-    $lo_sql = "SELECT * FROM `member` where email = '$member' ";
-    $lo_stmt = $pdo->query($lo_sql);
-    $lo_rows = $lo_stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach($lo_rows as $lo_row){
-        $user = $lo_row['sid'];
-        $user_name = $lo_row['name'];
-        $user_avatar = $lo_row['avatar'];
+    $user=$_SESSION['member'];
+    $m_sql = "SELECT * FROM `member` where email = '$member' ";
+    $m_stmt = $pdo->query($m_sql);
+    $m_rows = $lo_stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach($m_rows as $m_row){
+        $user = $m_row['sid'];
+        $user_name = $m_row['name'];
+        $user_avatar = $m_row['avatar'];
 
     
     }
