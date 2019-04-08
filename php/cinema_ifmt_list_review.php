@@ -16,7 +16,7 @@ foreach($rows as $row){
     $phone = $row['phone'];
     $address = $row['address'];
     $intro = $row['intro'];
-    $logo = $row['Logo'];
+    $logo = $row['logo'] ? $row['logo'] : '../pic/cinema/'.$row['img'];
 }
 
 
@@ -501,7 +501,7 @@ try{
             </div>
         </div>
         <div class="rightBtn googleFont">
-            <a href=""><div class="rightBtnTop" id="rightBtnTop">Top</div></a>
+            <a href="#"><div class="rightBtnTop" id="rightBtnTop">Top</div></a>
             <a href="cinema_ifmt_list.php"><div class="rightBtnBack">Back</div></a>
         </div>
 
@@ -567,14 +567,14 @@ try{
                         <div class="acBox col-3 ml-4 p-0 d-flex" style="height: 42%">
                             <div class="acImg" >
                                 <?php if($row['picture']=='space'){?>
-                                    <a href="   #   "><img src="../pic/cinema/<?= $logo ?>" alt=""></a>
+                                    <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><img src="../pic/cinema/<?= $logo ?>"></a>
                                 <?php }else{?>
-                                    <a href="   #   "><img src="../pic/activity/<?= $row['picture'] ?>" alt=""></a>
+                                    <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><img src="../pic/activity/<?= $row['picture'] ?>"></a>
                                 <?php } ?>
                             </div>
                         </div>
                         <div class="acTitle col-2" style="font-weight: 600">
-                            <a href="    #    "><?= $row['name'] ?></a>
+                            <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><?= $row['name'] ?></a>
                         </div>
                     <?php endforeach ?>
                 <?php } else { ?>
