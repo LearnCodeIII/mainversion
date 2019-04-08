@@ -16,7 +16,7 @@ foreach($rows as $row){
     $phone = $row['phone'];
     $address = $row['address'];
     $intro = $row['intro'];
-    $logo = $row['Logo'];
+    $logo = $row['logo'] ? $row['logo'] : '../pic/cinema/'.$row['img'];
 }
 
 
@@ -501,7 +501,7 @@ try{
             </div>
         </div>
         <div class="rightBtn googleFont">
-            <a href=""><div class="rightBtnTop" id="rightBtnTop">Top</div></a>
+            <a href="#"><div class="rightBtnTop" id="rightBtnTop">Top</div></a>
             <a href="cinema_ifmt_list.php"><div class="rightBtnBack">Back</div></a>
         </div>
 
@@ -567,14 +567,14 @@ try{
                         <div class="acBox col-3 ml-4 p-0 d-flex" style="height: 42%">
                             <div class="acImg" >
                                 <?php if($row['picture']=='space'){?>
-                                    <a href="   #   "><img src="../pic/cinema/<?= $logo ?>" alt=""></a>
+                                    <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><img src="../pic/cinema/<?= $logo ?>"></a>
                                 <?php }else{?>
-                                    <a href="   #   "><img src="../pic/activity/<?= $row['picture'] ?>" alt=""></a>
+                                    <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><img src="../pic/activity/<?= $row['picture'] ?>"></a>
                                 <?php } ?>
                             </div>
                         </div>
                         <div class="acTitle col-2" style="font-weight: 600">
-                            <a href="    #    "><?= $row['name'] ?></a>
+                            <a href="http://192.168.27.179/mainversion/mainversion/php/ShawnpageDisplay.php?sid=<?= $ac_sid ?>"><?= $row['name'] ?></a>
                         </div>
                     <?php endforeach ?>
                 <?php } else { ?>
@@ -688,6 +688,7 @@ try{
     <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
     <script>
         // 進頁面時的openView動畫
         start();
@@ -712,6 +713,13 @@ try{
             gutter: 6
         });
 
+        // 修復瀑布流卡圖 加載imagesLoaded
+            var $grid = $('.grid').masonry({
+            });
+            $grid.imagesLoaded().progress( function() {
+                $grid.masonry('layout');
+            });
+
 
         // 滾輪捲動互動效果
         $(window).scroll(function(){
@@ -719,7 +727,6 @@ try{
             console.log(s);
             $('#rightBtnTop').click(function () {
             });
-
 
             // rightBar文字
             if(s <= 500){
