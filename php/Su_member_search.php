@@ -10,13 +10,26 @@ $spname = 'member_search';
     #show_avatar {
         object-fit: contain;
     }
+    .fa-chevron-down{
+        position:absolute;
+        right:20px;
+        transition:.5s;
+        transform-origin: calc(50%-7px) calc(50%-8px);
+    }
+    .rotate{
+        transform: rotate(180deg);
+    }
 </style>
 <section class="dashboard">
-        <div class="card col">
+    <div class="row mx-3">
+        <button id="hideSrchbar" class="btn btn-info" style="color:white " data-toggle="collapse" data-target="#searchbar" aria-expanded="true" aria-controls="searchbar">隱藏搜尋列</button>
+    
+        <div class="card col collapse show" id="searchbar">
             <div class="card-body">
                 <form name="form1" method="post" action="" onsubmit="return checkForm()">
-                    <div class="alert alert-primary text-center" role="alert" data-toggle="collapse" data-target="#set_condition" aria-expanded="true" aria-controls="set_condition">
+                    <div id="step1" class="alert alert-primary text-center position-relative" role="alert" data-toggle="collapse" data-target="#set_condition" aria-expanded="true" aria-controls="set_condition">
                             STEP-(1)設定搜尋條件
+                            <i id="step1Arrow" class="fas fa-chevron-down"></i>
                     </div>
                     <div class="col-lg-12 show" id="set_condition">
                         <div class="row justify-content-center">
@@ -92,10 +105,11 @@ $spname = 'member_search';
                         </div>
                     </div>
 
-                <div class="alert alert-primary text-center mt-3" role="alert" data-toggle="collapse" data-target="#set_column" aria-expanded="true" aria-controls="set_column">
-                        STEP-(2)選擇資料顯示的欄位
+                <div id="step2" class="alert alert-primary text-center mt-3 position-relative" role="alert" data-toggle="collapse" data-target="#set_column" aria-expanded="true" aria-controls="set_column">
+                        STEP-(2)選擇顯示的資料欄位
+                        <i id="step2Arrow" class="fas fa-chevron-down"></i>
                 </div>
-                    <input type="hidden" name="chk[]" value="sid">
+                    <!-- <input type="hidden" name="" value="sid"> -->
                     <div class="row justify-content-center show" id="set_column">
                         <div class="col-lg-12">
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
@@ -104,7 +118,7 @@ $spname = 'member_search';
                                 <label id="l_all" class="custom-control-label" for="all">全選</label>
                             </div>
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="sid" name="" value="sid" checked disabled>
+                                <input type="checkbox" class="custom-control-input" id="sid" value="sid" checked disabled>
                                 <label name="sid" class="custom-control-label" for="sid">會員編號</label>
                             </div>
                             <div class="col-lg-2 custom-control custom-checkbox custom-control-inline">
@@ -263,6 +277,14 @@ $spname = 'member_search';
     const submit_btn = document.querySelector('#submit_btn');
     const title = document.querySelector('#title');
     const info = document.querySelector('.info');
+    const set_condition = document.querySelector('#set_condition');
+    const set_column = document.querySelector('#set_column');
+    const step1Arrow = document.querySelector('#step1Arrow');
+    const step2Arrow = document.querySelector('#step2Arrow');
+    const searchbar = document.querySelector('#searchbar');
+    const hideSrchbar = document.querySelector('#hideSrchbar');
+
+
 
 
 
@@ -291,7 +313,7 @@ $spname = 'member_search';
             document.getElementById(chkall).checked = false;
         } else {
             let checkItem = document.getElementsByName(cName).length;
-            let ci = 0;
+            let ci = 0;//勾選數量
             for (let i = 0; i < checkItem; i++) {
                 if (document.getElementsByName(cName)[i].checked == true) {
                     ci++;
@@ -305,9 +327,7 @@ $spname = 'member_search';
 
     //刪除資料
     function delete_it(sid) {
-        if (confirm(`確定要刪除編號為${sid}的資料嗎?`)) {
             location.href = 'Su_member_list_delete.php?sid=' + sid;
-        }
     }
     //取得勾選的欄位
     const get_checked_items = () => {
@@ -343,9 +363,28 @@ $spname = 'member_search';
                       </a>
                     </th>
                     <td>
-                      <a href="javascript: delete_it(${ori_data.data[s][temp_title[0]]})">
+                      <a  style="cursor: pointer" data-toggle="modal" data-target="#sid${ori_data.data[s][temp_title[0]]}">
                       <i class="text-danger fas fa-trash-alt"></i>
                     </a>
+                    <div class="modal fade" id="sid${ori_data.data[s][temp_title[0]]}" tabindex="-1" role="dialog" aria-labelledby="sid${ori_data.data[s][temp_title[0]]}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header alert alert-danger">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">刪除資料</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>確定要刪除「會員編號：${ori_data.data[s][temp_title[0]]}」的會員資料?</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" onclick="delete_it(${ori_data.data[s][temp_title[0]]})">確定</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                     </td>
                     <td>
                       <a href="Su_member_preview.php?sid=${ori_data.data[s][temp_title[0]]}">
@@ -471,6 +510,7 @@ $spname = 'member_search';
 
                     //資料筆數、頁數資訊
                     create_data_info();
+
                 }
                 submit_btn.style.display = 'block';
             });
@@ -514,7 +554,39 @@ $spname = 'member_search';
             });
     };
 
+
+    //搜尋條件箭頭
+    const arrow1change=()=>{
+        if(set_condition.className==="col-lg-12 collapse"){
+            step1Arrow.className = "fas fa-chevron-down";
+        }else{
+            step1Arrow.className = "fas fa-chevron-down rotate";
+        }
+    }
+
+    //選擇欄位箭頭
+    const arrow2change=()=>{
+        if(set_column.className==="row justify-content-center collapse"){
+            step2Arrow.className = "fas fa-chevron-down";
+        }else{
+            step2Arrow.className = "fas fa-chevron-down rotate";
+        }
+    }
+
+    const hideSearchbar=()=>{
+        if(searchbar.className==="card col collapse"){
+            hideSrchbar.innerHTML = '隱藏搜尋列';
+        }else{
+            hideSrchbar.innerHTML = '打開搜尋列';
+        }
+    }
+
+
+
     window.addEventListener('hashchange', myHashChange);
+    step1.addEventListener('click', arrow1change);
+    step2.addEventListener('click', arrow2change);
+    hideSrchbar.addEventListener('click', hideSearchbar);
 // myHashChange();
 
 </script>
