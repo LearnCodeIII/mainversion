@@ -12,16 +12,58 @@ $pagename = "pageMain";
   crossorigin="anonymous"></script>
 <script src="../js/sweet.js"></script>
 <script src="../js/tilt.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
+<script src="../zoom-master/jquery.zoom.min.js"></script>
 <style>
+    *{
+        transition:0.4s;
+    }
     html,body{
         font-family : 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
+        
+    }
+    .change{
+        position:fixed;
+        bottom:20%;
+        right:5%;
+        font-size:1.5rem;
+        border:2px solid black;
+        padding:1.3rem;
+        border-radius:10px;
     }
 </style>
 
 <div class="container">
     <ul class="list-unstyled" >
     </ul>  
+</div>
+<div class="change">
+    <div class="setting mb-2 mr-2">
+    設定觀賞模式
+    </div>
+    <div class="sun">
+        <i class="fas fa-sun mb-2 mr-2"></i>白天模式
+    </div>
+    <div class="moon">
+        <i class="fas fa-moon mb-2 mr-2"></i>黑夜模式
+    </div>
+    <div class="share mt-5 mb-2 mr-2">
+        分享連結<br>
+        <div onclick="javascript: void(window.open('http://www.facebook.com/share.php?kid_directed_site=0&sdk=joey&u='.concat(encodeURIComponent(location.href)) ));">
+            <i class="fab fa-facebook mb-2 mr-2"></i>Facebook
+        </div>
+        <div onclick="javascript: void(window.open('http://plus.google.com/share?url='.concat(encodeURIComponent(location.href))));">
+            <i class="fab fa-google-plus-square mb-2 mr-2"></i>Google
+        </div>
+        <div onclick="javascript: void(window.open('http://pinterest.com/pin/create/button/?url='.concat(encodeURIComponent(location.href))));">
+            <i class="fab fa-pinterest-square mb-2 mr-2"></i>Pinterset
+        </div>
+        <div onclick="javascript: void(window.open('http://twitter.com/home/?status='.concat(encodeURIComponent(document.title)) .concat(' ') .concat(encodeURIComponent(location.href))));">
+            <i class="fab fa-twitter-square mb-2 mr-2"></i>Twitter
+        </div>
+        <div onclick="javascript: void(window.open('http://www.plurk.com/?qualifier=shares&amp;status=' .concat(encodeURIComponent(location.href)) .concat(' ') .concat('(') .concat(encodeURIComponent(document.title)) .concat(')')));">
+            <i class="fab fa-product-hunt mb-2 mr-2"></i>Plurk
+        </div>
+    </div>
 </div>
 <script>
 //
@@ -50,6 +92,39 @@ $pagename = "pageMain";
   };
 })();
 
+
+$(document).ready(function(){
+  $('div').zoom({url: '../pic/activity/217ae40614f2c0962a9c54843ab799a42c09aafe.jpg'});
+});
+
+
+
+
+
+
+
+
+//換文字顏色
+$('.sun').on("click",function(){
+    $('div').css({
+        "background":"white",
+        "color":"black"
+    });
+    $('body').css({
+        "background":"white",
+        "color":"black"
+    });
+});
+$('.moon').on("click",function(){
+    $('div').css({
+        "background":"black",
+        "color":"white"
+    });
+    $('body').css({
+        "background":"black",
+        "color":"white"
+    });
+});
 
 
 
@@ -109,7 +184,8 @@ const wrap_str =
     <div class="card-footer d-flex justify-content-between bg-dark text-white" onclick="highlightContent();">
         <small >活動期限：<%= dateStart %>-<%= dateEnd %></small>
     </div>
-</div>`;
+</div>
+`;
 
 const wrap_func = _.template(wrap_str);
 
@@ -140,7 +216,7 @@ const searchForm = () =>{
         
         let str='';
         for(let d of ori_data.data){
-
+            document.title=d.company+d.name;
             if(d.contenttype.indexOf('primary')>-1){
                 d.primary="徵才資訊"
             }else d.primary="";
@@ -172,6 +248,8 @@ const searchForm = () =>{
         
     });
 };
+
+
 
 searchForm();
 $
