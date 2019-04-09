@@ -43,7 +43,7 @@
                     </h2>
                 </div>
 
-                <div id="collapse2" class="collapse <?= $groupname == "cinema"?"show":""; ?>" aria-labelledby="heading2"
+                <div id="collapse2" class="collapse <?= $groupname == "theater"?"show":""; ?>" aria-labelledby="heading2"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
                         <ul class="pl-4">
@@ -152,10 +152,10 @@
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
                         <ul class="pl-4">
-                            <li class="<?= $pagename == "REVISION_ann_ad_list"?"thisPage":""; ?>"><a
-                                    href="REVISION_ann_ad_list.php">客戶管理</a></li>
-                            <li class="<?= $pagename == "REVISION_ann_client_create"?"thisPage":""; ?>"><a
-                                    href="REVISION_ann_client_create.php">新增廣告</a></li>
+                            <li class="<?= $pagename == "ad_list"?"thisPage":""; ?>"><a
+                                    href="ad_list.php">客戶管理</a></li>
+                            <li class="<?= $pagename == "ad_client_update"?"thisPage":""; ?>"><a
+                                    href="ad_client_create.php">新增廣告</a></li>
                         </ul>
                     </div>
                 </div>
