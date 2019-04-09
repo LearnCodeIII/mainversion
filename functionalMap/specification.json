@@ -1,0 +1,14 @@
+[{
+    "items":"YourItemsName",
+    "description":"<li>YourItemsDescription</li>",
+    "content":{
+        "information":{
+            "info1":"ConectToitems",
+            "info2":""
+        },
+        "function":{
+            "func1":"func1",
+            "func2":""
+        }
+    }
+}]
