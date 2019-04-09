@@ -19,7 +19,7 @@
                 <div id="collapse1" class="collapse <?= $groupname == "member"?"show":""; ?>" aria-labelledby="heading1"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                    <ul class="text-light pl-4">
+                    <ul class="text-light pl-5">
                             <li class="<?= $pagename == "member_search"?"thisPage":""; ?>"><a
                                     href="./Su_member_search.php">會員總覽</a></li>
                             <li class="<?= $pagename == "member_insert"?"thisPage":""; ?>"><a
@@ -46,7 +46,7 @@
                 <div id="collapse2" class="collapse <?= $groupname == "theater"?"show":""; ?>" aria-labelledby="heading2"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "cinema_ifmt_list"?"thisPage":""; ?>"><a
                                     href="cinema_ifmt_list.php">戲院資訊</a></li>
                             <li class="<?= $pagename == "cinema_insert"?"thisPage":""; ?>"><a
@@ -70,7 +70,7 @@
                 <div id="collapse3" class="collapse <?= $groupname == "film"?"show":""; ?>" aria-labelledby="heading3"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "film_main"?"thisPage":""; ?>"><a
                                     href="./film_main.php">影片總覽</a></li>
                             <li class="<?= $pagename == "film_data_list"?"thisPage":""; ?>"><a
@@ -98,7 +98,7 @@
                 <div id="collapse4" class="collapse <?= $groupname == "article"?"show":""; ?>"
                     aria-labelledby="heading4" data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <!-- <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a
                                     href="article_list.php">新聞列表</a></li> -->
                             <li class="<?= $pagename == "article_search"?"thisPage":""; ?>"><a
@@ -124,7 +124,7 @@
                 <div id="collapse5" class="collapse <?= $groupname == "activity"?"show":""; ?>"
                     aria-labelledby="heading5" data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "ShawnpageMain"?"thisPage":""; ?>"><a
                                     href="./ShawnpageMain.php">活動總覽</a></li>
                             <li class="<?= $pagename == "ShawnpageDatalist"?"thisPage":""; ?>"><a
@@ -149,7 +149,7 @@
                 <div id="collapse6" class="collapse <?= $groupname == "ad"?"show":""; ?>" aria-labelledby="heading6"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "ad_list"?"thisPage":""; ?>"><a
                                     href="ad_list.php">客戶管理</a></li>
                             <li class="<?= $pagename == "ad_client_update"?"thisPage":""; ?>"><a
@@ -172,7 +172,7 @@
                 <div id="collapse7" class="collapse <?= $groupname == "forum"?"show":""; ?>" aria-labelledby="heading7"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "Roy_datalist"?"thisPage":""; ?>"><a
                                     href="./Roy_datalist.php">討論區</a></li>
                             <li class="<?= $pagename == "Roy_admin_data_insert_ajax"?"thisPage":""; ?>"><a

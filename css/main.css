@@ -10,9 +10,15 @@ body{
     position: fixed;
     transition: 0.5s
 }
+
+.text-warning{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
 .navbar-brand{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
+    /* font-weight: 700; */
 }
 .navbar-brand a{ 
     color: #444;
@@ -66,6 +72,7 @@ body{
     padding: 1rem 3rem;
     margin: 0;
     width: 240px;
+    font-weight: normal;
 }
 
 .myinfo2 .card-body{
@@ -74,8 +81,8 @@ body{
 
 
 .thisPage a{
-    font-weight: 900;
-    color: #ffb7be !important;
+    /* font-weight: 900; */
+    color: #ffb875 !important;
 }
 .dashboard{
     font-family: 'Noto Sans TC', sans-serif,Verdana, Geneva, Tahoma, sans-serif;
