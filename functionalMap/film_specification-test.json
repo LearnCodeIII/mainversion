@@ -1,0 +1,61 @@
+[{
+    "items":"會員",
+    "description":"<li>目的藉由會員系統讓使用者可以blablabla</li>",
+    "content":{
+        "information":{
+            "info1":"ConectToitems",
+            "info2":""
+        },
+        "function":{
+            "func1":"func1",
+            "func2":""
+        }
+    }
+}]
+
+
+[{
+    "items":"YourItemsName",
+    "description":"<li>YourItemsDescription</li>",
+    "content":{
+        "description":"<li>YourItemsDescription</li>",
+        {
+            "items":"會員登入",
+        
+            "content":{
+                "資訊":{
+                    "info1":"ConectToitems",
+                    "info2":{
+                        "items":個人頁面,
+                        "content":{
+                            "information":{
+
+                            },
+                            "function":{
+                                
+                            }
+                        }
+                    }
+                },
+                "功能":{
+                    "func1":"func1",
+                    "func2":""
+                }
+            }
+        },
+        {
+            "items":"YourItemsName",
+      
+            "content":{
+                "資訊":{
+                    "帳號":"",
+                    "info2":""
+                },
+                "功能":{
+                    "會員註冊":"func1",
+                    "func2":""
+                }
+            }
+        }
+    }
+}]
