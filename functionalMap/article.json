@@ -1,21 +1,24 @@
 [{
-    "items":"Article",
-    "description":"<li>Movie News</li>",
+    "items":"新聞專區",
+    "description":"<li>蒐集各種海內外電影第一手資訊，及熱門新聞主題</li>",
     "content":{
         "information":{
-            "info1":"title",
-            "info2":"content",
-            "info3":"author",
-            "info4":"date",
-            "info5":"comment",
-            "info6":"link",
-            "info7":"tags"
+            "新聞標題":"title",
+            "文章內文":"content",
+            "相關圖檔":"images",
+            "作者":"author",
+            "發布時間":"date",
+            "留言/評論":"comment",
+            "新聞來源":"link",
+            "點閱數":"clickCount",
+            "收藏數":"favoriteCount",
+            "關鍵字":"tags"
         },
         "function":{
-            "func1":"comment",
-            "func2":"like",
-            "func3":"share",
-            "func4":"favorite"
+            "留言":"comment",
+            "按讚":"like",
+            "分享":"share",
+            "收藏":"favorite"
         }
     }
 }]
