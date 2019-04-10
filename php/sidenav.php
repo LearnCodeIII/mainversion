@@ -7,11 +7,11 @@
         </div>
         <div class="bg-gradient-dark" id="accordionExample">
             <div class="card bg-dark">
-                <div class="card-header" id="heading1">
+                <div class="card-header" id="heading1" data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
+                            aria-controls="collapse1">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
-                            aria-controls="collapse1"><i class="fas fa-user fa-fw"></i><span class="px-2"> 會員系統</span>
+                            ><i class="fas fa-user fa-fw"></i><span class="px-2"> 會員系統</span>
                         </button>
                     </h2>
                 </div>
@@ -19,7 +19,7 @@
                 <div id="collapse1" class="collapse <?= $groupname == "member"?"show":""; ?>" aria-labelledby="heading1"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                    <ul class="text-light pl-4">
+                    <ul class="text-light pl-5">
                             <li class="<?= $pagename == "member_search"?"thisPage":""; ?>"><a
                                     href="./Su_member_search.php">會員總覽</a></li>
                             <li class="<?= $pagename == "member_insert"?"thisPage":""; ?>"><a
@@ -33,11 +33,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading2">
+                <div class="card-header" id="heading2" data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
+                            aria-controls="collapse2">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
-                            aria-controls="collapse2"><i class="fas fa-landmark fa-fw"></i>
+                            ><i class="fas fa-landmark fa-fw"></i>
                             <span class="px-2">廠商系統</span>
                         </button>
                     </h2>
@@ -46,7 +46,7 @@
                 <div id="collapse2" class="collapse <?= $groupname == "theater"?"show":""; ?>" aria-labelledby="heading2"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "cinema_ifmt_list"?"thisPage":""; ?>"><a
                                     href="cinema_ifmt_list.php">戲院資訊</a></li>
                             <li class="<?= $pagename == "cinema_insert"?"thisPage":""; ?>"><a
@@ -57,11 +57,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading3">
-                    <h2 class="mb-0 pl-3">
+                <div class="card-header" id="heading3" data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
+                            aria-controls="collapse3">
+                    <h2 class="mb-0 pl-3" >
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
-                            aria-controls="collapse3"><i class="fas fa-film fa-fw"></i>
+                            ><i class="fas fa-film fa-fw"></i>
                             <span class="px-2">電影資料庫</span>
                         </button>
                     </h2>
@@ -70,7 +70,7 @@
                 <div id="collapse3" class="collapse <?= $groupname == "film"?"show":""; ?>" aria-labelledby="heading3"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "film_main"?"thisPage":""; ?>"><a
                                     href="./film_main.php">影片總覽</a></li>
                             <li class="<?= $pagename == "film_data_list"?"thisPage":""; ?>"><a
@@ -86,11 +86,10 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading4">
+                <div class="card-header" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
+                            aria-controls="collapse4">
                     <h2 class="mb-0 pl-3">
-                        <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
-                            aria-controls="collapse4"><i class="far fa-newspaper fa-fw"></i>
+                        <button class="btn btn-link text-light text-decoration-none"><i class="far fa-newspaper fa-fw"></i>
                             <span class="px-2">文章專區</span>
                         </button>
                     </h2>
@@ -99,7 +98,7 @@
                 <div id="collapse4" class="collapse <?= $groupname == "article"?"show":""; ?>"
                     aria-labelledby="heading4" data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <!-- <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a
                                     href="article_list.php">新聞列表</a></li> -->
                             <li class="<?= $pagename == "article_search"?"thisPage":""; ?>"><a
@@ -113,11 +112,10 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading5">
+                <div class="card-header" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
+                            aria-controls="collapse5">
                     <h2 class="mb-0 pl-3">
-                        <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
-                            aria-controls="collapse5"> <i class="fas fa-calendar-check fa-fw"></i>
+                        <button class="btn btn-link text-light text-decoration-none"> <i class="fas fa-calendar-check fa-fw"></i>
                             <span class="px-2">活動系統</span>
                         </button>
                     </h2>
@@ -126,7 +124,7 @@
                 <div id="collapse5" class="collapse <?= $groupname == "activity"?"show":""; ?>"
                     aria-labelledby="heading5" data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "ShawnpageMain"?"thisPage":""; ?>"><a
                                     href="./ShawnpageMain.php">活動總覽</a></li>
                             <li class="<?= $pagename == "ShawnpageDatalist"?"thisPage":""; ?>"><a
@@ -138,11 +136,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading6">
+                <div class="card-header" id="heading6" data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
+                            aria-controls="collapse6">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
-                            aria-controls="collapse6"><i class="fas fa-ad fa-fw"></i>
+                            ><i class="fas fa-ad fa-fw"></i>
                             <span class="px-2">廣告管理</span>
                         </button>
                     </h2>
@@ -151,7 +149,7 @@
                 <div id="collapse6" class="collapse <?= $groupname == "ad"?"show":""; ?>" aria-labelledby="heading6"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "ad_list"?"thisPage":""; ?>"><a
                                     href="ad_list.php">客戶管理</a></li>
                             <li class="<?= $pagename == "ad_client_update"?"thisPage":""; ?>"><a
@@ -161,11 +159,11 @@
                 </div>
             </div>
             <div class="card bg-dark">
-                <div class="card-header" id="heading7">
+                <div class="card-header" id="heading7" data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
+                            aria-controls="collapse7">
                     <h2 class="mb-0 pl-3">
                         <button class="btn btn-link text-light text-decoration-none" type="button"
-                            data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
-                            aria-controls="collapse7"><i class="fas fa-comments fa-fw"></i>
+                            ><i class="fas fa-comments fa-fw"></i>
                             <span class="px-2">論壇管理</span>
                             </button>
                     </h2>
@@ -174,7 +172,7 @@
                 <div id="collapse7" class="collapse <?= $groupname == "forum"?"show":""; ?>" aria-labelledby="heading7"
                     data-parent="#accordionExample">
                     <div class="card-body bg_gray">
-                        <ul class="pl-4">
+                        <ul class="pl-5">
                             <li class="<?= $pagename == "Roy_datalist"?"thisPage":""; ?>"><a
                                     href="./Roy_datalist.php">討論區</a></li>
                             <li class="<?= $pagename == "Roy_admin_data_insert_ajax"?"thisPage":""; ?>"><a
