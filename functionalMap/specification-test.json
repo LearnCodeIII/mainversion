@@ -1,0 +1,125 @@
+[
+    {
+        "items": "會員主頁",
+        "description": "<li>123</li>",
+        "content": {
+            "information": {
+                "info1": {
+                    "items": "個人資訊",
+                    "content": {
+                        "information": {
+                            "info1": "姓名",
+                            "info2": "暱稱",
+                            "info3": "生日",
+                            "info4": "性別",
+                            "info5": "手機",
+                            "info6": "e-mail",
+                            "info7": "密碼"
+                        },
+                        "function": {
+                            "func1": "姓名",
+                            "func2": "編輯暱稱",
+                            "func3": "編輯生日",
+                            "func4": "編輯性別",
+                            "func5": "編輯手機",
+                            "func6": "編輯mail",
+                            "func7": "編輯密碼"
+                        }
+                    }
+                },
+                "info2": {
+                    "items": "收藏清單",
+                    "content": {
+                        "information": {
+                            "info1": {
+                                "items": "收藏影片清單",
+                                "content": {
+                                    "information": {
+                                        "info1": "影片名稱",
+                                        "info2": "檔期",
+                                        "info3": "圖片",
+                                        "info4": "評分",
+                                        "info5": "文章標題",
+                                        "info6": "發布日期"
+                                    },
+                                    "function": {
+                                        "func1": "",
+                                        "func2": {}
+                                    }
+                                }
+                            },
+                            "info2": {
+                                "info1": "收藏文章列表"
+                            }
+                        },
+                        "function": {
+                            "func1": "func1",
+                            "func2": {}
+                        }
+                    }
+                },
+                "info3": {
+                    "items": "討論區發文列表",
+                    "content": {
+                        "information": {
+                            "info1": "ConectToitems",
+                            "info2": ""
+                        },
+                        "function": {
+                            "func1": "func1",
+                            "func2": {}
+                        }
+                    }
+                },
+                "info4": {
+                    "items": "我的活動",
+                    "content": {
+                        "information": {
+                            "info1": "ConectToitems",
+                            "info2": ""
+                        },
+                        "function": {
+                            "func1": "func1",
+                            "func2": {}
+                        }
+                    }
+                },
+                "info5": {
+                    "items": "我的評分",
+                    "content": {
+                        "information": {
+                            "info1": "ConectToitems",
+                            "info2": ""
+                        },
+                        "function": {
+                            "func1": "func1",
+                            "func2": {}
+                        }
+                    }
+                },
+                "info5": {
+                    "items": "影片推薦",
+                    "content": {
+                        "information": {
+                            "info1": "ConectToitems",
+                            "info2": ""
+                        },
+                        "function": {
+                            "func1": "func1",
+                            "func2": {}
+                        }
+                    }
+                }
+            },
+            "function": {
+                "func1": "姓名",
+                "func2": "編輯暱稱",
+                "func3": "編輯生日",
+                "func4": "編輯性別",
+                "func5": "編輯手機",
+                "func6": "編輯mail",
+                "func7": "編輯密碼"
+            }
+        }
+    }
+]
