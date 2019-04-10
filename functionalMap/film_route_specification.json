@@ -1,0 +1,74 @@
+[{    
+    "items":"電影資訊(首頁)",
+    "description":"<li>在首頁提供電影資訊讓使用者想進來查詢</li>",
+    "content":{
+        "information":{
+            "info1":"電影名稱",
+            "info2":"電影類型",
+            "info3":"影片評論",
+            "info4":"電影圖片",
+            "info5":{
+                "items":"電影資訊(專頁)",
+                "description":"<li>目的藉由電影資訊讓使用者可以找到電影資訊進而啟動看電影的消費動作</li>",
+                "content":{
+                    "information":{
+                        "info1":"電影名稱",
+                        "info2":"電影類型",
+                        "info3":"影片評論",
+                        "info4":"放映影院",
+                        "info5":"電影圖片",
+                        "info6":{
+                            "items":"觀看詳細資訊",
+                            "description":"<li>顯示個別電影詳細資訊</li>",
+                            "content":{
+                                "information":{
+                                    "info1":"電影名稱",
+                                    "info2":"電影類型",
+                                    "info3":"影片評論",
+                                    "info4":{
+                                        "items":"放映影院"
+                                    },
+                                    "info5":"電影圖片",
+                                    "info6":"價格",
+                                    "info7":"電影介紹",
+                                    "info8":"製作團隊",
+                                    "info9":"時刻表",
+                                    "info10":"電影評分",
+                                    "info11":"交通資訊",
+                                    "info12":"周邊環境",
+                                    "info13":{                
+                                        "items":"電影新聞"
+                                    },
+                                    "info14":{                
+                                        "items":"電影活動"
+                                    }
+                                },
+                                "function":{
+                                    "func1":"觀看預告片", 
+                                    "func2":"分享",
+                                    "func3":"地圖"
+                                }
+                            }
+                        }
+                    }
+                },
+                    "function":{
+                        "func1":"搜尋",
+                        "func2":"排序",
+                        "func3":"篩選",
+                        "func4":"分享",
+                        "func5":"評分",
+                        "func6":"收藏"
+                    }
+            }
+        },
+        "function":{
+            "func1":"func1",
+            "func2":""
+        }
+    }
+
+
+
+  
+}]
