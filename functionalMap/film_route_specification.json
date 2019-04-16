@@ -8,7 +8,7 @@
             "info3":"影片評論",
             "info4":"電影圖片",
             "info5":{
-                "items":"電影資訊(專頁)",
+                "items":" (專頁)",
                 "description":"<li>目的藉由電影資訊讓使用者可以找到電影資訊進而啟動看電影的消費動作</li>",
                 "content":{
                     "information":{
@@ -58,8 +58,8 @@
                         "func3":"篩選",
                         "func4":"分享",
                         "func5":"評分",
-                        "func6":"收藏"
-                    }
+                        "func6":"收藏" 
+                    } 
             }
         },
         "function":{
