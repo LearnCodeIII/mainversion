@@ -42,12 +42,14 @@ table {
         </div> <!-- card-header -->
 
         <ul class="list-group list-group-flush ">
+
             <li class="list-group-item">
                 <div class="form-group d-flex">
                     <label for="adName" class="col-sm-2 col-form-label">橫幅名稱</label>
                     <input type="text" class="form-control" id="adName" aria-describedby="adNameHelp" placeholder="電影分類頁廣告" readonly>
                 </div>
             </li>
+
             <li class="list-group-item">
                 <div class="form-group d-flex">
                     <label for="status" class="col-sm-2 col-form-label">狀態</label>
@@ -57,48 +59,48 @@ table {
                     </select>
                 </div>
             </li>
-
+            
             <li class="list-group-item">
                 <div class="form-group d-flex">
+                    <label for="adName" class="col-sm-2 col-form-label">修改</label>
 
-                    <label for="status" class="col-sm-2 col-form-label">查詢</label>
+                <div class="form-row">
 
-                    <div class="row">
-                        
-                        <div class="col">
-                            <div class="form-group d-flex">
-                                <label for="status" class="col-sm-2 col-form-label inline">標題</label>
-                                <input type="text" class="form-control" placeholder="標題">
-                            </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">標題</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="標題">
                         </div>
+                </div>
 
-                        <div class="col">
-                            <div class="form-group d-flex">
-                                <label for="status" class="col-sm-2 col-form-label inline">連結</label>
-                                <input type="text" class="form-control" placeholder="http://...">
-                            </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">連結</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="http://...">
                         </div>
+                </div>
 
-                        <div class="col">
-                            <div class="form-group d-flex">
-                                <label for="status" class="col-sm-2 col-form-label inline">廣告起始日</label>
-                                <input type="text" class="form-control" placeholder="YYYY-MM-DD">
-                            </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">廣告起始日</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="YYYY-MM-DD">                            
                         </div>
+                </div>
 
-                        <div class="col">
-                            <div class="form-group d-flex">
-                                <label for="status" class="col-sm-2 col-form-label inline">廣告結束日</label>
-                                <input type="text" class="form-control" placeholder="YYYY-MM-DD">
-                            </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label inline">廣告結束日</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="YYYY-MM-DD">                            
                         </div>
+                </div>
 
-                     </div>
-
-                </div> 
+                </div> <!-- form-row -->
+            
+                </div> <!-- form-group -->
             </li>
 
         </ul>
+
 
         <div class="card-body">
             <div class="row">
@@ -109,8 +111,9 @@ table {
                             <tr class="align-middle">
                                 <th scope="col" class="text-left">標題</th>
                                 <th scope="col" class="text-left">連結(請填寫完整連結)</th>
-                                <th scope="col" class="text-right">廣告起始日</th>
-                                <th scope="col" class="text-right">廣告結束日</th>
+                                <th scope="col" class="text-left">電腦版圖片</th>
+                                <th scope="col" class="text-right">廣告起始日/廣告結束日</th>
+                                <th scope="col" class="text-right"></th>
                             </tr>
                         </thead>
 
@@ -151,7 +154,7 @@ table {
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- card -->
 
     </div>
 
