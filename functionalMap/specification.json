@@ -1,9 +1,17 @@
 [{
-    "items":"YourItemsName",
-    "description":"<li>YourItemsDescription</li>",
+    "items":"會員主頁",
+    "description":"<li>123</li>",
     "content":{
         "information":{
             "info1":"ConectToitems",
+            "info2":""
+            "info2":""
+            "info2":""
+            "info2":""
+            "info2":""
+            "info2":""
+            "info2":""
+            "info2":""
             "info2":""
         },
         "function":{

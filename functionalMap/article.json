@@ -12,7 +12,7 @@
             "新聞來源":"link",
             "點閱數":"clickCount",
             "收藏數":"favoriteCount",
-            "關鍵字":"tags"
+            "關鍵字":"tags "
         },
         "function":{
             "留言":"comment",
