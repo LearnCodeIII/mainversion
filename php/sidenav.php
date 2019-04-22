@@ -1,12 +1,12 @@
 <?php include __DIR__.'./session_test.php'
 ?>
-<section class="accordion nav_width bg-dark">
+<section class="accordion nav_width mydark">
     <div class="nav_wrapper">
         <div class="navbar-brand d-flex justify-content-center align-content-center text-light">
             <div class="p-3"><a href="mainpage.php">.<span class="text-warning">M</span>ovieee</a></div>
         </div>
         <div class="bg-gradient-dark" id="accordionExample">
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading1" data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
                             aria-controls="collapse1">
                     <h2 class="mb-0 pl-3">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading2" data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
                             aria-controls="collapse2">
                     <h2 class="mb-0 pl-3">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading3" data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
                             aria-controls="collapse3">
                     <h2 class="mb-0 pl-3" >
@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
                             aria-controls="collapse4">
                     <h2 class="mb-0 pl-3">
@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
                             aria-controls="collapse5">
                     <h2 class="mb-0 pl-3">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading6" data-toggle="collapse" data-target="#collapse6" aria-expanded="false"
                             aria-controls="collapse6">
                     <h2 class="mb-0 pl-3">
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card bg-dark">
+            <div class="card mydark">
                 <div class="card-header" id="heading7" data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
                             aria-controls="collapse7">
                     <h2 class="mb-0 pl-3">
@@ -181,7 +181,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card myinfo bg-dark" style="width:100%;">
+            <div class="card myinfo mydark" style="width:100%;">
                 <div class="card-body d-flex flex-column align-items-center">
                     <div class="text-center info_img">
                         <img src="../pic/avatar/<?=$user_avatar?>" class="img-fluid" alt="...">
@@ -215,7 +215,7 @@
         <div class="nav_wrapper">
 
             <div class="bg-gradient-dark" id="accordionExample2">
-                <div class="card bg-dark">
+                <div class="card mydark">
                     <div class="card-header" id="heading1">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -243,7 +243,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card mydark">
                     <div class="card-header" id="heading2">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -266,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card mydark">
                     <div class="card-header" id="heading3">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -292,7 +292,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card mydark">
                     <div class="card-header" id="heading4">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -318,7 +318,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-dark ">
+                <div class="card mydark ">
                     <div class="card-header" id="heading5">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -342,7 +342,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card mydark">
                     <div class="card-header" id="heading6">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -364,7 +364,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card mydark">
                     <div class="card-header" id="heading7">
                         <h2 class="mb-0">
                             <button class="btn btn-link text-light text-decoration-none" type="button"
@@ -386,7 +386,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card myinfo2 bg-dark">
+                <div class="card myinfo2 mydark">
                     <div class="card-body d-flex align-items-center">
                         <div class="text-center info_img">
                             <img src="../pic/avatar/<?=$user_avatar?>" class="img-fluid" alt="...">
