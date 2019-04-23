@@ -1,5 +1,5 @@
 body{
-    /* background:#eee; */
+    
     }
 
 .nav_width{
@@ -8,7 +8,17 @@ body{
     height: 100vh;
     overflow: hidden;
     position: fixed;
-    transition: 0.5s
+    transition: 0.5s;
+    
+}
+
+.btn-link{
+    color: #D4D1CC !important;
+}
+
+.word-m{
+    color: #FFA510;
+    font-size: 2rem;
 }
 
 .mydark{
@@ -165,5 +175,3 @@ body{
 .bg_gray{
     background-color: #29313B !important;
 }
-
-.bgcc{}
