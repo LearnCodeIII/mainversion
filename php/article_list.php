@@ -6,7 +6,8 @@ include __DIR__.'/PDO.php';
 ?>
 <?php include __DIR__.'./head.php'?>
 <?php include __DIR__.'./sidenav.php'?>
-
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet" href="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.css"> -->
 <!-- <link rel="stylesheet" href="../css/jquery-ui.css"> -->
 <!-- <script src="../js/jquery-ui.js"></script> -->
 <!-- <link rel="stylesheet" href="../css/animate.css"> -->
@@ -42,103 +43,63 @@ include __DIR__.'/PDO.php';
                 <!-- <div class="page-item <?= $page <=1 ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?=$page-1?>">Previous</a></button> -->
             <ul class="pagination">
-
             </ul>
         </nav>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+        <table class="table table-bordered" id="myDataTalbe">
+            <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th class="title text-truncate" scope="col">新聞標題（Preview）</th>
                     <th scope="col">作者</th>
                     <th scope="col">日期</th>
-                    <th class="content text-truncate" scope="col">新聞內容預覽</th>
-                    <th scope="col">編輯/刪除</i></th>
-
+                    <!-- <th class="content text-truncate" scope="col">新聞內容預覽</th> -->
+                    <th scope="col">編輯/刪除</th>
                 </tr>
             </thead>
             <tbody id="data_body">
-
             </tbody>
         </table>
     </div>
 
 </section>
-
+<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script> -->
 <script>
-let page = 1;
-let oriData;
-const ul_page = document.querySelector('.pagination');
-const data_body = document.querySelector('#data_body');
 
-let tr_str = `<tr>
-                <th scope="row"><%= sid %></th>
-                <td class="title text-truncate"><a href="article_preview.php?sid=<%= sid %>"><%= title %></a></td>
-                <td><%= author %></td>
-                <td><%= date %></td>
-                <td class="content text-truncate"><%= content %></td>
-                <td>
-                <a href="article_edit.php?sid=<%= sid %>"><i class="fas fa-edit"></i></a>/
-                <a href="" type="button" id="delete<%= sid %>"><i class="fas fa-trash-alt"></i></a>
-                </td>
-                </tr>`;
+var table = $('#myDataTalbe').DataTable({
+      // 'serverSide':true,
+      "ajax": {
+        "type": "GET",
+        "url": "./article_list_api.php",
+        "dataSrc": function (json) {
+          //Make your callback here.
+          return json.data;
+        }
+      },
+      "columns": [
+        { 'data': "sid",
+            render: function (data) {
+            return '<a href="article_preview.php?sid=' + data + '">'+ data + '</a>'
+            }},
+        { "data": "title" },
+        { "data": "author" },
+        { "data": "date" },
+        // { "data": "content" },
+        {//這裡的data變數值為sysid，相等於row.sysid
+          data: "sid",//資料行繫結屬性
+          orderable: false, // 禁用排序
+          render: function (data) {
+            return '<a href="article_edit.php?sid=' + data + '"><i class="fas fa-edit"></i></a>' + '/' + '<a href="article_delete.php?sid=' + data + '"><i class="fas fa-trash-alt"></i></a>'
+          }}
+      ],
+      'searching': true,
+      // "jQueryUI": true,
+    });
 
-const tr_func = _.template(tr_str);
-// escape.html(_.escape(input.val(tr_str)));
 
-let page_str = `<li class="page-item <%= active %>">
-                <a class="page-link" href="#<%= page %>"><%= page %></a>
-                </li>`;
 
-const page_func = _.template(page_str);
-
-// 換頁
-const myHashChange = () => {
-    let h = location.hash.slice(1);
-    page = parseInt(h);
-    if (isNaN(page)) {
-        page = 1;
-    };
-    // ul_page.innerHTML = page;
-
-    fetch('article_list_api.php?page=' + page)
-        .then(res => {
-            return res.json();
-        })
-        .then(json => {
-            oriData = json;
-            // console.log(oriData);
-            let str = '';
-            for (k in oriData.data) {
-                // .data = api那邊的data內容
-                str += tr_func(oriData.data[k]);
-                //_將data轉完放到str  k= data裡的陣列位置
-            }
-            data_body.innerHTML = str;
-            // str = 塞好data的tr_str 
-
-            str = '';
-            for (i = 1; i <= oriData.totalPages; i++) {
-
-                let active = oriData.page === i ? 'active' : '';
-
-                str += page_func({
-                    active: active,
-                    page: i
-                });
-            }
-            ul_page.innerHTML = `<li class="page-item <%= active %>">
-                <a class="page-link" href="#${page-1}">上一頁</a>
-                </li>` + str + `<li class="page-item <%= active %>">
-                <a class="page-link" href="#${page+1}">下一頁</a>
-                </li>`;
-
-        });
-
-};
-
-window.addEventListener('hashchange', myHashChange);
-myHashChange();
+// window.addEventListener('hashchange', myHashChange);
+// myHashChange();
 
 //刪除資料
 // function deleteIt(sid){
@@ -182,27 +143,7 @@ myHashChange();
 //     })
 // }
 
-var dSid = 'delete'+`${sid}`; 
 
-
-$('#dSid`).click(){
-    swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-    swal("Poof! Your imaginary file has been deleted!", {
-      icon: "success",
-    });
-  } else {
-    swal("Your imaginary file is safe!");
-  }
-});
-}
 
 
 </script>

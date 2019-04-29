@@ -11,7 +11,7 @@ $result = [
     ];
 
 $pname = 'article_list';
-$per_page = 10;
+$per_page = 100;
  //每頁筆數
 $result['perPage'] = $per_page;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1 ; //用戶輸入的頁數
