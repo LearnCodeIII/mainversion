@@ -101,6 +101,8 @@
                         <ul class="pl-5">
                             <!-- <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a
                                     href="article_list.php">新聞列表</a></li> -->
+                            <li class="<?= $pagename == "article_list"?"thisPage":""; ?>"><a
+                                    href="article_list.php">新聞列表</a></li>
                             <li class="<?= $pagename == "article_search"?"thisPage":""; ?>"><a
                                     href="article_search.php">新聞搜尋</a></li>
                             <li class="<?= $pagename == "comment_list"?"thisPage":""; ?>"><a
