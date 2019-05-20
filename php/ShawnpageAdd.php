@@ -83,9 +83,9 @@ if(isset($_SESSION['admin'])){
                                 <small id="dateEndHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">活動名稱</span>
+                                        <span class="input-group-text bg-dark text-white">活動廠商</span>
                                     </div>
-                                    <input type="text" class="form-control" id="company" name="company" value="<?=$user?>" readonly>
+                                    <input type="text" class="form-control" id="company" name="company" value="">
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="companyHelp" class="form-text text-muted"></small>
@@ -93,7 +93,7 @@ if(isset($_SESSION['admin'])){
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text bg-dark text-white">活動地址</span>
                                     </div>
-                                    <input type="text" class="form-control" id="region" name="region" value="<?=$address?>">
+                                    <input type="text" class="form-control" id="region" name="region" value="">
                                     <span class="text-danger">*</span>
                                 </div>
                                 <small id="regionHelp" class="form-text text-muted"></small>
