@@ -72,7 +72,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="dateEndHelp" class="form-text text-muted"></small>
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend ">
-                                        <span class="input-group-text bg-dark text-white">活動名稱</span>
+                                        <span class="input-group-text bg-dark text-white">活動廠商</span>
                                     </div>
                                     <input type="text" class="form-control" id="company" name="company" placeholder="" value="<?=$row['company']?>" readonly>
                                     <span class="text-danger">*</span>
